@@ -103,6 +103,8 @@ class VLLM:
 
 ANSWER = """Answer using only the context. Give a short direct answer (entity, name, number, date, phrase, Yes/No), or unanswerable. Output only the answer.\n\nContext:\n{context}\n\nQuestion: {question}\nAnswer:"""
 EXTRACT = """Extract a compact factual wiki note from the document. Include title, a concise summary, named entities, and relations. Do not invent facts.\n\nTitle: {title}\nDocument:\n{text}"""
+ROUTE = """You are the router of a wiki knowledge base. Select only page ids that are useful for answering the question.\n\nQuestion: {question}\n\nWiki index:\n{index}\n\nValid page ids: {valid_ids}\n\nReturn ONLY JSON in this form: {{\"source_pages\": [], \"entity_pages\": [], \"concept_pages\": []}}"""
+SEARCH_TERMS = """Generate 8-15 short search terms for paragraph-level keyword matching.\n\nQuestion: {question}\n\nSelected wiki pages:\n{pages}\n\nReturn ONLY JSON in this form: {{\"search_terms\": []}}"""
 
 
 def paragraphs(docs: list[dict[str, Any]], words: int = 200) -> list[dict[str, str]]:
@@ -123,6 +125,65 @@ def context_from_hits(hits: list[dict[str, Any]], budget: int = 12000) -> str:
     return "\n\n---\n\n".join(out)
 
 
+def parse_json_object(text: str) -> dict[str, Any]:
+    """Parse the small JSON objects requested by routed retrieval, tolerating fences."""
+    cleaned = re.sub(r"```(?:json)?|```", "", str(text), flags=re.I).strip()
+    match = re.search(r"\{.*\}", cleaned, flags=re.S)
+    if not match:
+        return {}
+    try:
+        value = json.loads(match.group(0))
+        return value if isinstance(value, dict) else {}
+    except json.JSONDecodeError:
+        return {}
+
+
+def routed_retrieve(llm: VLLM, question: str, docs: list[dict[str, Any]], wiki_notes: list[dict[str, Any]], budget: int = 12000) -> tuple[str, dict[str, Any]]:
+    """Method A from tutorial_LLM_wiki_v3: LLM routing -> LLM terms -> ranked paragraphs.
+
+    The notebook has source/entity/concept/analysis pages.  The compact runner
+    represents the same branches with raw source documents and generated wiki
+    notes, while retaining the two LLM decisions and deterministic safety net.
+    """
+    pages = {d["id"]: d["text"] for d in docs}
+    pages.update({f"wiki/{slug(n['title'])}": n["text"] for n in wiki_notes})
+    valid_ids = sorted(pages)
+    index = "\n".join(f"- {pid}: {text[:280]}" for pid, text in pages.items())
+    routed = parse_json_object(llm.ask(ROUTE.format(question=question, index=index, valid_ids=", ".join(valid_ids)), max_tokens=256))
+    selected_ids = []
+    for key in ("source_pages", "entity_pages", "concept_pages", "analysis_pages"):
+        selected_ids.extend(x for x in routed.get(key, []) if isinstance(x, str) and x in pages)
+    selected_ids = list(dict.fromkeys(selected_ids))
+    if not selected_ids:
+        # Same deterministic fallback used by the notebook when routing returns no valid id.
+        q_words = set(re.findall(r"[a-z0-9]+", question.lower()))
+        selected_ids = sorted(pages, key=lambda pid: len(q_words & set(re.findall(r"[a-z0-9]+", pages[pid].lower()))), reverse=True)[:3]
+    selected_text = "\n\n".join(f"[{pid}]\n{pages[pid][:2500]}" for pid in selected_ids)
+    terms_data = parse_json_object(llm.ask(SEARCH_TERMS.format(question=question, pages=selected_text), max_tokens=200))
+    terms = [str(x).lower().strip() for x in terms_data.get("search_terms", []) if str(x).strip()]
+    terms.extend(re.findall(r"[a-z0-9]+", question.lower()))
+    terms = list(dict.fromkeys(terms))
+
+    candidates = []
+    for doc in docs:
+        for paragraph in re.split(r"\n\n+", doc["text"]):
+            paragraph = paragraph.strip()
+            if len(paragraph) < 30:
+                continue
+            low = paragraph.lower()
+            exact = sum(term in low for term in terms)
+            if exact:
+                candidates.append((exact, int(doc["id"] in selected_ids), {"title": doc["title"], "text": paragraph}))
+    for note in wiki_notes:
+        low = note["text"].lower()
+        exact = sum(term in low for term in terms)
+        if exact:
+            candidates.append((exact, int(f"wiki/{slug(note['title'])}" in selected_ids), note))
+    candidates.sort(key=lambda row: (row[1], row[0]), reverse=True)
+    hits = [row[2] for row in candidates]
+    return context_from_hits(hits, budget), {"routed_ids": selected_ids, "terms": terms, "candidates": len(candidates), "selected": len(hits)}
+
+
 def run_notebook_wiki(llm: VLLM, docs: list[dict[str, Any]], questions: list[dict[str, Any]], run_dir: Path) -> dict[str, Any]:
     """Compact, non-notebook execution of tutorial_LLM_wiki_v3's ingest/RAG/wiki tests."""
     raw = paragraphs(docs)
@@ -140,6 +201,13 @@ def run_notebook_wiki(llm: VLLM, docs: list[dict[str, Any]], questions: list[dic
     wiki_bm25 = BM25Okapi([re.findall(r"[a-z0-9]+", x["text"].lower()) for x in wiki_notes])
     systems = {"rag_semantic": (raw, embeddings, None), "wiki_bm25": (wiki_notes, None, wiki_bm25), "wiki_hybrid": (wiki_notes, wiki_emb, wiki_bm25)}
     result = {}
+    routed_rows = []
+    for qa in questions:
+        before, started = llm.snapshot(), time.perf_counter()
+        context, diagnostics = routed_retrieve(llm, qa["question"], docs, wiki_notes)
+        prediction = llm.ask(ANSWER.format(context=context, question=qa["question"]), max_tokens=64)
+        routed_rows.append({**qa, "prediction": prediction, "seconds_wall": time.perf_counter() - started, "retrieval": diagnostics, **llm.delta(before), **score(prediction, qa["reference"])})
+    result["wiki_routed"] = routed_rows
     for name, (items, emb, lexical) in systems.items():
         rows = []
         for qa in questions:
