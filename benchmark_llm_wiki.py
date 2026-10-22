@@ -155,7 +155,6 @@ def routed_retrieve(llm: VLLM, question: str, docs: list[dict[str, Any]], wiki_n
         selected_ids.extend(x for x in routed.get(key, []) if isinstance(x, str) and x in pages)
     selected_ids = list(dict.fromkeys(selected_ids))
     if not selected_ids:
-        # Same deterministic fallback used by the notebook when routing returns no valid id.
         q_words = set(re.findall(r"[a-z0-9]+", question.lower()))
         selected_ids = sorted(pages, key=lambda pid: len(q_words & set(re.findall(r"[a-z0-9]+", pages[pid].lower()))), reverse=True)[:3]
     selected_text = "\n\n".join(f"[{pid}]\n{pages[pid][:2500]}" for pid in selected_ids)
