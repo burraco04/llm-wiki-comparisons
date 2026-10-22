@@ -1,6 +1,6 @@
 """Run the MultiHopRAG benchmark against the notebook LLM-wiki and llmwiki2.
 
-Required environment variables: VLLM_BASE_URL.  llmwiki2 additionally needs
+Required environment variables: LLM_BASE_URL.  llmwiki2 additionally needs
 OPENROUTER_API_KEY when OKF_CLASSIFIER_PROVIDER=openrouter (the default).
 """
 from __future__ import annotations
@@ -25,7 +25,6 @@ from rank_bm25 import BM25Okapi
 from rouge_score import rouge_scorer
 from sentence_transformers import SentenceTransformer
 
-MODELS = ("Qwen/Qwen2.5-3B-Instruct", "Qwen/Qwen3.5-4B")
 ROOT = Path(__file__).resolve().parent
 OUT = ROOT / "results"
 EMBEDDING_MODEL = "sentence-transformers/all-MiniLM-L6-v2"
@@ -238,7 +237,7 @@ def run_llmwiki2(model: str, docs: list[dict[str, Any]], questions: list[dict[st
     except ImportError as exc:
         raise RuntimeError("llmwiki2 is required; install requirements.txt") from exc
     bundle = run_dir / "llmwiki2_bundle"; shutil.rmtree(bundle, ignore_errors=True); bundle.mkdir(parents=True)
-    settings = {"OKF_LLM_PROVIDER": "custom", "OKF_LLM_BASE_URL": os.environ["VLLM_BASE_URL"], "OKF_LLM_MODEL": model, "OKF_LLM_TIMEOUT": os.getenv("OKF_LLM_TIMEOUT", "900"), "OKF_LLM_READ_CHARS": os.getenv("OKF_LLM_READ_CHARS", "10000"), "OKF_MODE": os.getenv("OKF_MODE", "crow"), "OKF_USAGE_LOG": str((run_dir / "llmwiki2_calls.jsonl").resolve())}
+    settings = {"OKF_LLM_PROVIDER": "custom", "OKF_LLM_BASE_URL": os.environ["LLM_BASE_URL"], "OKF_LLM_MODEL": model, "OKF_LLM_TIMEOUT": os.getenv("OKF_LLM_TIMEOUT", "900"), "OKF_LLM_READ_CHARS": os.getenv("OKF_LLM_READ_CHARS", "10000"), "OKF_MODE": os.getenv("OKF_MODE", "crow"), "OKF_USAGE_LOG": str((run_dir / "llmwiki2_calls.jsonl").resolve())}
     if prompt_dir.is_dir():
         settings["OKF_PROMPTS_DIR"] = str(prompt_dir.resolve())
     os.environ.update(settings)
@@ -278,20 +277,22 @@ def save_run(run_dir: Path, model: str, notebook: dict[str, Any], wiki2: dict[st
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--models", nargs="+", default=list(MODELS)); parser.add_argument("--top-docs", type=int, default=3); parser.add_argument("--max-questions", type=int, default=25)
+    parser.add_argument("--model", default=os.getenv("LLM_MODEL"), help="Hugging Face model served by vLLM (defaults to LLM_MODEL).")
+    parser.add_argument("--top-docs", type=int, default=3); parser.add_argument("--max-questions", type=int, default=25)
     parser.add_argument("--output", type=Path, default=OUT); parser.add_argument("--prompt-dir", type=Path, default=Path(os.getenv("OKF_PROMPTS_DIR", ROOT / "prompts_benchmark")))
     args = parser.parse_args()
-    if not os.getenv("VLLM_BASE_URL"): parser.error("VLLM_BASE_URL is required (for example http://localhost:8001/v1)")
+    if not args.model: parser.error("--model is required (or set LLM_MODEL)")
+    if not os.getenv("LLM_BASE_URL"): parser.error("LLM_BASE_URL is required (for example http://localhost:8001/v1)")
     docs, questions = make_dataset(args.top_docs, args.max_questions)
     manifest = {"top_docs": args.top_docs, "max_questions": args.max_questions, "documents": [d["title"] for d in docs], "questions": questions}
-    for model in args.models:
-        run_dir = args.output / slug(model); run_dir.mkdir(parents=True, exist_ok=True)
-        (run_dir / "benchmark_manifest.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=2), encoding="utf-8")
-        llm = VLLM(model, os.environ["VLLM_BASE_URL"], os.getenv("VLLM_API_KEY", "EMPTY"), float(os.getenv("VLLM_TIMEOUT_SECONDS", "1200")))
-        notebook = run_notebook_wiki(llm, docs, questions, run_dir)
-        wiki2 = run_llmwiki2(model, docs, questions, run_dir, args.prompt_dir)
-        save_run(run_dir, model, notebook, wiki2, manifest)
-        print(f"Completed {model}: {run_dir}")
+    model = args.model
+    run_dir = args.output / slug(model); run_dir.mkdir(parents=True, exist_ok=True)
+    (run_dir / "benchmark_manifest.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=2), encoding="utf-8")
+    llm = VLLM(model, os.environ["LLM_BASE_URL"], os.getenv("VLLM_API_KEY", "EMPTY"), float(os.getenv("VLLM_TIMEOUT_SECONDS", "1200")))
+    notebook = run_notebook_wiki(llm, docs, questions, run_dir)
+    wiki2 = run_llmwiki2(model, docs, questions, run_dir, args.prompt_dir)
+    save_run(run_dir, model, notebook, wiki2, manifest)
+    print(f"Completed {model}: {run_dir}")
 
 
 if __name__ == "__main__": main()

@@ -33,6 +33,13 @@ MODEL="${1:?usage: $0 <hf_model> -- <command ...>}"; shift
 PORT="${PORT:-8000}"
 MEM="${GPU_MEM_UTIL:-0.85}"
 MAXLEN="${MAX_MODEL_LEN:-32768}"
+VLLM_IMAGE="${VLLM_IMAGE:-llm-wiki-benchmark:latest}"
+
+# Build the application image used by the vLLM container.  The image contains
+# the benchmark, its prompts and all Python dependencies from requirements.txt.
+echo ">>> building $VLLM_IMAGE"
+docker build -t "$VLLM_IMAGE" .
+export VLLM_IMAGE
 
 cleanup() { echo ">>> stopping vLLM"; docker rm -f "vllm-${PORT}" >/dev/null 2>&1 || true; }
 trap cleanup EXIT

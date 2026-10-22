@@ -24,6 +24,7 @@ MAXLEN="${4:-32768}"
 NAME="vllm-${PORT}"
 HF_CACHE="${HF_CACHE:-$HOME/.cache/huggingface}"
 VLLM_TAG="${VLLM_TAG:-latest}"
+VLLM_IMAGE="${VLLM_IMAGE:-llm-wiki-benchmark:latest}"
 
 # ── which GPU (Docker ignores Slurm, so pin it explicitly by UUID) ──
 GPU="${CUDA_VISIBLE_DEVICES:-${GPU:-0}}"
@@ -44,7 +45,7 @@ docker run -d --name "$NAME" \
   -v "$HF_CACHE":/root/.cache/huggingface \
   -e HF_TOKEN="${HF_TOKEN:-}" \
   -p 127.0.0.1:"$PORT":8000 \
-  "vllm/vllm-openai:${VLLM_TAG}" \
+  "$VLLM_IMAGE" \
   --model "$MODEL" \
   --served-model-name "$MODEL" \
   --max-model-len "$MAXLEN" \
