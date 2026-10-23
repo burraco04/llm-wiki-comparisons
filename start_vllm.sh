@@ -9,8 +9,8 @@
 #    ./start_vllm.sh Qwen/Qwen2.5-3B-Instruct 8000 0.45
 #    ./start_vllm.sh Qwen/Qwen3.5-4B          8001 0.45     # second model on the same GPU
 #
-#  The image defaults to llm-wiki-benchmark:latest; build it first with:
-#    docker build -t llm-wiki-benchmark:latest .
+#  Build the image separately from Dockerfile and set VLLM_IMAGE to its tag
+#  before launching this script (the default below is only a placeholder).
 #
 #  Stop:   docker rm -f vllm-8000
 #  Logs:   docker logs -f vllm-8000
@@ -26,7 +26,7 @@ MEM="${3:-0.85}"
 MAXLEN="${4:-32768}"
 NAME="vllm-${PORT}"
 HF_CACHE="${HF_CACHE:-$HOME/.cache/huggingface}"
-VLLM_IMAGE="${VLLM_IMAGE:-llm-wiki-benchmark:latest}"
+VLLM_IMAGE="${VLLM_IMAGE:-llm-wiki-benchmark:replace-me}"
 RESULTS_DIR="${RESULTS_DIR:-$PWD/results}"
 mkdir -p "$RESULTS_DIR"
 RESULTS_DIR="$(cd "$RESULTS_DIR" && pwd)"

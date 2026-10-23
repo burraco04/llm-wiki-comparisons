@@ -31,15 +31,13 @@ MODEL="${1:?usage: $0 <hf_model> -- <command ...>}"; shift
 PORT="${PORT:-8000}"
 MEM="${GPU_MEM_UTIL:-0.85}"
 MAXLEN="${MAX_MODEL_LEN:-32768}"
-VLLM_IMAGE="${VLLM_IMAGE:-llm-wiki-benchmark:latest}"
+VLLM_IMAGE="${VLLM_IMAGE:-llm-wiki-benchmark:replace-me}"
 RESULTS_DIR="${RESULTS_DIR:-$PWD/results}"
 mkdir -p "$RESULTS_DIR"
 RESULTS_DIR="$(cd "$RESULTS_DIR" && pwd)"
 
-# Build the application image used by the vLLM container.  The image contains
-# the benchmark, its prompts and all Python dependencies from requirements.txt.
-echo ">>> building $VLLM_IMAGE"
-docker build -t "$VLLM_IMAGE" .
+# The image is built externally from Dockerfile and must exist on the node
+# running this job. Set VLLM_IMAGE to its actual tag before submitting.
 export VLLM_IMAGE
 
 cleanup() { echo ">>> stopping vLLM"; docker rm -f "vllm-${PORT}" >/dev/null 2>&1 || true; }
