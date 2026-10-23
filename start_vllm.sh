@@ -1,6 +1,6 @@
 #!/bin/bash
 # ═══════════════════════════════════════════════════════
-#  Start one vLLM server (official image, no Dockerfile needed)
+#  Start one vLLM server from the application image built by Dockerfile.
 #
 #  Usage:
 #    ./start_vllm.sh <hf_model> [port] [gpu_mem_util] [max_model_len]
@@ -8,6 +8,9 @@
 #  Examples (one RTX 3090, 24 GB):
 #    ./start_vllm.sh Qwen/Qwen2.5-3B-Instruct 8000 0.45
 #    ./start_vllm.sh Qwen/Qwen3.5-4B          8001 0.45     # second model on the same GPU
+#
+#  The image defaults to llm-wiki-benchmark:latest; build it first with:
+#    docker build -t llm-wiki-benchmark:latest .
 #
 #  Stop:   docker rm -f vllm-8000
 #  Logs:   docker logs -f vllm-8000
@@ -23,8 +26,10 @@ MEM="${3:-0.85}"
 MAXLEN="${4:-32768}"
 NAME="vllm-${PORT}"
 HF_CACHE="${HF_CACHE:-$HOME/.cache/huggingface}"
-VLLM_TAG="${VLLM_TAG:-latest}"
 VLLM_IMAGE="${VLLM_IMAGE:-llm-wiki-benchmark:latest}"
+RESULTS_DIR="${RESULTS_DIR:-$PWD/results}"
+mkdir -p "$RESULTS_DIR"
+RESULTS_DIR="$(cd "$RESULTS_DIR" && pwd)"
 
 # ── which GPU (Docker ignores Slurm, so pin it explicitly by UUID) ──
 GPU="${CUDA_VISIBLE_DEVICES:-${GPU:-0}}"
@@ -43,7 +48,15 @@ docker run -d --name "$NAME" \
   --gpus "\"device=${GPU}\"" \
   --ipc=host \
   -v "$HF_CACHE":/root/.cache/huggingface \
+  -v "$RESULTS_DIR":/workdir/results \
   -e HF_TOKEN="${HF_TOKEN:-}" \
+  -e LLM_BASE_URL="http://localhost:8000/v1" \
+  -e LLM_MODEL="$MODEL" \
+  -e OKF_LLM_PROVIDER=custom \
+  -e OKF_LLM_BASE_URL="http://localhost:8000/v1" \
+  -e OKF_LLM_MODEL="$MODEL" \
+  -e OKF_LLM_TIMEOUT="${OKF_LLM_TIMEOUT:-600}" \
+  -e OPENROUTER_API_KEY="${OPENROUTER_API_KEY:-}" \
   -p 127.0.0.1:"$PORT":8000 \
   "$VLLM_IMAGE" \
   --model "$MODEL" \

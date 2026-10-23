@@ -7,7 +7,7 @@
 #SBATCH --output=logs/exp-%j.out
 #SBATCH --signal=B:TERM@60
 # ═══════════════════════════════════════════════════════
-#  Start vLLM → run YOUR command (it can use vLLM) → stop vLLM
+#  Start vLLM → run YOUR command inside the container → stop vLLM
 #
 #  Usage (directly, or with sbatch — same arguments):
 #    ./run_with_vllm.sh <hf_model> -- <your command ...>
@@ -17,10 +17,8 @@
 #    sbatch run_with_vllm.sh Qwen/Qwen2.5-3B-Instruct -- python my_experiment.py
 #    sbatch run_with_vllm.sh Qwen/Qwen3.5-4B          -- python my_experiment.py --dataset squad
 #
-#  Your command sees:
-#    LLM_BASE_URL=http://localhost:<port>/v1
-#    LLM_MODEL=<hf_model>
-#  so llm_client.call_llm() connects automatically.
+#  The command runs in /workdir inside the application image.  The host
+#  ./results directory is mounted at /workdir/results and survives cleanup.
 # ═══════════════════════════════════════════════════════
 set -euo pipefail
 cd "${SLURM_SUBMIT_DIR:-$(dirname "$0")}"
@@ -34,6 +32,9 @@ PORT="${PORT:-8000}"
 MEM="${GPU_MEM_UTIL:-0.85}"
 MAXLEN="${MAX_MODEL_LEN:-32768}"
 VLLM_IMAGE="${VLLM_IMAGE:-llm-wiki-benchmark:latest}"
+RESULTS_DIR="${RESULTS_DIR:-$PWD/results}"
+mkdir -p "$RESULTS_DIR"
+RESULTS_DIR="$(cd "$RESULTS_DIR" && pwd)"
 
 # Build the application image used by the vLLM container.  The image contains
 # the benchmark, its prompts and all Python dependencies from requirements.txt.
@@ -57,7 +58,7 @@ export OKF_LLM_BASE_URL="$LLM_BASE_URL"
 export OKF_LLM_MODEL="$MODEL"
 export OKF_LLM_TIMEOUT=600
 
-# ── 2. YOUR command ──
-echo ">>> running: $*"
-"$@"
+# ── 2. YOUR command (inside the vLLM container) ──
+echo ">>> running in vllm-${PORT}: $*"
+docker exec -w /workdir "vllm-${PORT}" "$@"
 echo ">>> done"
