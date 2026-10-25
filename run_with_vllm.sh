@@ -31,13 +31,13 @@ MODEL="${1:?usage: $0 <hf_model> -- <command ...>}"; shift
 PORT="${PORT:-8000}"
 MEM="${GPU_MEM_UTIL:-0.85}"
 MAXLEN="${MAX_MODEL_LEN:-32768}"
-VLLM_IMAGE="${VLLM_IMAGE:-llm-wiki-benchmark:replace-me}"
+VLLM_IMAGE="${VLLM_IMAGE:-llm-wiki-benchmark:cu129}"
 RESULTS_DIR="${RESULTS_DIR:-$PWD/results}"
 mkdir -p "$RESULTS_DIR"
 RESULTS_DIR="$(cd "$RESULTS_DIR" && pwd)"
 
 # The image is built externally from Dockerfile and must exist on the node
-# running this job. Set VLLM_IMAGE to its actual tag before submitting.
+# running this job (docker build -t llm-wiki-benchmark:cu129 .).
 export VLLM_IMAGE
 
 cleanup() { echo ">>> stopping vLLM"; docker rm -f "vllm-${PORT}" >/dev/null 2>&1 || true; }

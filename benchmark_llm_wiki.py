@@ -286,7 +286,8 @@ def main() -> None:
     docs, questions = make_dataset(args.top_docs, args.max_questions)
     manifest = {"top_docs": args.top_docs, "max_questions": args.max_questions, "documents": [d["title"] for d in docs], "questions": questions}
     model = args.model
-    run_dir = args.output / slug(model); run_dir.mkdir(parents=True, exist_ok=True)
+    run_label = f"docs_{args.top_docs}_questions_{args.max_questions}"
+    run_dir = args.output / slug(model) / run_label; run_dir.mkdir(parents=True, exist_ok=True)
     (run_dir / "benchmark_manifest.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=2), encoding="utf-8")
     llm = VLLM(model, os.environ["LLM_BASE_URL"], os.getenv("VLLM_API_KEY", "EMPTY"), float(os.getenv("VLLM_TIMEOUT_SECONDS", "1200")))
     notebook = run_notebook_wiki(llm, docs, questions, run_dir)

@@ -5,12 +5,19 @@
 #  Usage:
 #    ./start_vllm.sh <hf_model> [port] [gpu_mem_util] [max_model_len]
 #
-#  Examples (one RTX 3090, 24 GB):
+#  Examples (one RTX 3090, 24 GB each):
 #    ./start_vllm.sh Qwen/Qwen2.5-3B-Instruct 8000 0.45
-#    ./start_vllm.sh Qwen/Qwen3.5-4B          8001 0.45     # second model on the same GPU
+#    ./start_vllm.sh Qwen/Qwen3.5-4B          8001 0.6      # needs >=0.6; use a second GPU (GPU=1)
 #
-#  Build the image separately from Dockerfile and set VLLM_IMAGE to its tag
-#  before launching this script (the default below is only a placeholder).
+#  MAX_NUM_SEQS (default 64) caps concurrent sequences; Qwen3.5 is a hybrid
+#  Mamba model and fails at the vLLM default of 256 on a 24 GB card.
+#  CHAT_TEMPLATE_KWARGS (default {"enable_thinking": false}) turns off Qwen3.5
+#  thinking, which would otherwise eat the benchmark's small max_tokens budgets.
+#  Set CHAT_TEMPLATE_KWARGS='{}' to keep thinking on.
+#
+#  Build the image separately from Dockerfile:
+#    docker build -t llm-wiki-benchmark:cu129 .
+#  and set VLLM_IMAGE if you tag it differently.
 #
 #  Stop:   docker rm -f vllm-8000
 #  Logs:   docker logs -f vllm-8000
@@ -26,7 +33,9 @@ MEM="${3:-0.85}"
 MAXLEN="${4:-32768}"
 NAME="vllm-${PORT}"
 HF_CACHE="${HF_CACHE:-$HOME/.cache/huggingface}"
-VLLM_IMAGE="${VLLM_IMAGE:-llm-wiki-benchmark:replace-me}"
+MAX_NUM_SEQS="${MAX_NUM_SEQS:-64}"
+CHAT_TEMPLATE_KWARGS="${CHAT_TEMPLATE_KWARGS:-{\"enable_thinking\": false}}"
+VLLM_IMAGE="${VLLM_IMAGE:-llm-wiki-benchmark:cu129}"
 RESULTS_DIR="${RESULTS_DIR:-$PWD/results}"
 mkdir -p "$RESULTS_DIR"
 RESULTS_DIR="$(cd "$RESULTS_DIR" && pwd)"
@@ -63,6 +72,8 @@ docker run -d --name "$NAME" \
   --served-model-name "$MODEL" \
   --max-model-len "$MAXLEN" \
   --gpu-memory-utilization "$MEM" \
+  --max-num-seqs "$MAX_NUM_SEQS" \
+  --default-chat-template-kwargs "$CHAT_TEMPLATE_KWARGS" \
   --enable-prefix-caching >/dev/null
 
 echo ">>> waiting for $MODEL on port $PORT ..."
