@@ -7,7 +7,8 @@
 #SBATCH --output=logs/exp-%j.out
 #SBATCH --signal=B:TERM@60
 # ═══════════════════════════════════════════════════════
-#  Start vLLM → run YOUR command inside the container → stop vLLM
+#  Start the LLM and local classifier vLLM servers → run YOUR command inside
+#  the container → stop both servers
 #
 #  Usage (directly, or with sbatch — same arguments):
 #    ./run_with_vllm.sh <hf_model> -- <your command ...>
@@ -29,7 +30,7 @@ MODEL="${1:?usage: $0 <hf_model> -- <command ...>}"; shift
 [[ $# -ge 1 ]] || { echo "ERROR: no command given after --"; exit 1; }
 
 PORT="${PORT:-8000}"
-MEM="${GPU_MEM_UTIL:-0.85}"
+MEM="${GPU_MEM_UTIL:-0.60}"
 MAXLEN="${MAX_MODEL_LEN:-32768}"
 VLLM_IMAGE="${VLLM_IMAGE:-llm-wiki-benchmark:cu129}"
 RESULTS_DIR="${RESULTS_DIR:-$PWD/results}"
@@ -55,6 +56,10 @@ export OKF_LLM_PROVIDER=custom
 export OKF_LLM_BASE_URL="$LLM_BASE_URL"
 export OKF_LLM_MODEL="$MODEL"
 export OKF_LLM_TIMEOUT=600
+export OKF_CLASSIFIER_PROVIDER=custom
+export OKF_CLASSIFIER_MODEL="${CLASSIFIER_MODEL:-LiquidAI/d1-3B}"
+export OKF_CLASSIFIER_BASE_URL="http://localhost:8001/v1"
+export OKF_CLASSIFIER_TIMEOUT="${OKF_CLASSIFIER_TIMEOUT:-60}"
 
 # ── 2. YOUR command (inside the vLLM container) ──
 echo ">>> running in vllm-${PORT}: $*"

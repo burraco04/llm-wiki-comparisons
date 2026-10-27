@@ -1,7 +1,8 @@
 """Run the MultiHopRAG benchmark against the notebook LLM-wiki and llmwiki2.
 
-Required environment variables: LLM_BASE_URL.  llmwiki2 additionally needs
-OPENROUTER_API_KEY when OKF_CLASSIFIER_PROVIDER=openrouter (the default).
+The writing model is exposed through ``LLM_BASE_URL``.  In CROW mode llmwiki2
+uses the local System One endpoint exposed by the second vLLM server through
+``OKF_CLASSIFIER_BASE_URL``; no external classifier API key is required.
 """
 from __future__ import annotations
 
@@ -237,12 +238,22 @@ def run_llmwiki2(model: str, docs: list[dict[str, Any]], questions: list[dict[st
     except ImportError as exc:
         raise RuntimeError("llmwiki2 is required; install requirements.txt") from exc
     bundle = run_dir / "llmwiki2_bundle"; shutil.rmtree(bundle, ignore_errors=True); bundle.mkdir(parents=True)
-    settings = {"OKF_LLM_PROVIDER": "custom", "OKF_LLM_BASE_URL": os.environ["LLM_BASE_URL"], "OKF_LLM_MODEL": model, "OKF_LLM_TIMEOUT": os.getenv("OKF_LLM_TIMEOUT", "900"), "OKF_LLM_READ_CHARS": os.getenv("OKF_LLM_READ_CHARS", "10000"), "OKF_MODE": os.getenv("OKF_MODE", "crow"), "OKF_USAGE_LOG": str((run_dir / "llmwiki2_calls.jsonl").resolve())}
+    settings = {
+        "OKF_LLM_PROVIDER": "custom",
+        "OKF_LLM_BASE_URL": os.environ["LLM_BASE_URL"],
+        "OKF_LLM_MODEL": model,
+        "OKF_LLM_TIMEOUT": os.getenv("OKF_LLM_TIMEOUT", "900"),
+        "OKF_LLM_READ_CHARS": os.getenv("OKF_LLM_READ_CHARS", "10000"),
+        "OKF_MODE": os.getenv("OKF_MODE", "crow"),
+        "OKF_USAGE_LOG": str((run_dir / "llmwiki2_calls.jsonl").resolve()),
+        "OKF_CLASSIFIER_PROVIDER": "custom",
+        "OKF_CLASSIFIER_BASE_URL": os.getenv("OKF_CLASSIFIER_BASE_URL", "http://localhost:8001/v1"),
+        "OKF_CLASSIFIER_MODEL": os.getenv("OKF_CLASSIFIER_MODEL", "LiquidAI/d1-3B"),
+        "OKF_CLASSIFIER_TIMEOUT": os.getenv("OKF_CLASSIFIER_TIMEOUT", "60"),
+    }
     if prompt_dir.is_dir():
         settings["OKF_PROMPTS_DIR"] = str(prompt_dir.resolve())
     os.environ.update(settings)
-    if not os.getenv("OKF_CLASSIFIER_PROVIDER"): os.environ["OKF_CLASSIFIER_PROVIDER"] = "openrouter"
-    if not os.getenv("OKF_CLASSIFIER_MODEL"): os.environ["OKF_CLASSIFIER_MODEL"] = "inception/mercury-decide:free"
     wiki = Wiki.from_env(bundle=bundle); wiki.init(); ingestion, rows = [], []
     for doc in docs:
         started = time.perf_counter(); response = wiki.ingest(doc["text"], title=doc["title"]); usage = response.usage.to_dict()
@@ -264,11 +275,12 @@ def summarize(rows: list[dict[str, Any]]) -> dict[str, Any]:
 
 def save_run(run_dir: Path, model: str, notebook: dict[str, Any], wiki2: dict[str, Any], manifest: dict[str, Any]) -> None:
     run_dir.mkdir(parents=True, exist_ok=True)
-    payload = {"created_at": datetime.now(timezone.utc).isoformat(), "model": model, "dataset": manifest, "tutorial_llm_wiki": notebook, "llmwiki2": wiki2}
+    classifier_model = manifest.get("classifier_model", "LiquidAI/d1-3B")
+    payload = {"created_at": datetime.now(timezone.utc).isoformat(), "model": model, "classifier_model": classifier_model, "dataset": manifest, "tutorial_llm_wiki": notebook, "llmwiki2": wiki2}
     (run_dir / "full_results.json").write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
     summaries = []
-    for system, rows in notebook["answers"].items(): summaries.append({"model": model, "implementation": "tutorial_llm_wiki", "system": system, **summarize(rows)})
-    for system, rows in wiki2["answers"].items(): summaries.append({"model": model, "implementation": "llmwiki2", "system": system, **summarize(rows)})
+    for system, rows in notebook["answers"].items(): summaries.append({"model": model, "classifier_model": classifier_model, "implementation": "tutorial_llm_wiki", "system": system, **summarize(rows)})
+    for system, rows in wiki2["answers"].items(): summaries.append({"model": model, "classifier_model": classifier_model, "implementation": "llmwiki2", "system": system, **summarize(rows)})
     (run_dir / "summary.json").write_text(json.dumps(summaries, ensure_ascii=False, indent=2), encoding="utf-8")
     with (run_dir / "summary.csv").open("w", newline="", encoding="utf-8") as stream:
         writer = csv.DictWriter(stream, fieldnames=list(summaries[0]))
@@ -282,9 +294,10 @@ def main() -> None:
     parser.add_argument("--output", type=Path, default=OUT); parser.add_argument("--prompt-dir", type=Path, default=Path(os.getenv("OKF_PROMPTS_DIR", ROOT / "prompts_benchmark")))
     args = parser.parse_args()
     if not args.model: parser.error("--model is required (or set LLM_MODEL)")
-    if not os.getenv("LLM_BASE_URL"): parser.error("LLM_BASE_URL is required (for example http://localhost:8001/v1)")
+    if not os.getenv("LLM_BASE_URL"): parser.error("LLM_BASE_URL is required (for example http://localhost:8000/v1)")
     docs, questions = make_dataset(args.top_docs, args.max_questions)
-    manifest = {"top_docs": args.top_docs, "max_questions": args.max_questions, "documents": [d["title"] for d in docs], "questions": questions}
+    classifier_model = os.getenv("OKF_CLASSIFIER_MODEL", "LiquidAI/d1-3B")
+    manifest = {"top_docs": args.top_docs, "max_questions": args.max_questions, "classifier_model": classifier_model, "documents": [d["title"] for d in docs], "questions": questions}
     model = args.model
     run_label = f"docs_{args.top_docs}_questions_{args.max_questions}"
     run_dir = args.output / slug(model) / run_label; run_dir.mkdir(parents=True, exist_ok=True)

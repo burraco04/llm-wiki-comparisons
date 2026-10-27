@@ -20,3 +20,5 @@ RUN pip freeze | grep -iE '^(transformers|tokenizers|huggingface-hub|torch|torch
 WORKDIR /workdir
 COPY benchmark_llm_wiki.py /workdir/benchmark_llm_wiki.py
 COPY prompts_benchmark /workdir/prompts_benchmark
+COPY start_vllm_services.sh /workdir/start_vllm_services.sh
+RUN chmod +x /workdir/start_vllm_services.sh
