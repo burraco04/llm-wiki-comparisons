@@ -1,9 +1,8 @@
-# v0.20.0-cu129: new enough for Qwen3.5 (qwen3_5 architecture), built on CUDA 12.9.
 # The host driver is 570 (CUDA 12.8), so it runs via CUDA minor-version compatibility:
 #  - NVIDIA_DISABLE_REQUIRE skips nvidia-container-cli's "cuda>=12.9" check;
 #  - the cuda-compat (forward compatibility) libs are removed because they only
 #    work on datacenter GPUs (Error 804 on RTX 3090), so the host libcuda is used.
-FROM vllm/vllm-openai:v0.20.0-cu129
+FROM vllm/vllm-openai:v0.30.0-cu129
 ENV NVIDIA_DISABLE_REQUIRE=1
 RUN rm -rf /usr/local/cuda-*/compat && ldconfig
 # This image only ships python3; the run scripts call `python`.

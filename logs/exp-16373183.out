@@ -1,0 +1,36 @@
+>>> GPU GPU-48b1d974-b35b-525d-c124-667cfdaff186: 24124/24576 MiB free, requesting 0.85 of total
+>>> waiting for Qwen/Qwen2.5-3B-Instruct on port 8000 ...
+>>> ready after ~80s
+{"object":"list","data":[{"id":"Qwen/Qwen2.5-3B-Instruct","object":"model","created":1793033637,"owned_by":"vllm","root":"Qwen/Qwen2.5-3B-Instruct","parent":null,"max_model_len":32768,"permission":[{"id":"modelperm-8d3e9cfa2318ab0b","object":"model_permission","created":1793033637,"allow_create_engine":false,"allow_sampling":true,"allow_logprobs":true,"allow_search_indices":false,"allow_view":true,"allow_fine_tuning":false,"organization":"*","group":null,"is_blocking":false}]}]}
+>>> base_url = http://localhost:8000/v1   model = Qwen/Qwen2.5-3B-Instruct
+>>> running in vllm-8000: python benchmark_llm_wiki.py
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+WARNING:huggingface_hub.utils._http:Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]Loading weights: 100%|██████████| 103/103 [00:00<00:00, 1994.19it/s]
+Traceback (most recent call last):
+  File "/workdir/benchmark_llm_wiki.py", line 299, in <module>
+    if __name__ == "__main__": main()
+                               ^^^^^^
+  File "/workdir/benchmark_llm_wiki.py", line 294, in main
+    wiki2 = run_llmwiki2(model, docs, questions, run_dir, args.prompt_dir)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workdir/benchmark_llm_wiki.py", line 248, in run_llmwiki2
+    started = time.perf_counter(); response = wiki.ingest(doc["text"], title=doc["title"]); usage = response.usage.to_dict()
+                                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/llmw2/wiki.py", line 168, in ingest
+    return self._ingest(lambda ctx: Source(text, title, resource, origin, dict(fields or {})))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/llmw2/wiki.py", line 392, in _ingest
+    ready = self._prepare(source)
+            ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/llmw2/wiki.py", line 405, in _prepare
+    return self._summarize(self._read(source))
+                           ^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/llmw2/wiki.py", line 414, in _read
+    self._require_classifier()
+  File "/usr/local/lib/python3.12/dist-packages/llmw2/wiki.py", line 481, in _require_classifier
+    self.classifier.require_key()
+  File "/usr/local/lib/python3.12/dist-packages/llmw2/models/classifier.py", line 56, in require_key
+    raise ConfigError(
+llmw2.errors.ConfigError: no API key for the CROW classifier on OpenRouter: paste it in Settings → Advanced → Classifier key, or choose classic mode there
+>>> stopping vLLM
