@@ -1,0 +1,13 @@
+>>> GPU GPU-48b1d974-b35b-525d-c124-667cfdaff186: 3268/24576 MiB free, requesting LLM=0.60 and classifier=0.35 of total
+>>> waiting for Qwen/Qwen3.5-4B on port 8004 and LiquidAI/d1-3B on port 9004 ...
+ERROR: vLLM exited. Log:
+>>> one of the vLLM servers exited (status=2)
+>>> benchmark LLM log
+usage: vllm serve [model_tag] [options]
+vllm serve: error: argument --default-chat-template-kwargs: invalid loads value: '{"enable_thinking": false}}'
+>>> classifier log
+usage: vllm [-h] [-v]
+            {chat,complete,serve,launch,bench,collect-env,download-kernels,preload,run-batch,snapshot}
+            ...
+vllm: error: unrecognized arguments: --disable-prefix-caching
+>>> stopping vLLM

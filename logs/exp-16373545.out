@@ -1,0 +1,17 @@
+>>> GPU GPU-4203a7da-86b5-5949-426d-ef72b5f92385: 6972/24576 MiB free, requesting LLM=0.60 and classifier=0.35 of total
+>>> waiting for Qwen/Qwen3.5-4B on port 8004 and LiquidAI/d1-3B on port 9004 ...
+ERROR: vLLM exited. Log:
+>>> one of the vLLM servers exited (status=2)
+>>> benchmark LLM log
+usage: vllm serve [model_tag] [options]
+vllm serve: error: argument --default-chat-template-kwargs: invalid loads value: '{"enable_thinking": false}}'
+>>> classifier log
+(APIServer pid=53) INFO 10-28 14:53:45 [api_utils.py:347] 
+(APIServer pid=53) INFO 10-28 14:53:45 [api_utils.py:347]        █     █     █▄   ▄█
+(APIServer pid=53) INFO 10-28 14:53:45 [api_utils.py:347]  ▄▄ ▄█ █     █     █ ▀▄▀ █  version 0.32.0
+(APIServer pid=53) INFO 10-28 14:53:45 [api_utils.py:347]   █▄█▀ █     █     █     █  model   LiquidAI/d1-3B
+(APIServer pid=53) INFO 10-28 14:53:45 [api_utils.py:347]    ▀▀  ▀▀▀▀▀ ▀▀▀▀▀ ▀     ▀
+(APIServer pid=53) INFO 10-28 14:53:45 [api_utils.py:347] 
+(APIServer pid=53) INFO 10-28 14:53:45 [api_utils.py:286] non-default args: {'model_tag': 'LiquidAI/d1-3B', 'host': '0.0.0.0', 'port': 8001, 'model': 'LiquidAI/d1-3B', 'max_model_len': 8192, 'served_model_name': ['LiquidAI/d1-3B'], 'gpu_memory_utilization': 0.35, 'enable_prefix_caching': False, 'max_num_seqs': 8}
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+>>> stopping vLLM

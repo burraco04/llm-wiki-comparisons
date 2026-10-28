@@ -41,7 +41,7 @@ vllm serve "$CLASSIFIER_MODEL" \
   --gpu-memory-utilization "$CLASSIFIER_MEM" \
   --max-num-seqs "$CLASSIFIER_MAX_NUM_SEQS" \
   --logprobs-mode raw_logprobs \
-  --disable-prefix-caching \
+  --no-enable-prefix-caching \
   >"$CLASSIFIER_LOG" 2>&1 &
 CLASSIFIER_PID=$!
 

@@ -12,7 +12,7 @@ export VLLM_IMAGE
 PORT=8000 sbatch --export=ALL -w faretra \
   run_with_vllm.sh Qwen/Qwen2.5-3B-Instruct -- \
   python benchmark_llm_wiki.py
-PORT=8001 sbatch --export=ALL -w faretra \
+PORT=8004 sbatch --export=ALL -w faretra \
   run_with_vllm.sh Qwen/Qwen3.5-4B -- \
   python benchmark_llm_wiki.py
 PORT=8002 sbatch --export=ALL -w faretra \
