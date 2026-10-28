@@ -46,6 +46,13 @@ VLLM_IMAGE="${VLLM_IMAGE:-llm-wiki-benchmark:cu129}"
 RESULTS_DIR="${RESULTS_DIR:-$PWD/results}"
 mkdir -p "$RESULTS_DIR"
 RESULTS_DIR="$(cd "$RESULTS_DIR" && pwd)"
+LOG_DIR="${LOG_DIR:-$PWD/logs}"
+mkdir -p "$LOG_DIR"
+DOCKER_LOG="$LOG_DIR/docker-${SLURM_JOB_ID:-manual}-${PORT}.log"
+
+dump_docker_logs() {
+  docker logs "$NAME" 2>&1 | tee "$DOCKER_LOG"
+}
 
 # ── which GPU (Docker ignores Slurm, so pin it explicitly by UUID) ──
 GPU="${CUDA_VISIBLE_DEVICES:-${GPU:-0}}"
@@ -103,8 +110,12 @@ for i in $(seq 1 180); do
     exit 0
   fi
   if [[ "$(docker inspect -f '{{.State.Status}}' "$NAME" 2>/dev/null)" != "running" ]]; then
-    echo "ERROR: vLLM exited. Log:"; docker logs --tail 60 "$NAME"; exit 1
+    echo "ERROR: vLLM exited. Full log: $DOCKER_LOG"
+    dump_docker_logs
+    exit 1
   fi
   sleep 10
 done
-echo "ERROR: not ready after 30 min"; docker logs --tail 60 "$NAME"; exit 1
+echo "ERROR: not ready after 30 min. Full log: $DOCKER_LOG"
+dump_docker_logs
+exit 1
