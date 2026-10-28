@@ -1,0 +1,64 @@
+>>> GPU GPU-48b1d974-b35b-525d-c124-667cfdaff186: 24124/24576 MiB free, requesting LLM=0.60 and classifier=0.35 of total
+>>> waiting for Qwen/Qwen3.5-4B on port 8003 and LiquidAI/d1-3B on port 9003 ...
+ERROR: vLLM exited. Log:
+  File "/usr/local/lib/python3.12/dist-packages/torchvision/_meta_registrations.py", line 163, in <module>
+    @torch.library.register_fake("torchvision::nms")
+     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/library.py", line 1271, in register
+    use_lib._register_fake(
+  File "/usr/local/lib/python3.12/dist-packages/torch/library.py", line 354, in _register_fake
+    handle = entry.fake_impl.register(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/_library/fake_impl.py", line 87, in register
+    lib.impl(self.qualname, meta_kernel, "Meta", allow_override=allow_override)
+  File "/usr/local/lib/python3.12/dist-packages/torch/library.py", line 496, in impl
+    if torch._C._dispatch_has_kernel_for_dispatch_key(
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: operator torchvision::nms does not exist
+>>> classifier log
+W1028 01:22:56.449000 52 torch/_opaque_base.py:6] torch._opaque_base is deprecated, use torch._custom_class_base instead
+W1028 01:22:56.449000 52 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1028 01:22:56.450000 52 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+Traceback (most recent call last):
+  File "/usr/local/bin/vllm", line 10, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/vllm/entrypoints/cli/main.py", line 43, in main
+    import vllm.entrypoints.cli.benchmark.main
+  File "/usr/local/lib/python3.12/dist-packages/vllm/entrypoints/cli/benchmark/main.py", line 12, in <module>
+    from vllm.entrypoints.serve.utils.api_utils import VLLM_SUBCMD_PARSER_EPILOG
+  File "/usr/local/lib/python3.12/dist-packages/vllm/entrypoints/serve/utils/api_utils.py", line 19, in <module>
+    from vllm.engine.arg_utils import EngineArgs
+  File "/usr/local/lib/python3.12/dist-packages/vllm/engine/arg_utils.py", line 36, in <module>
+    from vllm.config import (
+  File "/usr/local/lib/python3.12/dist-packages/vllm/config/__init__.py", line 24, in <module>
+    from vllm.config.model import (
+  File "/usr/local/lib/python3.12/dist-packages/vllm/config/model.py", line 31, in <module>
+    from vllm.transformers_utils.config import (
+  File "/usr/local/lib/python3.12/dist-packages/vllm/transformers_utils/config.py", line 21, in <module>
+    from transformers.models.auto.image_processing_auto import get_image_processor_config
+  File "/usr/local/lib/python3.12/dist-packages/transformers/models/auto/image_processing_auto.py", line 24, in <module>
+    from ...image_processing_utils import ImageProcessingMixin
+  File "/usr/local/lib/python3.12/dist-packages/transformers/image_processing_utils.py", line 24, in <module>
+    from .image_processing_base import BatchFeature, ImageProcessingMixin
+  File "/usr/local/lib/python3.12/dist-packages/transformers/image_processing_base.py", line 25, in <module>
+    from .image_utils import is_valid_image, load_image
+  File "/usr/local/lib/python3.12/dist-packages/transformers/image_utils.py", line 54, in <module>
+    from torchvision.io import ImageReadMode, decode_image
+  File "/usr/local/lib/python3.12/dist-packages/torchvision/__init__.py", line 8, in <module>
+    from torchvision import (
+  File "/usr/local/lib/python3.12/dist-packages/torchvision/_meta_registrations.py", line 163, in <module>
+    @torch.library.register_fake("torchvision::nms")
+     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/library.py", line 1271, in register
+    use_lib._register_fake(
+  File "/usr/local/lib/python3.12/dist-packages/torch/library.py", line 354, in _register_fake
+    handle = entry.fake_impl.register(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/_library/fake_impl.py", line 87, in register
+    lib.impl(self.qualname, meta_kernel, "Meta", allow_override=allow_override)
+  File "/usr/local/lib/python3.12/dist-packages/torch/library.py", line 496, in impl
+    if torch._C._dispatch_has_kernel_for_dispatch_key(
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: operator torchvision::nms does not exist
+>>> stopping vLLM
