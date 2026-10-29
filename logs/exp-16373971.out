@@ -1,0 +1,17 @@
+>>> GPU GPU-4203a7da-86b5-5949-426d-ef72b5f92385: 24124/24576 MiB free, requesting LLM=0.60 and classifier=0.35 of total
+>>> waiting for Qwen/Qwen2.5-3B-Instruct on port 8000 and LiquidAI/d1-3B on port 9000 ...
+>>> ready after ~90s
+{"object":"list","data":[{"id":"Qwen/Qwen2.5-3B-Instruct","object":"model","created":1793276096,"owned_by":"vllm","root":"Qwen/Qwen2.5-3B-Instruct","parent":null,"max_model_len":20032,"permission":[{"id":"modelperm-a2ee8b72b884e077","object":"model_permission","created":1793276096,"allow_create_engine":false,"allow_sampling":true,"allow_logprobs":true,"allow_search_indices":false,"allow_view":true,"allow_fine_tuning":false,"organization":"*","group":null,"is_blocking":false}]}]}
+{"object":"list","data":[{"id":"LiquidAI/d1-3B","object":"model","created":1793276096,"owned_by":"vllm","root":"LiquidAI/d1-3B","parent":null,"max_model_len":8192,"permission":[{"id":"modelperm-8902ae6912065421","object":"model_permission","created":1793276096,"allow_create_engine":false,"allow_sampling":true,"allow_logprobs":true,"allow_search_indices":false,"allow_view":true,"allow_fine_tuning":false,"organization":"*","group":null,"is_blocking":false}]}]}
+>>> llm_base_url = http://localhost:8000/v1   llm_model = Qwen/Qwen2.5-3B-Instruct
+>>> classifier_base_url = http://localhost:9000/v1   classifier_model = LiquidAI/d1-3B
+>>> running in vllm-8000: python benchmark_llm_wiki.py
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+WARNING:huggingface_hub.utils._http:Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]Loading weights: 100%|██████████| 103/103 [00:00<00:00, 2286.97it/s]
+WARNING:llmw2.agents.steps_classic:summarize: the note of '...' lacks 5 of 12 values of its part notes
+WARNING:llmw2.agents.steps_classic:summarize: the note of 'News Publisher Class Action Suit Against Google' lacks 7 of 11 values of its part notes
+WARNING:llmw2.agents.steps_classic:summarize: the note of "Opening Statements and Defense in Sam Bankman-Fried's Trial" lacks 2 of 3 values of its part notes
+Completed Qwen/Qwen2.5-3B-Instruct: /workdir/results/Qwen_Qwen2.5-3B-Instruct/docs_3_questions_25
+>>> done
+>>> stopping vLLM
