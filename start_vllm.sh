@@ -7,8 +7,8 @@
 #    ./start_vllm.sh <hf_model> [port] [gpu_mem_util] [max_model_len]
 #
 #  Examples (one RTX 3090, 24 GB each):
-#    ./start_vllm.sh Qwen/Qwen2.5-3B-Instruct 8000 0.60
-#    ./start_vllm.sh Qwen/Qwen3.5-4B          8001 0.60
+#    ./start_vllm.sh Qwen/Qwen2.5-3B-Instruct 8000 0.50
+#    ./start_vllm.sh Qwen/Qwen3.5-4B          8001 0.50
 #
 #  MAX_NUM_SEQS (default 32) caps concurrent sequences; Qwen3.5 is a hybrid
 #  Mamba model and fails at the vLLM default of 256 on a 24 GB card.
@@ -30,14 +30,14 @@ set -euo pipefail
 
 MODEL="${1:?usage: $0 <hf_model> [port] [gpu_mem_util] [max_model_len]}"
 PORT="${2:-8000}"
-MEM="${3:-0.65}"
-MAXLEN="${4:-4096}"
+MEM="${3:-0.50}"
+MAXLEN="${4:-16384}"
 NAME="vllm-${PORT}"
 CLASSIFIER_MODEL="${CLASSIFIER_MODEL:-LiquidAI/d1-3B}"
 CLASSIFIER_INTERNAL_PORT="${CLASSIFIER_INTERNAL_PORT:-8001}"
 CLASSIFIER_HOST_PORT="${CLASSIFIER_HOST_PORT:-$((PORT + 1000))}"
-CLASSIFIER_MEM="${CLASSIFIER_GPU_MEM:-0.30}"
-CLASSIFIER_MAXLEN="${CLASSIFIER_MAX_MODEL_LEN:-4096}"
+CLASSIFIER_MEM="${CLASSIFIER_GPU_MEM:-0.35}"
+CLASSIFIER_MAXLEN="${CLASSIFIER_MAX_MODEL_LEN:-8192}"
 CLASSIFIER_MAX_NUM_SEQS="${CLASSIFIER_MAX_NUM_SEQS:-8}"
 HF_CACHE="${HF_CACHE:-$HOME/.cache/huggingface}"
 MAX_NUM_SEQS="${MAX_NUM_SEQS:-32}"
