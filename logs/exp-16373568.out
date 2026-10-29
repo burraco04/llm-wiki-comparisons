@@ -1,0 +1,64 @@
+>>> GPU GPU-48b1d974-b35b-525d-c124-667cfdaff186: 3128/24576 MiB free, requesting LLM=0.60 and classifier=0.35 of total
+>>> waiting for Qwen/Qwen2.5-3B-Instruct on port 8000 and LiquidAI/d1-3B on port 9000 ...
+ERROR: vLLM exited. Log:
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "uvloop/loop.pyx", line 1515, in uvloop.loop.Loop.run_until_complete
+  File "/usr/local/lib/python3.12/dist-packages/uvloop/__init__.py", line 48, in wrapper
+    return await main
+           ^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/vllm/entrypoints/launchers/api_server/entry.py", line 177, in run_server
+    await run_server_worker(listen_address, sock, args, **uvicorn_kwargs)
+  File "/usr/local/lib/python3.12/dist-packages/vllm/entrypoints/launchers/api_server/entry.py", line 195, in run_server_worker
+    async with build_async_engine_client(
+  File "/usr/lib/python3.12/contextlib.py", line 210, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/vllm/entrypoints/launchers/api_server/entry.py", line 61, in build_async_engine_client
+    async with build_async_engine_client_from_engine_args(
+  File "/usr/lib/python3.12/contextlib.py", line 210, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/vllm/entrypoints/launchers/api_server/entry.py", line 95, in build_async_engine_client_from_engine_args
+    async_llm = AsyncLLM.from_vllm_config(
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/vllm/v1/engine/async_llm.py", line 255, in from_vllm_config
+    return cls(
+           ^^^^
+  File "/usr/local/lib/python3.12/dist-packages/vllm/v1/engine/async_llm.py", line 184, in __init__
+    self.engine_core = EngineCoreClient.make_async_mp_client(
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/vllm/tracing/otel.py", line 175, in sync_wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/vllm/v1/engine/core_client.py", line 167, in make_async_mp_client
+    return AsyncMPClient(
+           ^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/vllm/tracing/otel.py", line 175, in sync_wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/vllm/v1/engine/core_client.py", line 1120, in __init__
+    super().__init__(
+  File "/usr/local/lib/python3.12/dist-packages/vllm/v1/engine/core_client.py", line 682, in __init__
+    with launch_core_engines(
+  File "/usr/lib/python3.12/contextlib.py", line 144, in __exit__
+    next(self.gen)
+  File "/usr/local/lib/python3.12/dist-packages/vllm/v1/engine/utils.py", line 1351, in launch_core_engines
+    wait_for_engine_startup(
+  File "/usr/local/lib/python3.12/dist-packages/vllm/v1/engine/utils.py", line 1431, in wait_for_engine_startup
+    raise RuntimeError(
+RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}
+>>> classifier log
+(APIServer pid=53) INFO 10-28 15:22:59 [api_utils.py:347] 
+(APIServer pid=53) INFO 10-28 15:22:59 [api_utils.py:347]        █     █     █▄   ▄█
+(APIServer pid=53) INFO 10-28 15:22:59 [api_utils.py:347]  ▄▄ ▄█ █     █     █ ▀▄▀ █  version 0.32.0
+(APIServer pid=53) INFO 10-28 15:22:59 [api_utils.py:347]   █▄█▀ █     █     █     █  model   LiquidAI/d1-3B
+(APIServer pid=53) INFO 10-28 15:22:59 [api_utils.py:347]    ▀▀  ▀▀▀▀▀ ▀▀▀▀▀ ▀     ▀
+(APIServer pid=53) INFO 10-28 15:22:59 [api_utils.py:347] 
+(APIServer pid=53) INFO 10-28 15:22:59 [api_utils.py:286] non-default args: {'model_tag': 'LiquidAI/d1-3B', 'host': '0.0.0.0', 'port': 8001, 'model': 'LiquidAI/d1-3B', 'max_model_len': 8192, 'served_model_name': ['LiquidAI/d1-3B'], 'gpu_memory_utilization': 0.35, 'enable_prefix_caching': False, 'max_num_seqs': 8}
+(APIServer pid=53) INFO 10-28 15:23:09 [model.py:733] Resolved architecture: Lfm2VlForConditionalGeneration
+(APIServer pid=53) INFO 10-28 15:23:09 [model.py:2152] Using max model len 8192
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Fetching 14 files:   0%|          | 0/14 [00:00<?, ?it/s]Fetching 14 files:  14%|█▍        | 2/14 [00:00<00:00, 12.73it/s]Fetching 14 files:  36%|███▌      | 5/14 [00:00<00:00, 19.92it/s]Fetching 14 files:  64%|██████▍   | 9/14 [00:00<00:00, 26.26it/s]Fetching 14 files:  86%|████████▌ | 12/14 [00:00<00:00, 26.98it/s]Fetching 14 files: 100%|██████████| 14/14 [00:01<00:00,  7.60it/s]
+(APIServer pid=53) INFO 10-28 15:23:14 [kernel.py:467] Final IR op priority after setting platform defaults: IrOpPriorityConfig(rms_norm=['native'], fused_add_rms_norm=['native'], gelu_and_mul_sparse=['triton', 'native'])
+>>> stopping vLLM

@@ -31,7 +31,7 @@ set -euo pipefail
 MODEL="${1:?usage: $0 <hf_model> [port] [gpu_mem_util] [max_model_len]}"
 PORT="${2:-8000}"
 MEM="${3:-0.55}"
-MAXLEN="${4:-32768}"
+MAXLEN="${4:-20032}"
 NAME="vllm-${PORT}"
 CLASSIFIER_MODEL="${CLASSIFIER_MODEL:-LiquidAI/d1-3B}"
 CLASSIFIER_INTERNAL_PORT="${CLASSIFIER_INTERNAL_PORT:-8001}"
