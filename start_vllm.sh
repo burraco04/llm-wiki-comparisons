@@ -6,7 +6,7 @@
 #  Usage:
 #    ./start_vllm.sh <hf_model> [port] [gpu_mem_util] [max_model_len]
 #
-#  Examples (one RTX 3090, 24 GB each):
+#  Examples (two RTX 3090 cards, 24 GB each):
 #    ./start_vllm.sh Qwen/Qwen2.5-3B-Instruct 8000 0.50
 #    ./start_vllm.sh Qwen/Qwen3.5-4B          8001 0.50
 #
@@ -23,21 +23,23 @@
 #  Stop:   docker rm -f vllm-8000
 #  Logs:   docker logs -f vllm-8000
 #
-#  GPU: uses $CUDA_VISIBLE_DEVICES (set by Slurm), else $GPU, else 0.
+#  GPU: uses the first two entries in $CUDA_VISIBLE_DEVICES (set by Slurm),
+#  else $SLURM_JOB_GPUS, else fails.  The LLM uses container GPU 0 and the
+#  classifier container GPU 1.
 #  The API is only reachable from this machine (127.0.0.1); use an SSH tunnel from outside.
 # ═══════════════════════════════════════════════════════
 set -euo pipefail
 
 MODEL="${1:?usage: $0 <hf_model> [port] [gpu_mem_util] [max_model_len]}"
 PORT="${2:-8000}"
-MEM="${3:-0.45}"
-MAXLEN="${4:-8192}"
+MEM="${3:-0.85}"
+MAXLEN="${4:-32768}"
 NAME="vllm-${PORT}"
 CLASSIFIER_MODEL="${CLASSIFIER_MODEL:-LiquidAI/d1-3B}"
 CLASSIFIER_INTERNAL_PORT="${CLASSIFIER_INTERNAL_PORT:-8001}"
 CLASSIFIER_HOST_PORT="${CLASSIFIER_HOST_PORT:-$((PORT + 1000))}"
-CLASSIFIER_MEM="${CLASSIFIER_GPU_MEM:-0.45}"
-CLASSIFIER_MAXLEN="${CLASSIFIER_MAX_MODEL_LEN:-2048}"
+CLASSIFIER_MEM="${CLASSIFIER_GPU_MEM:-0.85}"
+CLASSIFIER_MAXLEN="${CLASSIFIER_MAX_MODEL_LEN:-8192}"
 CLASSIFIER_MAX_NUM_SEQS="${CLASSIFIER_MAX_NUM_SEQS:-8}"
 HF_CACHE="${HF_CACHE:-$HOME/.cache/huggingface}"
 MAX_NUM_SEQS="${MAX_NUM_SEQS:-32}"
@@ -54,21 +56,36 @@ dump_docker_logs() {
   docker logs "$NAME" 2>&1 | tee "$DOCKER_LOG"
 }
 
-# ── which GPU (Docker ignores Slurm, so pin it explicitly by UUID) ──
-GPU="${CUDA_VISIBLE_DEVICES:-${GPU:-0}}"
-GPU="${GPU%%,*}"
-if [[ "$GPU" != GPU-* ]]; then
-  GPU=$(nvidia-smi -i "$GPU" --query-gpu=uuid --format=csv,noheader | tr -d ' ')
+# ── which GPUs (Docker ignores Slurm, so pin both explicitly by UUID) ──
+GPU_LIST="${CUDA_VISIBLE_DEVICES:-${SLURM_JOB_GPUS:-}}"
+if [[ -z "$GPU_LIST" ]]; then
+  echo "ERROR: Slurm did not expose two GPUs through CUDA_VISIBLE_DEVICES or SLURM_JOB_GPUS"
+  exit 1
 fi
-FREE=$(nvidia-smi -i "$GPU" --query-gpu=memory.free --format=csv,noheader,nounits | tr -d ' ')
-TOTAL=$(nvidia-smi -i "$GPU" --query-gpu=memory.total --format=csv,noheader,nounits | tr -d ' ')
-echo ">>> GPU $GPU: ${FREE}/${TOTAL} MiB free, requesting LLM=${MEM} and classifier=${CLASSIFIER_MEM} of total"
+IFS=',' read -r GPU0 GPU1 extra <<< "$GPU_LIST"
+if [[ -z "${GPU0:-}" || -z "${GPU1:-}" || -n "${extra:-}" ]]; then
+  echo "ERROR: expected exactly two allocated GPUs, got '$GPU_LIST'"
+  exit 1
+fi
+for var in GPU0 GPU1; do
+  gpu="${!var}"
+  if [[ "$gpu" != GPU-* ]]; then
+    gpu=$(nvidia-smi -i "$gpu" --query-gpu=uuid --format=csv,noheader | tr -d ' ')
+    printf -v "$var" '%s' "$gpu"
+  fi
+done
+FREE0=$(nvidia-smi -i "$GPU0" --query-gpu=memory.free --format=csv,noheader,nounits | tr -d ' ')
+TOTAL0=$(nvidia-smi -i "$GPU0" --query-gpu=memory.total --format=csv,noheader,nounits | tr -d ' ')
+FREE1=$(nvidia-smi -i "$GPU1" --query-gpu=memory.free --format=csv,noheader,nounits | tr -d ' ')
+TOTAL1=$(nvidia-smi -i "$GPU1" --query-gpu=memory.total --format=csv,noheader,nounits | tr -d ' ')
+echo ">>> LLM GPU $GPU0: ${FREE0}/${TOTAL0} MiB free, classifier GPU $GPU1: ${FREE1}/${TOTAL1} MiB free"
+echo ">>> requesting LLM=${MEM} and classifier=${CLASSIFIER_MEM} of total"
 
 mkdir -p "$HF_CACHE"
 docker rm -f "$NAME" >/dev/null 2>&1 || true
 
 docker run -d --name "$NAME" \
-  --gpus "\"device=${GPU}\"" \
+  --gpus "\"device=${GPU0},${GPU1}\"" \
   --ipc=host \
   -v "$HF_CACHE":/root/.cache/huggingface \
   -v "$RESULTS_DIR":/workdir/results \
@@ -77,6 +94,8 @@ docker run -d --name "$NAME" \
   -e CLASSIFIER_MODEL="$CLASSIFIER_MODEL" \
   -e LLM_PORT=8000 \
   -e CLASSIFIER_PORT="$CLASSIFIER_INTERNAL_PORT" \
+  -e LLM_DEVICE=0 \
+  -e CLASSIFIER_DEVICE=1 \
   -e LLM_GPU_MEMORY_UTILIZATION="$MEM" \
   -e CLASSIFIER_GPU_MEMORY_UTILIZATION="$CLASSIFIER_MEM" \
   -e LLM_MAX_MODEL_LEN="$MAXLEN" \

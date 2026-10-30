@@ -8,10 +8,12 @@ set -euo pipefail
 
 LLM_PORT="${LLM_PORT:-8000}"
 CLASSIFIER_PORT="${CLASSIFIER_PORT:-8001}"
-LLM_MEM="${LLM_GPU_MEMORY_UTILIZATION:-0.45}"
-CLASSIFIER_MEM="${CLASSIFIER_GPU_MEMORY_UTILIZATION:-0.45}"
-LLM_MAXLEN="${LLM_MAX_MODEL_LEN:-8192}"
-CLASSIFIER_MAXLEN="${CLASSIFIER_MAX_MODEL_LEN:-2048}"
+LLM_DEVICE="${LLM_DEVICE:-0}"
+CLASSIFIER_DEVICE="${CLASSIFIER_DEVICE:-1}"
+LLM_MEM="${LLM_GPU_MEMORY_UTILIZATION:-0.85}"
+CLASSIFIER_MEM="${CLASSIFIER_GPU_MEMORY_UTILIZATION:-0.85}"
+LLM_MAXLEN="${LLM_MAX_MODEL_LEN:-32768}"
+CLASSIFIER_MAXLEN="${CLASSIFIER_MAX_MODEL_LEN:-8192}"
 LLM_MAX_NUM_SEQS="${LLM_MAX_NUM_SEQS:-32}"
 CLASSIFIER_MAX_NUM_SEQS="${CLASSIFIER_MAX_NUM_SEQS:-8}"
 if [[ -z "${CHAT_TEMPLATE_KWARGS:-}" ]]; then
@@ -26,7 +28,7 @@ if [[ "$LLM_MODEL" == "Qwen/Qwen3.5-4B" ]]; then
   LLM_MODE_FLAGS+=(--language-model-only)
 fi
 
-vllm serve "$LLM_MODEL" \
+CUDA_VISIBLE_DEVICES="$LLM_DEVICE" vllm serve "$LLM_MODEL" \
   --host 0.0.0.0 \
   --port "$LLM_PORT" \
   --served-model-name "$LLM_MODEL" \
@@ -42,7 +44,7 @@ LLM_PID=$!
 
 # Liquid d1 exposes the System One endpoint through vLLM.  Raw logprobs are
 # required by that endpoint to calculate the probability of each typed answer.
-vllm serve "$CLASSIFIER_MODEL" \
+CUDA_VISIBLE_DEVICES="$CLASSIFIER_DEVICE" vllm serve "$CLASSIFIER_MODEL" \
   --host 0.0.0.0 \
   --port "$CLASSIFIER_PORT" \
   --served-model-name "$CLASSIFIER_MODEL" \

@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH --job-name=llm-exp
-#SBATCH --gres=gpu:1
+#SBATCH --gres=gpu:2
 #SBATCH --cpus-per-task=4
 #SBATCH --mem=16G
 #SBATCH --time=08:00:00
@@ -30,8 +30,8 @@ MODEL="${1:?usage: $0 <hf_model> -- <command ...>}"; shift
 [[ $# -ge 1 ]] || { echo "ERROR: no command given after --"; exit 1; }
 
 PORT="${PORT:-8000}"
-MEM="${GPU_MEM_UTIL:-0.45}"
-MAXLEN="${MAX_MODEL_LEN:-8192}"
+MEM="${GPU_MEM_UTIL:-0.85}"
+MAXLEN="${MAX_MODEL_LEN:-32768}"
 VLLM_IMAGE="${VLLM_IMAGE:-llm-wiki-benchmark:cu129}"
 RESULTS_DIR="${RESULTS_DIR:-$PWD/results}"
 mkdir -p "$RESULTS_DIR"
