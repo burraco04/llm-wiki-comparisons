@@ -21,6 +21,11 @@ fi
 LLM_LOG=/tmp/vllm-llm.log
 CLASSIFIER_LOG=/tmp/vllm-classifier.log
 
+LLM_MODE_FLAGS=()
+if [[ "$LLM_MODEL" == "Qwen/Qwen3.5-4B" ]]; then
+  LLM_MODE_FLAGS+=(--language-model-only)
+fi
+
 vllm serve "$LLM_MODEL" \
   --host 0.0.0.0 \
   --port "$LLM_PORT" \
@@ -28,6 +33,7 @@ vllm serve "$LLM_MODEL" \
   --max-model-len "$LLM_MAXLEN" \
   --gpu-memory-utilization "$LLM_MEM" \
   --max-num-seqs "$LLM_MAX_NUM_SEQS" \
+  "${LLM_MODE_FLAGS[@]}" \
   --enforce-eager \
   --default-chat-template-kwargs "$CHAT_TEMPLATE_KWARGS" \
   --enable-prefix-caching \
