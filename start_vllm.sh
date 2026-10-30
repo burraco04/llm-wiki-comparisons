@@ -31,7 +31,7 @@ set -euo pipefail
 MODEL="${1:?usage: $0 <hf_model> [port] [gpu_mem_util] [max_model_len]}"
 PORT="${2:-8000}"
 MEM="${3:-0.50}"
-MAXLEN="${4:-32768}"
+MAXLEN="${4:-8192}"
 NAME="vllm-${PORT}"
 CLASSIFIER_MODEL="${CLASSIFIER_MODEL:-LiquidAI/d1-3B}"
 CLASSIFIER_INTERNAL_PORT="${CLASSIFIER_INTERNAL_PORT:-8001}"
@@ -99,7 +99,7 @@ docker run -d --name "$NAME" \
   "$VLLM_IMAGE" >/dev/null
 
 echo ">>> waiting for $MODEL on port $PORT and $CLASSIFIER_MODEL on port $CLASSIFIER_HOST_PORT ..."
-for i in $(seq 1 180); do
+for i in $(seq 1 60); do
   if curl -sf "http://localhost:${PORT}/health" >/dev/null 2>&1 \
     && curl -sf "http://localhost:${CLASSIFIER_HOST_PORT}/health" >/dev/null 2>&1; then
     echo ">>> ready after ~$((i*10))s"
@@ -116,6 +116,6 @@ for i in $(seq 1 180); do
   fi
   sleep 10
 done
-echo "ERROR: not ready after 30 min. Full log: $DOCKER_LOG"
+echo "ERROR: not ready after 10 min. Full log: $DOCKER_LOG"
 dump_docker_logs
 exit 1

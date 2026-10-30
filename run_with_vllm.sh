@@ -31,7 +31,7 @@ MODEL="${1:?usage: $0 <hf_model> -- <command ...>}"; shift
 
 PORT="${PORT:-8000}"
 MEM="${GPU_MEM_UTIL:-0.50}"
-MAXLEN="${MAX_MODEL_LEN:-32768}"
+MAXLEN="${MAX_MODEL_LEN:-8192}"
 VLLM_IMAGE="${VLLM_IMAGE:-llm-wiki-benchmark:cu129}"
 RESULTS_DIR="${RESULTS_DIR:-$PWD/results}"
 mkdir -p "$RESULTS_DIR"
