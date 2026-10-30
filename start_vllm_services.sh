@@ -10,8 +10,8 @@ LLM_PORT="${LLM_PORT:-8000}"
 CLASSIFIER_PORT="${CLASSIFIER_PORT:-8001}"
 LLM_MEM="${LLM_GPU_MEMORY_UTILIZATION:-0.50}"
 CLASSIFIER_MEM="${CLASSIFIER_GPU_MEMORY_UTILIZATION:-0.40}"
-LLM_MAXLEN="${LLM_MAX_MODEL_LEN:-4096}"
-CLASSIFIER_MAXLEN="${CLASSIFIER_MAX_MODEL_LEN:-4096}"
+LLM_MAXLEN="${LLM_MAX_MODEL_LEN:-32768}"
+CLASSIFIER_MAXLEN="${CLASSIFIER_MAX_MODEL_LEN:-8192}"
 LLM_MAX_NUM_SEQS="${LLM_MAX_NUM_SEQS:-32}"
 CLASSIFIER_MAX_NUM_SEQS="${CLASSIFIER_MAX_NUM_SEQS:-8}"
 if [[ -z "${CHAT_TEMPLATE_KWARGS:-}" ]]; then
@@ -28,6 +28,7 @@ vllm serve "$LLM_MODEL" \
   --max-model-len "$LLM_MAXLEN" \
   --gpu-memory-utilization "$LLM_MEM" \
   --max-num-seqs "$LLM_MAX_NUM_SEQS" \
+  --enforce-eager \
   --default-chat-template-kwargs "$CHAT_TEMPLATE_KWARGS" \
   --enable-prefix-caching \
   >"$LLM_LOG" 2>&1 &
@@ -42,6 +43,7 @@ vllm serve "$CLASSIFIER_MODEL" \
   --max-model-len "$CLASSIFIER_MAXLEN" \
   --gpu-memory-utilization "$CLASSIFIER_MEM" \
   --max-num-seqs "$CLASSIFIER_MAX_NUM_SEQS" \
+  --enforce-eager \
   --logprobs-mode raw_logprobs \
   --no-enable-prefix-caching \
   >"$CLASSIFIER_LOG" 2>&1 &
