@@ -1,0 +1,6 @@
+# Notes
+
+* [Apple's Decision to Use Google Search](apple-s-decision-to-use-google-search.md) - Apple's rationale for choosing Google Search as the default search engine, including privacy concerns and user experience considerations.
+* [Key Points from the Google Antitrust Case](key-points-from-the-google-antitrust-case.md) - This note summarizes important aspects of the Google antitrust case, including Google's spending on being the default search engine, its deal with Apple, and efforts to preinstall services on iPhones. It also compares Google's practices to those of Microsoft in past antitrust battles.
+* [News Publisher Class Action Suit Against Google](news-publisher-class-action-suit-against-google.md) - News publishers file a class action lawsuit against Google and Alphabet, alleging anticompetitive practices involving Google's AI technologies such as Search Generative Experience (SGE) and Bard AI chatbot. The lawsuit seeks injunctions and class-wide monetary and injunctive relief to restore competition and preserve a free marketplace of ideas.
+* [Google Search Functionality and Data Usage](google-search-functionality-and-data-usage.md) - Discusses Google's keyword matching and user data usage in search results. Highlights the increase in data volume and the role of machine learning in ranking search results.

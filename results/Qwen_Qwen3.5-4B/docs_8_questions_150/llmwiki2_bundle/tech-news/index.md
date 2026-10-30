@@ -1,0 +1,5 @@
+# Notes
+
+* [Helena World Chronicle files antitrust suit against Google over AI harms](helena-world-chronicle-files-antitrust-suit-against-google.md) - Arkansas publisher Helena World Chronicle filed a class action antitrust suit in the U.S. District Court in D.C. against Google and Alphabet, alleging violations of the Sherman Act and Clayton Act due to Google's siphoning of content, readers, and ad revenue through technologies like Search Generative Experience (SGE), Bard, and the Knowledge Graph.
+* [Tech news: AI startups, Google Pixel 8, TikTok ad-free tier, and more](tech-news-ai-startups-google-pixel-8-tiktok-ad-free-tier-and.md) - A roundup of recent tech developments including Induced AI's automation tool, Google's Pixel 8 launch, TikTok's ad-free test, Flexport leadership changes, and various startup updates.
+* [Google Search dominance, data practices, and competitive challenges](google-search-dominance-data-practices-and-competitive.md) - Analysis of Google's market dominance through data collection, personalization advantages over Bing, legal challenges, and allegations of manipulation versus official denials.

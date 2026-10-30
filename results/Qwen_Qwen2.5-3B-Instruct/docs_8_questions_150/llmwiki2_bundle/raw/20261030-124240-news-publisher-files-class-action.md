@@ -5,7 +5,7 @@ title: News publisher files class action antitrust suit against Google, citing A
 hash: sha256:3c8d3acaf5086a5a3ff546071a1be9c728c76ee582a688390917fb2d987f796a
 generated:
   by: llmw2/0.6.0
-  at: '2026-10-29T12:16:29+00:00'
+  at: '2026-10-30T12:42:40+00:00'
 ---
 
 A new class action lawsuit filed this week in the U.S. District Court in D.C. accuses Google and parent company Alphabet of anticompetitive behavior in violation of U.S. antitrust law, the Sherman Act, and others, on behalf of news publishers. The case, filed by Arkansas-based publisher Helena World Chronicle, argues that Google “siphons off” news publishers’ content, their readers and ad revenue through anticompetitive means. It also specifically cites new AI technologies like Google’s Search Generative Experience (SGE) and Bard AI chatbot as worsening the problem.

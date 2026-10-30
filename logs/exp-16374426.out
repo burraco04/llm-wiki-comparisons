@@ -1,0 +1,24 @@
+>>> LLM GPU GPU-48b1d974-b35b-525d-c124-667cfdaff186: 24124/24576 MiB free, classifier GPU GPU-190ed79c-3a8f-eed8-4e94-0e8a6d7b9384: 24124/24576 MiB free
+>>> requesting LLM=0.85 and classifier=0.85 of total
+>>> waiting for Qwen/Qwen3.5-4B on port 8004 and LiquidAI/d1-3B on port 9004 ...
+>>> ready after ~140s
+{"object":"list","data":[{"id":"Qwen/Qwen3.5-4B","object":"model","created":1793363340,"owned_by":"vllm","root":"Qwen/Qwen3.5-4B","parent":null,"max_model_len":32768,"permission":[{"id":"modelperm-890d6e244a10d162","object":"model_permission","created":1793363340,"allow_create_engine":false,"allow_sampling":true,"allow_logprobs":true,"allow_search_indices":false,"allow_view":true,"allow_fine_tuning":false,"organization":"*","group":null,"is_blocking":false}]}]}
+{"object":"list","data":[{"id":"LiquidAI/d1-3B","object":"model","created":1793363340,"owned_by":"vllm","root":"LiquidAI/d1-3B","parent":null,"max_model_len":8192,"permission":[{"id":"modelperm-92c2ea40799df2d4","object":"model_permission","created":1793363340,"allow_create_engine":false,"allow_sampling":true,"allow_logprobs":true,"allow_search_indices":false,"allow_view":true,"allow_fine_tuning":false,"organization":"*","group":null,"is_blocking":false}]}]}
+>>> llm_base_url = http://localhost:8004/v1   llm_model = Qwen/Qwen3.5-4B
+>>> classifier_base_url = http://localhost:9004/v1   classifier_model = LiquidAI/d1-3B
+>>> running in vllm-8004: python benchmark_llm_wiki.py
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+WARNING:huggingface_hub.utils._http:Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]Loading weights: 100%|██████████| 103/103 [00:00<00:00, 5790.05it/s]
+WARNING:llmw2.agents.steps_classic:summarize: part 1 of 2: notes cut from 2235 to 1729 characters
+WARNING:llmw2.agents.steps_classic:summarize: the note of "Tech news: Sam Altman's teen startup, Google's Pixel 8, and industry updates" lacks 3 of 23 values of its part notes
+WARNING:llmw2.agents.steps_classic:summarize: part 1 of 2: notes cut from 1946 to 1637 characters
+WARNING:llmw2.agents.steps_classic:summarize: part 2 of 2: notes cut from 1595 to 1430 characters
+WARNING:llmw2.agents.steps_classic:summarize: the note of 'Helena World Chronicle files antitrust class action against Google over AI harms' lacks 13 of 28 values of its part notes
+WARNING:llmw2.agents.steps_classic:summarize: 'Helena World Chronicle files antitrust class action against Google over AI harms' has a body of 2537 characters, over 1.2 times the 2000 asked
+WARNING:llmw2.agents.steps_classic:summarize: part 1 of 2: notes cut from 1531 to 1433 characters
+WARNING:llmw2.agents.steps_classic:summarize: part 2 of 2: notes cut from 1636 to 1463 characters
+WARNING:llmw2.agents.steps_classic:summarize: the note of 'Sam Bankman-Fried trial day 2: Prosecution and defense opening statements' lacks 3 of 18 values of its part notes
+Completed Qwen/Qwen3.5-4B: /workdir/results/Qwen_Qwen3.5-4B/docs_3_questions_25
+>>> done
+>>> stopping vLLM

@@ -1,0 +1,6 @@
+# Notes
+
+* [Apple defends Google Search deal in court: 'There wasn't a valid alternative'](apple-defends-google-search-deal-in-court-there-wasn-t-a.md) - Eddy Cue and Google CEO Sundar Pichai testified in US v. Google; Cue argued no valid alternative existed while Pichai defended Google's $26.3 billion 2021 payments to make itself default.
+* [Sam Bankman-Fried trial day 2: Prosecution opening statement](sam-bankman-fried-trial-day-2-prosecution-opening-statement.md) - Prosecutor Thane Rehn accused Bankman-Fried of stealing billions from thousands of victims via Alameda Research and Caroline Ellison to fund a lavish lifestyle and political donations.
+* [SBF's rise, political overtures, and FTX collapse](sbf-s-rise-political-overtures-and-ftx-collapse.md) - This note covers Sam Bankman-Fried's early interactions with Michael Lewis, his massive fundraising and marketing deals, his attempt to buy off Donald Trump, and the subsequent financial collapse of FTX.
+* [SBF's trial and the rise and fall of FTX](sbf-s-trial-and-the-rise-and-fall-of-ftx.md) - This note covers the timeline of Sam Bankman-Fried's trial, the founding and rapid growth of FTX and Alameda Research, the collapse triggered by Binance's withdrawal, the subsequent bankruptcy, and the legal outcomes for SBF and other executives.

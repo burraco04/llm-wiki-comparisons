@@ -1,6 +1,6 @@
 ---
 type: Note
-id: 7405dd9552ee
+id: a32e5b282985
 title: News Publisher Class Action Suit Against Google
 description: News publishers file a class action lawsuit against Google and Alphabet,
   alleging anticompetitive practices involving Google's AI technologies such as Search
@@ -15,11 +15,11 @@ tags:
 - class-action
 generated:
   by: llmw2/0.6.0
-  at: '2026-10-29T12:16:29+00:00'
+  at: '2026-10-30T12:26:31+00:00'
   body_hash: sha256:83d3e9db3beabd2cd9851c0d762b1efde20a5504470f889e4e80fb296fb1d307
 sources:
 - id: s1
-  resource: /raw/20261029-121629-news-publisher-files-class-action.md
+  resource: /raw/20261030-122631-news-publisher-files-class-action.md
   title: News publisher files class action antitrust suit against Google, citing AI’s
     harms to their bottom line
   hash: sha256:3c8d3acaf5086a5a3ff546071a1be9c728c76ee582a688390917fb2d987f796a

@@ -1,6 +1,6 @@
 ---
 type: Note
-id: c933681cd140
+id: 58a1f8a78f0f
 title: '...'
 description: '...'
 tags:
@@ -9,11 +9,11 @@ tags:
 - tech-companies
 generated:
   by: llmw2/0.6.0
-  at: '2026-10-29T12:16:21+00:00'
+  at: '2026-10-30T12:26:23+00:00'
   body_hash: sha256:e42dfd7a3ab22ed0a094ec786b0feaa367f5fa8c29aa05354a815bec44de8758
 sources:
 - id: s1
-  resource: /raw/20261029-121621-sam-altman-backs-teens-startup-google.md
+  resource: /raw/20261030-122623-sam-altman-backs-teens-startup-google.md
   title: Sam Altman backs teens’ startup, Google unveils the Pixel 8 and TikTok tests
     an ad-free tier
   hash: sha256:5b136a9bad6732b58956655c3e56a7e481b90281a9bccbf43cfb69d40eee0212

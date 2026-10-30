@@ -5,7 +5,7 @@ title: Sam Altman backs teens’ startup, Google unveils the Pixel 8 and TikTok 
 hash: sha256:5b136a9bad6732b58956655c3e56a7e481b90281a9bccbf43cfb69d40eee0212
 generated:
   by: llmw2/0.6.0
-  at: '2026-10-29T12:16:21+00:00'
+  at: '2026-10-30T12:31:27+00:00'
 ---
 
 Hiya, folks, and welcome to Week in Review (WiR), TechCrunch’s digest of the past week in tech news. It’s TC’s column that highlights the major stories over the past few days, and — we humbly submit — it’s a darn useful resource for folks on the go.

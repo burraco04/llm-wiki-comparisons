@@ -36,7 +36,6 @@ CUDA_VISIBLE_DEVICES="$LLM_DEVICE" vllm serve "$LLM_MODEL" \
   --gpu-memory-utilization "$LLM_MEM" \
   --max-num-seqs "$LLM_MAX_NUM_SEQS" \
   "${LLM_MODE_FLAGS[@]}" \
-  --enforce-eager \
   --default-chat-template-kwargs "$CHAT_TEMPLATE_KWARGS" \
   --enable-prefix-caching \
   >"$LLM_LOG" 2>&1 &
@@ -51,7 +50,6 @@ CUDA_VISIBLE_DEVICES="$CLASSIFIER_DEVICE" vllm serve "$CLASSIFIER_MODEL" \
   --max-model-len "$CLASSIFIER_MAXLEN" \
   --gpu-memory-utilization "$CLASSIFIER_MEM" \
   --max-num-seqs "$CLASSIFIER_MAX_NUM_SEQS" \
-  --enforce-eager \
   --logprobs-mode raw_logprobs \
   --no-enable-prefix-caching \
   >"$CLASSIFIER_LOG" 2>&1 &

@@ -5,7 +5,7 @@ title: Is Sam Bankman-Fried a bad ‘man’ or a good ‘boy’? Lawyers swap op
 hash: sha256:7547a91c0f876b858db234b2457d32c9e10413dc05e8f08e0ea78c61bd0dcbcc
 generated:
   by: llmw2/0.6.0
-  at: '2026-10-29T12:16:34+00:00'
+  at: '2026-10-30T12:21:19+00:00'
 ---
 
 Who is Sam Bankman-Fried, the former CEO of crypto exchange FTX? Is he a liar and a fraud? Or did he act in good faith, and like many a startup founder, fly too close to the sun?

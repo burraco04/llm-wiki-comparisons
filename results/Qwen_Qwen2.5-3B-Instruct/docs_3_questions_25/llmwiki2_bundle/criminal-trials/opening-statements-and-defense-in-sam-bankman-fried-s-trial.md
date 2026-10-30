@@ -1,6 +1,6 @@
 ---
 type: Note
-id: 8460dd485083
+id: 24dc3eb56f35
 title: Opening Statements and Defense in Sam Bankman-Fried's Trial
 description: The prosecution presents Sam Bankman-Fried as a liar and fraud, while
   the defense argues he acted in good faith. Bankman-Fried defends Alameda as a successful
@@ -14,11 +14,11 @@ tags:
 - trial
 generated:
   by: llmw2/0.6.0
-  at: '2026-10-29T12:16:34+00:00'
+  at: '2026-10-30T12:26:36+00:00'
   body_hash: sha256:ee7870339f7ed8361a1f391779ecf98674b0713fd21e660e993f2f75259ad888
 sources:
 - id: s1
-  resource: /raw/20261029-121634-is-sam-bankman-fried-a-bad-man-or-a-good.md
+  resource: /raw/20261030-122636-is-sam-bankman-fried-a-bad-man-or-a-good.md
   title: Is Sam Bankman-Fried a bad ‘man’ or a good ‘boy’? Lawyers swap opening statements
     before first witnesses take the stand
   hash: sha256:7547a91c0f876b858db234b2457d32c9e10413dc05e8f08e0ea78c61bd0dcbcc

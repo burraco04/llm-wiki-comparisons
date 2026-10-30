@@ -1,0 +1,4 @@
+# Notes
+
+* [Tech news: Sam Altman's teen startup, Google's Pixel 8, and industry updates](tech-news-sam-altman-s-teen-startup-google-s-pixel-8-and.md) - Sam Altman supports a teen-founded AI tool for workflow automation; Google launches the Pixel 8 series with AI enhancements; and various tech companies report on AI features, cybersecurity shifts, and market valuations.
+* [Helena World Chronicle files antitrust class action against Google over AI harms](helena-world-chronicle-files-antitrust-class-action-against.md) - Arkansas publisher Helena World Chronicle filed a class action suit in D.C. alleging Google's AI tools (SGE, Bard) and data practices violate antitrust laws by siphoning content, revenue, and traffic, seeking damages and an injunction requiring publisher consent for AI training.

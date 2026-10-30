@@ -1,0 +1,39 @@
+>>> LLM GPU GPU-48b1d974-b35b-525d-c124-667cfdaff186: 24124/24576 MiB free, classifier GPU GPU-190ed79c-3a8f-eed8-4e94-0e8a6d7b9384: 24124/24576 MiB free
+>>> requesting LLM=0.85 and classifier=0.85 of total
+>>> waiting for Qwen/Qwen3.5-4B on port 8003 and LiquidAI/d1-3B on port 9003 ...
+>>> ready after ~140s
+{"object":"list","data":[{"id":"Qwen/Qwen3.5-4B","object":"model","created":1793364404,"owned_by":"vllm","root":"Qwen/Qwen3.5-4B","parent":null,"max_model_len":32768,"permission":[{"id":"modelperm-8270920ed22ac4d8","object":"model_permission","created":1793364404,"allow_create_engine":false,"allow_sampling":true,"allow_logprobs":true,"allow_search_indices":false,"allow_view":true,"allow_fine_tuning":false,"organization":"*","group":null,"is_blocking":false}]}]}
+{"object":"list","data":[{"id":"LiquidAI/d1-3B","object":"model","created":1793364404,"owned_by":"vllm","root":"LiquidAI/d1-3B","parent":null,"max_model_len":8192,"permission":[{"id":"modelperm-9f80b08decd7ccc5","object":"model_permission","created":1793364404,"allow_create_engine":false,"allow_sampling":true,"allow_logprobs":true,"allow_search_indices":false,"allow_view":true,"allow_fine_tuning":false,"organization":"*","group":null,"is_blocking":false}]}]}
+>>> llm_base_url = http://localhost:8003/v1   llm_model = Qwen/Qwen3.5-4B
+>>> classifier_base_url = http://localhost:9003/v1   classifier_model = LiquidAI/d1-3B
+>>> running in vllm-8003: python benchmark_llm_wiki.py --top-docs 8 --max-questions 150
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+WARNING:huggingface_hub.utils._http:Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]Loading weights: 100%|██████████| 103/103 [00:00<00:00, 7555.98it/s]
+WARNING:llmw2.agents.steps_classic:summarize: part 1 of 2: notes cut from 1893 to 1718 characters
+WARNING:llmw2.agents.steps_classic:summarize: part 2 of 2: notes cut from 2142 to 1724 characters
+WARNING:llmw2.agents.steps_classic:summarize: part 1 of 2: notes cut from 2277 to 1598 characters
+WARNING:llmw2.agents.steps_classic:summarize: the note of 'Helena World Chronicle files antitrust suit against Google over AI harms' lacks 5 of 24 values of its part notes
+WARNING:llmw2.agents.steps_classic:summarize: 'Helena World Chronicle files antitrust suit against Google over AI harms' has a body of 2658 characters, over 1.2 times the 2000 asked
+WARNING:llmw2.agents.steps_classic:summarize: part 1 of 2: notes cut from 1595 to 1383 characters
+WARNING:llmw2.agents.steps_classic:summarize: part 2 of 2: notes cut from 1524 to 1339 characters
+WARNING:llmw2.agents.steps_classic:summarize: the note of 'Sam Bankman-Fried trial opening statements: Prosecution vs. Defense arguments' lacks 6 of 13 values of its part notes
+WARNING:llmw2.agents.steps_classic:summarize: part 2 of 2: notes cut from 1467 to 1212 characters
+WARNING:llmw2.agents.steps_classic:summarize: the note of "SBF's trial and the rise and fall of FTX" lacks 5 of 30 values of its part notes
+WARNING:llmw2.agents.steps_classic:summarize: part 2 of 3: notes cut from 1172 to 1069 characters
+WARNING:llmw2.agents.steps_classic:summarize: part 3 of 3: notes cut from 1373 to 1313 characters
+WARNING:llmw2.agents.steps_classic:summarize: the note of "SBF's $5B Offer to Trump and FTX's Rise and Fall" lacks 1 of 20 values of its part notes
+WARNING:llmw2.agents.steps_classic:merge: the incoming text is cut from 8092 to 2221 characters to fit the call
+WARNING:llmw2.agents.steps_classic:merge: the draft of legal-trials/sbf-s-trial-and-the-rise-and-fall-of-ftx.md drops 24 of 25 values of the existing note: asking again
+WARNING:llmw2.agents.steps_classic:merge: "SBF's trial and the rise and fall of FTX" has a body of 2585 characters, over 1.2 times the 2000 asked
+WARNING:llmw2.agents.steps_classic:summarize: the note of "Apple defends Google Search deal in court: 'There wasn't a valid alternative'" lacks 4 of 10 values of its part notes
+WARNING:llmw2.agents.steps_classic:summarize: part 1 of 2: notes cut from 2183 to 1646 characters
+WARNING:llmw2.agents.steps_classic:summarize: the note of 'Google Antitrust Case: Key Facts and Testimony' lacks 1 of 20 values of its part notes
+WARNING:llmw2.agents.steps_classic:summarize: 'Google Antitrust Case: Key Facts and Testimony' has a body of 2788 characters, over 1.2 times the 2000 asked
+WARNING:llmw2.agents.steps_classic:summarize: part 1 of 2: notes cut from 2233 to 1872 characters
+WARNING:llmw2.agents.steps_classic:summarize: part 2 of 2: notes cut from 2966 to 1818 characters
+WARNING:llmw2.agents.steps_classic:summarize: the note of 'Google Search dominance, data practices, and competitive challenges' lacks 10 of 14 values of its part notes
+WARNING:llmw2.models.llm:llm researcher/navigate: the reply was cut at max_tokens 1715: asking again, shorter
+Completed Qwen/Qwen3.5-4B: /workdir/results/Qwen_Qwen3.5-4B/docs_8_questions_150
+>>> done
+>>> stopping vLLM
