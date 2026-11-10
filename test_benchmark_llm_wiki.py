@@ -57,6 +57,10 @@ class FakeEncoder:
 
 
 class BenchmarkTests(unittest.TestCase):
+    def setUp(self):
+        self.temp_root = Path(__file__).parent / "tmp" / "benchmark_tests"
+        self.temp_root.mkdir(parents=True, exist_ok=True)
+
     def test_multiline_response_and_json_are_preserved(self):
         llm = client_with_replies(["First line\nSecond line", extraction()])
         self.assertEqual(llm.ask("test"), "First line\nSecond line")
@@ -88,7 +92,7 @@ class BenchmarkTests(unittest.TestCase):
         for pid, page in wiki.pages.items():
             for target in page["links"]:
                 self.assertIn(pid, wiki.pages[target]["links"])
-        with tempfile.TemporaryDirectory() as directory:
+        with tempfile.TemporaryDirectory(dir=self.temp_root) as directory:
             wiki.save(Path(directory))
             saved = Path(directory, "wiki/entities/acme.md").read_text(encoding="utf-8")
             self.assertIn("sources/article-two", saved)
@@ -123,8 +127,8 @@ class BenchmarkTests(unittest.TestCase):
         llm = client_with_replies(replies)
         questions = [{"qa_id": "q1", "question": "Who develops retrieval systems?", "reference": "Acme"}]
         fake_module = SimpleNamespace(SentenceTransformer=FakeEncoder)
-        with tempfile.TemporaryDirectory() as directory, patch.dict(sys.modules, {"sentence_transformers": fake_module}):
-            output = bench.run_notebook_wiki(llm, DOCS, questions, Path(directory))
+        with tempfile.TemporaryDirectory(dir=self.temp_root) as directory, patch.dict(sys.modules, {"sentence_transformers": fake_module}):
+            output = bench.run_structured_wiki(llm, DOCS, questions, Path(directory))
             self.assertFalse(output["writeback_enabled"])
             self.assertEqual(output["wiki_stats"]["entities"], 1)
             self.assertEqual(output["answers"]["rag_semantic"][0]["llm_calls"], 1)
@@ -133,7 +137,35 @@ class BenchmarkTests(unittest.TestCase):
                 self.assertEqual(row["llm_calls"], 3)
                 self.assertEqual(row["em"], 1)
                 self.assertGreater(row["retrieval"]["selected"], 0)
-            self.assertEqual(len(Path(directory, "notebook_answers.jsonl").read_text().splitlines()), 4)
+            self.assertEqual(len(Path(directory, "structured_wiki", "answers.jsonl").read_text().splitlines()), 4)
+            for name, rows in output["answers"].items():
+                row = rows[0]
+                self.assertEqual(row["context"], row["answer_prompt"].split("Context:\n", 1)[1].split("\n\nQuestion:", 1)[0])
+                self.assertTrue(row["retrieval"]["selected_passages"])
+                self.assertTrue(Path(directory, "structured_wiki", "queries", name, "q1.json").is_file())
+
+    def test_failed_structured_construction_keeps_dense_baseline_independent(self):
+        llm = client_with_replies([{}, {}, "Acme"])
+        questions = [{"qa_id": "q1", "question": "Who develops retrieval systems?", "reference": "Acme"}]
+        with tempfile.TemporaryDirectory(dir=self.temp_root) as directory, patch.dict(sys.modules, {"sentence_transformers": SimpleNamespace(SentenceTransformer=FakeEncoder)}):
+            output = bench.run_structured_wiki(llm, DOCS, questions, Path(directory))
+            self.assertEqual(output["construction_status"], "failed")
+            self.assertEqual(output["answers"]["rag_semantic"][0]["em"], 1)
+            for name in ("wiki_routed", "wiki_bm25", "wiki_hybrid"):
+                self.assertEqual(output["systems"][name]["status"], "failed")
+                self.assertEqual(output["answers"][name], [])
+
+    def test_reference_answers_never_enter_model_requests(self):
+        replies = [extraction(), extraction("acme-corp"), RECONCILIATION, "Acme"]
+        for _ in range(3):
+            replies += [copy.deepcopy(ROUTING), {"search_terms": ["Acme", "retrieval"]}, "Acme"]
+        llm = client_with_replies(replies)
+        questions = [{"qa_id": "q1", "question": "Who develops retrieval systems?", "reference": "PRIVATE_REFERENCE_SENTINEL"}]
+        with tempfile.TemporaryDirectory(dir=self.temp_root) as directory, patch.dict(sys.modules, {"sentence_transformers": SimpleNamespace(SentenceTransformer=FakeEncoder)}):
+            bench.run_structured_wiki(llm, DOCS, questions, Path(directory))
+        for event in llm.events:
+            self.assertNotIn("PRIVATE_REFERENCE_SENTINEL", json.dumps(event["request"]))
+        self.assertTrue(any(event.get("item_id") == "q1" for event in llm.events))
 
     def test_classifier_usage_is_included_in_summary(self):
         row = {"usage": {"llm": {"calls": 1, "input_tokens": 100, "output_tokens": 5},

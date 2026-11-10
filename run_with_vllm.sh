@@ -36,6 +36,7 @@ VLLM_IMAGE="${VLLM_IMAGE:-llm-wiki-benchmark:cu129}"
 RESULTS_DIR="${RESULTS_DIR:-$PWD/results}"
 mkdir -p "$RESULTS_DIR"
 RESULTS_DIR="$(cd "$RESULTS_DIR" && pwd)"
+export RESULTS_DIR
 
 # The image is built externally from Dockerfile and must exist on the node
 # running this job (docker build -t llm-wiki-benchmark:cu129 .).
@@ -45,23 +46,38 @@ cleanup() { echo ">>> stopping vLLM"; docker rm -f "vllm-${PORT}" >/dev/null 2>&
 trap cleanup EXIT
 trap 'exit 130' TERM INT
 
-# ── 1. start vLLM ──
-./start_vllm.sh "$MODEL" "$PORT" "$MEM" "$MAXLEN"
-
-
-export LLM_BASE_URL="http://localhost:${PORT}/v1"
+# These addresses are used by the command inside the container, rather than
+# by host-side clients. Set them before startup so both processes inherit them.
+export LLM_BASE_URL="http://localhost:8000/v1"
 export LLM_MODEL="$MODEL"
 # for llmwiki2 (llm-wiki-v2) the same server, through its own variables:
 export OKF_LLM_PROVIDER=custom
 export OKF_LLM_BASE_URL="$LLM_BASE_URL"
 export OKF_LLM_MODEL="$MODEL"
-export OKF_LLM_TIMEOUT=600
+export OKF_LLM_TIMEOUT="${OKF_LLM_TIMEOUT:-600}"
 export OKF_CLASSIFIER_PROVIDER=custom
 export OKF_CLASSIFIER_MODEL="${CLASSIFIER_MODEL:-LiquidAI/d1-3B}"
-export OKF_CLASSIFIER_BASE_URL="http://localhost:8001/v1"
+export OKF_CLASSIFIER_BASE_URL="http://localhost:${CLASSIFIER_INTERNAL_PORT:-8001}/v1"
 export OKF_CLASSIFIER_TIMEOUT="${OKF_CLASSIFIER_TIMEOUT:-60}"
+export BENCHMARK_RUNTIME_METADATA="${BENCHMARK_RUNTIME_METADATA:-/workdir/runtime_environment.json}"
+
+# ── 1. start vLLM ──
+./start_vllm.sh "$MODEL" "$PORT" "$MEM" "$MAXLEN"
+
+# docker exec does not inherit the host environment. Forward configuration by
+# name so thresholds, read limits and classifier settings reach the benchmark;
+# do not print their values (some OKF_* variables can contain credentials).
+COMMAND_ENV=()
+while IFS='=' read -r name _; do
+  if [[ "$name" =~ ^[A-Za-z_][A-Za-z0-9_]*$ ]]; then
+    case "$name" in
+      OKF_*|LLM_BASE_URL|LLM_MODEL|VLLM_API_KEY|VLLM_TIMEOUT_SECONDS|BENCHMARK_RUNTIME_METADATA)
+        COMMAND_ENV+=(--env "$name") ;;
+    esac
+  fi
+done < <(env)
 
 # ── 2. YOUR command (inside the vLLM container) ──
 echo ">>> running in vllm-${PORT}: $*"
-docker exec -w /workdir "vllm-${PORT}" "$@"
+docker exec "${COMMAND_ENV[@]}" -w /workdir "vllm-${PORT}" "$@"
 echo ">>> done"

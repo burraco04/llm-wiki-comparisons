@@ -28,7 +28,7 @@ if [[ "$LLM_MODEL" == "Qwen/Qwen3.5-4B" ]]; then
   LLM_MODE_FLAGS+=(--language-model-only)
 fi
 
-CUDA_VISIBLE_DEVICES="$LLM_DEVICE" vllm serve "$LLM_MODEL" \
+LLM_COMMAND=(vllm serve "$LLM_MODEL" \
   --host 0.0.0.0 \
   --port "$LLM_PORT" \
   --served-model-name "$LLM_MODEL" \
@@ -37,13 +37,11 @@ CUDA_VISIBLE_DEVICES="$LLM_DEVICE" vllm serve "$LLM_MODEL" \
   --max-num-seqs "$LLM_MAX_NUM_SEQS" \
   "${LLM_MODE_FLAGS[@]}" \
   --default-chat-template-kwargs "$CHAT_TEMPLATE_KWARGS" \
-  --enable-prefix-caching \
-  >"$LLM_LOG" 2>&1 &
-LLM_PID=$!
+  --enable-prefix-caching)
 
 # Liquid d1 exposes the System One endpoint through vLLM.  Raw logprobs are
 # required by that endpoint to calculate the probability of each typed answer.
-CUDA_VISIBLE_DEVICES="$CLASSIFIER_DEVICE" vllm serve "$CLASSIFIER_MODEL" \
+CLASSIFIER_COMMAND=(vllm serve "$CLASSIFIER_MODEL" \
   --host 0.0.0.0 \
   --port "$CLASSIFIER_PORT" \
   --served-model-name "$CLASSIFIER_MODEL" \
@@ -51,8 +49,20 @@ CUDA_VISIBLE_DEVICES="$CLASSIFIER_DEVICE" vllm serve "$CLASSIFIER_MODEL" \
   --gpu-memory-utilization "$CLASSIFIER_MEM" \
   --max-num-seqs "$CLASSIFIER_MAX_NUM_SEQS" \
   --logprobs-mode raw_logprobs \
-  --no-enable-prefix-caching \
-  >"$CLASSIFIER_LOG" 2>&1 &
+  --no-enable-prefix-caching)
+
+# Save the exact service commands before starting either model. Host and
+# container observations are labelled separately; no API keys are captured.
+python /workdir/capture_runtime_metadata.py --phase container \
+  --output "${BENCHMARK_RUNTIME_METADATA:-/workdir/runtime_environment.json}" \
+  --host-metadata "${BENCHMARK_HOST_METADATA:-}" \
+  --llm-argc "${#LLM_COMMAND[@]}" \
+  --llm-device "$LLM_DEVICE" --classifier-device "$CLASSIFIER_DEVICE" \
+  -- "${LLM_COMMAND[@]}" "${CLASSIFIER_COMMAND[@]}"
+
+CUDA_VISIBLE_DEVICES="$LLM_DEVICE" "${LLM_COMMAND[@]}" >"$LLM_LOG" 2>&1 &
+LLM_PID=$!
+CUDA_VISIBLE_DEVICES="$CLASSIFIER_DEVICE" "${CLASSIFIER_COMMAND[@]}" >"$CLASSIFIER_LOG" 2>&1 &
 CLASSIFIER_PID=$!
 
 cleanup() {

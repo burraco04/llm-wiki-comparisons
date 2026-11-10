@@ -32,6 +32,11 @@ RUN python -c "import torch, torchvision, vllm, torchcodec; print('torch', torch
 # Keep the executable benchmark and llmwiki2's benchmark prompts in the image.
 WORKDIR /workdir
 COPY benchmark_llm_wiki.py /workdir/benchmark_llm_wiki.py
+COPY benchmark_artifacts.py /workdir/benchmark_artifacts.py
+COPY llmwiki_adapter.py /workdir/llmwiki_adapter.py
+COPY capture_runtime_metadata.py /workdir/capture_runtime_metadata.py
 COPY prompts_benchmark /workdir/prompts_benchmark
 COPY start_vllm_services.sh /workdir/start_vllm_services.sh
 RUN chmod +x /workdir/start_vllm_services.sh
+RUN python /workdir/capture_runtime_metadata.py --phase build \
+      --output /workdir/image_build_metadata.json

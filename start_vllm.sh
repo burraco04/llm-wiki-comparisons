@@ -29,6 +29,7 @@
 #  The API is only reachable from this machine (127.0.0.1); use an SSH tunnel from outside.
 # ═══════════════════════════════════════════════════════
 set -euo pipefail
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 MODEL="${1:?usage: $0 <hf_model> [port] [gpu_mem_util] [max_model_len]}"
 PORT="${2:-8000}"
@@ -51,6 +52,7 @@ RESULTS_DIR="$(cd "$RESULTS_DIR" && pwd)"
 LOG_DIR="${LOG_DIR:-$PWD/logs}"
 mkdir -p "$LOG_DIR"
 DOCKER_LOG="$LOG_DIR/docker-${SLURM_JOB_ID:-manual}-${PORT}.log"
+BENCHMARK_RUNTIME_METADATA="${BENCHMARK_RUNTIME_METADATA:-/workdir/runtime_environment.json}"
 
 dump_docker_logs() {
   docker logs "$NAME" 2>&1 | tee "$DOCKER_LOG"
@@ -82,6 +84,25 @@ echo ">>> LLM GPU $GPU0: ${FREE0}/${TOTAL0} MiB free, classifier GPU $GPU1: ${FR
 echo ">>> requesting LLM=${MEM} and classifier=${CLASSIFIER_MEM} of total"
 
 mkdir -p "$HF_CACHE"
+METADATA_DIR="$RESULTS_DIR/runtime_environment"
+mkdir -p "$METADATA_DIR"
+HOST_METADATA_NAME="${SLURM_JOB_ID:-manual}-${PORT}-$(date -u +%Y%m%dT%H%M%SZ)-host.json"
+HOST_METADATA_FILE="$METADATA_DIR/$HOST_METADATA_NAME"
+python3 "$SCRIPT_DIR/capture_runtime_metadata.py" --phase host \
+  --output "$HOST_METADATA_FILE" --gpu "$GPU0" --gpu "$GPU1"
+IMAGE_ID="$(docker image inspect -f '{{.Id}}' "$VLLM_IMAGE" 2>/dev/null || true)"
+
+# Forward the library's optional settings without embedding their values in
+# the Docker command line. Fixed local-service endpoints below take priority.
+CONFIG_ENV=()
+while IFS='=' read -r name _; do
+  if [[ "$name" =~ ^[A-Za-z_][A-Za-z0-9_]*$ ]]; then
+    case "$name" in
+      OKF_*|VLLM_API_KEY|VLLM_TIMEOUT_SECONDS)
+        CONFIG_ENV+=(--env "$name") ;;
+    esac
+  fi
+done < <(env)
 docker rm -f "$NAME" >/dev/null 2>&1 || true
 
 docker run -d --name "$NAME" \
@@ -89,7 +110,12 @@ docker run -d --name "$NAME" \
   --ipc=host \
   -v "$HF_CACHE":/root/.cache/huggingface \
   -v "$RESULTS_DIR":/workdir/results \
+  "${CONFIG_ENV[@]}" \
   -e HF_TOKEN="${HF_TOKEN:-}" \
+  -e BENCHMARK_RUNTIME_METADATA="$BENCHMARK_RUNTIME_METADATA" \
+  -e BENCHMARK_HOST_METADATA="/workdir/results/runtime_environment/$HOST_METADATA_NAME" \
+  -e BENCHMARK_IMAGE="$VLLM_IMAGE" \
+  -e BENCHMARK_IMAGE_ID="$IMAGE_ID" \
   -e LLM_MODEL="$MODEL" \
   -e CLASSIFIER_MODEL="$CLASSIFIER_MODEL" \
   -e LLM_PORT=8000 \

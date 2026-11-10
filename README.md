@@ -1,110 +1,168 @@
-# LLM Wiki comparisons
+# LLM Wiki comparison benchmark
 
-## Structured wiki benchmark (`structured_wiki_v2`)
+Direct calls disable implicit OpenAI SDK transport retries so each request attempt is visible. JSON validation still allows two attempts; failed requests remain in the traces and evaluation records.
 
-`benchmark_llm_wiki.py` adapts the non-interactive method in
-`tutorial_LLM_wiki_v3.ipynb`. Each source is processed through structured
-extraction and, after the first source, reconciliation against existing entities
-and concepts. Deterministic code creates Markdown source/entity/concept pages,
-keeps per-source descriptions, applies validated ID merges, records proposed
-contradictions for review, adds reciprocal links and saves a provenance graph.
-Invalid extraction fails explicitly after one retry; it never silently falls
-back to a source-only wiki. Open-ended semantic correctness still depends on
-the generating model, even when JSON satisfies its schema.
+## Protocol: structured_wiki_v3
 
-The comparison runs five systems:
+Each model/subset run evaluates six configurations on the same documents and questions:
 
-| System | Retrieval |
+| Configuration | Evidence selection |
 | --- | --- |
-| `rag_semantic` | Top 3 dense matches over 200-word raw-text chunks |
-| `wiki_routed` | LLM-selected source/entity/concept pages, keyword-ranked paragraphs, raw-text safety net and graph triples |
-| `wiki_bm25` | BM25 over compiled-page and raw-source paragraphs, with graph triples |
-| `wiki_hybrid` | BM25 + dense paragraph retrieval fused with reciprocal rank fusion (`k=60`), with graph triples |
-| `llmwiki2` | External library in CROW mode; generative LLM plus `LiquidAI/d1-3B` |
+| `rag_semantic` | Top 3 embedding matches over non-overlapping 200-word source chunks |
+| `wiki_routed` | LLM page selection and query expansion, keyword-ranked paragraphs and graph relations |
+| `wiki_bm25` | Same preparation; BM25 over wiki and original-source paragraphs |
+| `wiki_hybrid` | Same preparation; BM25 and dense rankings fused through RRF, constant 60 |
+| `llmwiki2_classic` | Independent note wiki with generative organizational and retrieval decisions |
+| `llmwiki2_crow` | Independent note wiki with Decision Model decisions and generative fallback |
 
-As in the notebook, **all three wiki strategies perform LLM routing and search
-term expansion** before retrieval; routing directly constrains only the routed
-strategy. Wiki BM25 therefore uses expanded search terms, not just the original
-question. The wiki stays frozen during evaluation: there are no analysis/demo
-pages and no query write-back. Generative answers share the same prompt across
-the first four systems. The context budget includes labels, separators and graph
-text (12,000 characters). The library retains its own internal context policy.
+The structured wiki is built once and shared by its three retrieval strategies.
+All three use LLM page selection and search terms; BM25 and hybrid rank the full
+paragraph index. Direct contexts are limited to 12,000 characters, including
+labels, separators and graph text. The note library retains its own context
+policy. Neither wiki ingests generated answers during evaluation.
 
-Differences from the tutorial are limited to batch-oriented choices: typed page
-paths prevent source/entity ID collisions; English stopwords come from
-scikit-learn (no NLTK corpus download); source claims are retained on merged
-pages; invalid references are rejected; whole-context budgets are enforced.
-The tutorial's visualization, interactive examples, lint demonstrations and
-write-back demonstrations are not part of this evaluation. Raw RAG chunks remain
-fixed word windows, rather than the notebook's paragraph-aligned windows.
+Classic and CROW build fresh bundles with the same source order, writer, prompt
+overrides and installed library. The default classifier is `LiquidAI/d1-3B`.
+The library is third-party work; its internal algorithms are not modified.
 
-The implementation and CROW logic inside `llmwiki2` belong to its authors and
-are not modified here. Jev is not used by the default benchmark configuration.
+## Build and submit
 
-### Run on the GPU server
+**Rebuild the image before submitting:** it contains the benchmark, adapters,
+metadata collector and prompts. Use the same rebuilt image for all four runs;
+keep it unchanged while runs are queued or executing.
 
-Rebuild the application image: the benchmark source and requirements are copied
-into it, so reusing an old image would run the old implementation.
+~~~bash
+docker build -t llm-wiki-benchmark:structured-wiki-v3 .
+VLLM_IMAGE=llm-wiki-benchmark:structured-wiki-v3 bash run_both_models.sh
+~~~
 
-```bash
-docker build -t llm-wiki-benchmark:cu129 .
+The launcher submits four Slurm jobs: Qwen2.5-3B-Instruct and Qwen3.5-4B, each
+with 3 documents/up to 25 questions and 8 documents/up to 150 questions. Each job
+runs all six configurations and reserves two GPUs, one per inference service.
+Classic and CROW run sequentially within that allocation.
 
-# Small validation run (3 documents, up to 25 questions)
-PORT=8000 sbatch --export=ALL -w faretra run_with_vllm.sh \
-  Qwen/Qwen2.5-3B-Instruct -- python benchmark_llm_wiki.py
+For a small validation run:
 
-# Existing launcher: both generative models, 3/25 and 8/150 configurations
-bash run_both_models.sh
-```
+~~~bash
+VLLM_IMAGE=llm-wiki-benchmark:structured-wiki-v3 PORT=8000 \
+  sbatch --export=ALL run_with_vllm.sh Qwen/Qwen2.5-3B-Instruct -- \
+  python benchmark_llm_wiki.py --top-docs 3 --max-questions 25 \
+  --wiki-modes classic crow
+~~~
 
-Inspect the small run's generated wiki and extraction logs before submitting
-the larger comparison. Models/endpoints still use the existing vLLM launchers.
-The local automated tests below do not launch these GPU experiments.
+`--wiki-modes classic crow` is the default. `--wiki-modes crow` selects a CROW-only
+diagnostic run, which cannot provide the paired comparison.
+Pass `--dataset-revision <commit-SHA>` to the benchmark to pin the dataset;
+selected inputs, dataset identity and fingerprints are recorded.
 
-New runs use their own versioned, timestamped directories:
+Both note-wiki constructions add work. Set the allocation time without editing
+the launcher when needed:
 
-```text
-results/structured_wiki_v2/<model>/docs_<N>_questions_<M>/<UTC-run-id>/
+~~~bash
+RUN_TIME_LIMIT=12:00:00 VLLM_IMAGE=llm-wiki-benchmark:structured-wiki-v3 \
+  bash run_both_models.sh
+~~~
+
+The launchers capture actual image identity, service commands, hardware
+inventory and package provenance when available. These are startup records,
+not peak-memory or energy measurements.
+
+## Saved outputs
+
+Every run has a separate versioned, timestamped directory:
+
+~~~text
+results/structured_wiki_v3/<model>/docs_<N>_questions_<M>/<UTC-run-id>/
   benchmark_manifest.json
-  notebook_wiki_bundle/
+  runtime_environment.json
+  run_status.json
+  dataset/
+    documents.jsonl
+    questions.jsonl
+    statistics.json
+    metadata.json
+  prompts/
+    direct_prompts.json
+    schemas.json
+    overrides/<operation>.md
+    manifest.json
+  structured_wiki_bundle/
     documents/
     compilation.json
     wiki/{sources,entities,concepts}/
     wiki/{index.md,knowledge_graph.json,log.json}
-  notebook_ingestion.json
-  notebook_answers.jsonl
-  notebook_results.json
-  llmwiki2_bundle/
-  llmwiki2_answers.jsonl
-  llmwiki2_calls.jsonl
+  structured_wiki/
+    ingestion.jsonl
+    ingestion/<document>.json
+    retrieval_index.json
+    raw_embeddings.npy
+    wiki_embeddings.npy
+    indexing.json
+    model_calls.jsonl
+    queries/<system>/<question>.json
+    answers.jsonl
+    results.json
+  llmwiki2_classic/             # same files also under llmwiki2_crow/
+    bundle/
+    configuration.json
+    model_calls.jsonl
+    usage.jsonl
+    ingestion.jsonl
+    ingestion/<document>.json
+    queries/<question>.json
+    answers.jsonl
+    results.json
+    knowledge_before_queries.json
+    knowledge_after_queries.json
   full_results.json
   summary.json
   summary.csv
-```
+  construction_summary.json
+  summary_by_type.json
+  summary_by_support_count.json
+  paired_comparison.json
+~~~
 
-Old result directories are preserved. JSONL answers are saved after each query;
-these are interruption checkpoints, not automatic resume files. The manifest
-records code/document hashes, package versions and retrieval settings. Summaries
-report generative and classifier calls/tokens separately, as well as their totals.
-Ingestion and indexing costs are recorded separately from per-query latency.
+Query traces retain actual evidence, selected pages/notes, decisions and answer
+requests. Model-call traces record request/response payloads and reported usage
+with credentials removed. The thesis example `mhop_424` belongs to the larger
+subset and can be inspected through these traces.
 
-Results from the old runner should be treated as a different protocol: it kept
-only the first line of model replies, omitted entity/concept pages and used
-different retrieval settings. New scores cannot be attributed solely to adding
-entity pages. Both models and all systems need fresh runs for a consistent
-comparison. No empirical improvement is assumed by the code change itself.
+The adapter records installed library version/source identity and resolved
+configuration, including thresholds, beam widths, state limits and generation
+settings. Unsupported tracing APIs are reported explicitly. Defaults from
+another installation are not substituted. Native library features are retained;
+mode-specific features and other differences are recorded as possible confounds.
 
-### Offline regression tests
+## Reading results and failures
 
-Install `requirements.txt` for the complete benchmark. The offline tests need
-only numpy, openai, rank-bm25, rouge-score, jsonschema, nltk and scikit-learn;
-they replace model inference and the embedding encoder with deterministic fakes.
+Check `run_status.json` and component statuses before using summaries. Completed,
+partial and failed components are distinguished. Failed construction prevents
+evaluation of that incomplete wiki; subsequent independent components are
+still attempted. Query errors retain their question, score zero and remain in
+the averaging denominator. Checkpoints preserve work but do not auto-resume.
 
-```bash
-python -m unittest -v test_benchmark_llm_wiki
-```
+Summary scores are per-question EM, token F1 and ROUGE-L means. Generative and
+classifier calls/tokens are separate and also totaled. Construction/indexing
+costs are separate from query latency. Group tables describe question types and
+support counts; the overall mean is not category balanced. The paired report
+checks common conditions, completeness and configuration differences before
+presenting classic–CROW deltas.
 
-Tests cover multiline responses, JSON validation/retries, merging and provenance,
-graph endpoints/backlinks, routing fallbacks, the full context budget, all four
-notebook strategies and classifier accounting. They verify orchestration, not
-model accuracy, vLLM schema support or the external library's behavior.
+Latency includes retrieval, model waiting and some trace-writing overhead;
+it is not pure inference time. Existing outputs are preserved. Compare v3 runs
+with other v3 runs using compatible recorded settings.
+
+## Offline validation
+
+With the benchmark dependencies installed:
+
+~~~bash
+python -m unittest -v test_benchmark_llm_wiki test_benchmark_artifacts test_llmwiki_adapter
+bash -n run_both_models.sh run_with_vllm.sh start_vllm.sh start_vllm_services.sh
+~~~
+
+Tests use deterministic model/encoder fakes and HTTP mock transports. They
+check orchestration, artifacts, error accounting and tracing, without running
+GPU experiments or establishing accuracy. A local library integration check
+does not establish the release/configuration used by the server.

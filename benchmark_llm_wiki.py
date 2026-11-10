@@ -1,4 +1,4 @@
-"""Run the MultiHopRAG benchmark against the notebook LLM-wiki and llmwiki2.
+"""Compare Dense RAG, a structured wiki, and independent classic/CROW note wikis.
 
 The writing model is exposed through ``LLM_BASE_URL``.  In CROW mode llmwiki2
 uses the local System One endpoint exposed by the second vLLM server through
@@ -7,6 +7,7 @@ uses the local System One endpoint exposed by the second vLLM server through
 from __future__ import annotations
 
 import argparse
+from contextlib import contextmanager
 import csv
 import hashlib
 import json
@@ -14,6 +15,7 @@ import os
 import re
 import string
 import time
+import traceback
 from collections import Counter, defaultdict
 from datetime import datetime, timezone
 from importlib.metadata import PackageNotFoundError, version
@@ -28,12 +30,36 @@ from rank_bm25 import BM25Okapi
 from rouge_score import rouge_scorer
 from sklearn.feature_extraction.text import ENGLISH_STOP_WORDS
 
+from benchmark_artifacts import (
+    append_jsonl, buildcost_summary, collect_package_provenance, json_safe,
+    redact_secrets, runtime_snapshot, save_dataset, save_prompt_snapshot,
+    summarize_rows, summary_by_group, write_json,
+)
+
 ROOT = Path(__file__).resolve().parent
 OUT = ROOT / "results"
 EMBEDDING_MODEL = "sentence-transformers/all-MiniLM-L6-v2"
-BENCHMARK_VERSION = "structured_wiki_v2"
+BENCHMARK_VERSION = "structured_wiki_v3"
 CONTEXT_BUDGET = 12000
 STEMMER = SnowballStemmer("english")
+DIRECT_SYSTEMS = ("rag_semantic", "wiki_routed", "wiki_bm25", "wiki_hybrid")
+WIKI_MODES = ("classic", "crow")
+
+
+def error_record(exc: Exception) -> dict[str, Any]:
+    return redact_secrets({"type": type(exc).__name__, "message": str(exc),
+                           "step": getattr(exc, "step", None),
+                           "status_code": getattr(exc, "status_code", getattr(exc, "status", None)),
+                           "traceback": traceback.format_exc()})
+
+
+def relative_file(path: Path, root: Path) -> str:
+    return path.relative_to(root).as_posix()
+
+
+def report_progress(callback, **update) -> None:
+    if callback is not None:
+        callback(update)
 
 
 def slug(value: str) -> str:
@@ -65,11 +91,13 @@ def evidence_titles(row: dict[str, Any]) -> list[str]:
     return list(dict.fromkeys(result))
 
 
-def make_dataset(top_docs: int, max_questions: int) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+def make_dataset(top_docs: int, max_questions: int, *, revision: str | None = None,
+                 metadata: dict[str, Any] | None = None) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
     from datasets import load_dataset
 
-    queries = load_dataset("yixuantt/MultiHopRAG", "MultiHopRAG", split="train")
-    corpus = load_dataset("yixuantt/MultiHopRAG", "corpus", split="train")
+    options = {"revision": revision} if revision else {}
+    queries = load_dataset("yixuantt/MultiHopRAG", "MultiHopRAG", split="train", **options)
+    corpus = load_dataset("yixuantt/MultiHopRAG", "corpus", split="train", **options)
     valid = [dict(q) for q in queries if q.get("question_type") != "null_query"]
     counts, qdocs = Counter(), {}
     for i, row in enumerate(valid):
@@ -78,39 +106,86 @@ def make_dataset(top_docs: int, max_questions: int) -> tuple[list[dict[str, Any]
             qdocs[i] = docs; counts.update(sorted(docs))
     selected = [title for title, _ in counts.most_common(top_docs)]
     selected_set = set(selected)
-    text, metadata = defaultdict(list), {}
+    text, source_metadata = defaultdict(list), {}
     for row in corpus:
         if row.get("title") in selected_set and row.get("body"):
             text[row["title"]].append(row["body"])
-            metadata.setdefault(row["title"], {k: str(row.get(k, "")) for k in ("source", "url", "published_at")})
-    docs = [{"id": slug(title), "title": title, "text": "\n\n".join(text[title]), "meta": metadata.get(title, {})} for title in selected]
+            source_metadata.setdefault(row["title"], {k: str(row.get(k, "")) for k in ("source", "url", "published_at")})
+    docs = [{"id": slug(title), "title": title, "text": "\n\n".join(text[title]), "meta": source_metadata.get(title, {})} for title in selected]
     questions = []
     for i in qdocs:
         if qdocs[i].issubset(selected_set):
             row = valid[i]
             questions.append({"qa_id": f"mhop_{i}", "question": row["query"], "reference": str(row.get("answer", "")), "question_type": row.get("question_type", ""), "evidence_titles": evidence_titles(row)})
+    if metadata is not None:
+        configs = {}
+        for name, data in (("MultiHopRAG", queries), ("corpus", corpus)):
+            info = data.info
+            checksums = getattr(info, "download_checksums", None) or {}
+            resolved = sorted(set(re.findall(r"/resolve/([0-9a-f]{40})/", "\n".join(checksums))))
+            configs[name] = {"rows": len(data), "fingerprint": getattr(data, "_fingerprint", None),
+                             "builder_version": str(getattr(info, "version", "")),
+                             "resolved_repository_revisions": resolved,
+                             "download_checksums": json_safe(checksums)}
+        metadata.update({"name": "yixuantt/MultiHopRAG", "requested_revision": revision,
+                         "split": "train", "configurations": configs,
+                         "full_counts": {"documents": len(corpus), "questions": len(queries),
+                                         "question_types": dict(Counter(queries["question_type"])),
+                                         "non_null_with_evidence": len(qdocs),
+                                         "supporting_document_counts": dict(Counter(len(titles) for titles in qdocs.values()))},
+                         "eligible_questions_before_cap": len(questions),
+                         "selection": "non-null queries; documents by evidence frequency; dataset question order; no shuffle"})
     return docs, questions[:max_questions]
 
 
 class VLLM:
-    def __init__(self, model: str, base_url: str, api_key: str, timeout: float):
-        self.model, self.client = model, OpenAI(base_url=base_url.rstrip("/"), api_key=api_key, timeout=timeout)
+    def __init__(self, model: str, base_url: str, api_key: str, timeout: float, events_path: Path | None = None):
+        self.model, self.client = model, OpenAI(base_url=base_url.rstrip("/"), api_key=api_key, timeout=timeout, max_retries=0)
         self.calls = self.input_tokens = self.output_tokens = 0
         self.structured_output = True
         self.json_failures = 0
         self.events: list[dict[str, Any]] = []
+        self.events_path, self._flushed = events_path, 0
+        self._operation: dict[str, Any] = {}
+
+    @contextmanager
+    def operation(self, phase: str, item_id: str, system: str = "structured_wiki"):
+        previous = self._operation
+        self._operation = {"phase": phase, "item_id": item_id, "system": system}
+        try:
+            yield
+        finally:
+            self._operation = previous
+
+    def flush_events(self) -> None:
+        """Flush outside the measured document/query interval."""
+        if self.events_path is not None:
+            for event in self.events[self._flushed:]:
+                append_jsonl(self.events_path, event)
+        self._flushed = len(self.events)
 
     def ask(self, prompt: str, max_tokens: int = 96, *, response_format=None, stage: str = "answer") -> str:
         started = time.perf_counter()
         options = {"response_format": response_format} if response_format else {}
-        result = self.client.chat.completions.create(model=self.model, messages=[{"role": "user", "content": prompt}], temperature=0, max_tokens=max_tokens, **options)
+        request = {"model": self.model, "messages": [{"role": "user", "content": prompt}],
+                   "temperature": 0, "max_tokens": max_tokens, **options}
+        event = {"call_id": len(self.events) + 1, **self._operation, "stage": stage,
+                 "request": request, "started_at": datetime.now(timezone.utc).isoformat()}
+        try:
+            result = self.client.chat.completions.create(**request)
+        except Exception as exc:
+            self.events.append({**event, "seconds_wall": time.perf_counter() - started,
+                                "error": error_record(exc), "status": "failed"})
+            raise
         usage = result.usage
         self.calls += 1; self.input_tokens += getattr(usage, "prompt_tokens", 0) or 0; self.output_tokens += getattr(usage, "completion_tokens", 0) or 0
         choice = result.choices[0]
-        self.events.append({"stage": stage, "seconds_wall": time.perf_counter() - started,
+        self.events.append({**event, "seconds_wall": time.perf_counter() - started, "status": "complete",
                             "input_tokens": getattr(usage, "prompt_tokens", 0) or 0,
                             "output_tokens": getattr(usage, "completion_tokens", 0) or 0,
-                            "finish_reason": choice.finish_reason})
+                            "finish_reason": choice.finish_reason,
+                            "response": (choice.message.content or ""),
+                            "usage": json_safe(usage)})
         return (choice.message.content or "").strip()
 
     def ask_json(self, prompt: str, schema: dict, max_tokens: int, stage: str) -> dict[str, Any]:
@@ -247,7 +322,7 @@ class StructuredWiki:
         t = time.perf_counter()
         data = llm.ask_json(EXTRACT.format(title=doc["title"], text=doc["text"]), INGEST_SCHEMA, 4096, "ingest_extract")
         timing["pass1_llm"] = time.perf_counter() - t
-        # Invalid extraction aborts the run instead of silently substituting a
+        # Invalid extraction aborts this wiki's construction instead of substituting a
         # source-only wiki. Raw model output is never truncated to its first line.
         if not data["summary"].strip():
             raise ValueError(f"Empty extracted summary for {doc['title']}")
@@ -372,6 +447,7 @@ class StructuredWiki:
 
     def save(self, bundle: Path) -> None:
         bundle.mkdir(parents=True, exist_ok=True)
+        (bundle / "wiki").mkdir(exist_ok=True)
         raw_dir = bundle / "documents"
         raw_dir.mkdir(exist_ok=True)
         for sid, source in self.sources.items():
@@ -405,19 +481,26 @@ def package_versions() -> dict[str, str]:
             result[name] = version(name)
         except PackageNotFoundError:
             result[name] = "not installed in client environment"
+    try:
+        result["llmw2"] = version("llmw2")
+    except PackageNotFoundError:
+        result["llmw2"] = "not installed in client environment"
     return result
 
 
-def paragraphs(docs: list[dict[str, Any]], words: int = 200) -> list[dict[str, str]]:
+def paragraphs(docs: list[dict[str, Any]], words: int = 200) -> list[dict[str, Any]]:
     output = []
     for doc in docs:
         tokens = doc["text"].split()
         for start in range(0, len(tokens), words):
-            output.append({"doc_id": doc["id"], "title": doc["title"], "text": " ".join(tokens[start:start + words])})
+            output.append({"doc_id": doc["id"], "title": doc["title"],
+                           "chunk_id": f"raw/{doc['id']}/{start // words}",
+                           "start_word": start, "end_word": min(start + words, len(tokens)),
+                           "text": " ".join(tokens[start:start + words])})
     return output
 
 
-def context_from_hits(hits: list[dict[str, Any]], budget: int = 12000) -> str:
+def context_from_hits(hits: list[dict[str, Any]], budget: int = 12000, *, trace: list | None = None) -> str:
     out, used = [], 0
     for hit in hits:
         block = f"[{hit['title']}]\n{hit['text']}"
@@ -427,9 +510,13 @@ def context_from_hits(hits: list[dict[str, Any]], budget: int = 12000) -> str:
         if len(block) > remaining:
             if remaining > len(hit["title"]) + 20:
                 out.append(block[:remaining])
+                if trace is not None:
+                    trace.append({**hit, "context_block": block[:remaining], "truncated": True})
             break
         used += len(block) + (len("\n\n---\n\n") if out else 0)
         out.append(block)
+        if trace is not None:
+            trace.append({**hit, "context_block": block, "truncated": False})
     return "\n\n---\n\n".join(out)
 
 
@@ -490,9 +577,11 @@ def prepare_query(llm: VLLM, question: str, wiki: StructuredWiki) -> tuple[list[
 def wiki_items(wiki: StructuredWiki) -> list[dict[str, str]]:
     items = []
     for pid, page in wiki.pages.items():
-        items.extend({"title": pid, "page_id": pid, "text": p, "branch": "wiki"} for p in split_paragraphs(page["text"], 20))
+        items.extend({"title": pid, "page_id": pid, "text": p, "branch": "wiki",
+                      "item_id": f"wiki:{pid}:{i}"} for i, p in enumerate(split_paragraphs(page["text"], 20)))
     for sid, source in wiki.sources.items():
-        items.extend({"title": "raw:" + sid, "page_id": sid, "text": p, "branch": "raw"} for p in split_paragraphs(source["text"]))
+        items.extend({"title": "raw:" + sid, "page_id": sid, "text": p, "branch": "raw",
+                      "item_id": f"raw:{sid}:{i}"} for i, p in enumerate(split_paragraphs(source["text"])))
     return items
 
 
@@ -514,12 +603,12 @@ def pack_wiki_context(wiki: StructuredWiki, hits: list[dict[str, str]], candidat
             break
         parts.append(block[:remaining])
         used += len(parts[-1]) + (2 if len(parts) > 1 else 0)
-        selected.append(hit)
+        selected.append({**hit, "context_block": parts[-1], "truncated": len(block) > remaining})
         matched.add(hit["page_id"])
         if len(block) > remaining:
             break
     node_ids = {nid for nid in wiki.nodes if wiki.node_page_id(nid) in matched}
-    triples, graph = [], ""
+    triples, graph, graph_records = [], "", []
     for edge in wiki.edges:
         if edge["source"] not in node_ids and edge["target"] not in node_ids:
             continue
@@ -530,6 +619,7 @@ def pack_wiki_context(wiki: StructuredWiki, hits: list[dict[str, str]], candidat
         if used + 2 + len(proposed) > budget:
             continue
         triples.append(line)
+        graph_records.append({**edge, "context_line": line})
         graph = proposed
         if len(triples) == 6:
             break
@@ -538,7 +628,9 @@ def pack_wiki_context(wiki: StructuredWiki, hits: list[dict[str, str]], candidat
         context += "\n\n" + graph
     return context, {"candidates": candidates, "selected": len(selected), "chars": len(context),
                      "matched_pages": list(dict.fromkeys(h["page_id"] for h in selected)),
-                     "kg_triples": len(triples), "branches": dict(Counter(h["branch"] for h in selected))}
+                     "kg_triples": len(triples), "graph_relations": graph_records,
+                     "selected_passages": selected,
+                     "branches": dict(Counter(h["branch"] for h in selected))}
 
 
 def routed_retrieve(wiki: StructuredWiki, ids: list[str], terms: list[str], items: list[dict[str, str]]) -> tuple[str, dict]:
@@ -556,78 +648,188 @@ def routed_retrieve(wiki: StructuredWiki, ids: list[str], terms: list[str], item
             eligible = fuzzy > 0 and (routed or hit["page_id"] in other_pages)
             branch = "routed_wiki" if routed else "other_wiki"
         if eligible:
-            candidates.append((fuzzy, exact, {**hit, "branch": branch}))
+            candidates.append((fuzzy, exact, {**hit, "branch": branch,
+                                               "matched_terms": fuzzy, "direct_matches": exact}))
     candidates.sort(key=lambda x: (-x[0], -x[1]))
     return pack_wiki_context(wiki, [h for _, _, h in candidates], len(candidates))
 
 
-def run_notebook_wiki(llm: VLLM, docs: list[dict[str, Any]], questions: list[dict[str, Any]], run_dir: Path) -> dict[str, Any]:
-    """Structured notebook wiki, immutable throughout the batch evaluation."""
+def run_structured_wiki(llm: VLLM, docs: list[dict[str, Any]], questions: list[dict[str, Any]],
+                        run_dir: Path, *, progress=None) -> dict[str, Any]:
+    """Build once, retain actual evidence, and evaluate the four direct configurations."""
     from sentence_transformers import SentenceTransformer
 
+    out = run_dir / "structured_wiki"
+    out.mkdir(parents=True, exist_ok=True)
     wiki, ingest = StructuredWiki(), []
-    bundle = run_dir / "notebook_wiki_bundle"
-    for doc in docs:
-        ingest.append(wiki.ingest(llm, doc))
+    bundle = run_dir / "structured_wiki_bundle"
+    construction_error = None
+    report_progress(progress, component="structured_wiki_build", state="running", completed_documents=0)
+    for number, doc in enumerate(docs):
+        mark, before, started = len(llm.events), llm.snapshot(), time.perf_counter()
+        try:
+            with llm.operation("ingestion", doc["id"]):
+                record = {**wiki.ingest(llm, doc), "document_id": doc["id"], "status": "complete"}
+        except Exception as exc:
+            construction_error = error_record(exc)
+            record = {"document": doc["title"], "document_id": doc["id"], "status": "failed",
+                      "seconds_wall": time.perf_counter() - started, **llm.delta(before),
+                      "error": construction_error}
+        record["model_call_ids"] = [e["call_id"] for e in llm.events[mark:]]
+        ingest.append(record)
+        # Serialization and trace flushing follow the construction timer.
+        llm.flush_events()
         wiki.save(bundle)
+        append_jsonl(out / "ingestion.jsonl", record)
+        write_json(out / "ingestion.json", ingest)
+        write_json(out / "ingestion" / f"{number:03d}-{slug(doc['id'])}.json",
+                   {**record, "wiki_stats": wiki.stats(),
+                    "source": wiki.sources.get("sources/" + doc["id"])})
+        report_progress(progress, component="structured_wiki_build",
+                        state="failed" if construction_error else "running",
+                        completed_documents=sum(x["status"] == "complete" for x in ingest),
+                        error=construction_error)
+        if construction_error:
+            break
         print(f"Ingested {doc['title']}: {wiki.stats()}", flush=True)
-    (run_dir / "notebook_ingestion.json").write_text(json.dumps(ingest, ensure_ascii=False, indent=2), encoding="utf-8")
+    if not construction_error:
+        report_progress(progress, component="structured_wiki_build", state="complete",
+                        completed_documents=len(docs))
+
     raw = paragraphs(docs)
+    if not raw:
+        raise ValueError("No original-source chunks; check the input corpus")
     encoder = SentenceTransformer(EMBEDDING_MODEL)
     started = time.perf_counter()
-    embeddings = encoder.encode([x["text"] for x in raw], convert_to_numpy=True, normalize_embeddings=True, show_progress_bar=False)
+    embeddings = encoder.encode([x["text"] for x in raw], convert_to_numpy=True,
+                                normalize_embeddings=True, show_progress_bar=False)
     raw_index_seconds = time.perf_counter() - started
-    started = time.perf_counter()
-    items = wiki_items(wiki)
-    if not raw or not items:
-        raise ValueError("No source/retrieval passages; check the input corpus")
-    wiki_emb = encoder.encode([x["text"] for x in items], convert_to_numpy=True, normalize_embeddings=True, show_progress_bar=False)
-    wiki_bm25 = BM25Okapi([tokenize(x["text"]) or ["__empty__"] for x in items])
-    wiki_index_seconds = time.perf_counter() - started
-    result = {}
-    for name in ("rag_semantic", "wiki_routed", "wiki_bm25", "wiki_hybrid"):
+    items, wiki_emb, wiki_bm25, wiki_index_seconds = [], None, None, None
+    if construction_error is None:
+        started = time.perf_counter()
+        items = wiki_items(wiki)
+        if not items:
+            construction_error = {"type": "EmptyWiki", "message": "No wiki retrieval paragraphs were produced"}
+        else:
+            wiki_emb = encoder.encode([x["text"] for x in items], convert_to_numpy=True,
+                                      normalize_embeddings=True, show_progress_bar=False)
+            wiki_bm25 = BM25Okapi([tokenize(x["text"]) or ["__empty__"] for x in items])
+            wiki_index_seconds = time.perf_counter() - started
+    indexing = {"raw_seconds": raw_index_seconds, "wiki_seconds": wiki_index_seconds,
+                "wiki_paragraphs": len(items), "raw_chunks": len(raw),
+                "embedding_model": EMBEDDING_MODEL,
+                "encoder_max_seq_length": getattr(encoder, "max_seq_length", None),
+                "normalized_embeddings": True, "raw_embedding_shape": list(embeddings.shape),
+                "wiki_embedding_shape": list(wiki_emb.shape) if wiki_emb is not None else None}
+    write_json(out / "retrieval_index.json", {"indexing": indexing, "raw_chunks": raw, "wiki_paragraphs": items})
+    np.save(out / "raw_embeddings.npy", embeddings)
+    if wiki_emb is not None:
+        np.save(out / "wiki_embeddings.npy", wiki_emb)
+    write_json(out / "indexing.json", indexing)
+
+    result, systems = {}, {}
+    for name in DIRECT_SYSTEMS:
+        if name != "rag_semantic" and construction_error:
+            result[name] = []
+            systems[name] = {"status": "failed", "error": construction_error, "evaluated_questions": 0,
+                             "expected_questions": len(questions)}
+            report_progress(progress, component=name, state="failed", error=construction_error,
+                            completed_questions=0, expected_questions=len(questions))
+            continue
         rows = []
+        report_progress(progress, component=name, state="running", completed_questions=0,
+                        expected_questions=len(questions))
         for qa in questions:
-            before, started = llm.snapshot(), time.perf_counter()
-            if name == "rag_semantic":
-                q = encoder.encode([qa["question"]], convert_to_numpy=True, normalize_embeddings=True)[0]
-                ranks = np.argsort(-(embeddings @ q), kind="stable")[:3]
-                context = context_from_hits([raw[i] for i in ranks], CONTEXT_BUDGET)
-                diagnostics = {"selected": len(ranks), "chars": len(context), "top_k": 3}
-            else:
-                ids, terms, diagnostics = prepare_query(llm, qa["question"], wiki)
-                t = time.perf_counter()
-                if name == "wiki_routed":
-                    context, retrieval = routed_retrieve(wiki, ids, terms, items)
-                else:
-                    lexical = np.asarray(wiki_bm25.get_scores(tokenize(qa["question"] + " " + " ".join(terms))))
-                    lexical_rank = np.argsort(-lexical, kind="stable")
-                    fused = np.zeros(len(items))
-                    fused[lexical_rank] += 1 / (60 + np.arange(1, len(items) + 1))
-                    if name == "wiki_hybrid":
-                        q = encoder.encode([qa["question"]], convert_to_numpy=True, normalize_embeddings=True)[0]
-                        semantic_rank = np.argsort(-(wiki_emb @ q), kind="stable")
-                        fused[semantic_rank] += 1 / (60 + np.arange(1, len(items) + 1))
-                    order = np.argsort(-fused, kind="stable")
-                    hits = [items[i] for i in order if name == "wiki_hybrid" or lexical[i] > 0]
-                    context, retrieval = pack_wiki_context(wiki, hits, len(items))
-                diagnostics.update(retrieval)
-                diagnostics["timing"]["retrieval_code"] = time.perf_counter() - t
-            t = time.perf_counter()
-            raw_prediction = llm.ask(ANSWER.format(context=context, question=qa["question"]), max_tokens=96, stage=f"{name}_answer")
-            prediction = repair_answer(raw_prediction)
-            diagnostics.setdefault("timing", {})["answer_llm"] = time.perf_counter() - t
-            rows.append({**qa, "prediction": prediction, "raw_prediction": raw_prediction,
-                         "seconds_wall": time.perf_counter() - started, "retrieval": diagnostics,
-                         **llm.delta(before), **score(prediction, qa["reference"])})
-            # Durable checkpoint: an interrupted model/system run retains completed answers.
-            with (run_dir / "notebook_answers.jsonl").open("a", encoding="utf-8") as stream:
-                stream.write(json.dumps({"system": name, **rows[-1]}, ensure_ascii=False) + "\n")
+            before, mark, started = llm.snapshot(), len(llm.events), time.perf_counter()
+            diagnostics, context, prompt, prediction, raw_prediction, error = {}, "", None, "", "", None
+            try:
+                with llm.operation("query", qa["qa_id"], name):
+                    if name == "rag_semantic":
+                        query_vector = encoder.encode([qa["question"]], convert_to_numpy=True,
+                                                      normalize_embeddings=True)[0]
+                        similarities = embeddings @ query_vector
+                        ranks = np.argsort(-similarities, kind="stable")[:3]
+                        hits = [{**raw[i], "rank": number + 1, "similarity": float(similarities[i])}
+                                for number, i in enumerate(ranks)]
+                        selected = []
+                        context = context_from_hits(hits, CONTEXT_BUDGET, trace=selected)
+                        diagnostics = {"candidates": len(raw), "selected": len(selected),
+                                       "chars": len(context), "top_k": 3, "selected_passages": selected}
+                    else:
+                        ids, terms, diagnostics = prepare_query(llm, qa["question"], wiki)
+                        t = time.perf_counter()
+                        if name == "wiki_routed":
+                            context, retrieval = routed_retrieve(wiki, ids, terms, items)
+                        else:
+                            lexical = np.asarray(wiki_bm25.get_scores(tokenize(qa["question"] + " " + " ".join(terms))))
+                            lexical_rank = np.argsort(-lexical, kind="stable")
+                            fused = np.zeros(len(items))
+                            fused[lexical_rank] += 1 / (60 + np.arange(1, len(items) + 1))
+                            semantic, semantic_rank = None, None
+                            if name == "wiki_hybrid":
+                                query_vector = encoder.encode([qa["question"]], convert_to_numpy=True,
+                                                              normalize_embeddings=True)[0]
+                                semantic = wiki_emb @ query_vector
+                                semantic_rank = np.argsort(-semantic, kind="stable")
+                                fused[semantic_rank] += 1 / (60 + np.arange(1, len(items) + 1))
+                            order = np.argsort(-fused, kind="stable")
+                            lexical_positions = {int(index): rank + 1 for rank, index in enumerate(lexical_rank)}
+                            semantic_positions = ({int(index): rank + 1 for rank, index in enumerate(semantic_rank)}
+                                                  if semantic_rank is not None else {})
+                            hits = [{**items[i], "rank": rank + 1, "bm25_score": float(lexical[i]),
+                                     "bm25_rank": lexical_positions[int(i)], "rrf_score": float(fused[i]),
+                                     "dense_score": float(semantic[i]) if semantic is not None else None,
+                                     "dense_rank": semantic_positions.get(int(i))}
+                                    for rank, i in enumerate(order)
+                                    if name == "wiki_hybrid" or lexical[i] > 0]
+                            context, retrieval = pack_wiki_context(wiki, hits, len(items))
+                        diagnostics.update(retrieval)
+                        diagnostics["timing"]["retrieval_code"] = time.perf_counter() - t
+                    t = time.perf_counter()
+                    prompt = ANSWER.format(context=context, question=qa["question"])
+                    raw_prediction = llm.ask(prompt, max_tokens=96, stage=f"{name}_answer")
+                    prediction = repair_answer(raw_prediction)
+                    diagnostics.setdefault("timing", {})["answer_llm"] = time.perf_counter() - t
+            except Exception as exc:
+                error = error_record(exc)
+            elapsed = time.perf_counter() - started
+            calls = llm.events[mark:]
+            row = {**qa, "system": name, "prediction": prediction, "raw_prediction": raw_prediction,
+                   "seconds_wall": elapsed, "retrieval": diagnostics, "error": error,
+                   "context": context, "answer_prompt": prompt,
+                   "model_call_ids": [event["call_id"] for event in calls],
+                   "request_attempts": len(calls), "failed_requests": sum(e.get("status") == "failed" for e in calls),
+                   **llm.delta(before),
+                   **(score(prediction, qa["reference"]) if error is None
+                      else {"em": 0.0, "token_f1": 0.0, "rouge_l": 0.0})}
+            # Every selected evaluation question remains in the denominator on a query error.
+            rows.append(row)
+            llm.flush_events()
+            append_jsonl(out / "answers.jsonl", row)
+            write_json(out / "queries" / name / f"{slug(qa['qa_id'])}.json", row)
+            report_progress(progress, component=name, state="running", completed_questions=len(rows),
+                            expected_questions=len(questions), query_errors=sum(bool(x["error"]) for x in rows))
         result[name] = rows
-    return {"ingestion": ingest, "answers": result, "wiki_stats": wiki.stats(), "writeback_enabled": False,
-            "indexing": {"raw_seconds": raw_index_seconds, "wiki_seconds": wiki_index_seconds,
-                         "wiki_paragraphs": len(items), "raw_chunks": len(raw)},
-            "json_failures": llm.json_failures, "model_calls": llm.events}
+        systems[name] = {"status": "complete_with_query_errors" if any(r["error"] for r in rows) else "complete",
+                         "evaluated_questions": len(rows), "expected_questions": len(questions),
+                         "query_errors": sum(bool(r["error"]) for r in rows)}
+        write_json(out / f"{name}.json", {"status": systems[name], "answers": rows})
+        report_progress(progress, component=name, state=systems[name]["status"],
+                        completed_questions=len(rows), expected_questions=len(questions),
+                        query_errors=systems[name]["query_errors"])
+    output = {"ingestion": ingest, "answers": result, "systems": systems, "wiki_stats": wiki.stats(),
+              "construction_status": "failed" if construction_error else "complete",
+              "construction_error": construction_error, "writeback_enabled": False, "indexing": indexing,
+              "json_failures": llm.json_failures, "model_calls_file": relative_file(llm.events_path, run_dir)
+              if llm.events_path is not None else None,
+              "construction_cost": buildcost_summary(ingest, indexing),
+              "model_calls": llm.events}
+    write_json(out / "results.json", output)
+    return output
+
+
+# Compatibility for callers of the earlier runner; new artifacts use structured_wiki.
+run_notebook_wiki = run_structured_wiki
 
 
 def repair_answer(text: str) -> str:
@@ -636,21 +838,51 @@ def repair_answer(text: str) -> str:
     return (match.group(1) if match else text).strip().split("\n")[0].strip(" .")
 
 
-def run_llmwiki2(model: str, docs: list[dict[str, Any]], questions: list[dict[str, Any]], run_dir: Path, prompt_dir: Path) -> dict[str, Any]:
-    try:
-        from llmw2 import Wiki
-    except ImportError as exc:
-        raise RuntimeError("llmwiki2 is required; install requirements.txt") from exc
-    bundle = run_dir / "llmwiki2_bundle"
-    bundle.mkdir(parents=True, exist_ok=False)
+def usage_snapshot(wiki: Any) -> dict[str, Any]:
+    usage = getattr(wiki, "usage", None)
+    return json_safe(usage.to_dict()) if usage is not None and callable(getattr(usage, "to_dict", None)) else {}
+
+
+def usage_difference(before: Any, after: Any) -> Any:
+    if isinstance(after, dict):
+        return {key: usage_difference(before.get(key, {}) if isinstance(before, dict) else {}, value)
+                for key, value in after.items()}
+    if isinstance(after, (int, float)) and not isinstance(after, bool):
+        return max(0, after - (before if isinstance(before, (int, float)) else 0))
+    return after
+
+
+def response_dict(response: Any) -> dict[str, Any]:
+    convert = getattr(response, "to_dict", None)
+    if callable(convert):
+        return json_safe(convert())
+    return {key: json_safe(getattr(response, key)) for key in
+            ("text", "citations", "notes", "decisions", "action", "note", "title", "folder", "related")
+            if hasattr(response, key)}
+
+
+def knowledge_digest(bundle: Path) -> dict[str, str]:
+    """Content hashes, not access times; query/audit logs are not wiki knowledge."""
+    return {path.relative_to(bundle).as_posix(): hashlib.sha256(path.read_bytes()).hexdigest()
+            for path in sorted(bundle.rglob("*.md")) if path != bundle / "log.md"}
+
+
+def run_llmwiki2(model: str, docs: list[dict[str, Any]], questions: list[dict[str, Any]],
+                 run_dir: Path, prompt_dir: Path, *, mode: str = "crow", progress=None) -> dict[str, Any]:
+    """Build a fresh independent library wiki with explicit mode and resolved configuration."""
+    from llmwiki_adapter import create_wiki, note_snapshot
+
+    if mode not in WIKI_MODES:
+        raise ValueError(f"Unknown note-wiki mode: {mode}")
+    system = f"llmwiki2_{mode}"
+    out = run_dir / system
+    out.mkdir(parents=True, exist_ok=False)
+    bundle = out / "bundle"
     settings = {
-        "OKF_LLM_PROVIDER": "custom",
-        "OKF_LLM_BASE_URL": os.environ["LLM_BASE_URL"],
-        "OKF_LLM_MODEL": model,
-        "OKF_LLM_TIMEOUT": os.getenv("OKF_LLM_TIMEOUT", "900"),
-        "OKF_LLM_READ_CHARS": os.getenv("OKF_LLM_READ_CHARS", "10000"),
-        "OKF_MODE": os.getenv("OKF_MODE", "crow"),
-        "OKF_USAGE_LOG": str((run_dir / "llmwiki2_calls.jsonl").resolve()),
+        "OKF_LLM_PROVIDER": "custom", "OKF_LLM_BASE_URL": os.environ["LLM_BASE_URL"],
+        "OKF_LLM_MODEL": model, "OKF_LLM_TIMEOUT": os.getenv("OKF_LLM_TIMEOUT", "900"),
+        "OKF_LLM_READ_CHARS": os.getenv("OKF_LLM_READ_CHARS", "10000"), "OKF_MODE": mode,
+        "OKF_USAGE_LOG": str((out / "usage.jsonl").resolve()),
         "OKF_CLASSIFIER_PROVIDER": "custom",
         "OKF_CLASSIFIER_BASE_URL": os.getenv("OKF_CLASSIFIER_BASE_URL", "http://localhost:8001/v1"),
         "OKF_CLASSIFIER_MODEL": os.getenv("OKF_CLASSIFIER_MODEL", "LiquidAI/d1-3B"),
@@ -658,93 +890,437 @@ def run_llmwiki2(model: str, docs: list[dict[str, Any]], questions: list[dict[st
     }
     if prompt_dir.is_dir():
         settings["OKF_PROMPTS_DIR"] = str(prompt_dir.resolve())
-    os.environ.update(settings)
-    wiki = Wiki.from_env(bundle=bundle); wiki.init(); ingestion, rows = [], []
-    for doc in docs:
-        started = time.perf_counter(); response = wiki.ingest(doc["text"], title=doc["title"]); usage = response.usage.to_dict()
-        ingestion.append({"document": doc["title"], "seconds_wall": time.perf_counter() - started, "action": str(response.action), "note": response.note, "usage": usage})
-    for qa in questions:
-        started, error = time.perf_counter(), None
+    wiki = recorder = None
+    ingestion, rows, construction_error = [], [], None
+    output = {"mode": mode, "system": system, "bundle": relative_file(bundle, run_dir),
+              "answers": {system: rows}, "ingestion": ingestion, "writeback_enabled": False}
+    report_progress(progress, component=system, state="building", completed_documents=0,
+                    expected_documents=len(docs), completed_questions=0, expected_questions=len(questions))
+    try:
+        wiki, recorder, provenance = create_wiki(bundle, settings, out / "model_calls.jsonl")
+        output["configuration"] = provenance
+        with recorder.operation("initialization", mode):
+            wiki.init()
+        for number, doc in enumerate(docs):
+            before, mark, started = usage_snapshot(wiki), recorder.mark(), time.perf_counter()
+            trace_before = recorder.trace_io_seconds
+            try:
+                with recorder.operation("ingestion", doc["id"]):
+                    response = wiki.ingest(doc["text"], title=doc["title"])
+                elapsed = time.perf_counter() - started
+                data = response_dict(response)
+                usage = data.get("usage") or usage_difference(before, usage_snapshot(wiki))
+                record = {"document": doc["title"], "document_id": doc["id"], "status": "complete",
+                          "seconds_wall": elapsed, "usage": usage, "response": data,
+                          "action": data.get("action"), "note": data.get("note"),
+                          "decisions": data.get("decisions", [])}
+            except Exception as exc:
+                construction_error = error_record(exc)
+                record = {"document": doc["title"], "document_id": doc["id"], "status": "failed",
+                          "seconds_wall": time.perf_counter() - started,
+                          "usage": usage_difference(before, usage_snapshot(wiki)), "error": construction_error}
+            calls = recorder.since(mark)
+            record.update({"trace_io_seconds": recorder.trace_io_seconds - trace_before,
+                           "model_call_ids": [event["call_id"] for event in calls if "call_id" in event],
+                           "failed_requests": sum(bool(event.get("error")) for event in calls)})
+            ingestion.append(record)
+            append_jsonl(out / "ingestion.jsonl", record)
+            write_json(out / "ingestion" / f"{number:03d}-{slug(doc['id'])}.json",
+                       {**record, "model_calls": calls})
+            report_progress(progress, component=system, state="failed" if construction_error else "building",
+                            completed_documents=sum(x["status"] == "complete" for x in ingestion),
+                            expected_documents=len(docs), error=construction_error)
+            if construction_error:
+                break
+        output["construction_status"] = "failed" if construction_error else "complete"
+        output["construction_error"] = construction_error
+        if construction_error is None:
+            before_queries = knowledge_digest(bundle)
+            write_json(out / "knowledge_before_queries.json", before_queries)
+            report_progress(progress, component=system, state="running", completed_questions=0,
+                            expected_questions=len(questions))
+            for qa in questions:
+                before, mark, started = usage_snapshot(wiki), recorder.mark(), time.perf_counter()
+                trace_before = recorder.trace_io_seconds
+                raw_prediction, prediction, error, data = "", "", None, {}
+                try:
+                    with recorder.operation("query", qa["qa_id"]):
+                        response = wiki.ask(qa["question"])
+                    raw_prediction = response.text
+                    prediction = repair_answer(raw_prediction)
+                    data = response_dict(response)
+                except Exception as exc:
+                    error = error_record(exc)
+                elapsed = time.perf_counter() - started
+                trace_seconds = recorder.trace_io_seconds - trace_before
+                # Artifact reads/writes below are outside the measured ask interval.
+                calls = recorder.since(mark)
+                usage = data.get("usage") or usage_difference(before, usage_snapshot(wiki))
+                notes = data.get("notes", []) or []
+                answer_requests = [{"call_id": event.get("call_id"), "op": event.get("op"),
+                                    "request": event.get("request"), "response": event.get("response"),
+                                    "error": event.get("error")} for event in calls
+                                   if event.get("role") == "llm" and "answer" in event.get("op", "").lower()]
+                no_answer_call = error is None and "notes" in data and not notes and not answer_requests
+                row = {**qa, "system": system, "mode": mode, "raw_prediction": raw_prediction,
+                       "prediction": prediction, "citations": data.get("citations", []),
+                       "notes": notes, "decisions": data.get("decisions", []), "response": data,
+                       "seconds_wall": elapsed, "trace_io_seconds": trace_seconds,
+                       "error": error, "usage": usage, "request_attempts": len(calls),
+                       "failed_requests": sum(bool(event.get("error")) for event in calls),
+                       "model_call_ids": [event["call_id"] for event in calls if "call_id" in event],
+                       "trace_status": "complete" if answer_requests or error or no_answer_call else "missing_answer_request",
+                       "no_answer_request_reason": "No notes selected; navigation may call models, but no answer-model call was made" if no_answer_call else None,
+                       "trace_file": relative_file(out / "queries" / f"{slug(qa['qa_id'])}.json", run_dir),
+                       **(score(prediction, qa["reference"]) if error is None
+                          else {"em": 0.0, "token_f1": 0.0, "rouge_l": 0.0})}
+                try:
+                    snapshots = note_snapshot(wiki, notes)
+                except Exception as exc:
+                    snapshots = []
+                    row["trace_status"] = "note_snapshot_error"
+                    row["trace_error"] = error_record(exc)
+                write_json(out / "queries" / f"{slug(qa['qa_id'])}.json",
+                           {**row, "selected_note_snapshots": snapshots,
+                            "answer_requests": answer_requests, "model_calls": calls})
+                rows.append(row)
+                append_jsonl(out / "answers.jsonl", row)
+                report_progress(progress, component=system, state="running", completed_questions=len(rows),
+                                expected_questions=len(questions), query_errors=sum(bool(x["error"]) for x in rows))
+            after_queries = knowledge_digest(bundle)
+            output["knowledge_frozen"] = before_queries == after_queries
+            output["knowledge_changed_files"] = sorted(key for key in before_queries.keys() | after_queries.keys()
+                                                       if before_queries.get(key) != after_queries.get(key))
+            write_json(out / "knowledge_after_queries.json", after_queries)
+        else:
+            output["knowledge_frozen"] = None
+        output["usage_total"] = usage_snapshot(wiki)
+    except Exception as exc:
+        construction_error = error_record(exc)
+        output.update({"construction_status": "failed", "construction_error": construction_error,
+                       "usage_total": usage_snapshot(wiki) if wiki is not None else {}})
+    finally:
         try:
-            response = wiki.ask(qa["question"]); raw = response.text; prediction = repair_answer(raw); citations = response.citations; usage = response.usage.to_dict()
+            close = getattr(wiki, "close", None)
+            if callable(close):
+                close()
         except Exception as exc:
-            raw = prediction = ""; citations = []; usage = {}; error = repr(exc)
-        rows.append({**qa, "raw_prediction": raw, "prediction": prediction, "citations": citations, "seconds_wall": time.perf_counter() - started, "error": error, "usage": usage, **score(prediction, qa["reference"])})
-        with (run_dir / "llmwiki2_answers.jsonl").open("a", encoding="utf-8") as stream:
-            stream.write(json.dumps(rows[-1], ensure_ascii=False) + "\n")
-    return {"ingestion": ingestion, "answers": {"llmwiki2": rows}, "usage_total": wiki.usage.to_dict()}
+            output["cleanup_error"] = error_record(exc)
+        finally:
+            if recorder is not None:
+                recorder.close()
+    query_errors = sum(bool(row["error"]) for row in rows)
+    trace_errors = sum(row.get("trace_status") != "complete" for row in rows)
+    classifier_calls = output.get("usage_total", {}).get("classifier", {}).get("calls", 0)
+    state = ("failed" if construction_error else
+             "invalid_knowledge_changed" if output.get("knowledge_frozen") is False else
+             "invalid_classic_classifier_usage" if mode == "classic" and classifier_calls else
+             "complete_with_cleanup_errors" if output.get("cleanup_error") else
+             "complete_with_trace_errors" if trace_errors else
+             "complete_with_query_errors" if query_errors else "complete")
+    output.update({"status": state, "expected_questions": len(questions), "evaluated_questions": len(rows),
+                   "query_errors": query_errors, "trace_errors": trace_errors,
+                   "construction_cost": buildcost_summary(ingestion),
+                   "latency_scope": "wiki.ask plus response processing; includes synchronous HTTP trace capture; excludes artifact exports",
+                   "model_calls_file": relative_file(out / "model_calls.jsonl", run_dir)})
+    write_json(out / "ingestion.json", ingestion)
+    write_json(out / "results.json", output)
+    report_progress(progress, component=system, state=state, completed_questions=len(rows),
+                    expected_questions=len(questions), query_errors=query_errors, trace_errors=trace_errors,
+                    error=construction_error)
+    return output
 
 
 def summarize(rows: list[dict[str, Any]]) -> dict[str, Any]:
-    metrics = ("em", "token_f1", "rouge_l", "seconds_wall", "llm_calls", "input_tokens", "output_tokens",
-               "classifier_calls", "classifier_input_tokens", "classifier_output_tokens", "total_input_tokens", "total_output_tokens")
-    normalized = []
-    for row in rows:
-        value = dict(row)
-        if "usage" in row:
-            usage = row["usage"]
-            writing, classifier = usage.get("llm", {}), usage.get("classifier", {})
-            value.update(llm_calls=writing.get("calls", 0), input_tokens=writing.get("input_tokens", 0),
-                         output_tokens=writing.get("output_tokens", 0), classifier_calls=classifier.get("calls", 0),
-                         classifier_input_tokens=classifier.get("input_tokens", 0), classifier_output_tokens=classifier.get("output_tokens", 0))
-        value["total_input_tokens"] = value.get("input_tokens", 0) + value.get("classifier_input_tokens", 0)
-        value["total_output_tokens"] = value.get("output_tokens", 0) + value.get("classifier_output_tokens", 0)
-        normalized.append(value)
-    return {"questions": len(rows), "errors": sum(bool(r.get("error")) for r in rows),
-            **{key: sum(float(r.get(key, 0) or 0) for r in normalized) / max(1, len(rows)) for key in metrics}}
+    return summarize_rows(rows)
 
 
-def save_run(run_dir: Path, model: str, notebook: dict[str, Any], wiki2: dict[str, Any], manifest: dict[str, Any]) -> None:
+def comparison_report(wikis: dict[str, dict[str, Any]], manifest: dict[str, Any]) -> dict[str, Any]:
+    classic, crow = wikis.get("classic"), wikis.get("crow")
+    report = {"modes_requested": manifest["wiki_modes"],
+              "same_documents_and_order": manifest["documents"],
+              "document_sha256": manifest["document_sha256"],
+              "questions_sha256": manifest["questions_sha256"],
+              "native_library_modes": True,
+              "interpretation": "Independent constructions; mode-specific library features may also differ. "
+                                "Resolved flags and actual decision/request traces are retained.",
+              "both_available": classic is not None and crow is not None}
+    if not classic or not crow:
+        return {**report, "paired_comparison_complete": False, "reason": "Both modes were not completed"}
+    left, right = classic.get("configuration", {}), crow.get("configuration", {})
+    ignored = {"bundle", "mode", "usage_log"}
+    cfg_left = {k: v for k, v in left.get("configuration", {}).items() if k not in ignored}
+    cfg_right = {k: v for k, v in right.get("configuration", {}).items() if k not in ignored}
+    differences = {k: {"classic": cfg_left.get(k), "crow": cfg_right.get(k)}
+                   for k in cfg_left.keys() | cfg_right.keys() if cfg_left.get(k) != cfg_right.get(k)}
+    library_equal = bool(left.get("library")) and left.get("library") == right.get("library")
+    prompts_equal = bool(left.get("prompts_fingerprint")) and left.get("prompts_fingerprint") == right.get("prompts_fingerprint")
+    complete = {"complete", "complete_with_query_errors"}
+    report.update({"same_library_provenance": library_equal, "same_resolved_prompts": prompts_equal,
+                   "common_configuration_equal": bool(cfg_left) and bool(cfg_right) and not differences,
+                   "common_configuration_differences": differences,
+                   "feature_flags": {"classic": left.get("feature_flags"), "crow": right.get("feature_flags")},
+                   "status": {"classic": classic.get("status"), "crow": crow.get("status")},
+                   "knowledge_frozen": {"classic": classic.get("knowledge_frozen"), "crow": crow.get("knowledge_frozen")},
+                   "classic_classifier_calls": classic.get("usage_total", {}).get("classifier", {}).get("calls", 0)})
+    expected_ids = [question["qa_id"] for question in manifest["questions"]]
+    left_rows = classic.get("answers", {}).get("llmwiki2_classic", [])
+    right_rows = crow.get("answers", {}).get("llmwiki2_crow", [])
+    report["same_complete_question_order"] = ([row["qa_id"] for row in left_rows] == expected_ids
+                                              and [row["qa_id"] for row in right_rows] == expected_ids)
+    report["paired_comparison_complete"] = (
+        classic.get("status") in complete and crow.get("status") in complete
+        and report["common_configuration_equal"] and library_equal and prompts_equal
+        and report["classic_classifier_calls"] == 0 and report["same_complete_question_order"]
+    )
+    left_summary, right_summary = summarize(left_rows), summarize(right_rows)
+    report["crow_minus_classic"] = {key: right_summary[key] - left_summary[key]
+                                    for key in ("em", "token_f1", "rouge_l", "seconds_wall", "llm_calls",
+                                                "classifier_calls", "total_input_tokens", "total_output_tokens")}
+    report["deltas_valid_for_complete_comparison"] = report["paired_comparison_complete"]
+    return report
+
+
+def save_run(run_dir: Path, model: str, structured: dict[str, Any],
+             wikis: dict[str, dict[str, Any]], manifest: dict[str, Any],
+             run_status: dict[str, Any] | None = None) -> None:
+    """Write six distinct summaries without turning missing runs into zero accuracy."""
     run_dir.mkdir(parents=True, exist_ok=True)
-    classifier_model = manifest.get("classifier_model", "LiquidAI/d1-3B")
-    payload = {"benchmark_version": BENCHMARK_VERSION, "created_at": datetime.now(timezone.utc).isoformat(), "model": model, "classifier_model": classifier_model, "dataset": manifest, "tutorial_llm_wiki": notebook, "llmwiki2": wiki2}
-    (run_dir / "full_results.json").write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
-    summaries = []
-    for system, rows in notebook["answers"].items(): summaries.append({"model": model, "classifier_model": classifier_model, "implementation": "tutorial_llm_wiki", "system": system, **summarize(rows)})
-    for system, rows in wiki2["answers"].items(): summaries.append({"model": model, "classifier_model": classifier_model, "implementation": "llmwiki2", "system": system, **summarize(rows)})
-    (run_dir / "summary.json").write_text(json.dumps(summaries, ensure_ascii=False, indent=2), encoding="utf-8")
+    classifier_model = manifest.get("classifier_model")
+    summaries, construction, by_type, by_support = [], {}, {}, {}
+    for system in manifest["expected_systems"]:
+        if system in DIRECT_SYSTEMS:
+            rows = structured.get("answers", {}).get(system, [])
+            system_state = structured.get("systems", {}).get(system, {}).get("status", "pending")
+            implementation = "dense_rag" if system == "rag_semantic" else "structured_wiki"
+            if system == "rag_semantic":
+                cost = buildcost_summary([], {"raw_seconds": structured.get("indexing", {}).get("raw_seconds")})
+                shared_group = None
+            else:
+                cost = buildcost_summary(structured.get("ingestion", []),
+                                         {"wiki_seconds": structured.get("indexing", {}).get("wiki_seconds")})
+                shared_group = "structured_wiki"
+        else:
+            mode = system.removeprefix("llmwiki2_")
+            record = wikis.get(mode, {})
+            rows = record.get("answers", {}).get(system, [])
+            system_state = record.get("status", "pending")
+            implementation, shared_group = "llmwiki2", None
+            cost = record.get("construction_cost") or buildcost_summary(record.get("ingestion", []))
+        summary = {"model": model, "classifier_model": classifier_model if system == "llmwiki2_crow" else None,
+                   "implementation": implementation, "system": system, "status": system_state,
+                   "expected_questions": len(manifest["questions"]), **summarize(rows)}
+        summary["eligible_for_complete_comparison"] = (
+            system_state in {"complete", "complete_with_query_errors"}
+            and [row["qa_id"] for row in rows] == [question["qa_id"] for question in manifest["questions"]]
+        )
+        if not rows:
+            for metric in ("em", "token_f1", "rouge_l", "seconds_wall"):
+                summary[metric] = None
+        summaries.append(summary)
+        construction[system] = {**cost, "shared_construction_group": shared_group,
+                                "scope": ("One structured build and common wiki index, shared by three configurations; do not sum it three times"
+                                          if shared_group else cost.get("scope"))}
+        construction[system]["partial_or_pending"] = system_state not in {"complete", "complete_with_query_errors"}
+        if construction[system]["partial_or_pending"] and not cost.get("documents") and not cost.get("indexing_seconds_total"):
+            for key in ("construction_seconds_total", "ingestion_seconds_total", "ingestion_seconds_mean", "indexing_seconds_total"):
+                construction[system][key] = None
+        by_type[system] = summary_by_group(rows, "question_type")
+        by_support[system] = summary_by_group(rows, "supporting_documents")
+    payload = {"benchmark_version": BENCHMARK_VERSION, "created_at": datetime.now(timezone.utc).isoformat(),
+               "model": model, "classifier_model": classifier_model, "manifest": manifest,
+               "status": run_status, "structured_wiki": structured, "llmwiki2": wikis}
+    write_json(run_dir / "full_results.json", payload)
+    write_json(run_dir / "summary.json", summaries)
+    write_json(run_dir / "construction_summary.json", construction)
+    write_json(run_dir / "summary_by_type.json", by_type)
+    write_json(run_dir / "summary_by_support_count.json", by_support)
+    write_json(run_dir / "paired_comparison.json", comparison_report(wikis, manifest))
+    csv_rows = []
+    for summary in summaries:
+        flat = {key: value for key, value in summary.items() if not isinstance(value, (dict, list))}
+        flat.update({f"sum_{key}": value for key, value in summary["totals"].items()})
+        cost = construction[summary["system"]]
+        flat.update({"construction_seconds": cost.get("construction_seconds_total"),
+                     "ingestion_seconds": cost.get("ingestion_seconds_total"),
+                     "indexing_seconds": cost.get("indexing_seconds_total"),
+                     "shared_construction_group": cost.get("shared_construction_group")})
+        csv_rows.append(flat)
+    fields = list(dict.fromkeys(key for row in csv_rows for key in row))
     with (run_dir / "summary.csv").open("w", newline="", encoding="utf-8") as stream:
-        writer = csv.DictWriter(stream, fieldnames=list(summaries[0]))
-        writer.writeheader(); writer.writerows(summaries)
+        writer = csv.DictWriter(stream, fieldnames=fields)
+        writer.writeheader()
+        writer.writerows(csv_rows)
 
 
-def main() -> None:
+def source_hashes() -> dict[str, str]:
+    names = ("benchmark_llm_wiki.py", "benchmark_artifacts.py", "llmwiki_adapter.py",
+             "capture_runtime_metadata.py", "requirements.txt", "start_vllm_services.sh")
+    return {name: hashlib.sha256((ROOT / name).read_bytes()).hexdigest() for name in names if (ROOT / name).is_file()}
+
+
+def recover_structured_outputs(run_dir: Path) -> dict[str, Any]:
+    """Recover completed checkpoints if a later construction/index/export step fails."""
+    out = run_dir / "structured_wiki"
+    recovered: dict[str, Any] = {"answers": {}, "systems": {}, "ingestion": [], "indexing": {}}
+    for name, key in (("ingestion.json", "ingestion"), ("indexing.json", "indexing")):
+        path = out / name
+        if path.is_file():
+            recovered[key] = json.loads(path.read_text(encoding="utf-8"))
+    path = out / "answers.jsonl"
+    if path.is_file():
+        for line in path.read_text(encoding="utf-8").splitlines():
+            try:
+                row = json.loads(line)
+            except json.JSONDecodeError:
+                continue
+            recovered["answers"].setdefault(row["system"], []).append(row)
+    for system in DIRECT_SYSTEMS:
+        path = out / f"{system}.json"
+        if path.is_file():
+            payload = json.loads(path.read_text(encoding="utf-8"))
+            recovered["systems"][system] = payload["status"]
+    return recovered
+
+
+def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--model", default=os.getenv("LLM_MODEL"), help="Hugging Face model served by vLLM (defaults to LLM_MODEL).")
-    parser.add_argument("--top-docs", type=int, default=3); parser.add_argument("--max-questions", type=int, default=25)
-    parser.add_argument("--output", type=Path, default=OUT); parser.add_argument("--prompt-dir", type=Path, default=Path(os.getenv("OKF_PROMPTS_DIR", ROOT / "prompts_benchmark")))
-    args = parser.parse_args()
-    if not args.model: parser.error("--model is required (or set LLM_MODEL)")
-    if not os.getenv("LLM_BASE_URL"): parser.error("LLM_BASE_URL is required (for example http://localhost:8000/v1)")
+    parser.add_argument("--top-docs", type=int, default=3)
+    parser.add_argument("--max-questions", type=int, default=25)
+    parser.add_argument("--output", type=Path, default=OUT)
+    parser.add_argument("--prompt-dir", type=Path, default=Path(os.getenv("OKF_PROMPTS_DIR", ROOT / "prompts_benchmark")))
+    parser.add_argument("--wiki-modes", nargs="+", choices=WIKI_MODES, default=list(WIKI_MODES),
+                        help="Independent note-wiki modes, in execution order (default: classic crow).")
+    parser.add_argument("--dataset-revision", default=None,
+                        help="Optional Hugging Face revision; actual dataset fingerprints/checksums are always saved.")
+    args = parser.parse_args(argv)
+    if not args.model:
+        parser.error("--model is required (or set LLM_MODEL)")
+    if not os.getenv("LLM_BASE_URL"):
+        parser.error("LLM_BASE_URL is required (for example http://localhost:8000/v1)")
     if args.top_docs < 1 or args.max_questions < 1:
         parser.error("--top-docs and --max-questions must be positive")
-    docs, questions = make_dataset(args.top_docs, args.max_questions)
-    if not questions or any(not d["text"].strip() for d in docs):
-        raise ValueError("The selected dataset has no questions or contains empty source documents")
-    classifier_model = os.getenv("OKF_CLASSIFIER_MODEL", "LiquidAI/d1-3B")
-    manifest = {"benchmark_version": BENCHMARK_VERSION, "code_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
-                "package_versions": package_versions(),
-                "top_docs": args.top_docs, "max_questions": args.max_questions, "actual_questions": len(questions),
-                "classifier_model": classifier_model, "embedding_model": EMBEDDING_MODEL,
-                "context_budget_chars": CONTEXT_BUDGET, "rag_top_k": 3, "rag_chunk_words": 200,
-                "wiki_search": "paragraphs of compiled pages and raw sources; BM25 or RRF(k=60)",
-                "wiki_query_preparation": "LLM routing and term expansion for all three wiki strategies",
-                "llm_settings": {"temperature": 0, "extract_max_tokens": 4096, "reconcile_max_tokens": 1024,
-                                 "route_max_tokens": 512, "search_terms_max_tokens": 384, "answer_max_tokens": 96},
-                "writeback_enabled": False, "documents": [d["title"] for d in docs],
-                "document_sha256": {d["id"]: hashlib.sha256(d["text"].encode("utf-8")).hexdigest() for d in docs}, "questions": questions}
+    if len(args.wiki_modes) != len(set(args.wiki_modes)):
+        parser.error("--wiki-modes cannot contain duplicate modes")
     model = args.model
     run_label = f"docs_{args.top_docs}_questions_{args.max_questions}"
     run_id = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S_%fZ")
     run_dir = args.output / BENCHMARK_VERSION / slug(model) / run_label / run_id
     run_dir.mkdir(parents=True, exist_ok=False)
-    (run_dir / "benchmark_manifest.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=2), encoding="utf-8")
-    llm = VLLM(model, os.environ["LLM_BASE_URL"], os.getenv("VLLM_API_KEY", "EMPTY"), float(os.getenv("VLLM_TIMEOUT_SECONDS", "1200")))
-    notebook = run_notebook_wiki(llm, docs, questions, run_dir)
-    (run_dir / "notebook_results.json").write_text(json.dumps(notebook, ensure_ascii=False, indent=2), encoding="utf-8")
-    wiki2 = run_llmwiki2(model, docs, questions, run_dir, args.prompt_dir)
-    save_run(run_dir, model, notebook, wiki2, manifest)
-    print(f"Completed {model}: {run_dir}")
+    status = {"status": "running", "started_at": datetime.now(timezone.utc).isoformat(),
+              "components": {}, "run_directory": str(run_dir), "last_update": None}
+
+    def progress(update):
+        component = update.pop("component")
+        status["components"].setdefault(component, {}).update(update)
+        status["last_update"] = datetime.now(timezone.utc).isoformat()
+        write_json(run_dir / "run_status.json", status)
+
+    write_json(run_dir / "run_status.json", status)
+    print(f"Run directory: {run_dir}", flush=True)
+    manifest: dict[str, Any] = {"benchmark_version": BENCHMARK_VERSION, "schema_version": 3,
+        "code_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(), "source_sha256": source_hashes(),
+        "package_versions": package_versions(), "package_provenance": collect_package_provenance(),
+        "top_docs": args.top_docs, "max_questions": args.max_questions, "wiki_modes": args.wiki_modes,
+        "expected_systems": [*DIRECT_SYSTEMS, *(f"llmwiki2_{mode}" for mode in args.wiki_modes)],
+        "execution_order": [*DIRECT_SYSTEMS, *(f"llmwiki2_{mode}" for mode in args.wiki_modes)],
+        "classifier_model": os.getenv("OKF_CLASSIFIER_MODEL", "LiquidAI/d1-3B"),
+        "embedding_model": EMBEDDING_MODEL, "context_budget_chars": CONTEXT_BUDGET,
+        "rag_top_k": 3, "rag_chunk_words": 200,
+        "wiki_search": "compiled-page and raw-source paragraphs; BM25 or RRF(k=60)",
+        "wiki_query_preparation": "LLM page selection and term expansion for all three structured-wiki strategies",
+        "llm_settings": {"temperature": 0, "sdk_transport_retries": 0, "json_validation_attempts": 2,
+                         "extract_max_tokens": 4096, "reconcile_max_tokens": 1024,
+                         "route_max_tokens": 512, "search_terms_max_tokens": 384, "answer_max_tokens": 96},
+        "writeback_enabled": False, "replicates": 1, "randomized_order": False,
+        "direct_retrieval_settings": {"raw_chunk_words": 200, "chunk_overlap_words": 0, "dense_top_k": 3,
+            "raw_paragraph_min_chars": 30, "wiki_paragraph_min_chars": 20,
+            "context_budget_chars": CONTEXT_BUDGET, "graph_reserved_fraction": 0.25, "graph_max_relations": 6,
+            "reconciliation_candidates": "all stored nodes", "index_description_chars": 280,
+            "fallback_pages_per_type": 3, "expansion_excerpt_chars": 2500,
+            "expansion_term_prompt_target": [8, 15], "other_wiki_pages": 3,
+            "selected_term_min_matches": 1, "other_raw_min_matches": 2,
+            "question_unigram_min_chars": 3, "question_bigrams": "adjacent non-stopwords",
+            "stopwords": sorted(ENGLISH_STOP_WORDS), "stemmer": "Snowball English",
+            "bm25_package_defaults": {"k1": 1.5, "b": 0.75, "epsilon": 0.25},
+            "rrf_k": 60, "fusion_lists": "all indexed paragraphs", "normalize_embeddings": True},
+        "latency_scope": "Retrieval plus generation, excluding per-query result export. Library timing includes HTTP trace capture.",
+        "relevant_environment": redact_secrets({key: value for key, value in os.environ.items()
+                                  if key.startswith(("OKF_", "VLLM_", "BENCHMARK_"))
+                                  or key in {"LLM_MODEL", "LLM_BASE_URL"}})}
+    write_json(run_dir / "benchmark_manifest.json", manifest)
+    write_json(run_dir / "runtime_environment.json", runtime_snapshot())
+    prompt_manifest = save_prompt_snapshot(
+        run_dir, args.prompt_dir,
+        {"ANSWER": ANSWER, "EXTRACT": EXTRACT, "RECONCILE": RECONCILE, "ROUTE": ROUTE, "SEARCH_TERMS": SEARCH_TERMS},
+        {"INGEST_SCHEMA": INGEST_SCHEMA, "RECONCILE_SCHEMA": RECONCILE_SCHEMA,
+         "ROUTE_SCHEMA": ROUTE_SCHEMA, "TERMS_SCHEMA": TERMS_SCHEMA})
+    manifest["prompt_snapshot"] = prompt_manifest
+    dataset_metadata: dict[str, Any] = {}
+    try:
+        docs, questions = make_dataset(args.top_docs, args.max_questions, revision=args.dataset_revision,
+                                       metadata=dataset_metadata)
+        if not questions or any(not doc["text"].strip() for doc in docs):
+            raise ValueError("Selected data has no questions or contains empty source documents")
+        manifest.update({"actual_questions": len(questions), "documents": [doc["title"] for doc in docs],
+                         "document_order": [doc["id"] for doc in docs],
+                         "document_sha256": {doc["id"]: hashlib.sha256(doc["text"].encode("utf-8")).hexdigest() for doc in docs},
+                         "questions": questions,
+                         "questions_sha256": hashlib.sha256(json.dumps(questions, sort_keys=True, ensure_ascii=False).encode()).hexdigest(),
+                         "dataset": dataset_metadata})
+        manifest["dataset_statistics"] = save_dataset(run_dir, docs, questions, dataset_metadata)
+        write_json(run_dir / "benchmark_manifest.json", manifest)
+        progress({"component": "dataset", "state": "complete", "documents": len(docs), "questions": len(questions)})
+    except Exception as exc:
+        status.update({"status": "failed", "error": error_record(exc), "completed_at": datetime.now(timezone.utc).isoformat()})
+        write_json(run_dir / "run_status.json", status)
+        raise
+
+    structured: dict[str, Any] = {"answers": {}, "systems": {}, "ingestion": []}
+    wikis: dict[str, dict[str, Any]] = {}
+    save_run(run_dir, model, structured, wikis, manifest, status)
+    llm = VLLM(model, os.environ["LLM_BASE_URL"], os.getenv("VLLM_API_KEY", "EMPTY"),
+               float(os.getenv("VLLM_TIMEOUT_SECONDS", "1200")), run_dir / "structured_wiki" / "model_calls.jsonl")
+    try:
+        structured = run_structured_wiki(llm, docs, questions, run_dir, progress=progress)
+    except Exception as exc:
+        error = error_record(exc)
+        structured = recover_structured_outputs(run_dir)
+        for system in DIRECT_SYSTEMS:
+            if system not in structured["systems"]:
+                structured["systems"][system] = {"status": "failed", "error": error}
+                progress({"component": system, "state": "failed", "error": error})
+        structured["fatal_error"] = error
+    finally:
+        llm.flush_events()
+    save_run(run_dir, model, structured, wikis, manifest, status)
+    for mode in args.wiki_modes:
+        try:
+            wikis[mode] = run_llmwiki2(model, docs, questions, run_dir, args.prompt_dir, mode=mode, progress=progress)
+        except Exception as exc:
+            error = error_record(exc)
+            wikis[mode] = {"mode": mode, "status": "failed", "construction_error": error,
+                           "answers": {f"llmwiki2_{mode}": []}, "ingestion": []}
+            progress({"component": f"llmwiki2_{mode}", "state": "failed", "error": error})
+        save_run(run_dir, model, structured, wikis, manifest, status)
+    summaries = json.loads((run_dir / "summary.json").read_text(encoding="utf-8"))
+    states = [row["status"] for row in summaries]
+    healthy = {"complete", "complete_with_query_errors"}
+    systems_complete = all(state in healthy for state in states) and all(row["eligible_for_complete_comparison"] for row in summaries)
+    pair_required = set(args.wiki_modes) == set(WIKI_MODES)
+    pair_valid = comparison_report(wikis, manifest)["paired_comparison_complete"]
+    finished = systems_complete and (not pair_required or pair_valid)
+    status.update({"status": ("complete_with_query_errors" if "complete_with_query_errors" in states else "complete")
+                   if finished else "incomplete", "completed_at": datetime.now(timezone.utc).isoformat(),
+                   "expected_systems": manifest["expected_systems"], "all_systems_complete": systems_complete,
+                   "paired_comparison_required": pair_required, "paired_comparison_complete": pair_valid,
+                   "comparison_valid": finished})
+    write_json(run_dir / "run_status.json", status)
+    save_run(run_dir, model, structured, wikis, manifest, status)
+    print(f"{status['status']}: {run_dir}", flush=True)
+    return 0 if finished else 2
 
 
-if __name__ == "__main__": main()
+if __name__ == "__main__":
+    raise SystemExit(main())
