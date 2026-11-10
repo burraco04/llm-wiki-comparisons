@@ -1,0 +1,5 @@
+# Notes
+
+* [News Publisher Class Action Suit Against Google](news-publisher-class-action-suit-against-google.md) - A class action lawsuit filed by news publishers against Google and Alphabet alleges anticompetitive practices involving AI technologies like Google's Search Generative Experience (SGE) and Bard AI chatbot, claiming these technologies harm their bottom line by siphoning off content, readers, and ad revenue.
+* [Tech News Highlights](tech-news-highlights.md) - This note compiles highlights from recent tech news sources, covering topics such as AI startups, hardware launches, company closures, and user experiences like ad-free tiers. It includes updates from LinkedIn, Google, and TikTok, as well as comments from Elon Musk regarding Twitter metrics and the closure of IronNet.
+* [Sam Bankman-Fried's Character and Legal Defense](sam-bankman-fried-s-character-and-legal-defense.md) - This source contrasts the prosecution's portrayal of Sam Bankman-Fried as a liar and fraud with his lawyer's argument that he acted in good faith. It also details the defense's use of witnesses Julliard and Yedidia.

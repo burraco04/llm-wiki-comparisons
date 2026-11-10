@@ -1,0 +1,24 @@
+---
+title: "Marc-Antoine Julliard"
+type: "entity"
+sources: ["sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand"]
+---
+
+# Marc-Antoine Julliard
+
+A Paris-born cocoa trader who lives in London and testified as a victim.
+
+## References
+
+- From [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]]: A Paris-born cocoa trader who lives in London and testified as a victim.
+
+## Relations
+
+- Marc-Antoine Julliard [invested in] FTX (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])
+- Marc-Antoine Julliard [lost money from] Sam Bankman-Fried (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])
+
+## Related
+
+- [[entities/ftx]]
+- [[entities/sam-bankman-fried]]
+- [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]]

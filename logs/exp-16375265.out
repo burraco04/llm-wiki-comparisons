@@ -1,0 +1,21 @@
+>>> LLM GPU GPU-585638e5-d6b7-97e1-cc87-9d5173977604: 3984/24576 MiB free, classifier GPU GPU-190ed79c-3a8f-eed8-4e94-0e8a6d7b9384: 24124/24576 MiB free
+>>> requesting LLM=0.85 and classifier=0.85 of total
+>>> waiting for Qwen/Qwen2.5-3B-Instruct on port 8000 and LiquidAI/d1-3B on port 9000 ...
+>>> ready after ~100s
+{"object":"list","data":[{"id":"Qwen/Qwen2.5-3B-Instruct","object":"model","created":1794304651,"owned_by":"vllm","root":"Qwen/Qwen2.5-3B-Instruct","parent":null,"max_model_len":32768,"permission":[{"id":"modelperm-85c05659c9597b31","object":"model_permission","created":1794304651,"allow_create_engine":false,"allow_sampling":true,"allow_logprobs":true,"allow_search_indices":false,"allow_view":true,"allow_fine_tuning":false,"organization":"*","group":null,"is_blocking":false}]}]}
+{"object":"list","data":[{"id":"LiquidAI/d1-3B","object":"model","created":1794304651,"owned_by":"vllm","root":"LiquidAI/d1-3B","parent":null,"max_model_len":8192,"permission":[{"id":"modelperm-a51668ec4b3b39f7","object":"model_permission","created":1794304651,"allow_create_engine":false,"allow_sampling":true,"allow_logprobs":true,"allow_search_indices":false,"allow_view":true,"allow_fine_tuning":false,"organization":"*","group":null,"is_blocking":false}]}]}
+>>> llm_base_url = http://localhost:8000/v1   llm_model = Qwen/Qwen2.5-3B-Instruct
+>>> classifier_base_url = http://localhost:9000/v1   classifier_model = LiquidAI/d1-3B
+>>> running in vllm-8000: python benchmark_llm_wiki.py
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+WARNING:huggingface_hub.utils._http:Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Ingested Sam Altman backs teens’ startup, Google unveils the Pixel 8 and TikTok tests an ad-free tier: {'sources': 1, 'entities': 8, 'concepts': 7, 'kg_edges': 7, 'wiki_links': 44}
+Ingested News publisher files class action antitrust suit against Google, citing AI’s harms to their bottom line: {'sources': 2, 'entities': 13, 'concepts': 11, 'kg_edges': 13, 'wiki_links': 74}
+Ingested Is Sam Bankman-Fried a bad ‘man’ or a good ‘boy’? Lawyers swap opening statements before first witnesses take the stand: {'sources': 3, 'entities': 18, 'concepts': 16, 'kg_edges': 20, 'wiki_links': 110}
+Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]Loading weights: 100%|██████████| 103/103 [00:00<00:00, 2285.85it/s]
+WARNING:llmw2.agents.steps_classic:summarize: part 2 of 2: notes cut from 1608 to 1415 characters
+WARNING:llmw2.agents.steps_classic:summarize: the note of 'News Publisher Class Action Suit Against Google' lacks 1 of 18 values of its part notes
+WARNING:llmw2.agents.steps_classic:summarize: the note of "Sam Bankman-Fried's Character and Legal Defense" lacks 4 of 7 values of its part notes
+Completed Qwen/Qwen2.5-3B-Instruct: /workdir/results/structured_wiki_v2/Qwen_Qwen2.5-3B-Instruct/docs_3_questions_25/20261110T095738_660099Z
+>>> done
+>>> stopping vLLM

@@ -1,0 +1,32 @@
+>>> LLM GPU GPU-585638e5-d6b7-97e1-cc87-9d5173977604: 24121/24576 MiB free, classifier GPU GPU-190ed79c-3a8f-eed8-4e94-0e8a6d7b9384: 24121/24576 MiB free
+>>> requesting LLM=0.85 and classifier=0.85 of total
+>>> waiting for Qwen/Qwen2.5-3B-Instruct on port 8002 and LiquidAI/d1-3B on port 9002 ...
+>>> ready after ~90s
+{"object":"list","data":[{"id":"Qwen/Qwen2.5-3B-Instruct","object":"model","created":1794304995,"owned_by":"vllm","root":"Qwen/Qwen2.5-3B-Instruct","parent":null,"max_model_len":32768,"permission":[{"id":"modelperm-ba78b214b602f556","object":"model_permission","created":1794304995,"allow_create_engine":false,"allow_sampling":true,"allow_logprobs":true,"allow_search_indices":false,"allow_view":true,"allow_fine_tuning":false,"organization":"*","group":null,"is_blocking":false}]}]}
+{"object":"list","data":[{"id":"LiquidAI/d1-3B","object":"model","created":1794304995,"owned_by":"vllm","root":"LiquidAI/d1-3B","parent":null,"max_model_len":8192,"permission":[{"id":"modelperm-859cd63fa0c59458","object":"model_permission","created":1794304995,"allow_create_engine":false,"allow_sampling":true,"allow_logprobs":true,"allow_search_indices":false,"allow_view":true,"allow_fine_tuning":false,"organization":"*","group":null,"is_blocking":false}]}]}
+>>> llm_base_url = http://localhost:8002/v1   llm_model = Qwen/Qwen2.5-3B-Instruct
+>>> classifier_base_url = http://localhost:9002/v1   classifier_model = LiquidAI/d1-3B
+>>> running in vllm-8002: python benchmark_llm_wiki.py --top-docs 8 --max-questions 150
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+WARNING:huggingface_hub.utils._http:Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Ingested Sam Altman backs teens’ startup, Google unveils the Pixel 8 and TikTok tests an ad-free tier: {'sources': 1, 'entities': 8, 'concepts': 7, 'kg_edges': 7, 'wiki_links': 44}
+Ingested News publisher files class action antitrust suit against Google, citing AI’s harms to their bottom line: {'sources': 2, 'entities': 13, 'concepts': 11, 'kg_edges': 13, 'wiki_links': 74}
+Ingested Is Sam Bankman-Fried a bad ‘man’ or a good ‘boy’? Lawyers swap opening statements before first witnesses take the stand: {'sources': 3, 'entities': 18, 'concepts': 16, 'kg_edges': 20, 'wiki_links': 110}
+Ingested SBF’s trial starts soon, but how did he — and FTX — get here?: {'sources': 4, 'entities': 18, 'concepts': 19, 'kg_edges': 26, 'wiki_links': 130}
+Traceback (most recent call last):
+  File "/workdir/benchmark_llm_wiki.py", line 750, in <module>
+    if __name__ == "__main__": main()
+                               ^^^^^^
+  File "/workdir/benchmark_llm_wiki.py", line 743, in main
+    notebook = run_notebook_wiki(llm, docs, questions, run_dir)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workdir/benchmark_llm_wiki.py", line 571, in run_notebook_wiki
+    ingest.append(wiki.ingest(llm, doc))
+                  ^^^^^^^^^^^^^^^^^^^^^
+  File "/workdir/benchmark_llm_wiki.py", line 248, in ingest
+    data = llm.ask_json(EXTRACT.format(title=doc["title"], text=doc["text"]), INGEST_SCHEMA, 4096, "ingest_extract")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workdir/benchmark_llm_wiki.py", line 143, in ask_json
+    raise ValueError(f"Invalid JSON after two attempts during {stage}")
+ValueError: Invalid JSON after two attempts during ingest_extract
+>>> stopping vLLM

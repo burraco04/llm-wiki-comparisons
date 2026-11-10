@@ -1,0 +1,74 @@
+# Wiki index
+
+- sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier: This TechCrunch Week in Review highlights major tech developments including Sam Altman's support for a teen-founded AI startup, Google's hardware event showcasing the Pixel 8 series, and TikTok's experimental ad-free subscription. The digest also covers significant corporate turm
+- entities/sam-altman: Tech entrepreneur and investor who backed a teen-founded AI startup.
+- entities/induced-ai: An AI startup founded by teenagers that automates business workflows.
+- entities/google: Search and consumer tech giant that unveiled new hardware and updated email policies.
+- entities/pixel-8-pro: A smartphone released by Google with improved cameras and screen.
+- entities/flexport: A freight forwarding and customs brokerage startup valued at $8 billion.
+- entities/dave-clark: Former Amazon executive and ousted CEO of Flexport.
+- entities/sam-bankman-fried: Former CEO of FTX and owner of Alameda Research, central figure in the trial.
+- entities/ftx: Cryptocurrency exchange that collapsed and is the subject of a trial.
+- entities/michael-lewis: Author of the book 'Going Infinite' which details SBF's political dealings.
+- entities/donald-trump: Former U.S. President allegedly targeted by SBF in a political deal.
+- entities/tiktok: Social media platform testing an ad-free subscription tier.
+- entities/linkedin: Professional networking platform launching new AI tools.
+- entities/x-platform: Social media platform formerly known as Twitter, led by Linda Yaccarino.
+- entities/linda-yaccarino: CEO of X who provided conflicting metrics on daily post volume.
+- entities/ironnet: Cybersecurity startup founded by former NSA director Keith Alexander that shut down.
+- entities/keith-alexander: Retired four-star general and founder of IronNet.
+- entities/manhattan-federal-court: Court where the SBF trial is taking place.
+- entities/virginia: U.S. state where IronNet was based.
+- concepts/ai-startup-backing: The trend of established tech leaders investing in and supporting new AI ventures, often founded by young entrepreneurs.
+- concepts/hardware-unveiling: Corporate events where companies like Google introduce new consumer electronics and software updates.
+- concepts/corporate-turmoil: Internal conflicts and leadership changes within companies, such as the ousting of CEOs or board disputes.
+- concepts/legal-trial: High-profile court proceedings involving major financial figures and allegations of fraud or misconduct.
+- concepts/subscription-models: Business strategies where platforms offer premium, ad-free experiences for a recurring fee.
+- concepts/ai-integration: The incorporation of artificial intelligence tools into existing platforms to enhance productivity and features.
+- concepts/cybersecurity-failure: The collapse of high-profile cybersecurity startups despite significant funding and high-profile founders.
+- sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line: Helena World Chronicle, LLC has filed a class action antitrust lawsuit against Google and Alphabet in the U.S. District Court in D.C., alleging that Google's AI technologies, including Search Generative Experience (SGE) and Bard, along with older features like the Knowledge Graph
+- entities/helena-world-chronicle-llc: Arkansas-based publisher that filed the class action antitrust suit against Google.
+- entities/google-llc: Technology company accused of anticompetitive behavior and AI misuse of publisher data.
+- entities/alphabet-inc: Parent company of Google accused in the antitrust lawsuit.
+- entities/us-district-court-dc: The court where the class action lawsuit was filed.
+- entities/search-generative-experience: Google's AI search technology cited in the lawsuit for siphoning traffic.
+- entities/bard-ai: Google's AI chatbot accused of training on misappropriated publisher content.
+- entities/knowledge-graph: Google's database launched in 2012 that extracts information from publisher websites.
+- entities/featured-snippets: Google technology that algorithmically extracts answers from webpages, shifting traffic away from publishers.
+- entities/the-atlantic: Online magazine that modeled the impact of Google AI on search traffic.
+- entities/axel-springer: Publisher that licensed news to OpenAI for AI model training.
+- entities/openai: Company that licensed news from Axel Springer for AI training.
+- entities/the-wall-street-journal: Publication that reported on the impact of Google AI on publisher traffic.
+- entities/similarweb: Data source cited regarding Google's traffic share for publishers.
+- entities/news-media-alliance: Organization that provided a 2023 report on AI training data.
+- entities/washington-post: Publication that cited AI training data sources regarding news and media.
+- entities/allen-institute-for-ai: Research institution that worked with The Post on AI training data.
+- entities/epic-games: Company involved in a recent lawsuit against Google over antitrust issues.
+- entities/canadian-government: Government entity that reached an agreement with Google regarding media payments.
+- entities/meta: Company with unresolved negotiations regarding content payments in Canada.
+- entities/us-justice-department: Agency that filed a separate antitrust suit against Google.
+- entities/hausfeld: Law firm handling the class action lawsuit against Google.
+- concepts/antitrust-lawsuit: Legal action alleging violations of antitrust laws like the Sherman Act.
+- concepts/ai-content-misappropriation: The practice of using AI to extract and utilize content from publishers without consent.
+- concepts/traffic-redirection: Shifting user traffic from publisher websites to search engine interfaces.
+- concepts/digital-news-marketplace: The ecosystem where news publishers compete for attention and revenue.
+- concepts/walled-garden: A closed ecosystem where users remain within a single platform's services.
+- sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand: The second day of the Sam Bankman-Fried trial featured starkly contrasting opening statements where prosecutors painted him as a liar who stole billions for a lavish lifestyle, while his defense argued he was a good-faith startup founder who acted reasonably. The day concluded wi
+- entities/alameda-research: A crypto hedge fund owned by Sam Bankman-Fried.
+- entities/caroline-ellison: Former CEO of Alameda Research and Sam Bankman-Fried's girlfriend.
+- entities/thane-rehn: A prosecutor for the government who gave the prosecution's opening statement.
+- entities/mark-cohen: One of Sam Bankman-Fried's lawyers who gave the defense's opening statement.
+- entities/damian-williams: U.S. attorney for the Southern District of New York.
+- entities/marc-antoine-julliard: A Paris-born cocoa trader who lives in London and testified as a victim.
+- entities/adam-yedidia: A fast-talking MIT graduate and close friend of Bankman-Fried who testified with legal immunity.
+- entities/matt-huang: A former partner at Sequoia Capital and a witness scheduled to testify.
+- entities/gary-wang: A key Bankman-Fried lieutenant and one of the government's star witnesses.
+- entities/jane-street: A high-frequency trading firm where Bankman-Fried started his finance career.
+- entities/sequoia-capital: A high-powered venture capital firm where Matt Huang worked.
+- entities/brooklyn: The location of the prison where Bankman-Fried spent time.
+- entities/new-york: The location where the trial is taking place.
+- concepts/good-faith: The defense's argument that Bankman-Fried acted honestly and without intent to defraud.
+- concepts/ponzi-scheme: The prosecution's allegation that FTX was a fraudulent scheme.
+- concepts/startup-founder: The role Bankman-Fried played in building FTX and Alameda Research.
+- concepts/legal-immunity: The protection granted to Adam Yedidia for his testimony.
+- concepts/opening-statement: The formal presentation of arguments by lawyers at the start of a trial day.

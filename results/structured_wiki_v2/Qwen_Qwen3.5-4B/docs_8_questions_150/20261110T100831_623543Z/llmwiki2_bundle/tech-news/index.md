@@ -1,0 +1,5 @@
+# Notes
+
+* [Helena World Chronicle files antitrust suit against Google over AI content misappropriation](helena-world-chronicle-files-antitrust-suit-against-google.md) - Arkansas publisher Helena World Chronicle filed a class action antitrust suit against Google and Alphabet, alleging violations of the Sherman Act and Clayton Act due to Google's AI technologies siphoning publisher content, traffic, and ad revenue.
+* [Tech news: Sam Altman backs teen startup, Google unveils Pixel 8, and more industry updates](tech-news-sam-altman-backs-teen-startup-google-unveils-pixel.md) - This note covers Sam Altman's backing of the teen-founded Induced AI, Google's Pixel 8 hardware launch, Flexport's valuation and leadership changes, the SBF trial details, and various other tech industry developments including LinkedIn's AI tools and IronNet's collapse.
+* [Google Search dominance, data collection, and controversies](google-search-dominance-data-collection-and-controversies.md) - An analysis of Google's market dominance through data collection, user behavior patterns, and controversies regarding search manipulation and ad integration.

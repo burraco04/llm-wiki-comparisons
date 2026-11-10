@@ -1,0 +1,44 @@
+>>> LLM GPU GPU-585638e5-d6b7-97e1-cc87-9d5173977604: 24121/24576 MiB free, classifier GPU GPU-190ed79c-3a8f-eed8-4e94-0e8a6d7b9384: 24121/24576 MiB free
+>>> requesting LLM=0.85 and classifier=0.85 of total
+>>> waiting for Qwen/Qwen3.5-4B on port 8003 and LiquidAI/d1-3B on port 9003 ...
+>>> ready after ~150s
+{"object":"list","data":[{"id":"Qwen/Qwen3.5-4B","object":"model","created":1794305306,"owned_by":"vllm","root":"Qwen/Qwen3.5-4B","parent":null,"max_model_len":32768,"permission":[{"id":"modelperm-a0adef0feaff6271","object":"model_permission","created":1794305306,"allow_create_engine":false,"allow_sampling":true,"allow_logprobs":true,"allow_search_indices":false,"allow_view":true,"allow_fine_tuning":false,"organization":"*","group":null,"is_blocking":false}]}]}
+{"object":"list","data":[{"id":"LiquidAI/d1-3B","object":"model","created":1794305306,"owned_by":"vllm","root":"LiquidAI/d1-3B","parent":null,"max_model_len":8192,"permission":[{"id":"modelperm-b11c916c330b6436","object":"model_permission","created":1794305306,"allow_create_engine":false,"allow_sampling":true,"allow_logprobs":true,"allow_search_indices":false,"allow_view":true,"allow_fine_tuning":false,"organization":"*","group":null,"is_blocking":false}]}]}
+>>> llm_base_url = http://localhost:8003/v1   llm_model = Qwen/Qwen3.5-4B
+>>> classifier_base_url = http://localhost:9003/v1   classifier_model = LiquidAI/d1-3B
+>>> running in vllm-8003: python benchmark_llm_wiki.py --top-docs 8 --max-questions 150
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+WARNING:huggingface_hub.utils._http:Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Ingested Sam Altman backs teens’ startup, Google unveils the Pixel 8 and TikTok tests an ad-free tier: {'sources': 1, 'entities': 18, 'concepts': 7, 'kg_edges': 11, 'wiki_links': 72}
+Ingested News publisher files class action antitrust suit against Google, citing AI’s harms to their bottom line: {'sources': 2, 'entities': 38, 'concepts': 15, 'kg_edges': 25, 'wiki_links': 156}
+Ingested Is Sam Bankman-Fried a bad ‘man’ or a good ‘boy’? Lawyers swap opening statements before first witnesses take the stand: {'sources': 3, 'entities': 52, 'concepts': 20, 'kg_edges': 36, 'wiki_links': 218}
+Ingested SBF’s trial starts soon, but how did he — and FTX — get here?: {'sources': 4, 'entities': 71, 'concepts': 25, 'kg_edges': 51, 'wiki_links': 304}
+Ingested SBF, riding high on FTX, reportedly offered $5B to Trump to cancel President re-run: {'sources': 5, 'entities': 79, 'concepts': 30, 'kg_edges': 65, 'wiki_links': 364}
+Ingested Apple defends Google Search deal in court: ‘There wasn’t a valid alternative’: {'sources': 6, 'entities': 91, 'concepts': 36, 'kg_edges': 86, 'wiki_links': 446}
+Ingested 5 things we learned so far about the Google antitrust case: {'sources': 7, 'entities': 107, 'concepts': 38, 'kg_edges': 105, 'wiki_links': 536}
+Ingested Is Google Search better than the rest? And is that fair?: {'sources': 8, 'entities': 113, 'concepts': 43, 'kg_edges': 116, 'wiki_links': 594}
+Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]Loading weights: 100%|██████████| 103/103 [00:00<00:00, 2347.73it/s]
+WARNING:llmw2.agents.steps_classic:summarize: part 1 of 2: notes cut from 2243 to 1687 characters
+WARNING:llmw2.agents.steps_classic:summarize: part 2 of 2: notes cut from 2069 to 1654 characters
+WARNING:llmw2.agents.steps_classic:summarize: the note of 'Tech news: Sam Altman backs teen startup, Google unveils Pixel 8, and more industry updates' lacks 1 of 25 values of its part notes
+WARNING:llmw2.agents.steps_classic:summarize: part 1 of 2: notes cut from 1990 to 1607 characters
+WARNING:llmw2.agents.steps_classic:summarize: 'Helena World Chronicle files antitrust suit against Google over AI content misappropriation' has a body of 2808 characters, over 1.2 times the 2000 asked
+WARNING:llmw2.agents.steps_classic:summarize: part 2 of 2: notes cut from 1617 to 1367 characters
+WARNING:llmw2.agents.steps_classic:summarize: the note of 'Sam Bankman-Fried trial opening statements and witness testimony' lacks 2 of 19 values of its part notes
+WARNING:llmw2.agents.steps_classic:summarize: 'Sam Bankman-Fried trial opening statements and witness testimony' has a body of 2494 characters, over 1.2 times the 2000 asked
+WARNING:llmw2.agents.steps_classic:summarize: part 2 of 2: notes cut from 1483 to 1229 characters
+WARNING:llmw2.agents.steps_classic:summarize: the note of "SBF's trial and the rise and fall of FTX" lacks 2 of 31 values of its part notes
+WARNING:llmw2.agents.steps_classic:summarize: part 2 of 3: notes cut from 1175 to 1072 characters
+WARNING:llmw2.agents.steps_classic:summarize: part 3 of 3: notes cut from 3822 to 1206 characters
+WARNING:llmw2.agents.steps_classic:summarize: the note of "SBF's $5B offer to Trump to cancel presidential run" lacks 10 of 17 values of its part notes
+WARNING:llmw2.agents.steps_classic:summarize: part 1 of 2: notes cut from 2170 to 1876 characters
+WARNING:llmw2.agents.steps_classic:summarize: the note of "Apple defends Google Search deal in court: 'There wasn't a valid alternative'" lacks 2 of 8 values of its part notes
+WARNING:llmw2.agents.steps_classic:summarize: part 1 of 2: notes cut from 2156 to 1614 characters
+WARNING:llmw2.agents.steps_classic:summarize: the note of 'Google antitrust case: key facts and trial developments' lacks 2 of 20 values of its part notes
+WARNING:llmw2.agents.steps_classic:summarize: 'Google antitrust case: key facts and trial developments' has a body of 2846 characters, over 1.2 times the 2000 asked
+WARNING:llmw2.agents.steps_classic:summarize: part 1 of 2: notes cut from 2329 to 1861 characters
+WARNING:llmw2.agents.steps_classic:summarize: part 2 of 2: notes cut from 2049 to 1806 characters
+WARNING:llmw2.agents.steps_classic:summarize: the note of 'Google Search dominance, data collection, and controversies' lacks 3 of 15 values of its part notes
+Completed Qwen/Qwen3.5-4B: /workdir/results/structured_wiki_v2/Qwen_Qwen3.5-4B/docs_8_questions_150/20261110T100831_623543Z
+>>> done
+>>> stopping vLLM
