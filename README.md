@@ -101,10 +101,10 @@ devices on the host. An empty `squeue` result shows that the specified runs are
 not currently queued; absence from `sacct` or `scontrol` alone does not explain
 an old run's failure. Check the log timestamp and the earliest startup error.
 
-Offline launcher checks, without GPUs or Docker:
+Offline launcher checks with Python 3.8 or later, without GPUs or Docker:
 
 ~~~bash
-python -m unittest -v test_startup_scripts
+python3 -m unittest -v test_startup_scripts
 ~~~
 
 ## Saved outputs

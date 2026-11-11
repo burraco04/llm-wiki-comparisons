@@ -1,6 +1,7 @@
 """Offline regression checks for launcher failures before GPU/model startup.
 
-Run with ``python -m unittest -v test_startup_scripts``. Every external GPU,
+Compatible with Python 3.8+. Run with
+``python3 -m unittest -v test_startup_scripts``. Every external GPU,
 container, metadata and HTTP operation is replaced in a disposable directory.
 """
 from __future__ import annotations
@@ -92,15 +93,16 @@ class StartupScriptsTest(unittest.TestCase):
         scratch = ROOT / "tmp"
         scratch.mkdir(exist_ok=True)
         self.directory = tempfile.TemporaryDirectory(prefix="startup-scripts-", dir=scratch)
-        self.addCleanup(self.directory.cleanup)
         self.work = Path(self.directory.name).resolve()
         # TemporaryDirectory cleanup is restricted to this verified scratch root.
-        self.assertTrue(self.work.is_relative_to(scratch.resolve()))
+        self.assertEqual(self.work.parent, scratch.resolve())
+        self.addCleanup(self.directory.cleanup)
         mockbin = self.work / "mockbin"
         mockbin.mkdir()
         for name, source in MOCKS.items():
             target = mockbin / name
-            target.write_text(textwrap.dedent(source), encoding="utf-8", newline="\n")
+            with target.open("w", encoding="utf-8", newline="\n") as stream:
+                stream.write(textwrap.dedent(source))
             target.chmod(0o755)
         for name in ("run_with_vllm.sh", "start_vllm.sh", "capture_runtime_metadata.py"):
             shutil.copyfile(ROOT / name, self.work / name)
@@ -142,12 +144,13 @@ class StartupScriptsTest(unittest.TestCase):
     def test_original_unguarded_query_reproduces_cleanup_only_output(self) -> None:
         # Preserve the exact failure mechanism, independent of future launcher edits.
         baseline = self.work / "unguarded-baseline.sh"
-        baseline.write_text(textwrap.dedent(r"""\
+        with baseline.open("w", encoding="utf-8", newline="\n") as stream:
+            stream.write(textwrap.dedent("""\
             set -euo pipefail
             trap 'echo ">>> stopping vLLM"' EXIT
             FREE0=$(nvidia-smi -i 0 --query-gpu=memory.free --format=csv,noheader,nounits | tr -d ' ')
             echo 'unexpected: query succeeded'
-            """), encoding="utf-8", newline="\n")
+            """))
         result = self.run_bash("bash unguarded-baseline.sh", MOCK_NVIDIA_FAIL_FIELD="memory.free")
         self.assertEqual(result.returncode, 42, result.stderr)
         self.assertEqual(result.stdout.strip(), ">>> stopping vLLM")
