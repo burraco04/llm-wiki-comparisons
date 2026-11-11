@@ -39,14 +39,18 @@ MODEL="${1:?usage: $0 <hf_model> -- <command ...>}"; shift
 PORT="${PORT:-8000}"
 MEM="${GPU_MEM_UTIL:-0.85}"
 MAXLEN="${MAX_MODEL_LEN:-32768}"
-VLLM_IMAGE="${VLLM_IMAGE:-llm-wiki-benchmark:cu129}"
+VLLM_IMAGE="${VLLM_IMAGE:-llm-wiki-benchmark:structured-wiki-v3}"
 RESULTS_DIR="${RESULTS_DIR:-$PWD/results}"
 mkdir -p "$RESULTS_DIR"
 RESULTS_DIR="$(cd "$RESULTS_DIR" && pwd)"
 export RESULTS_DIR
 
-# The image is built externally from Dockerfile and must exist on the node
-# running this job (docker build -t llm-wiki-benchmark:cu129 .).
+# Check the image on the execution node before querying GPUs or starting models.
+# Keep the returned immutable ID so a retag cannot change the checked image.
+# Install cleanup only after this check: a rejected image owns no service container.
+RUN_STAGE=image_preflight
+echo ">>> verifying benchmark image $VLLM_IMAGE"
+VLLM_IMAGE="$(python3 ./verify_benchmark_image.py "$VLLM_IMAGE")"
 export VLLM_IMAGE
 
 cleanup() {

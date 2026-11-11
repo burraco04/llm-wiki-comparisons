@@ -31,6 +31,7 @@ BASH = bash_executable()
 MOCKS = {
     "nvidia-smi": r"""#!/usr/bin/env bash
 set -eu
+printf 'nvidia-smi\n' >> "$MOCK_DOCKER_LOG"
 field= gpu=
 while (( $# )); do
   case "$1" in
@@ -64,12 +65,25 @@ printf '%s\n' "${1:-}" >> "$MOCK_DOCKER_LOG"
 case "${1:-}" in
   image) printf 'sha256:offline-fixture\n' ;;
   inspect) printf 'running\n' ;;
-  run) printf 'offline-container\n' ;;
-  exec) printf 'MOCK benchmark executed\n' ;;
+  run)
+    [[ "${@: -1}" == sha256:offline-fixture ]]
+    printf 'offline-container\n' ;;
+  exec)
+    printf 'MOCK benchmark executed\n'
+    exit "${MOCK_BENCHMARK_EXIT:-0}" ;;
 esac
 """,
     "python3": r"""#!/usr/bin/env bash
 set -eu
+if [[ "$1" == *verify_benchmark_image.py ]]; then
+  printf 'image_preflight\n' >> "$MOCK_DOCKER_LOG"
+  if [[ "${MOCK_IMAGE_MISMATCH:-0}" == 1 ]]; then
+    printf 'ERROR: benchmark image is stale; rebuild it before submitting\n' >&2
+    exit 2
+  fi
+  printf 'sha256:offline-fixture\n'
+  exit 0
+fi
 if [[ "${MOCK_METADATA_FAIL:-0}" == 1 ]]; then
   printf 'MOCK host metadata capture failed\n' >&2
   exit 37
@@ -84,6 +98,12 @@ done
 """,
     "curl": "#!/usr/bin/env bash\nprintf '{\"data\":[]}\\n'\n",
     "sleep": "#!/usr/bin/env bash\nexit 0\n",
+    "sbatch": r"""#!/usr/bin/env bash
+set -eu
+printf 'sbatch\n' >> "$MOCK_DOCKER_LOG"
+[[ "$VLLM_IMAGE" == sha256:offline-fixture ]]
+printf 'MOCK job submitted\n'
+""",
 }
 
 
@@ -104,7 +124,8 @@ class StartupScriptsTest(unittest.TestCase):
             with target.open("w", encoding="utf-8", newline="\n") as stream:
                 stream.write(textwrap.dedent(source))
             target.chmod(0o755)
-        for name in ("run_with_vllm.sh", "start_vllm.sh", "capture_runtime_metadata.py"):
+        for name in ("run_both_models.sh", "run_with_vllm.sh", "start_vllm.sh",
+                     "capture_runtime_metadata.py", "verify_benchmark_image.py"):
             shutil.copyfile(ROOT / name, self.work / name)
             (self.work / name).chmod(0o755)
         self.trace = self.work / "docker-operations.txt"
@@ -172,6 +193,32 @@ class StartupScriptsTest(unittest.TestCase):
         self.assertIn("exec", self.docker_operations())
         self.assertIn("MOCK benchmark executed", result.stdout)
         self.assertIn(">>> done", result.stdout)
+        operations = self.docker_operations()
+        self.assertLess(operations.index("image_preflight"), operations.index("nvidia-smi"))
+
+    def test_stale_image_stops_before_gpu_queries_or_container_cleanup(self) -> None:
+        result = self.run_launcher(MOCK_IMAGE_MISMATCH="1")
+        self.assertEqual(result.returncode, 2, result.stdout + result.stderr)
+        self.assertIn("rebuild", result.stderr)
+        self.assertIn("phase=image_preflight", result.stderr)
+        self.assertEqual(self.docker_operations(), ["image_preflight"])
+
+    def test_stale_image_stops_before_submitting_any_jobs(self) -> None:
+        result = self.run_bash("bash run_both_models.sh", MOCK_IMAGE_MISMATCH="1")
+        self.assertEqual(result.returncode, 2, result.stdout + result.stderr)
+        self.assertEqual(self.docker_operations(), ["image_preflight"])
+
+    def test_submitter_passes_checked_image_id_to_all_four_jobs(self) -> None:
+        result = self.run_bash("bash run_both_models.sh")
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+        self.assertEqual(self.docker_operations(), ["image_preflight"] + ["sbatch"] * 4)
+
+    def test_benchmark_failure_keeps_exit_code_and_cleans_up_services(self) -> None:
+        result = self.run_launcher(MOCK_BENCHMARK_EXIT="23")
+        self.assertEqual(result.returncode, 23, result.stdout + result.stderr)
+        self.assertIn("phase=benchmark", result.stderr)
+        self.assertIn("exit=23", result.stdout)
+        self.assertEqual(self.docker_operations()[-1], "rm")
 
     def test_metadata_failure_stops_before_container_and_keeps_error(self) -> None:
         result = self.run_launcher(MOCK_METADATA_FAIL="1")

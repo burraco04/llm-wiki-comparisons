@@ -29,11 +29,26 @@ The library is third-party work; its internal algorithms are not modified.
 
 **Rebuild the image before submitting:** it contains the benchmark, adapters,
 metadata collector and prompts. Use the same rebuilt image for all four runs;
-keep it unchanged while runs are queued or executing.
+keep the source checkout unchanged while runs are queued or executing.
 
 ~~~bash
 docker build -t llm-wiki-benchmark:structured-wiki-v3 .
 VLLM_IMAGE=llm-wiki-benchmark:structured-wiki-v3 bash run_both_models.sh
+~~~
+
+All launchers default to `llm-wiki-benchmark:structured-wiki-v3`.
+Before submitting, `run_both_models.sh` checks the actual image files against
+the local benchmark, adapters, service script, metadata collector, Markdown
+prompts and requirements. This check uses a temporary container without GPUs
+or network access. A stale or missing image stops submission with a rebuild
+instruction. Each `run_with_vllm.sh` job repeats the check before starting
+services; both launchers use the checked immutable image ID. Updating a tag
+cannot silently switch an already submitted job to a different image.
+
+To check an existing image separately, without submitting a job:
+
+~~~bash
+python3 verify_benchmark_image.py llm-wiki-benchmark:structured-wiki-v3
 ~~~
 
 The launcher submits four Slurm jobs: Qwen2.5-3B-Instruct and Qwen3.5-4B, each
@@ -69,30 +84,37 @@ not peak-memory or energy measurements.
 
 ## Troubleshooting an immediate exit
 
+The November 11 logs (`exp-16419749` through `exp-16419752` and
+`exp-16420762` through `exp-16420765`) show both model services becoming ready,
+followed by `unrecognized arguments: --wiki-modes classic crow`. The image
+`llm-wiki-benchmark:cu129` contains an older benchmark parser. The Dockerfile
+copies the application into the image; only `results` is mounted from the
+host. Copying updated Python files to the server therefore does not update
+the code executed in the container. Rebuild using the command above and
+submit with that image. Removing `--wiki-modes` would still run the old
+benchmark and would not fix the version mismatch.
+
 `>>> stopping vLLM` is printed by the launcher's exit handler on both success
-and failure. It does not mean that the model services or benchmark started.
+and failure after image verification. It does not mean that the model services
+or benchmark started.
 The launcher now reports its phase and preserves the failing exit code;
 `start_vllm.sh` also identifies the failing NVIDIA query and prints its output.
 Previously, a failed `nvidia-smi` call could put its diagnostic on captured
 stdout and terminate the script under `set -e`, leaving only the exit message.
 
-`gpu_discovery` and `gpu_memory_query` failures occur before Docker or either
-model is started. Check the allocation variables and GPU visibility inside the
+`gpu_discovery` and `gpu_memory_query` failures occur before either model is
+started. Check the allocation variables and GPU visibility inside the
 same kind of allocation. This short diagnostic uses no models or containers:
 
 ~~~bash
 mkdir -p logs
-sbatch --gres=gpu:2 --cpus-per-task=1 --mem=1G --time=00:02:00 -w faretra \
-  --output=logs/gpu-diagnostic-%j.out --wrap='
-printf "CUDA_VISIBLE_DEVICES=%s\nSLURM_JOB_GPUS=%s\n" "${CUDA_VISIBLE_DEVICES:-unset}" "${SLURM_JOB_GPUS:-unset}"
-nvidia-smi -L
-nvidia-smi --query-gpu=index,uuid,name,memory.free,memory.total --format=csv
-IFS=, read -ra allocated <<< "${CUDA_VISIBLE_DEVICES:-${SLURM_JOB_GPUS:-}}"
-for gpu in "${allocated[@]}"; do
-  printf "Checking allocated GPU %s\n" "$gpu"
-  nvidia-smi -i "$gpu" --query-gpu=uuid,memory.free,memory.total --format=csv
-done'
+sbatch -w faretra gpu_diagnostic.sh
 ~~~
+
+Submit this script directly so Slurm uses its Bash shebang. The previous
+`--wrap` example was interpreted by `/bin/sh`, causing `redirection unexpected`
+on the Bash here-string in `gpu-diagnostic-16420563.out`. The diagnostic now
+checks every allocated GPU and preserves query failures in its final status.
 
 The allocation variables may need to be compared with the indices and UUIDs
 actually visible to `nvidia-smi`. A query on the login shell alone does not
@@ -104,7 +126,7 @@ an old run's failure. Check the log timestamp and the earliest startup error.
 Offline launcher checks with Python 3.8 or later, without GPUs or Docker:
 
 ~~~bash
-python3 -m unittest -v test_startup_scripts
+python3 -m unittest -v test_startup_scripts test_verify_benchmark_image test_gpu_diagnostic
 ~~~
 
 ## Saved outputs
@@ -199,7 +221,8 @@ With the benchmark dependencies installed:
 
 ~~~bash
 python -m unittest -v test_benchmark_llm_wiki test_benchmark_artifacts test_llmwiki_adapter
-bash -n run_both_models.sh run_with_vllm.sh start_vllm.sh start_vllm_services.sh
+python3 -m unittest -v test_startup_scripts test_verify_benchmark_image test_gpu_diagnostic
+for script in *.sh; do bash -n "$script" || exit; done
 ~~~
 
 Tests use deterministic model/encoder fakes and HTTP mock transports. They

@@ -17,7 +17,7 @@
 #  Set CHAT_TEMPLATE_KWARGS='{}' to keep thinking on.
 #
 #  Build the image separately from Dockerfile:
-#    docker build -t llm-wiki-benchmark:cu129 .
+#    docker build -t llm-wiki-benchmark:structured-wiki-v3 .
 #  and set VLLM_IMAGE if you tag it differently.
 #
 #  Stop:   docker rm -f vllm-8000
@@ -51,7 +51,7 @@ CLASSIFIER_MAX_NUM_SEQS="${CLASSIFIER_MAX_NUM_SEQS:-8}"
 HF_CACHE="${HF_CACHE:-$HOME/.cache/huggingface}"
 MAX_NUM_SEQS="${MAX_NUM_SEQS:-32}"
 CHAT_TEMPLATE_KWARGS="${CHAT_TEMPLATE_KWARGS:-{\"enable_thinking\": false}}"
-VLLM_IMAGE="${VLLM_IMAGE:-llm-wiki-benchmark:cu129}"
+VLLM_IMAGE="${VLLM_IMAGE:-llm-wiki-benchmark:structured-wiki-v3}"
 RESULTS_DIR="${RESULTS_DIR:-$PWD/results}"
 mkdir -p "$RESULTS_DIR"
 RESULTS_DIR="$(cd "$RESULTS_DIR" && pwd)"
