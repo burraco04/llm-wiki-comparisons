@@ -67,6 +67,46 @@ The launchers capture actual image identity, service commands, hardware
 inventory and package provenance when available. These are startup records,
 not peak-memory or energy measurements.
 
+## Troubleshooting an immediate exit
+
+`>>> stopping vLLM` is printed by the launcher's exit handler on both success
+and failure. It does not mean that the model services or benchmark started.
+The launcher now reports its phase and preserves the failing exit code;
+`start_vllm.sh` also identifies the failing NVIDIA query and prints its output.
+Previously, a failed `nvidia-smi` call could put its diagnostic on captured
+stdout and terminate the script under `set -e`, leaving only the exit message.
+
+`gpu_discovery` and `gpu_memory_query` failures occur before Docker or either
+model is started. Check the allocation variables and GPU visibility inside the
+same kind of allocation. This short diagnostic uses no models or containers:
+
+~~~bash
+mkdir -p logs
+sbatch --gres=gpu:2 --cpus-per-task=1 --mem=1G --time=00:02:00 -w faretra \
+  --output=logs/gpu-diagnostic-%j.out --wrap='
+printf "CUDA_VISIBLE_DEVICES=%s\nSLURM_JOB_GPUS=%s\n" "${CUDA_VISIBLE_DEVICES:-unset}" "${SLURM_JOB_GPUS:-unset}"
+nvidia-smi -L
+nvidia-smi --query-gpu=index,uuid,name,memory.free,memory.total --format=csv
+IFS=, read -ra allocated <<< "${CUDA_VISIBLE_DEVICES:-${SLURM_JOB_GPUS:-}}"
+for gpu in "${allocated[@]}"; do
+  printf "Checking allocated GPU %s\n" "$gpu"
+  nvidia-smi -i "$gpu" --query-gpu=uuid,memory.free,memory.total --format=csv
+done'
+~~~
+
+The allocation variables may need to be compared with the indices and UUIDs
+actually visible to `nvidia-smi`. A query on the login shell alone does not
+check that allocation. Do not replace the allocated GPU list with arbitrary
+devices on the host. An empty `squeue` result shows that the specified runs are
+not currently queued; absence from `sacct` or `scontrol` alone does not explain
+an old run's failure. Check the log timestamp and the earliest startup error.
+
+Offline launcher checks, without GPUs or Docker:
+
+~~~bash
+python -m unittest -v test_startup_scripts
+~~~
+
 ## Saved outputs
 
 Every run has a separate versioned, timestamped directory:

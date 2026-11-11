@@ -21,7 +21,14 @@
 #  The command runs in /workdir inside the application image.  The host
 #  ./results directory is mounted at /workdir/results and survives cleanup.
 # ═══════════════════════════════════════════════════════
-set -euo pipefail
+set -Eeuo pipefail
+RUN_STAGE=initialization
+report_failure() {
+  local status="$1" line="$2"
+  # Do not print BASH_COMMAND: forwarded commands may contain credentials.
+  printf 'ERROR: run_with_vllm.sh:%s phase=%s exit=%s\n' "$line" "$RUN_STAGE" "$status" >&2
+}
+trap 'report_failure "$?" "$LINENO"' ERR
 cd "${SLURM_SUBMIT_DIR:-$(dirname "$0")}"
 mkdir -p logs
 
@@ -42,7 +49,13 @@ export RESULTS_DIR
 # running this job (docker build -t llm-wiki-benchmark:cu129 .).
 export VLLM_IMAGE
 
-cleanup() { echo ">>> stopping vLLM"; docker rm -f "vllm-${PORT}" >/dev/null 2>&1 || true; }
+cleanup() {
+  local status=$?
+  trap - ERR
+  printf '>>> stopping vLLM (exit=%s; phase=%s)\n' "$status" "$RUN_STAGE"
+  docker rm -f "vllm-${PORT}" >/dev/null 2>&1 || true
+  return "$status"
+}
 trap cleanup EXIT
 trap 'exit 130' TERM INT
 
@@ -62,6 +75,8 @@ export OKF_CLASSIFIER_TIMEOUT="${OKF_CLASSIFIER_TIMEOUT:-60}"
 export BENCHMARK_RUNTIME_METADATA="${BENCHMARK_RUNTIME_METADATA:-/workdir/runtime_environment.json}"
 
 # ── 1. start vLLM ──
+RUN_STAGE=service_startup
+echo ">>> starting vLLM services: model=$MODEL port=$PORT image=$VLLM_IMAGE"
 ./start_vllm.sh "$MODEL" "$PORT" "$MEM" "$MAXLEN"
 
 # docker exec does not inherit the host environment. Forward configuration by
@@ -78,6 +93,8 @@ while IFS='=' read -r name _; do
 done < <(env)
 
 # ── 2. YOUR command (inside the vLLM container) ──
+RUN_STAGE=benchmark
 echo ">>> running in vllm-${PORT}: $*"
 docker exec "${COMMAND_ENV[@]}" -w /workdir "vllm-${PORT}" "$@"
+RUN_STAGE=complete
 echo ">>> done"

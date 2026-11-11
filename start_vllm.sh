@@ -28,7 +28,13 @@
 #  classifier container GPU 1.
 #  The API is only reachable from this machine (127.0.0.1); use an SSH tunnel from outside.
 # ═══════════════════════════════════════════════════════
-set -euo pipefail
+set -Eeuo pipefail
+STARTUP_STAGE=initialization
+report_failure() {
+  local status="$1" line="$2"
+  printf 'ERROR: start_vllm.sh:%s phase=%s exit=%s\n' "$line" "$STARTUP_STAGE" "$status" >&2
+}
+trap 'report_failure "$?" "$LINENO"' ERR
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 MODEL="${1:?usage: $0 <hf_model> [port] [gpu_mem_util] [max_model_len]}"
@@ -58,8 +64,38 @@ dump_docker_logs() {
   docker logs "$NAME" 2>&1 | tee "$DOCKER_LOG"
 }
 
+# A failed assignment exits under set -e. Capture and report both output streams
+# explicitly, because nvidia-smi can put its error on stdout, which would
+# otherwise disappear inside $(...) and leave only the parent's EXIT message.
+query_gpu() {
+  local gpu="$1" field="$2" output status
+  if output="$(nvidia-smi -i "$gpu" --query-gpu="$field" --format=csv,noheader,nounits 2>&1)"; then
+    output="${output//[[:space:]]/}"
+    case "$field" in
+      uuid)
+        if [[ "$output" != GPU-* ]]; then
+          printf 'ERROR: nvidia-smi GPU=%s query=%s returned invalid data: %s\n' "$gpu" "$field" "$output" >&2
+          return 1
+        fi ;;
+      memory.free|memory.total)
+        if [[ ! "$output" =~ ^[0-9]+$ ]]; then
+          printf 'ERROR: nvidia-smi GPU=%s query=%s returned invalid data: %s\n' "$gpu" "$field" "$output" >&2
+          return 1
+        fi ;;
+    esac
+    printf '%s\n' "$output"
+  else
+    status=$?
+    printf 'ERROR: nvidia-smi GPU=%s query=%s exit=%s\n' "$gpu" "$field" "$status" >&2
+    [[ -z "$output" ]] || printf '%s\n' "$output" >&2
+    return "$status"
+  fi
+}
+
 # ── which GPUs (Docker ignores Slurm, so pin both explicitly by UUID) ──
+STARTUP_STAGE=gpu_discovery
 GPU_LIST="${CUDA_VISIBLE_DEVICES:-${SLURM_JOB_GPUS:-}}"
+printf '>>> GPU discovery: CUDA_VISIBLE_DEVICES=%s SLURM_JOB_GPUS=%s\n' "${CUDA_VISIBLE_DEVICES:-unset}" "${SLURM_JOB_GPUS:-unset}"
 if [[ -z "$GPU_LIST" ]]; then
   echo "ERROR: Slurm did not expose two GPUs through CUDA_VISIBLE_DEVICES or SLURM_JOB_GPUS"
   exit 1
@@ -71,15 +107,17 @@ if [[ -z "${GPU0:-}" || -z "${GPU1:-}" || -n "${extra:-}" ]]; then
 fi
 for var in GPU0 GPU1; do
   gpu="${!var}"
+  gpu="${gpu//[[:space:]]/}"
   if [[ "$gpu" != GPU-* ]]; then
-    gpu=$(nvidia-smi -i "$gpu" --query-gpu=uuid --format=csv,noheader | tr -d ' ')
-    printf -v "$var" '%s' "$gpu"
+    gpu=$(query_gpu "$gpu" uuid)
   fi
+  printf -v "$var" '%s' "$gpu"
 done
-FREE0=$(nvidia-smi -i "$GPU0" --query-gpu=memory.free --format=csv,noheader,nounits | tr -d ' ')
-TOTAL0=$(nvidia-smi -i "$GPU0" --query-gpu=memory.total --format=csv,noheader,nounits | tr -d ' ')
-FREE1=$(nvidia-smi -i "$GPU1" --query-gpu=memory.free --format=csv,noheader,nounits | tr -d ' ')
-TOTAL1=$(nvidia-smi -i "$GPU1" --query-gpu=memory.total --format=csv,noheader,nounits | tr -d ' ')
+STARTUP_STAGE=gpu_memory_query
+FREE0=$(query_gpu "$GPU0" memory.free)
+TOTAL0=$(query_gpu "$GPU0" memory.total)
+FREE1=$(query_gpu "$GPU1" memory.free)
+TOTAL1=$(query_gpu "$GPU1" memory.total)
 echo ">>> LLM GPU $GPU0: ${FREE0}/${TOTAL0} MiB free, classifier GPU $GPU1: ${FREE1}/${TOTAL1} MiB free"
 echo ">>> requesting LLM=${MEM} and classifier=${CLASSIFIER_MEM} of total"
 
@@ -88,6 +126,8 @@ METADATA_DIR="$RESULTS_DIR/runtime_environment"
 mkdir -p "$METADATA_DIR"
 HOST_METADATA_NAME="${SLURM_JOB_ID:-manual}-${PORT}-$(date -u +%Y%m%dT%H%M%SZ)-host.json"
 HOST_METADATA_FILE="$METADATA_DIR/$HOST_METADATA_NAME"
+STARTUP_STAGE=host_metadata
+echo ">>> capturing host runtime metadata"
 python3 "$SCRIPT_DIR/capture_runtime_metadata.py" --phase host \
   --output "$HOST_METADATA_FILE" --gpu "$GPU0" --gpu "$GPU1"
 IMAGE_ID="$(docker image inspect -f '{{.Id}}' "$VLLM_IMAGE" 2>/dev/null || true)"
@@ -105,6 +145,8 @@ while IFS='=' read -r name _; do
 done < <(env)
 docker rm -f "$NAME" >/dev/null 2>&1 || true
 
+STARTUP_STAGE=container_start
+echo ">>> starting container $NAME from image $VLLM_IMAGE"
 docker run -d --name "$NAME" \
   --gpus "\"device=${GPU0},${GPU1}\"" \
   --ipc=host \
@@ -144,6 +186,7 @@ docker run -d --name "$NAME" \
   "$VLLM_IMAGE" >/dev/null
 
 echo ">>> waiting for $MODEL on port $PORT and $CLASSIFIER_MODEL on port $CLASSIFIER_HOST_PORT ..."
+STARTUP_STAGE=service_health
 for i in $(seq 1 60); do
   if curl -sf "http://localhost:${PORT}/health" >/dev/null 2>&1 \
     && curl -sf "http://localhost:${CLASSIFIER_HOST_PORT}/health" >/dev/null 2>&1; then
