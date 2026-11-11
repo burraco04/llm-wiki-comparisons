@@ -1,0 +1,17 @@
+>>> GPU discovery: CUDA_VISIBLE_DEVICES=0,2 SLURM_JOB_GPUS=0,2
+>>> LLM GPU GPU-48b1d974-b35b-525d-c124-667cfdaff186: 24124/24576 MiB free, classifier GPU GPU-190ed79c-3a8f-eed8-4e94-0e8a6d7b9384: 24124/24576 MiB free
+>>> requesting LLM=0.85 and classifier=0.85 of total
+>>> capturing host runtime metadata
+>>> starting container vllm-8002 from image llm-wiki-benchmark:cu129
+>>> waiting for Qwen/Qwen2.5-3B-Instruct on port 8002 and LiquidAI/d1-3B on port 9002 ...
+>>> ready after ~80s
+{"object":"list","data":[{"id":"Qwen/Qwen2.5-3B-Instruct","object":"model","created":1794436676,"owned_by":"vllm","root":"Qwen/Qwen2.5-3B-Instruct","parent":null,"max_model_len":32768,"permission":[{"id":"modelperm-96c1a289619817f8","object":"model_permission","created":1794436676,"allow_create_engine":false,"allow_sampling":true,"allow_logprobs":true,"allow_search_indices":false,"allow_view":true,"allow_fine_tuning":false,"organization":"*","group":null,"is_blocking":false}]}]}
+{"object":"list","data":[{"id":"LiquidAI/d1-3B","object":"model","created":1794436676,"owned_by":"vllm","root":"LiquidAI/d1-3B","parent":null,"max_model_len":8192,"permission":[{"id":"modelperm-a0fc9314465d0284","object":"model_permission","created":1794436676,"allow_create_engine":false,"allow_sampling":true,"allow_logprobs":true,"allow_search_indices":false,"allow_view":true,"allow_fine_tuning":false,"organization":"*","group":null,"is_blocking":false}]}]}
+>>> llm_base_url = http://localhost:8002/v1   llm_model = Qwen/Qwen2.5-3B-Instruct
+>>> classifier_base_url = http://localhost:9002/v1   classifier_model = LiquidAI/d1-3B
+>>> running in vllm-8002: python benchmark_llm_wiki.py --top-docs 8 --max-questions 150 --wiki-modes classic crow
+usage: benchmark_llm_wiki.py [-h] [--model MODEL] [--top-docs TOP_DOCS]
+                             [--max-questions MAX_QUESTIONS] [--output OUTPUT]
+                             [--prompt-dir PROMPT_DIR]
+benchmark_llm_wiki.py: error: unrecognized arguments: --wiki-modes classic crow
+>>> stopping vLLM
