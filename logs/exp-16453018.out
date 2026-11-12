@@ -1,0 +1,70 @@
+>>> verifying benchmark image sha256:3c8543c949b033d4af9ea5889aff54d8327e588b84d0eb9ed07eaa6b7061c32f
+>>> verifying benchmark image against local sources
+>>> benchmark image sources match
+>>> starting vLLM services: model=Qwen/Qwen3.5-4B port=8003 image=sha256:3c8543c949b033d4af9ea5889aff54d8327e588b84d0eb9ed07eaa6b7061c32f
+>>> GPU discovery: CUDA_VISIBLE_DEVICES=0,2 SLURM_JOB_GPUS=0,2
+>>> LLM GPU GPU-48b1d974-b35b-525d-c124-667cfdaff186: 24124/24576 MiB free, classifier GPU GPU-190ed79c-3a8f-eed8-4e94-0e8a6d7b9384: 24124/24576 MiB free
+>>> requesting LLM=0.85 and classifier=0.85 of total
+>>> capturing host runtime metadata
+>>> starting container vllm-8003 from image sha256:3c8543c949b033d4af9ea5889aff54d8327e588b84d0eb9ed07eaa6b7061c32f
+>>> waiting for Qwen/Qwen3.5-4B on port 8003 and LiquidAI/d1-3B on port 9003 ...
+>>> ready after ~140s
+{"object":"list","data":[{"id":"Qwen/Qwen3.5-4B","object":"model","created":1794462506,"owned_by":"vllm","root":"Qwen/Qwen3.5-4B","parent":null,"max_model_len":32768,"permission":[{"id":"modelperm-9c75f276ea5e354a","object":"model_permission","created":1794462506,"allow_create_engine":false,"allow_sampling":true,"allow_logprobs":true,"allow_search_indices":false,"allow_view":true,"allow_fine_tuning":false,"organization":"*","group":null,"is_blocking":false}]}]}
+{"object":"list","data":[{"id":"LiquidAI/d1-3B","object":"model","created":1794462506,"owned_by":"vllm","root":"LiquidAI/d1-3B","parent":null,"max_model_len":8192,"permission":[{"id":"modelperm-bda6f8f81ac5beb4","object":"model_permission","created":1794462506,"allow_create_engine":false,"allow_sampling":true,"allow_logprobs":true,"allow_search_indices":false,"allow_view":true,"allow_fine_tuning":false,"organization":"*","group":null,"is_blocking":false}]}]}
+>>> llm_base_url = http://localhost:8003/v1   llm_model = Qwen/Qwen3.5-4B
+>>> classifier_base_url = http://localhost:9003/v1   classifier_model = LiquidAI/d1-3B
+>>> running in vllm-8003: python benchmark_llm_wiki.py --top-docs 8 --max-questions 150 --wiki-modes classic crow
+Run directory: /workdir/results/structured_wiki_v3/Qwen_Qwen3.5-4B/docs_8_questions_150/20261112T054828_016597Z
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+WARNING:huggingface_hub.utils._http:Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Ingested Sam Altman backs teens’ startup, Google unveils the Pixel 8 and TikTok tests an ad-free tier: {'sources': 1, 'entities': 18, 'concepts': 7, 'kg_edges': 11, 'wiki_links': 72}
+Ingested News publisher files class action antitrust suit against Google, citing AI’s harms to their bottom line: {'sources': 2, 'entities': 38, 'concepts': 15, 'kg_edges': 25, 'wiki_links': 156}
+Ingested Is Sam Bankman-Fried a bad ‘man’ or a good ‘boy’? Lawyers swap opening statements before first witnesses take the stand: {'sources': 3, 'entities': 52, 'concepts': 20, 'kg_edges': 36, 'wiki_links': 218}
+Ingested SBF’s trial starts soon, but how did he — and FTX — get here?: {'sources': 4, 'entities': 71, 'concepts': 25, 'kg_edges': 51, 'wiki_links': 304}
+Ingested SBF, riding high on FTX, reportedly offered $5B to Trump to cancel President re-run: {'sources': 5, 'entities': 79, 'concepts': 30, 'kg_edges': 65, 'wiki_links': 364}
+Ingested Apple defends Google Search deal in court: ‘There wasn’t a valid alternative’: {'sources': 6, 'entities': 91, 'concepts': 36, 'kg_edges': 86, 'wiki_links': 446}
+Ingested 5 things we learned so far about the Google antitrust case: {'sources': 7, 'entities': 107, 'concepts': 38, 'kg_edges': 105, 'wiki_links': 536}
+Ingested Is Google Search better than the rest? And is that fair?: {'sources': 8, 'entities': 113, 'concepts': 43, 'kg_edges': 116, 'wiki_links': 594}
+Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]Loading weights: 100%|██████████| 103/103 [00:00<00:00, 6084.95it/s]
+WARNING:llmw2.agents.steps_classic:summarize: part 1 of 2: notes cut from 2243 to 1687 characters
+WARNING:llmw2.agents.steps_classic:summarize: part 2 of 2: notes cut from 2069 to 1654 characters
+WARNING:llmw2.agents.steps_classic:summarize: the note of 'Tech news: Sam Altman backs teen startup, Google unveils Pixel 8, and more industry updates' lacks 1 of 25 values of its part notes
+WARNING:llmw2.agents.steps_classic:summarize: part 1 of 2: notes cut from 2303 to 1409 characters
+WARNING:llmw2.agents.steps_classic:summarize: part 2 of 2: notes cut from 1550 to 1380 characters
+WARNING:llmw2.agents.steps_classic:summarize: the note of 'Helena World Chronicle files antitrust suit against Google and Alphabet' lacks 4 of 20 values of its part notes
+WARNING:llmw2.agents.steps_classic:summarize: the note of 'Sam Bankman-Fried Trial Opening Statements and Witness Testimony' lacks 5 of 13 values of its part notes
+WARNING:llmw2.agents.steps_classic:summarize: part 2 of 2: notes cut from 1473 to 1218 characters
+WARNING:llmw2.agents.steps_classic:summarize: the note of "SBF's trial and the rise and fall of FTX" lacks 3 of 28 values of its part notes
+WARNING:llmw2.agents.steps_classic:summarize: part 3 of 3: notes cut from 3724 to 1254 characters
+WARNING:llmw2.agents.steps_classic:summarize: the note of "Apple defends Google Search deal in court: 'There wasn't a valid alternative'" lacks 2 of 7 values of its part notes
+WARNING:llmw2.agents.steps_classic:summarize: part 1 of 2: notes cut from 2108 to 1805 characters
+WARNING:llmw2.agents.steps_classic:summarize: the note of 'Google antitrust case: key facts and testimony' lacks 2 of 22 values of its part notes
+WARNING:llmw2.agents.steps_classic:summarize: 'Google antitrust case: key facts and testimony' has a body of 3048 characters, over 1.2 times the 2000 asked
+WARNING:llmw2.agents.steps_classic:summarize: part 1 of 2: notes cut from 2095 to 1915 characters
+WARNING:llmw2.agents.steps_classic:summarize: part 2 of 2: notes cut from 2506 to 1808 characters
+WARNING:llmw2.agents.steps_classic:summarize: the note of 'Google Search dominance, data collection, and manipulation allegations' lacks 6 of 12 values of its part notes
+WARNING:llmw2.models.llm:llm researcher/navigate: the reply was cut at max_tokens 1715: asking again, shorter
+WARNING:llmw2.models.llm:llm researcher/navigate: the reply was cut at max_tokens 1715: asking again, shorter
+WARNING:llmw2.models.llm:llm researcher/navigate: the reply was cut at max_tokens 1715: asking again, shorter
+WARNING:llmw2.models.llm:llm researcher/navigate: the reply was cut at max_tokens 1715: asking again, shorter
+WARNING:llmw2.agents.steps_classic:summarize: part 1 of 2: notes cut from 2263 to 1703 characters
+WARNING:llmw2.agents.steps_classic:summarize: part 2 of 2: notes cut from 1891 to 1694 characters
+WARNING:llmw2.agents.steps_classic:summarize: the note of 'Tech news roundup: AI startups, Google Pixel 8, and SBF trial updates' lacks 2 of 25 values of its part notes
+WARNING:llmw2.agents.steps_classic:summarize: part 1 of 2: notes cut from 2789 to 1569 characters
+WARNING:llmw2.agents.steps_classic:summarize: part 2 of 2: notes cut from 1552 to 1386 characters
+WARNING:llmw2.agents.steps_classic:summarize: the note of 'Helena World Chronicle files antitrust suit against Google and Alphabet' lacks 6 of 24 values of its part notes
+WARNING:llmw2.agents.steps_classic:summarize: part 1 of 2: notes cut from 1502 to 1395 characters
+WARNING:llmw2.agents.steps_classic:summarize: part 2 of 2: notes cut from 1637 to 1431 characters
+WARNING:llmw2.agents.steps_classic:summarize: part 2 of 2: notes cut from 1483 to 1228 characters
+WARNING:llmw2.agents.steps_classic:summarize: the note of "SBF's trial and the rise and fall of FTX" lacks 3 of 33 values of its part notes
+WARNING:llmw2.agents.steps_classic:summarize: part 2 of 3: notes cut from 1156 to 1053 characters
+WARNING:llmw2.agents.steps_classic:summarize: part 3 of 3: notes cut from 1626 to 1295 characters
+WARNING:llmw2.agents.steps_classic:summarize: the note of "Apple defends Google Search deal in court: 'There wasn't a valid alternative'" lacks 1 of 7 values of its part notes
+WARNING:llmw2.agents.steps_classic:summarize: part 1 of 2: notes cut from 2155 to 1613 characters
+WARNING:llmw2.agents.steps_classic:summarize: part 2 of 2: notes cut from 2367 to 1872 characters
+WARNING:llmw2.agents.steps_classic:summarize: the note of 'Google Antitrust Case: Key Facts and Testimony' lacks 15 of 29 values of its part notes
+WARNING:llmw2.agents.steps_classic:summarize: part 2 of 2: notes cut from 2736 to 1894 characters
+WARNING:llmw2.agents.steps_classic:summarize: the note of 'Google Search dominance, data practices, and manipulation allegations' lacks 5 of 11 values of its part notes
+complete: /workdir/results/structured_wiki_v3/Qwen_Qwen3.5-4B/docs_8_questions_150/20261112T054828_016597Z
+>>> done
+>>> stopping vLLM (exit=0; phase=complete)

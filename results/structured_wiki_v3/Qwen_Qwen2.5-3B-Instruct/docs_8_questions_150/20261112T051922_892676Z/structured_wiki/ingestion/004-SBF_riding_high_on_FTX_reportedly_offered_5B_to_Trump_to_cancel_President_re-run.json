@@ -1,0 +1,28 @@
+{
+  "document": "SBF, riding high on FTX, reportedly offered $5B to Trump to cancel President re-run",
+  "document_id": "SBF_riding_high_on_FTX_reportedly_offered_5B_to_Trump_to_cancel_President_re-run",
+  "status": "failed",
+  "seconds_wall": 74.07146101100079,
+  "llm_calls": 2,
+  "input_tokens": 4779,
+  "output_tokens": 8192,
+  "error": {
+    "type": "ValueError",
+    "message": "Invalid JSON after two attempts during ingest_extract",
+    "step": null,
+    "status_code": null,
+    "traceback": "Traceback (most recent call last):\n  File \"/workdir/benchmark_llm_wiki.py\", line 672, in run_structured_wiki\n    record = {**wiki.ingest(llm, doc), \"document_id\": doc[\"id\"], \"status\": \"complete\"}\n                ^^^^^^^^^^^^^^^^^^^^^\n  File \"/workdir/benchmark_llm_wiki.py\", line 323, in ingest\n    data = llm.ask_json(EXTRACT.format(title=doc[\"title\"], text=doc[\"text\"]), INGEST_SCHEMA, 4096, \"ingest_extract\")\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workdir/benchmark_llm_wiki.py\", line 218, in ask_json\n    raise ValueError(f\"Invalid JSON after two attempts during {stage}\")\nValueError: Invalid JSON after two attempts during ingest_extract\n"
+  },
+  "model_call_ids": [
+    9,
+    10
+  ],
+  "wiki_stats": {
+    "sources": 4,
+    "entities": 18,
+    "concepts": 19,
+    "kg_edges": 26,
+    "wiki_links": 130
+  },
+  "source": null
+}

@@ -1,0 +1,51 @@
+>>> verifying benchmark image sha256:3c8543c949b033d4af9ea5889aff54d8327e588b84d0eb9ed07eaa6b7061c32f
+>>> verifying benchmark image against local sources
+>>> benchmark image sources match
+>>> starting vLLM services: model=Qwen/Qwen2.5-3B-Instruct port=8002 image=sha256:3c8543c949b033d4af9ea5889aff54d8327e588b84d0eb9ed07eaa6b7061c32f
+>>> GPU discovery: CUDA_VISIBLE_DEVICES=0,2 SLURM_JOB_GPUS=0,2
+>>> LLM GPU GPU-48b1d974-b35b-525d-c124-667cfdaff186: 24124/24576 MiB free, classifier GPU GPU-190ed79c-3a8f-eed8-4e94-0e8a6d7b9384: 24124/24576 MiB free
+>>> requesting LLM=0.85 and classifier=0.85 of total
+>>> capturing host runtime metadata
+>>> starting container vllm-8002 from image sha256:3c8543c949b033d4af9ea5889aff54d8327e588b84d0eb9ed07eaa6b7061c32f
+>>> waiting for Qwen/Qwen2.5-3B-Instruct on port 8002 and LiquidAI/d1-3B on port 9002 ...
+>>> ready after ~80s
+{"object":"list","data":[{"id":"Qwen/Qwen2.5-3B-Instruct","object":"model","created":1794460761,"owned_by":"vllm","root":"Qwen/Qwen2.5-3B-Instruct","parent":null,"max_model_len":32768,"permission":[{"id":"modelperm-a76cff53d6c1acff","object":"model_permission","created":1794460761,"allow_create_engine":false,"allow_sampling":true,"allow_logprobs":true,"allow_search_indices":false,"allow_view":true,"allow_fine_tuning":false,"organization":"*","group":null,"is_blocking":false}]}]}
+{"object":"list","data":[{"id":"LiquidAI/d1-3B","object":"model","created":1794460761,"owned_by":"vllm","root":"LiquidAI/d1-3B","parent":null,"max_model_len":8192,"permission":[{"id":"modelperm-853fa454ae596b77","object":"model_permission","created":1794460761,"allow_create_engine":false,"allow_sampling":true,"allow_logprobs":true,"allow_search_indices":false,"allow_view":true,"allow_fine_tuning":false,"organization":"*","group":null,"is_blocking":false}]}]}
+>>> llm_base_url = http://localhost:8002/v1   llm_model = Qwen/Qwen2.5-3B-Instruct
+>>> classifier_base_url = http://localhost:9002/v1   classifier_model = LiquidAI/d1-3B
+>>> running in vllm-8002: python benchmark_llm_wiki.py --top-docs 8 --max-questions 150 --wiki-modes classic crow
+Run directory: /workdir/results/structured_wiki_v3/Qwen_Qwen2.5-3B-Instruct/docs_8_questions_150/20261112T051922_892676Z
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+WARNING:huggingface_hub.utils._http:Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Ingested Sam Altman backs teens’ startup, Google unveils the Pixel 8 and TikTok tests an ad-free tier: {'sources': 1, 'entities': 8, 'concepts': 7, 'kg_edges': 7, 'wiki_links': 44}
+Ingested News publisher files class action antitrust suit against Google, citing AI’s harms to their bottom line: {'sources': 2, 'entities': 13, 'concepts': 11, 'kg_edges': 13, 'wiki_links': 74}
+Ingested Is Sam Bankman-Fried a bad ‘man’ or a good ‘boy’? Lawyers swap opening statements before first witnesses take the stand: {'sources': 3, 'entities': 18, 'concepts': 16, 'kg_edges': 20, 'wiki_links': 110}
+Ingested SBF’s trial starts soon, but how did he — and FTX — get here?: {'sources': 4, 'entities': 18, 'concepts': 19, 'kg_edges': 26, 'wiki_links': 130}
+Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]Loading weights: 100%|██████████| 103/103 [00:00<00:00, 7166.54it/s]
+WARNING:llmw2.agents.steps_classic:summarize: part 2 of 2: notes cut from 125835 to 1537 characters
+WARNING:llmw2.agents.steps_classic:summarize: the note of "Google's AI Practices and Their Impact on News Publishers" lacks 8 of 14 values of its part notes
+WARNING:llmw2.agents.steps_classic:summarize: part 1 of 2: notes cut from 1692 to 1107 characters
+WARNING:llmw2.agents.steps_classic:summarize: the note of 'Opening Statements and Witness Testimonies in Sam Bankman-Fried Trial' lacks 5 of 9 values of its part notes
+WARNING:llmw2.models.llm:llm librarian/summarize_combine: the reply was cut at max_tokens 2058: asking again, shorter
+WARNING:llmw2.agents.steps_classic:summarize: the note of "Sam Bankman-Fried's Rise and Fall" lacks 25 of 33 values of its part notes
+WARNING:llmw2.agents.steps_classic:summarize: the note of "Sam Bankman-Fried's Financial and Political Interactions" lacks 3 of 9 values of its part notes
+WARNING:llmw2.agents.steps_classic:merge: the incoming text would be cut from 8092 to 3491 characters: added whole to tech-news/sam-bankman-fried-s-rise-and-fall.md instead
+WARNING:llmw2.agents.steps_classic:summarize: the note of "Apple's Defense of the Google Search Deal" lacks 1 of 4 values of its part notes
+WARNING:llmw2.agents.steps_classic:summarize: the note of "Google's Attempts to Preinstall Services on iPhones" lacks 5 of 6 values of its part notes
+WARNING:llmw2.models.llm:llm librarian/summarize_combine: the reply was cut at max_tokens 2058: asking again, shorter
+WARNING:llmw2.agents.steps_classic:summarize: the note of 'Google Search Dominance and Functionality' lacks 2 of 3 values of its part notes
+WARNING:llmw2.agents.steps_classic:summarize: part 1 of 2: notes cut from 1761 to 1749 characters
+WARNING:llmw2.agents.steps_classic:summarize: the note of '...' lacks 7 of 16 values of its part notes
+WARNING:llmw2.agents.steps_classic:summarize: part 1 of 2: notes cut from 1887 to 1542 characters
+WARNING:llmw2.agents.steps_classic:summarize: part 2 of 2: notes cut from 1704 to 1524 characters
+WARNING:llmw2.agents.steps_classic:summarize: the note of "Google's AI Practices and Antitrust Suit Against News Publishers" lacks 7 of 16 values of its part notes
+WARNING:llmw2.agents.steps_classic:summarize: the note of "Sam Bankman-Fried's Character Portrayal and Defense Strategies" lacks 1 of 7 values of its part notes
+WARNING:llmw2.agents.steps_classic:summarize: part 2 of 2: notes cut from 2377 to 1195 characters
+WARNING:llmw2.agents.steps_classic:summarize: the note of "Sam Bankman-Fried and FTX's Rise and Fall" lacks 2 of 21 values of its part notes
+WARNING:llmw2.agents.steps_classic:summarize: the note of "Sam Bankman-Fried's Financial and Political Interactions" lacks 1 of 8 values of its part notes
+WARNING:llmw2.agents.steps_classic:summarize: the note of "Apple's Defense of Google Search Deal in Court" lacks 3 of 3 values of its part notes
+WARNING:llmw2.agents.steps_classic:summarize: the note of "Google's Attempts to Preinstall Services on iPhones" lacks 5 of 6 values of its part notes
+WARNING:llmw2.agents.steps_classic:summarize: the note of 'Google Search Operations and User Data Handling' lacks 2 of 3 values of its part notes
+incomplete: /workdir/results/structured_wiki_v3/Qwen_Qwen2.5-3B-Instruct/docs_8_questions_150/20261112T051922_892676Z
+ERROR: run_with_vllm.sh:102 phase=benchmark exit=2
+>>> stopping vLLM (exit=2; phase=benchmark)

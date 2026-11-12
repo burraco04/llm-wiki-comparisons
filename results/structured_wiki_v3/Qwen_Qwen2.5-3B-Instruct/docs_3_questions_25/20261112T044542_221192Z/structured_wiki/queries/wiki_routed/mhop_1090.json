@@ -1,0 +1,413 @@
+{
+  "qa_id": "mhop_1090",
+  "question": "Which company, recently discussed in TechCrunch articles for both hosting an annual hardware event to showcase new developments and being the subject of a class action antitrust lawsuit by news publishers for its alleged anticompetitive practices, is also known for its search engine and advertising services?",
+  "reference": "Google",
+  "question_type": "inference_query",
+  "evidence_titles": [
+    "Sam Altman backs teens’ startup, Google unveils the Pixel 8 and TikTok tests an ad-free tier",
+    "News publisher files class action antitrust suit against Google, citing AI’s harms to their bottom line"
+  ],
+  "system": "wiki_routed",
+  "prediction": "Google",
+  "raw_prediction": "Google",
+  "seconds_wall": 2.0366226989863208,
+  "retrieval": {
+    "routed_ids": [
+      "concepts/c001",
+      "concepts/c002",
+      "concepts/c003",
+      "concepts/c004"
+    ],
+    "terms": [
+      "techcrunch articles",
+      "annual hardware event",
+      "class action antitrust lawsuit",
+      "news publisher",
+      "google anticompetitive practices",
+      "search engine",
+      "advertising services",
+      "ai technologies",
+      "free press impact",
+      "company",
+      "recently",
+      "discussed",
+      "techcrunch",
+      "articles",
+      "hosting",
+      "annual",
+      "hardware",
+      "event",
+      "showcase",
+      "new",
+      "developments",
+      "subject",
+      "class",
+      "action",
+      "antitrust",
+      "lawsuit",
+      "news",
+      "publishers",
+      "alleged",
+      "anticompetitive",
+      "practices",
+      "known",
+      "search",
+      "engine",
+      "advertising",
+      "services",
+      "company recently",
+      "recently discussed",
+      "annual hardware",
+      "hardware event",
+      "showcase new",
+      "new developments",
+      "class action",
+      "action antitrust",
+      "antitrust lawsuit",
+      "news publishers",
+      "alleged anticompetitive",
+      "anticompetitive practices"
+    ],
+    "routing_fallback": false,
+    "timing": {
+      "routing_llm": 0.9573560749995522,
+      "search_terms_llm": 0.5686820900009479,
+      "retrieval_code": 0.25898630199662875,
+      "answer_llm": 0.25157738200505264
+    },
+    "candidates": 49,
+    "selected": 23,
+    "chars": 10021,
+    "matched_pages": [
+      "sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line",
+      "concepts/c001",
+      "entities/g001",
+      "entities/h001",
+      "concepts/c002",
+      "concepts/c003",
+      "concepts/c004",
+      "sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier"
+    ],
+    "kg_triples": 6,
+    "graph_relations": [
+      {
+        "source": "g001",
+        "target": "c001",
+        "relation": "filed lawsuit against",
+        "source_doc": "sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line",
+        "context_line": "google [filed lawsuit against] antitrust lawsuit (from sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line)"
+      },
+      {
+        "source": "g001",
+        "target": "c002",
+        "relation": "alleges content misappropriation",
+        "source_doc": "sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line",
+        "context_line": "google [alleges content misappropriation] content misappropriation (from sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line)"
+      },
+      {
+        "source": "g001",
+        "target": "c003",
+        "relation": "targets AI technologies",
+        "source_doc": "sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line",
+        "context_line": "google [targets AI technologies] artificial intelligence (from sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line)"
+      },
+      {
+        "source": "h001",
+        "target": "c001",
+        "relation": "files class action lawsuit",
+        "source_doc": "sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line",
+        "context_line": "helena world chronicle [files class action lawsuit] antitrust lawsuit (from sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line)"
+      },
+      {
+        "source": "h001",
+        "target": "c002",
+        "relation": "argues about content misappropriation",
+        "source_doc": "sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line",
+        "context_line": "helena world chronicle [argues about content misappropriation] content misappropriation (from sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line)"
+      },
+      {
+        "source": "h001",
+        "target": "c003",
+        "relation": "specifically targets AI technologies",
+        "source_doc": "sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line",
+        "context_line": "helena world chronicle [specifically targets AI technologies] artificial intelligence (from sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line)"
+      }
+    ],
+    "selected_passages": [
+      {
+        "title": "raw:sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line",
+        "page_id": "sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line",
+        "text": "A new class action lawsuit filed this week in the U.S. District Court in D.C. accuses Google and parent company Alphabet of anticompetitive behavior in violation of U.S. antitrust law, the Sherman Act, and others, on behalf of news publishers. The case, filed by Arkansas-based publisher Helena World Chronicle, argues that Google “siphons off” news publishers’ content, their readers and ad revenue through anticompetitive means. It also specifically cites new AI technologies like Google’s Search Generative Experience (SGE) and Bard AI chatbot as worsening the problem.",
+        "branch": "other_raw",
+        "item_id": "raw:sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line:0",
+        "matched_terms": 17,
+        "direct_matches": 14,
+        "context_block": "[raw:sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]\nA new class action lawsuit filed this week in the U.S. District Court in D.C. accuses Google and parent company Alphabet of anticompetitive behavior in violation of U.S. antitrust law, the Sherman Act, and others, on behalf of news publishers. The case, filed by Arkansas-based publisher Helena World Chronicle, argues that Google “siphons off” news publishers’ content, their readers and ad revenue through anticompetitive means. It also specifically cites new AI technologies like Google’s Search Generative Experience (SGE) and Bard AI chatbot as worsening the problem.",
+        "truncated": false
+      },
+      {
+        "title": "sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line",
+        "page_id": "sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line",
+        "text": "A class action lawsuit has been filed by the Helena World Chronicle against Google and Alphabet, alleging anticompetitive practices and the negative impact of AI technologies on news publishers' revenues and content distribution.",
+        "branch": "other_wiki",
+        "item_id": "wiki:sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line:0",
+        "matched_terms": 16,
+        "direct_matches": 13,
+        "context_block": "[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]\nA class action lawsuit has been filed by the Helena World Chronicle against Google and Alphabet, alleging anticompetitive practices and the negative impact of AI technologies on news publishers' revenues and content distribution.",
+        "truncated": false
+      },
+      {
+        "title": "concepts/c001",
+        "page_id": "concepts/c001",
+        "text": "- From [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]]: Legal action against Google and Alphabet for alleged anticompetitive practices",
+        "branch": "routed_wiki",
+        "item_id": "wiki:concepts/c001:1",
+        "matched_terms": 16,
+        "direct_matches": 10,
+        "context_block": "[concepts/c001]\n- From [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]]: Legal action against Google and Alphabet for alleged anticompetitive practices",
+        "truncated": false
+      },
+      {
+        "title": "entities/g001",
+        "page_id": "entities/g001",
+        "text": "- From [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]]: Search engine and technology company",
+        "branch": "other_wiki",
+        "item_id": "wiki:entities/g001:1",
+        "matched_terms": 15,
+        "direct_matches": 9,
+        "context_block": "[entities/g001]\n- From [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]]: Search engine and technology company",
+        "truncated": false
+      },
+      {
+        "title": "entities/g001",
+        "page_id": "entities/g001",
+        "text": "- google [filed lawsuit against] antitrust lawsuit (from [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]])\n- google [alleges content misappropriation] content misappropriation (from [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]])\n- google [targets AI technologies] artificial intelligence (from [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]])",
+        "branch": "other_wiki",
+        "item_id": "wiki:entities/g001:2",
+        "matched_terms": 15,
+        "direct_matches": 8,
+        "context_block": "[entities/g001]\n- google [filed lawsuit against] antitrust lawsuit (from [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]])\n- google [alleges content misappropriation] content misappropriation (from [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]])\n- google [targets AI technologies] artificial intelligence (from [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]])",
+        "truncated": false
+      },
+      {
+        "title": "entities/h001",
+        "page_id": "entities/h001",
+        "text": "- helena world chronicle [files class action lawsuit] antitrust lawsuit (from [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]])\n- helena world chronicle [argues about content misappropriation] content misappropriation (from [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]])\n- helena world chronicle [specifically targets AI technologies] artificial intelligence (from [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]])",
+        "branch": "other_wiki",
+        "item_id": "wiki:entities/h001:2",
+        "matched_terms": 14,
+        "direct_matches": 9,
+        "context_block": "[entities/h001]\n- helena world chronicle [files class action lawsuit] antitrust lawsuit (from [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]])\n- helena world chronicle [argues about content misappropriation] content misappropriation (from [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]])\n- helena world chronicle [specifically targets AI technologies] artificial intelligence (from [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]])",
+        "truncated": false
+      },
+      {
+        "title": "concepts/c001",
+        "page_id": "concepts/c001",
+        "text": "- google [filed lawsuit against] antitrust lawsuit (from [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]])\n- helena world chronicle [files class action lawsuit] antitrust lawsuit (from [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]])",
+        "branch": "routed_wiki",
+        "item_id": "wiki:concepts/c001:2",
+        "matched_terms": 13,
+        "direct_matches": 8,
+        "context_block": "[concepts/c001]\n- google [filed lawsuit against] antitrust lawsuit (from [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]])\n- helena world chronicle [files class action lawsuit] antitrust lawsuit (from [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]])",
+        "truncated": false
+      },
+      {
+        "title": "concepts/c002",
+        "page_id": "concepts/c002",
+        "text": "- Existing: Google allegedly using publishers' content without permission | [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]]: Google's AI-powered search technology (SGE) and Google's AI chatbot (Bard AI) allegedly using publishers' content without permission",
+        "branch": "routed_wiki",
+        "item_id": "wiki:concepts/c002:3",
+        "matched_terms": 13,
+        "direct_matches": 8,
+        "context_block": "[concepts/c002]\n- Existing: Google allegedly using publishers' content without permission | [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]]: Google's AI-powered search technology (SGE) and Google's AI chatbot (Bard AI) allegedly using publishers' content without permission",
+        "truncated": false
+      },
+      {
+        "title": "sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line",
+        "page_id": "sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line",
+        "text": "- Helena World Chronicle files a class action lawsuit against Google and Alphabet\n- Claims Google siphons off news publishers' content, readers, and ad revenue\n- Specifically targets AI technologies like SGE and Bard AI\n- Argues these technologies worsen the problem of content misappropriation\n- Requests an injunction to prevent Google from using publishers' content for AI training",
+        "branch": "other_wiki",
+        "item_id": "wiki:sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line:1",
+        "matched_terms": 11,
+        "direct_matches": 11,
+        "context_block": "[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]\n- Helena World Chronicle files a class action lawsuit against Google and Alphabet\n- Claims Google siphons off news publishers' content, readers, and ad revenue\n- Specifically targets AI technologies like SGE and Bard AI\n- Argues these technologies worsen the problem of content misappropriation\n- Requests an injunction to prevent Google from using publishers' content for AI training",
+        "truncated": false
+      },
+      {
+        "title": "concepts/c002",
+        "page_id": "concepts/c002",
+        "text": "- From [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]]: Google allegedly using publishers' content without permission",
+        "branch": "routed_wiki",
+        "item_id": "wiki:concepts/c002:1",
+        "matched_terms": 11,
+        "direct_matches": 7,
+        "context_block": "[concepts/c002]\n- From [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]]: Google allegedly using publishers' content without permission",
+        "truncated": false
+      },
+      {
+        "title": "concepts/c003",
+        "page_id": "concepts/c003",
+        "text": "- From [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]]: Technologies like SGE and Bard AI impacting publishers' businesses",
+        "branch": "routed_wiki",
+        "item_id": "wiki:concepts/c003:1",
+        "matched_terms": 11,
+        "direct_matches": 6,
+        "context_block": "[concepts/c003]\n- From [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]]: Technologies like SGE and Bard AI impacting publishers' businesses",
+        "truncated": false
+      },
+      {
+        "title": "concepts/c003",
+        "page_id": "concepts/c003",
+        "text": "- google [targets AI technologies] artificial intelligence (from [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]])\n- helena world chronicle [specifically targets AI technologies] artificial intelligence (from [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]])",
+        "branch": "routed_wiki",
+        "item_id": "wiki:concepts/c003:2",
+        "matched_terms": 11,
+        "direct_matches": 6,
+        "context_block": "[concepts/c003]\n- google [targets AI technologies] artificial intelligence (from [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]])\n- helena world chronicle [specifically targets AI technologies] artificial intelligence (from [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]])",
+        "truncated": false
+      },
+      {
+        "title": "concepts/c003",
+        "page_id": "concepts/c003",
+        "text": "- Existing: Artificial Intelligence (AI) impacting publishers' businesses | [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]]: Artificial Intelligence (AI) technologies like SGE and Bard AI impacting publishers' businesses",
+        "branch": "routed_wiki",
+        "item_id": "wiki:concepts/c003:3",
+        "matched_terms": 11,
+        "direct_matches": 6,
+        "context_block": "[concepts/c003]\n- Existing: Artificial Intelligence (AI) impacting publishers' businesses | [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]]: Artificial Intelligence (AI) technologies like SGE and Bard AI impacting publishers' businesses",
+        "truncated": false
+      },
+      {
+        "title": "concepts/c002",
+        "page_id": "concepts/c002",
+        "text": "- google [alleges content misappropriation] content misappropriation (from [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]])\n- helena world chronicle [argues about content misappropriation] content misappropriation (from [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]])",
+        "branch": "routed_wiki",
+        "item_id": "wiki:concepts/c002:2",
+        "matched_terms": 11,
+        "direct_matches": 5,
+        "context_block": "[concepts/c002]\n- google [alleges content misappropriation] content misappropriation (from [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]])\n- helena world chronicle [argues about content misappropriation] content misappropriation (from [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]])",
+        "truncated": false
+      },
+      {
+        "title": "concepts/c004",
+        "page_id": "concepts/c004",
+        "text": "- From [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]]: Impact on the free press and democratic society",
+        "branch": "routed_wiki",
+        "item_id": "wiki:concepts/c004:1",
+        "matched_terms": 11,
+        "direct_matches": 5,
+        "context_block": "[concepts/c004]\n- From [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]]: Impact on the free press and democratic society",
+        "truncated": false
+      },
+      {
+        "title": "entities/h001",
+        "page_id": "entities/h001",
+        "text": "- From [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]]: Arkansas-based publisher suing Google and Alphabet",
+        "branch": "other_wiki",
+        "item_id": "wiki:entities/h001:1",
+        "matched_terms": 10,
+        "direct_matches": 5,
+        "context_block": "[entities/h001]\n- From [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]]: Arkansas-based publisher suing Google and Alphabet",
+        "truncated": false
+      },
+      {
+        "title": "raw:sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier",
+        "page_id": "sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier",
+        "text": "Google unveils new hardware: This week was Google’s annual hardware event, where the search and consumer tech giant showed off what it’s been working on. Christine wrote up a thorough roundup of the news, which included updates on the Pixel 8 and Pixel 8 Pro, Pixel Fold, Android 14, Pixel Buds, Google Assistant, Bard, Pixel Watch 2 and other goodies.",
+        "branch": "other_raw",
+        "item_id": "raw:sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier:4",
+        "matched_terms": 9,
+        "direct_matches": 9,
+        "context_block": "[raw:sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]\nGoogle unveils new hardware: This week was Google’s annual hardware event, where the search and consumer tech giant showed off what it’s been working on. Christine wrote up a thorough roundup of the news, which included updates on the Pixel 8 and Pixel 8 Pro, Pixel Fold, Android 14, Pixel Buds, Google Assistant, Bard, Pixel Watch 2 and other goodies.",
+        "truncated": false
+      },
+      {
+        "title": "raw:sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line",
+        "page_id": "sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line",
+        "text": "The lawsuit reiterates this concern, claiming that Google’s recent advances in AI-based search were implemented with “the goal of discouraging end-users from visiting the websites of Class members who are part of the digital news and publishing line of commerce.”",
+        "branch": "other_raw",
+        "item_id": "raw:sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line:8",
+        "matched_terms": 9,
+        "direct_matches": 5,
+        "context_block": "[raw:sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]\nThe lawsuit reiterates this concern, claiming that Google’s recent advances in AI-based search were implemented with “the goal of discouraging end-users from visiting the websites of Class members who are part of the digital news and publishing line of commerce.”",
+        "truncated": false
+      },
+      {
+        "title": "sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line",
+        "page_id": "sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line",
+        "text": "- Google receives approximately 40% of publishers' traffic\n- 75% of queries answered by AI do not require clicking to publishers' websites\n- Google's Knowledge Graph database includes 500 billion facts about 5 billion entities\n- News publishers expect to lose between 20-40% of their traffic when AI products fully roll out\n- Google paid $73.5 million annually to Canadian news organizations under a recent agreement\n- Meta began blocking news in Canada in August due to the need to pay for content under new Canadian laws\n- Google's AdSense rates may change due to AI advancements\n- Google destroyed chat messages related to the lawsuit, raising concerns about improper spoliation of evidence",
+        "branch": "other_wiki",
+        "item_id": "wiki:sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line:2",
+        "matched_terms": 8,
+        "direct_matches": 7,
+        "context_block": "[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]\n- Google receives approximately 40% of publishers' traffic\n- 75% of queries answered by AI do not require clicking to publishers' websites\n- Google's Knowledge Graph database includes 500 billion facts about 5 billion entities\n- News publishers expect to lose between 20-40% of their traffic when AI products fully roll out\n- Google paid $73.5 million annually to Canadian news organizations under a recent agreement\n- Meta began blocking news in Canada in August due to the need to pay for content under new Canadian laws\n- Google's AdSense rates may change due to AI advancements\n- Google destroyed chat messages related to the lawsuit, raising concerns about improper spoliation of evidence",
+        "truncated": false
+      },
+      {
+        "title": "concepts/c001",
+        "page_id": "concepts/c001",
+        "text": "Legal action against Google and Alphabet for alleged anticompetitive practices",
+        "branch": "routed_wiki",
+        "item_id": "wiki:concepts/c001:0",
+        "matched_terms": 7,
+        "direct_matches": 6,
+        "context_block": "[concepts/c001]\nLegal action against Google and Alphabet for alleged anticompetitive practices",
+        "truncated": false
+      },
+      {
+        "title": "raw:sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line",
+        "page_id": "sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line",
+        "text": "The case also arrives alongside the filing of the U.S. Justice Department’s lawsuit against Google for monopolizing digital ad technologies, and references the 2020 Justice Department’s civil antitrust suit over search and search advertising (which are different markets from digital ad technologies in the more recent suit).",
+        "branch": "other_raw",
+        "item_id": "raw:sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line:14",
+        "matched_terms": 6,
+        "direct_matches": 4,
+        "context_block": "[raw:sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]\nThe case also arrives alongside the filing of the U.S. Justice Department’s lawsuit against Google for monopolizing digital ad technologies, and references the 2020 Justice Department’s civil antitrust suit over search and search advertising (which are different markets from digital ad technologies in the more recent suit).",
+        "truncated": false
+      },
+      {
+        "title": "raw:sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line",
+        "page_id": "sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line",
+        "text": "A Google spokesperson offered a statement on the lawsuit, saying “This lawsuit is meritless. People have many ways to access information and news content today – through publishers’ websites, dedicated apps, social media platforms, print papers and more. Google links people to publishers’ websites more than 24 billion times each month – at no cost to them.”",
+        "branch": "other_raw",
+        "item_id": "raw:sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line:17",
+        "matched_terms": 6,
+        "direct_matches": 4,
+        "context_block": "[raw:sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]\nA Google spokesperson offered a statement on the lawsuit, saying “This lawsuit is meritless. People have many ways to access information and news content today – through publishers’ websites, dedicated apps, social media platforms, print papers and more. Google links people to publishers’ websites more than 24 billion times each month – at no cost to them.”",
+        "truncated": false
+      },
+      {
+        "title": "raw:sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line",
+        "page_id": "sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line",
+        "text": "“Plaintiff Helena World Chronicle, LLC invokes the Sherman Act and Clayton Act to seek class-wide monetary and injunctive relief to restore and ensure competition for digital news and reference publishing and set up guardrails to preserve a free marketplace of ideas in the new era of artificial intelligence,” it states.",
+        "branch": "other_raw",
+        "item_id": "raw:sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line:16",
+        "matched_terms": 6,
+        "direct_matches": 3,
+        "context_block": "[raw:sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]\n“Plaintiff Helena World Chronicle, LLC invokes the Sherman Act and Clayton Act to seek class-wide monetary and injunctive relief to restore and ensure competition for digital news and reference publishing and set up guardrails to preserve a free marketplace of ideas in the new era of artificial intelligence,” it states.",
+        "truncated": false
+      }
+    ],
+    "branches": {
+      "other_raw": 6,
+      "other_wiki": 7,
+      "routed_wiki": 10
+    }
+  },
+  "error": null,
+  "context": "[raw:sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]\nA new class action lawsuit filed this week in the U.S. District Court in D.C. accuses Google and parent company Alphabet of anticompetitive behavior in violation of U.S. antitrust law, the Sherman Act, and others, on behalf of news publishers. The case, filed by Arkansas-based publisher Helena World Chronicle, argues that Google “siphons off” news publishers’ content, their readers and ad revenue through anticompetitive means. It also specifically cites new AI technologies like Google’s Search Generative Experience (SGE) and Bard AI chatbot as worsening the problem.\n\n[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]\nA class action lawsuit has been filed by the Helena World Chronicle against Google and Alphabet, alleging anticompetitive practices and the negative impact of AI technologies on news publishers' revenues and content distribution.\n\n[concepts/c001]\n- From [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]]: Legal action against Google and Alphabet for alleged anticompetitive practices\n\n[entities/g001]\n- From [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]]: Search engine and technology company\n\n[entities/g001]\n- google [filed lawsuit against] antitrust lawsuit (from [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]])\n- google [alleges content misappropriation] content misappropriation (from [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]])\n- google [targets AI technologies] artificial intelligence (from [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]])\n\n[entities/h001]\n- helena world chronicle [files class action lawsuit] antitrust lawsuit (from [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]])\n- helena world chronicle [argues about content misappropriation] content misappropriation (from [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]])\n- helena world chronicle [specifically targets AI technologies] artificial intelligence (from [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]])\n\n[concepts/c001]\n- google [filed lawsuit against] antitrust lawsuit (from [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]])\n- helena world chronicle [files class action lawsuit] antitrust lawsuit (from [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]])\n\n[concepts/c002]\n- Existing: Google allegedly using publishers' content without permission | [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]]: Google's AI-powered search technology (SGE) and Google's AI chatbot (Bard AI) allegedly using publishers' content without permission\n\n[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]\n- Helena World Chronicle files a class action lawsuit against Google and Alphabet\n- Claims Google siphons off news publishers' content, readers, and ad revenue\n- Specifically targets AI technologies like SGE and Bard AI\n- Argues these technologies worsen the problem of content misappropriation\n- Requests an injunction to prevent Google from using publishers' content for AI training\n\n[concepts/c002]\n- From [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]]: Google allegedly using publishers' content without permission\n\n[concepts/c003]\n- From [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]]: Technologies like SGE and Bard AI impacting publishers' businesses\n\n[concepts/c003]\n- google [targets AI technologies] artificial intelligence (from [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]])\n- helena world chronicle [specifically targets AI technologies] artificial intelligence (from [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]])\n\n[concepts/c003]\n- Existing: Artificial Intelligence (AI) impacting publishers' businesses | [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]]: Artificial Intelligence (AI) technologies like SGE and Bard AI impacting publishers' businesses\n\n[concepts/c002]\n- google [alleges content misappropriation] content misappropriation (from [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]])\n- helena world chronicle [argues about content misappropriation] content misappropriation (from [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]])\n\n[concepts/c004]\n- From [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]]: Impact on the free press and democratic society\n\n[entities/h001]\n- From [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]]: Arkansas-based publisher suing Google and Alphabet\n\n[raw:sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]\nGoogle unveils new hardware: This week was Google’s annual hardware event, where the search and consumer tech giant showed off what it’s been working on. Christine wrote up a thorough roundup of the news, which included updates on the Pixel 8 and Pixel 8 Pro, Pixel Fold, Android 14, Pixel Buds, Google Assistant, Bard, Pixel Watch 2 and other goodies.\n\n[raw:sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]\nThe lawsuit reiterates this concern, claiming that Google’s recent advances in AI-based search were implemented with “the goal of discouraging end-users from visiting the websites of Class members who are part of the digital news and publishing line of commerce.”\n\n[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]\n- Google receives approximately 40% of publishers' traffic\n- 75% of queries answered by AI do not require clicking to publishers' websites\n- Google's Knowledge Graph database includes 500 billion facts about 5 billion entities\n- News publishers expect to lose between 20-40% of their traffic when AI products fully roll out\n- Google paid $73.5 million annually to Canadian news organizations under a recent agreement\n- Meta began blocking news in Canada in August due to the need to pay for content under new Canadian laws\n- Google's AdSense rates may change due to AI advancements\n- Google destroyed chat messages related to the lawsuit, raising concerns about improper spoliation of evidence\n\n[concepts/c001]\nLegal action against Google and Alphabet for alleged anticompetitive practices\n\n[raw:sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]\nThe case also arrives alongside the filing of the U.S. Justice Department’s lawsuit against Google for monopolizing digital ad technologies, and references the 2020 Justice Department’s civil antitrust suit over search and search advertising (which are different markets from digital ad technologies in the more recent suit).\n\n[raw:sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]\nA Google spokesperson offered a statement on the lawsuit, saying “This lawsuit is meritless. People have many ways to access information and news content today – through publishers’ websites, dedicated apps, social media platforms, print papers and more. Google links people to publishers’ websites more than 24 billion times each month – at no cost to them.”\n\n[raw:sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]\n“Plaintiff Helena World Chronicle, LLC invokes the Sherman Act and Clayton Act to seek class-wide monetary and injunctive relief to restore and ensure competition for digital news and reference publishing and set up guardrails to preserve a free marketplace of ideas in the new era of artificial intelligence,” it states.\n\n[Knowledge graph]\ngoogle [filed lawsuit against] antitrust lawsuit (from sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line)\ngoogle [alleges content misappropriation] content misappropriation (from sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line)\ngoogle [targets AI technologies] artificial intelligence (from sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line)\nhelena world chronicle [files class action lawsuit] antitrust lawsuit (from sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line)\nhelena world chronicle [argues about content misappropriation] content misappropriation (from sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line)\nhelena world chronicle [specifically targets AI technologies] artificial intelligence (from sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line)",
+  "answer_prompt": "Answer using only the context. Give a short direct answer (entity, name, number, date, phrase, Yes/No), or unanswerable. Output only the answer.\n\nContext:\n[raw:sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]\nA new class action lawsuit filed this week in the U.S. District Court in D.C. accuses Google and parent company Alphabet of anticompetitive behavior in violation of U.S. antitrust law, the Sherman Act, and others, on behalf of news publishers. The case, filed by Arkansas-based publisher Helena World Chronicle, argues that Google “siphons off” news publishers’ content, their readers and ad revenue through anticompetitive means. It also specifically cites new AI technologies like Google’s Search Generative Experience (SGE) and Bard AI chatbot as worsening the problem.\n\n[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]\nA class action lawsuit has been filed by the Helena World Chronicle against Google and Alphabet, alleging anticompetitive practices and the negative impact of AI technologies on news publishers' revenues and content distribution.\n\n[concepts/c001]\n- From [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]]: Legal action against Google and Alphabet for alleged anticompetitive practices\n\n[entities/g001]\n- From [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]]: Search engine and technology company\n\n[entities/g001]\n- google [filed lawsuit against] antitrust lawsuit (from [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]])\n- google [alleges content misappropriation] content misappropriation (from [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]])\n- google [targets AI technologies] artificial intelligence (from [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]])\n\n[entities/h001]\n- helena world chronicle [files class action lawsuit] antitrust lawsuit (from [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]])\n- helena world chronicle [argues about content misappropriation] content misappropriation (from [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]])\n- helena world chronicle [specifically targets AI technologies] artificial intelligence (from [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]])\n\n[concepts/c001]\n- google [filed lawsuit against] antitrust lawsuit (from [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]])\n- helena world chronicle [files class action lawsuit] antitrust lawsuit (from [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]])\n\n[concepts/c002]\n- Existing: Google allegedly using publishers' content without permission | [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]]: Google's AI-powered search technology (SGE) and Google's AI chatbot (Bard AI) allegedly using publishers' content without permission\n\n[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]\n- Helena World Chronicle files a class action lawsuit against Google and Alphabet\n- Claims Google siphons off news publishers' content, readers, and ad revenue\n- Specifically targets AI technologies like SGE and Bard AI\n- Argues these technologies worsen the problem of content misappropriation\n- Requests an injunction to prevent Google from using publishers' content for AI training\n\n[concepts/c002]\n- From [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]]: Google allegedly using publishers' content without permission\n\n[concepts/c003]\n- From [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]]: Technologies like SGE and Bard AI impacting publishers' businesses\n\n[concepts/c003]\n- google [targets AI technologies] artificial intelligence (from [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]])\n- helena world chronicle [specifically targets AI technologies] artificial intelligence (from [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]])\n\n[concepts/c003]\n- Existing: Artificial Intelligence (AI) impacting publishers' businesses | [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]]: Artificial Intelligence (AI) technologies like SGE and Bard AI impacting publishers' businesses\n\n[concepts/c002]\n- google [alleges content misappropriation] content misappropriation (from [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]])\n- helena world chronicle [argues about content misappropriation] content misappropriation (from [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]])\n\n[concepts/c004]\n- From [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]]: Impact on the free press and democratic society\n\n[entities/h001]\n- From [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]]: Arkansas-based publisher suing Google and Alphabet\n\n[raw:sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]\nGoogle unveils new hardware: This week was Google’s annual hardware event, where the search and consumer tech giant showed off what it’s been working on. Christine wrote up a thorough roundup of the news, which included updates on the Pixel 8 and Pixel 8 Pro, Pixel Fold, Android 14, Pixel Buds, Google Assistant, Bard, Pixel Watch 2 and other goodies.\n\n[raw:sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]\nThe lawsuit reiterates this concern, claiming that Google’s recent advances in AI-based search were implemented with “the goal of discouraging end-users from visiting the websites of Class members who are part of the digital news and publishing line of commerce.”\n\n[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]\n- Google receives approximately 40% of publishers' traffic\n- 75% of queries answered by AI do not require clicking to publishers' websites\n- Google's Knowledge Graph database includes 500 billion facts about 5 billion entities\n- News publishers expect to lose between 20-40% of their traffic when AI products fully roll out\n- Google paid $73.5 million annually to Canadian news organizations under a recent agreement\n- Meta began blocking news in Canada in August due to the need to pay for content under new Canadian laws\n- Google's AdSense rates may change due to AI advancements\n- Google destroyed chat messages related to the lawsuit, raising concerns about improper spoliation of evidence\n\n[concepts/c001]\nLegal action against Google and Alphabet for alleged anticompetitive practices\n\n[raw:sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]\nThe case also arrives alongside the filing of the U.S. Justice Department’s lawsuit against Google for monopolizing digital ad technologies, and references the 2020 Justice Department’s civil antitrust suit over search and search advertising (which are different markets from digital ad technologies in the more recent suit).\n\n[raw:sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]\nA Google spokesperson offered a statement on the lawsuit, saying “This lawsuit is meritless. People have many ways to access information and news content today – through publishers’ websites, dedicated apps, social media platforms, print papers and more. Google links people to publishers’ websites more than 24 billion times each month – at no cost to them.”\n\n[raw:sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]\n“Plaintiff Helena World Chronicle, LLC invokes the Sherman Act and Clayton Act to seek class-wide monetary and injunctive relief to restore and ensure competition for digital news and reference publishing and set up guardrails to preserve a free marketplace of ideas in the new era of artificial intelligence,” it states.\n\n[Knowledge graph]\ngoogle [filed lawsuit against] antitrust lawsuit (from sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line)\ngoogle [alleges content misappropriation] content misappropriation (from sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line)\ngoogle [targets AI technologies] artificial intelligence (from sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line)\nhelena world chronicle [files class action lawsuit] antitrust lawsuit (from sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line)\nhelena world chronicle [argues about content misappropriation] content misappropriation (from sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line)\nhelena world chronicle [specifically targets AI technologies] artificial intelligence (from sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line)\n\nQuestion: Which company, recently discussed in TechCrunch articles for both hosting an annual hardware event to showcase new developments and being the subject of a class action antitrust lawsuit by news publishers for its alleged anticompetitive practices, is also known for its search engine and advertising services?\nAnswer:",
+  "model_call_ids": [
+    71,
+    72,
+    73
+  ],
+  "request_attempts": 3,
+  "failed_requests": 0,
+  "llm_calls": 3,
+  "input_tokens": 4777,
+  "output_tokens": 145,
+  "em": 1.0,
+  "token_f1": 1.0,
+  "rouge_l": 1.0
+}

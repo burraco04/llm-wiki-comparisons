@@ -1,0 +1,166 @@
+# Wiki index
+
+- sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier: This TechCrunch Week in Review highlights major tech developments including Sam Altman's support for a teen-founded AI startup, Google's hardware event showcasing the Pixel 8 series, and TikTok's experimental ad-free subscription. The digest also covers significant corporate turm
+- entities/sam-altman: Tech entrepreneur and investor who backed a teen-founded AI startup.
+- entities/induced-ai: An AI startup founded by teenagers that automates business workflows.
+- entities/google: A multinational technology company known for its search engine, data collection practices, and market dominance.
+- entities/pixel-8-pro: A smartphone released by Google with improved cameras and screen.
+- entities/flexport: A freight forwarding and customs brokerage startup valued at $8 billion.
+- entities/dave-clark: Former Amazon executive and ousted CEO of Flexport.
+- entities/sam-bankman-fried: Former CEO of FTX and co-founder of Alameda Research, currently facing criminal trial.
+- entities/ftx: Cryptocurrency exchange that collapsed in November 2022 after reaching a $32 billion valuation.
+- entities/michael-lewis: Author of the book 'Going Infinite' which details SBF's political dealings.
+- entities/donald-trump: Former U.S. President allegedly targeted by SBF for political influence.
+- entities/tiktok: Social media platform testing an ad-free subscription tier.
+- entities/linkedin: Professional networking platform launching new AI tools.
+- entities/linda-yaccarino: CEO of X who offered a higher daily post count than Musk.
+- entities/x: A social media platform where Google's official search liaison posted a response to allegations.
+- entities/keith-alexander: Retired four-star general and founder of IronNet.
+- entities/ironnet: Cybersecurity startup founded by a former NSA director that shut down.
+- entities/manhattan-federal-court: Court where the SBF trial is taking place.
+- entities/virginia: U.S. state where IronNet was based.
+- concepts/ai-startup-backing: The practice of investors supporting early-stage artificial intelligence companies.
+- concepts/hardware-unveiling: The public announcement and release of new consumer electronics devices.
+- concepts/corporate-turmoil: Internal conflicts and leadership changes within a company.
+- concepts/legal-trial: A formal court proceeding to determine guilt or innocence in a criminal case.
+- concepts/subscription-model: A business model where users pay a recurring fee for access to services.
+- concepts/ai-integration: The incorporation of artificial intelligence features into existing software platforms.
+- concepts/cybersecurity-failure: The collapse of a company focused on security technologies due to market or operational issues.
+- sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line: Helena World Chronicle, LLC has filed a class action antitrust lawsuit against Google and Alphabet in the U.S. District Court in D.C., alleging that Google's AI technologies, including Search Generative Experience (SGE) and Bard, along with older features like the Knowledge Graph
+- entities/helena-world-chronicle-llc: Arkansas-based publisher that filed the class action antitrust suit against Google.
+- entities/google-llc: Technology company accused of anticompetitive behavior and AI misuse of publisher data.
+- entities/alphabet-inc: Parent company of Google accused in the antitrust lawsuit.
+- entities/us-district-court-dc: The landmark antitrust trial over Google's search business.
+- entities/the-atlantic: Online magazine that modeled the impact of Google's AI on search traffic.
+- entities/axel-springer: Publisher that licensed news to OpenAI for AI model training.
+- entities/openai: Company whose news licensing deal was inked with Axel Springer.
+- entities/meta: Company with unresolved negotiations regarding content payments in Canada.
+- entities/canadian-government: Government entity that reached an agreement with Google for media content payments.
+- entities/hausfeld: Law firm handling the class action lawsuit against Google.
+- entities/epic-games: Company that won a recent lawsuit against Google over app store antitrust issues.
+- entities/allen-institute-for-ai: Research institution that worked with The Washington Post on AI training data findings.
+- entities/news-media-alliance: Organization that provided a 2023 report on AI training data sources.
+- entities/the-washington-post: Publication that cited a report on AI training data for the lawsuit.
+- entities/techcrunch: Publication that hosted the complaint on Scribd.
+- entities/similarweb: Data source cited regarding Google's traffic share for publishers.
+- entities/wall-street-journal: Publication that reported on the impact of Google's AI on publisher traffic.
+- entities/us-justice-department: Government entity that filed a separate antitrust suit against Google.
+- entities/arkansas: U.S. state where Helena World Chronicle operates its newspapers.
+- entities/canada: Country where Google reached an agreement to pay news organizations.
+- concepts/antitrust-lawsuit: Legal action alleging violations of antitrust laws like the Sherman Act and Clayton Act.
+- concepts/ai-content-misappropriation: The alleged practice of using AI to extract and utilize publisher content without consent.
+- concepts/search-traffic-redirection: The shift of user traffic from publisher websites to search engine results or AI summaries.
+- concepts/knowledge-graph: Google's database launched in 2012 that compiles facts from web materials and open sources.
+- concepts/search-generative-experience: Google's AI-based search technology that offers conversational information seeking.
+- concepts/bard-ai: Google's AI chatbot trained on datasets including news and magazine publications.
+- concepts/digital-news-marketplace: The ecosystem of digital news publishing and distribution challenged by the lawsuit.
+- concepts/injunction-relief: A court order requiring Google to obtain consent for using publisher data to train AI.
+- sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand: The second day of the Sam Bankman-Fried trial featured starkly contrasting opening statements where prosecutors painted him as a liar who stole billions for a lavish lifestyle, while his defense argued he was a good-faith startup founder who acted innovatively. The day concluded 
+- entities/alameda-research: Crypto-trading firm co-founded by Bankman-Fried in 2017, which held significant FTT tokens.
+- entities/caroline-ellison: Former CEO of Alameda Research who pleaded guilty and is a key witness in the trial.
+- entities/thane-rehn: A prosecutor for the government who gave the prosecution's opening statement.
+- entities/mark-cohen: High-profile defense attorney representing Bankman-Fried, formerly a federal prosecutor.
+- entities/damian-williams: U.S. Attorney who called Bankman-Fried's crimes one of the biggest financial frauds in American history.
+- entities/marc-antoine-julliard: A Paris-born cocoa trader who testified as a victim of FTX.
+- entities/adam-yedidia: An MIT graduate and former friend of Bankman-Fried who testified for the government.
+- entities/matt-huang: A former partner at Sequoia Capital and witness scheduled to testify.
+- entities/jane-street: A high-frequency trading firm where Bankman-Fried began his finance career.
+- entities/sequoia-capital: A venture capital firm where Matt Huang previously worked.
+- entities/brooklyn: The location of the prison where Bankman-Fried spent time.
+- entities/paris: The birthplace of witness Marc-Antoine Julliard.
+- entities/london: The current residence of witness Marc-Antoine Julliard.
+- entities/nov-8: The date when victim Julliard attempted to withdraw funds from FTX.
+- concepts/good-faith: The defense's argument that Bankman-Fried acted honestly and without intent to defraud.
+- concepts/ponzi-scheme: The prosecution's allegation that FTX operated as a fraudulent investment scheme.
+- concepts/startup-founder: The archetype of a risk-taking entrepreneur used by the defense to describe Bankman-Fried.
+- concepts/crypto-exchange: A platform for trading cryptocurrencies, central to the financial activities of FTX and Alameda.
+- concepts/opening-statement: The initial presentation of a case by lawyers to the jury, setting the narrative for the trial.
+- sources/SBF_s_trial_starts_soon_but_how_did_he_and_FTX_get_here: Sam Bankman-Fried's criminal trial for seven counts of fraud and conspiracy against FTX has begun, following the exchange's collapse in November 2022 due to severe liquidity issues and mismanagement of customer funds. The once-valued $32 billion crypto empire filed for Chapter 11
+- entities/gary-wang: FTX co-founder and former CTO who pleaded guilty to federal criminal charges.
+- entities/john-j-ray-iii: Enron turnaround veteran appointed as the new CEO of FTX after Bankman-Fried resigned.
+- entities/cohen-gresser: Law firm representing Sam Bankman-Fried during his criminal trial.
+- entities/binance: World's largest crypto exchange that pulled out $2.1 billion in cash, triggering a bank run on FTX.
+- entities/miami-heat: NBA team whose home arena naming rights were purchased by FTX in 2021.
+- entities/tom-brady: Sports icon who paid $55 million to lend legitimacy to FTX.
+- entities/gisele-bundchen: Celebrity and Tom Brady's ex-wife who partnered with FTX.
+- entities/steph-curry: Sports icon who paid $35 million to lend legitimacy to FTX.
+- entities/shaquille-o-neal: NBA player who partnered with FTX.
+- entities/naomi-osaka: Tennis player who partnered with FTX.
+- entities/coin-desk: News publication that published Alameda's balance sheet exposing FTX's liquidity issues.
+- entities/ny-times: Publication where Bankman-Fried appeared at the DealBook Summit.
+- entities/vox: Media organization with which Bankman-Fried exchanged DMs.
+- entities/sec: U.S. regulatory body imposing civil penalties on FTX executives.
+- entities/cftc: U.S. regulatory body imposing civil penalties on FTX executives.
+- entities/blockfi: Financial institution that filed for Chapter 11 bankruptcy in November 2022.
+- entities/genesis-global-trading: Financial institution that filed for Chapter 11 bankruptcy in January 2022.
+- entities/palo-alto: City in California where Bankman-Fried was under house arrest at his parents' home.
+- entities/bahamas: Location where FTX was based and where Bankman-Fried was arrested.
+- concepts/crypto-fraud: The central criminal charge involving the misappropriation of customer funds and conspiracy to commit fraud by FTX executives.
+- concepts/bankruptcy: The legal process of Chapter 11 filing used by FTX and Alameda Research to manage debt and liquidate assets.
+- concepts/liquidity-crisis: The situation where FTX could not meet its obligations due to a mismatch between asset types and market conditions.
+- concepts/brand-partnerships: Strategic alliances FTX formed with sports teams and celebrities to gain mainstream recognition and revenue.
+- concepts/regulatory-overreach: The concept that Bankman-Fried claimed regulators made the situation worse rather than causing the collapse.
+- sources/SBF_riding_high_on_FTX_reportedly_offered_5B_to_Trump_to_cancel_President_re-run: This document details the upcoming trial of Sam Bankman-Fried (SBF) regarding the collapse of FTX and Alameda Research, highlighting Michael Lewis's book 'Going Infinite' which chronicles SBF's rise and alleged attempts to buy off Donald Trump with a $5 billion offer. The text co
+- entities/mitch-mcconnell: US Senator met by SBF to discuss political funding.
+- entities/anna-wintour: Fashion doyenne who contacted SBF to sponsor the Met Costume Ball.
+- entities/sequoia: Investment firm that backed FTX.
+- entities/temasek: Investment firm that backed FTX.
+- entities/tiger-global: Investment firm that backed FTX.
+- entities/met-costume-ball: Event SBF was asked to sponsor by Anna Wintour.
+- entities/sliced-brand: Public relations firm founded by Ayelet Noff.
+- entities/going-infinite: Book by Michael Lewis chronicling the rise and fall of SBF.
+- concepts/financial-fraud: The core accusation against SBF regarding the collapse of FTX.
+- concepts/cryptocurrency-speculation: The market activity on FTX that led to valuation crashes.
+- concepts/political-maneuvering: SBF's efforts to influence elections and fund candidates.
+- concepts/media-coverage: The portrayal of SBF in news outlets and books like 'Going Infinite'.
+- concepts/effective-altruism: SBF's self-proclaimed idealism regarding saving humanity.
+- sources/Apple_defends_Google_Search_deal_in_court_There_wasn_t_a_valid_alternative: In the landmark US v. Google antitrust trial, Apple witness Eddy Cue testified that Google Search was the only viable alternative for Apple devices, despite the Justice Department's focus on the lucrative Information Services Agreement (ISA). Cue argued that Apple prioritizes use
+- entities/eddy-cue: Apple executive and key witness in the US v. Google antitrust trial.
+- entities/america-justice-department: Federal agency prosecuting Google in the antitrust case.
+- entities/apple: Company with which Google has a major search engine deal since 2003.
+- entities/sundar-pichai: Google CEO who testified in the antitrust trial defending business tactics.
+- entities/meagan-bellshaw: U.S. Justice Department lawyer who testified against Google.
+- entities/john-schmidtlein: Google lawyer who led Eddy Cue through the history of the partnership.
+- entities/america: Location where the courtroom trial took place.
+- entities/safari: Apple's browser on iOS devices where Google agreed not to promote Chrome.
+- entities/duckduckgo: Search engine CEO who testified that similar deals would have made them competitive.
+- entities/yahoo: A search engine that was set as the default on Firefox during a trial.
+- entities/bing: A search engine developed by Microsoft that has overhauled its layout and integrated generative AI.
+- entities/information-services-agreement: Contract making Google the default search engine on Apple devices.
+- concepts/antitrust-litigation: Legal proceedings investigating monopolistic practices in the tech sector.
+- concepts/default-search-engine: The practice of being the preselected search engine on devices and browsers.
+- concepts/revenue-share-deal: Financial arrangement where one company pays another for user traffic.
+- concepts/user-privacy: Protection of user data and tracking practices.
+- concepts/user-experience: The overall experience a user has with a product or service.
+- concepts/market-dominance: The state of holding a significant share of a market, raising questions about competition and fairness.
+- sources/5_things_we_learned_so_far_about_the_Google_antitrust_case: Google CEO Sundar Pichai testified in a U.S. antitrust trial defending the company's $26.3 billion spending to secure default search engine status across platforms, including a major deal with Apple. The Department of Justice argues these tactics block competition and hinder riva
+- entities/prabhakar-raghavan: Google's search head who testified in court on October 28.
+- entities/satya-nadella: Microsoft CEO who testified about willingness to spend $15 billion for Bing default status.
+- entities/tim-cook: Apple CEO who declined Google's request to preinstall Google on iPhones.
+- entities/david-drummond: Google's legal chief who sent an angry letter to Microsoft in 2005.
+- entities/microsoft: A technology company that makes Windows and Bing, often requiring users to sidestep its defaults.
+- entities/brave: Search engine company that accuses Google of being anticompetitive.
+- entities/internet-explorer: Microsoft's browser that became the default search engine in 2005.
+- entities/chrome: Google's browser that Google agreed not to promote to Safari users.
+- entities/ftc: Agency that sued Amazon and is involved in cases with Facebook.
+- entities/amazon: Company sued by the FTC for anticompetitive strategies.
+- entities/facebook: Company involved in an ongoing case with the FTC regarding Instagram and WhatsApp.
+- entities/new-york-times: Publication that reported on Google's payment to Apple.
+- entities/the-verge: Publication that reported on various details of the Google antitrust trial.
+- entities/bloomberg: Publication that reported on Google's agreement not to promote Chrome to Safari users.
+- entities/the-information: Publication that reported on Satya Nadella's offer to spend $15 billion for Bing.
+- entities/cnbc: Publication that reported on Pichai's actions regarding chat history settings.
+- concepts/data-exclusivity: The argument that Google's dominance prevents competitors from accessing necessary data to improve products.
+- concepts/litigation-hold: A legal requirement to preserve relevant documents and data during a lawsuit.
+- sources/Is_Google_Search_better_than_the_rest_And_is_that_fair: The document explores the debate over Google's dominance in search, contrasting its data collection and personalization capabilities with alternatives like DuckDuckGo and Bing. It examines legal arguments regarding Google's default status, allegations of query manipulation for ad
+- entities/kent-walker: President of global affairs at Google who defended the company's search product and default status.
+- entities/megan-gray: A lawyer, privacy advocate, and former vice-president at DuckDuckGo who alleged Google manipulates search queries.
+- entities/danny-sullivan: Google's official search liaison who clarified that ad systems do not affect organic results.
+- entities/wired: A digital media outlet that published an opinion article alleging Google manipulates search queries.
+- entities/firefox: A web browser where Mozilla temporarily set Yahoo! as the default search provider.
+- entities/search-quality-raters: Independent groups Google works with to gauge the effectiveness of its search processes.
+- concepts/data-collection: The practice of gathering user search history, clicks, and interactions to personalize services.
+- concepts/default-status: The pre-set position of a search engine on devices or browsers, often a subject of legal and ethical debate.
+- concepts/query-manipulation: The alleged practice of altering search terms to maximize ad revenue or influence results.
+- concepts/organic-results: The list of non-sponsored links displayed in search results, distinct from paid advertisements.
+- concepts/machine-learning: AI techniques used by search engines to understand query meaning and rank results based on user intent.

@@ -1,0 +1,390 @@
+{
+  "qa_id": "mhop_738",
+  "question": "Who is the individual facing a jury's assessment of contrasting legal narratives in Fortune, is reported by the same source to have recruited a former Jane Street trader to his ventures, and is accused by the prosecution of committing fraud for personal gain according to TechCrunch?",
+  "reference": "Sam Bankman-Fried",
+  "question_type": "inference_query",
+  "evidence_titles": [
+    "Is Sam Bankman-Fried a bad ‘man’ or a good ‘boy’? Lawyers swap opening statements before first witnesses take the stand",
+    "Sam Altman backs teens’ startup, Google unveils the Pixel 8 and TikTok tests an ad-free tier"
+  ],
+  "system": "wiki_routed",
+  "prediction": "Sam Bankman-Fried",
+  "raw_prediction": "Sam Bankman-Fried",
+  "seconds_wall": 1.8000308689952362,
+  "retrieval": {
+    "routed_ids": [
+      "sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand",
+      "sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier",
+      "concepts/cybercrime",
+      "concepts/c001",
+      "concepts/trial-over-crypto-crimes",
+      "entities/ironnet-closure",
+      "entities/g001",
+      "entities/g002",
+      "sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line"
+    ],
+    "terms": [
+      "sam bankman-fried trial",
+      "ftx collapse",
+      "alameda research",
+      "cybercrime",
+      "caroline ellison",
+      "federal court",
+      "jail time",
+      "former jane street trader",
+      "individual",
+      "facing",
+      "jury",
+      "assessment",
+      "contrasting",
+      "legal",
+      "narratives",
+      "fortune",
+      "reported",
+      "source",
+      "recruited",
+      "jane",
+      "street",
+      "trader",
+      "ventures",
+      "accused",
+      "prosecution",
+      "committing",
+      "fraud",
+      "personal",
+      "gain",
+      "according",
+      "techcrunch",
+      "individual facing",
+      "jury s",
+      "s assessment",
+      "contrasting legal",
+      "legal narratives",
+      "jane street",
+      "street trader",
+      "committing fraud",
+      "personal gain",
+      "gain according"
+    ],
+    "routing_fallback": true,
+    "timing": {
+      "routing_llm": 0.42745341500267386,
+      "search_terms_llm": 0.8591287070012186,
+      "retrieval_code": 0.21373429699451663,
+      "answer_llm": 0.2996772780024912
+    },
+    "candidates": 61,
+    "selected": 21,
+    "chars": 10119,
+    "matched_pages": [
+      "sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand",
+      "sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier",
+      "concepts/trial-over-crypto-crimes",
+      "concepts/cybercrime",
+      "concepts/c001",
+      "entities/sam-altman-backs-teens-startup",
+      "sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line",
+      "entities/ironnet-closure",
+      "entities/g001"
+    ],
+    "kg_triples": 6,
+    "graph_relations": [
+      {
+        "source": "sam-altman-backs-teens-startup",
+        "target": "sam-altman-supports-teens-startup",
+        "relation": "supports",
+        "source_doc": "sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier",
+        "context_line": "sam-altman-backs-teens-startup [supports] sam-altman-supports-teens-startup (from sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier)"
+      },
+      {
+        "source": "g001",
+        "target": "c001",
+        "relation": "filed lawsuit against",
+        "source_doc": "sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line",
+        "context_line": "google [filed lawsuit against] antitrust lawsuit (from sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line)"
+      },
+      {
+        "source": "g001",
+        "target": "c002",
+        "relation": "alleges content misappropriation",
+        "source_doc": "sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line",
+        "context_line": "google [alleges content misappropriation] content misappropriation (from sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line)"
+      },
+      {
+        "source": "g001",
+        "target": "c003",
+        "relation": "targets AI technologies",
+        "source_doc": "sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line",
+        "context_line": "google [targets AI technologies] artificial intelligence (from sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line)"
+      },
+      {
+        "source": "h001",
+        "target": "c001",
+        "relation": "files class action lawsuit",
+        "source_doc": "sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line",
+        "context_line": "helena world chronicle [files class action lawsuit] antitrust lawsuit (from sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line)"
+      },
+      {
+        "source": "sam-altman-backs-teens-startup",
+        "target": "trial-over-crypto-crimes",
+        "relation": "is involved in",
+        "source_doc": "sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand",
+        "context_line": "sam-altman-backs-teens-startup [is involved in] trial over crypto crimes (from sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand)"
+      }
+    ],
+    "selected_passages": [
+      {
+        "title": "raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand",
+        "page_id": "sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand",
+        "text": "Shortly afterward, as the trial neared late afternoon, the government called Adam Yedidia to the stand. A fast-talking graduate of MIT, he and Bankman-Fried were close friends in college, he said. And after Bankman-Fried left Jane Street, the high-frequency trading firm where the former billionaire got his start in finance after MIT, he persuaded Yedidia to join him as a trader at Alameda and then as a developer at FTX.",
+        "branch": "routed_raw",
+        "item_id": "raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand:19",
+        "matched_terms": 6,
+        "direct_matches": 4,
+        "context_block": "[raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\nShortly afterward, as the trial neared late afternoon, the government called Adam Yedidia to the stand. A fast-talking graduate of MIT, he and Bankman-Fried were close friends in college, he said. And after Bankman-Fried left Jane Street, the high-frequency trading firm where the former billionaire got his start in finance after MIT, he persuaded Yedidia to join him as a trader at Alameda and then as a developer at FTX.",
+        "truncated": false
+      },
+      {
+        "title": "sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand",
+        "page_id": "sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand",
+        "text": "This document discusses the ongoing trial of Sam Bankman-Fried, the former CEO of FTX, focusing on contrasting narratives presented by the prosecution and defense. The prosecution portrays Bankman-Fried as a liar and fraud, while the defense argues he acted in good faith.",
+        "branch": "routed_wiki",
+        "item_id": "wiki:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand:0",
+        "matched_terms": 5,
+        "direct_matches": 4,
+        "context_block": "[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\nThis document discusses the ongoing trial of Sam Bankman-Fried, the former CEO of FTX, focusing on contrasting narratives presented by the prosecution and defense. The prosecution portrays Bankman-Fried as a liar and fraud, while the defense argues he acted in good faith.",
+        "truncated": false
+      },
+      {
+        "title": "raw:sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier",
+        "page_id": "sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier",
+        "text": "SBF allegedly tried to buy off Trump: The TC team’s been trained on the Manhattan Federal Court for the trial of Sam Bankman-Fried, the disgraced entrepreneur accused of orchestrating the collapse of cryptocurrency exchange FTX. But fascinating details about SBF’s political dealings are emerging from a book by Michael Lewis, “Going Infinite,” that debuted on the first day of the trial, like SBF’s attempt to buy off Trump to get him to not run again for president.",
+        "branch": "routed_raw",
+        "item_id": "raw:sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier:7",
+        "matched_terms": 5,
+        "direct_matches": 3,
+        "context_block": "[raw:sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]\nSBF allegedly tried to buy off Trump: The TC team’s been trained on the Manhattan Federal Court for the trial of Sam Bankman-Fried, the disgraced entrepreneur accused of orchestrating the collapse of cryptocurrency exchange FTX. But fascinating details about SBF’s political dealings are emerging from a book by Michael Lewis, “Going Infinite,” that debuted on the first day of the trial, like SBF’s attempt to buy off Trump to get him to not run again for president.",
+        "truncated": false
+      },
+      {
+        "title": "raw:sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier",
+        "page_id": "sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier",
+        "text": "Inside the SBF trial: Rebecca and Jacquelyn report on the second day of the SBF and FTX trial. The prosecution painted Bankman-Fried as someone who knowingly committed fraud to achieve great wealth, power and influence, while the defense countered that the FTX founder acted in good faith, never meant to commit fraud or steal and basically got in over his head.",
+        "branch": "routed_raw",
+        "item_id": "raw:sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier:18",
+        "matched_terms": 5,
+        "direct_matches": 2,
+        "context_block": "[raw:sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]\nInside the SBF trial: Rebecca and Jacquelyn report on the second day of the SBF and FTX trial. The prosecution painted Bankman-Fried as someone who knowingly committed fraud to achieve great wealth, power and influence, while the defense countered that the FTX founder acted in good faith, never meant to commit fraud or steal and basically got in over his head.",
+        "truncated": false
+      },
+      {
+        "title": "sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier",
+        "page_id": "sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier",
+        "text": "- Induced AI, backed by Sam Altman, assists businesses in automating workflows using plain English inputs.\n- The Pixel 8 Pro offers improved cameras, brighter screens, and enhanced AI features compared to the Pixel 7 Pro.\n- Flexport's CEO, Dave Clark, was ousted a year after taking the CEO role.\n- FTX founder Sam Bankman-Fried faces charges of orchestrating the collapse of cryptocurrency exchange FTX.\n- TikTok plans to test an ad-free subscription tier for some users, priced at $4.99.\n- LinkedIn's AI features include an AI-powered talent sourcing platform, LinkedIn Learning coach, and marketing campaign tool.\n- Elon Musk claims X users generate 100 million to 200 million posts daily, but X CEO Linda Yaccarino reports 500 million posts per day.\n- IronNet, founded by a former NSA director, collapsed and laid off its staff following its failure to gain traction.",
+        "branch": "routed_wiki",
+        "item_id": "wiki:sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier:2",
+        "matched_terms": 5,
+        "direct_matches": 1,
+        "context_block": "[sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]\n- Induced AI, backed by Sam Altman, assists businesses in automating workflows using plain English inputs.\n- The Pixel 8 Pro offers improved cameras, brighter screens, and enhanced AI features compared to the Pixel 7 Pro.\n- Flexport's CEO, Dave Clark, was ousted a year after taking the CEO role.\n- FTX founder Sam Bankman-Fried faces charges of orchestrating the collapse of cryptocurrency exchange FTX.\n- TikTok plans to test an ad-free subscription tier for some users, priced at $4.99.\n- LinkedIn's AI features include an AI-powered talent sourcing platform, LinkedIn Learning coach, and marketing campaign tool.\n- Elon Musk claims X users generate 100 million to 200 million posts daily, but X CEO Linda Yaccarino reports 500 million posts per day.\n- IronNet, founded by a former NSA director, collapsed and laid off its staff following its failure to gain traction.",
+        "truncated": false
+      },
+      {
+        "title": "concepts/trial-over-crypto-crimes",
+        "page_id": "concepts/trial-over-crypto-crimes",
+        "text": "- From [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]]: ongoing legal proceedings against Sam Bankman-Fried for alleged crimes related to FTX and Alameda Research",
+        "branch": "routed_wiki",
+        "item_id": "wiki:concepts/trial-over-crypto-crimes:1",
+        "matched_terms": 4,
+        "direct_matches": 4,
+        "context_block": "[concepts/trial-over-crypto-crimes]\n- From [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]]: ongoing legal proceedings against Sam Bankman-Fried for alleged crimes related to FTX and Alameda Research",
+        "truncated": false
+      },
+      {
+        "title": "sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand",
+        "page_id": "sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand",
+        "text": "- Sam Bankman-Fried is the subject of a trial over alleged crimes related to FTX and Alameda Research\n- The prosecution claims Bankman-Fried stole customer funds and lied to investors\n- The defense argues Bankman-Fried acted in good faith and did not defraud anyone",
+        "branch": "routed_wiki",
+        "item_id": "wiki:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand:1",
+        "matched_terms": 4,
+        "direct_matches": 3,
+        "context_block": "[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\n- Sam Bankman-Fried is the subject of a trial over alleged crimes related to FTX and Alameda Research\n- The prosecution claims Bankman-Fried stole customer funds and lied to investors\n- The defense argues Bankman-Fried acted in good faith and did not defraud anyone",
+        "truncated": false
+      },
+      {
+        "title": "concepts/cybercrime",
+        "page_id": "concepts/cybercrime",
+        "text": "- From [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]]: crimes committed through electronic means, often involving hacking or financial fraud",
+        "branch": "routed_wiki",
+        "item_id": "wiki:concepts/cybercrime:1",
+        "matched_terms": 4,
+        "direct_matches": 2,
+        "context_block": "[concepts/cybercrime]\n- From [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]]: crimes committed through electronic means, often involving hacking or financial fraud",
+        "truncated": false
+      },
+      {
+        "title": "concepts/c001",
+        "page_id": "concepts/c001",
+        "text": "- From [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]]: Legal action against Google and Alphabet for alleged anticompetitive practices",
+        "branch": "routed_wiki",
+        "item_id": "wiki:concepts/c001:1",
+        "matched_terms": 3,
+        "direct_matches": 3,
+        "context_block": "[concepts/c001]\n- From [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]]: Legal action against Google and Alphabet for alleged anticompetitive practices",
+        "truncated": false
+      },
+      {
+        "title": "concepts/trial-over-crypto-crimes",
+        "page_id": "concepts/trial-over-crypto-crimes",
+        "text": "ongoing legal proceedings against Sam Bankman-Fried for alleged crimes related to FTX and Alameda Research",
+        "branch": "routed_wiki",
+        "item_id": "wiki:concepts/trial-over-crypto-crimes:0",
+        "matched_terms": 3,
+        "direct_matches": 3,
+        "context_block": "[concepts/trial-over-crypto-crimes]\nongoing legal proceedings against Sam Bankman-Fried for alleged crimes related to FTX and Alameda Research",
+        "truncated": false
+      },
+      {
+        "title": "raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand",
+        "page_id": "sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand",
+        "text": "The key to his alleged scheme? Alameda Research, a crypto hedge fund he also owned, argued Rehn. Using Caroline Ellison, his on-again off-again girlfriend and the CEO of Alameda, as a front, Bankman-Fried had “secret access” to customer money—both cash and crypto—the government claimed.",
+        "branch": "routed_raw",
+        "item_id": "raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand:6",
+        "matched_terms": 3,
+        "direct_matches": 3,
+        "context_block": "[raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\nThe key to his alleged scheme? Alameda Research, a crypto hedge fund he also owned, argued Rehn. Using Caroline Ellison, his on-again off-again girlfriend and the CEO of Alameda, as a front, Bankman-Fried had “secret access” to customer money—both cash and crypto—the government claimed.",
+        "truncated": false
+      },
+      {
+        "title": "entities/sam-altman-backs-teens-startup",
+        "page_id": "entities/sam-altman-backs-teens-startup",
+        "text": "- sam-altman-backs-teens-startup [supports] sam-altman-supports-teens-startup (from [[sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]])\n- sam-altman-backs-teens-startup [is involved in] trial over crypto crimes (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- sam-altman-backs-teens-startup [owns] alameda research (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- sam-altman-backs-teens-startup [runs] ftx (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])",
+        "branch": "other_wiki",
+        "item_id": "wiki:entities/sam-altman-backs-teens-startup:2",
+        "matched_terms": 3,
+        "direct_matches": 2,
+        "context_block": "[entities/sam-altman-backs-teens-startup]\n- sam-altman-backs-teens-startup [supports] sam-altman-supports-teens-startup (from [[sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]])\n- sam-altman-backs-teens-startup [is involved in] trial over crypto crimes (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- sam-altman-backs-teens-startup [owns] alameda research (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- sam-altman-backs-teens-startup [runs] ftx (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])",
+        "truncated": false
+      },
+      {
+        "title": "concepts/trial-over-crypto-crimes",
+        "page_id": "concepts/trial-over-crypto-crimes",
+        "text": "- sam-altman-backs-teens-startup [is involved in] trial over crypto crimes (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- trial over crypto crimes [is a case of] startup founder (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- trial over crypto crimes [involves] cybercrime (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- thane rehn [is involved in] trial over crypto crimes (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- mark cohen [is involved in] trial over crypto crimes (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])",
+        "branch": "routed_wiki",
+        "item_id": "wiki:concepts/trial-over-crypto-crimes:2",
+        "matched_terms": 3,
+        "direct_matches": 2,
+        "context_block": "[concepts/trial-over-crypto-crimes]\n- sam-altman-backs-teens-startup [is involved in] trial over crypto crimes (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- trial over crypto crimes [is a case of] startup founder (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- trial over crypto crimes [involves] cybercrime (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- thane rehn [is involved in] trial over crypto crimes (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- mark cohen [is involved in] trial over crypto crimes (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])",
+        "truncated": false
+      },
+      {
+        "title": "concepts/cybercrime",
+        "page_id": "concepts/cybercrime",
+        "text": "- trial over crypto crimes [involves] cybercrime (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])",
+        "branch": "routed_wiki",
+        "item_id": "wiki:concepts/cybercrime:2",
+        "matched_terms": 3,
+        "direct_matches": 2,
+        "context_block": "[concepts/cybercrime]\n- trial over crypto crimes [involves] cybercrime (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])",
+        "truncated": false
+      },
+      {
+        "title": "raw:sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line",
+        "page_id": "sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line",
+        "text": "More importantly, perhaps, is the suit’s tackling of how AI will impact publishers’ businesses. The problem was recently detailed in a report on Thursday by The Wall Street Journal, which led with a shocking statistic. When online magazine The Atlantic modeled what would happen if Google integrated AI into search, it found that 75% of the time the AI would answer the user’s query without requiring a click-through to its website, losing it traffic. This could have a major impact on publishers’ traffic going forward, as Google today drives nearly 40% of their traffic, according to data from Similarweb.",
+        "branch": "routed_raw",
+        "item_id": "raw:sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line:6",
+        "matched_terms": 3,
+        "direct_matches": 2,
+        "context_block": "[raw:sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]\nMore importantly, perhaps, is the suit’s tackling of how AI will impact publishers’ businesses. The problem was recently detailed in a report on Thursday by The Wall Street Journal, which led with a shocking statistic. When online magazine The Atlantic modeled what would happen if Google integrated AI into search, it found that 75% of the time the AI would answer the user’s query without requiring a click-through to its website, losing it traffic. This could have a major impact on publishers’ traffic going forward, as Google today drives nearly 40% of their traffic, according to data from Similarweb.",
+        "truncated": false
+      },
+      {
+        "title": "raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand",
+        "page_id": "sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand",
+        "text": "What the jury will see is a nerdy startup founder who acted in “good faith,” not the prosecution’s “cartoon of a villain.” (Cohen repeatedly harped on Bankman-Fried’s allegedly good-faith actions throughout his address to the jury.)",
+        "branch": "routed_raw",
+        "item_id": "raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand:10",
+        "matched_terms": 3,
+        "direct_matches": 2,
+        "context_block": "[raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\nWhat the jury will see is a nerdy startup founder who acted in “good faith,” not the prosecution’s “cartoon of a villain.” (Cohen repeatedly harped on Bankman-Fried’s allegedly good-faith actions throughout his address to the jury.)",
+        "truncated": false
+      },
+      {
+        "title": "concepts/cybercrime",
+        "page_id": "concepts/cybercrime",
+        "text": "crimes committed through electronic means, often involving hacking or financial fraud",
+        "branch": "routed_wiki",
+        "item_id": "wiki:concepts/cybercrime:0",
+        "matched_terms": 3,
+        "direct_matches": 1,
+        "context_block": "[concepts/cybercrime]\ncrimes committed through electronic means, often involving hacking or financial fraud",
+        "truncated": false
+      },
+      {
+        "title": "sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier",
+        "page_id": "sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier",
+        "text": "- Sam Altman supports a teen-founded AI startup\n- Google launches Pixel 8 and Pixel 8 Pro\n- Flexport CEO Dave Clark criticizes the board and founder\n- FTX founder Sam Bankman-Fried faces trial\n- TikTok introduces an ad-free subscription service\n- LinkedIn integrates AI into its recruitment and marketing tools\n- Elon Musk's X platform sees conflicting user activity numbers\n- IronNet, a cybersecurity startup, closes and lays off staff",
+        "branch": "routed_wiki",
+        "item_id": "wiki:sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier:1",
+        "matched_terms": 3,
+        "direct_matches": 0,
+        "context_block": "[sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]\n- Sam Altman supports a teen-founded AI startup\n- Google launches Pixel 8 and Pixel 8 Pro\n- Flexport CEO Dave Clark criticizes the board and founder\n- FTX founder Sam Bankman-Fried faces trial\n- TikTok introduces an ad-free subscription service\n- LinkedIn integrates AI into its recruitment and marketing tools\n- Elon Musk's X platform sees conflicting user activity numbers\n- IronNet, a cybersecurity startup, closes and lays off staff",
+        "truncated": false
+      },
+      {
+        "title": "entities/ironnet-closure",
+        "page_id": "entities/ironnet-closure",
+        "text": "- From [[sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]]: The closure of IronNet, a cybersecurity startup founded by a former NSA director, following its failure to gain traction.",
+        "branch": "routed_wiki",
+        "item_id": "wiki:entities/ironnet-closure:1",
+        "matched_terms": 2,
+        "direct_matches": 2,
+        "context_block": "[entities/ironnet-closure]\n- From [[sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]]: The closure of IronNet, a cybersecurity startup founded by a former NSA director, following its failure to gain traction.",
+        "truncated": false
+      },
+      {
+        "title": "entities/g001",
+        "page_id": "entities/g001",
+        "text": "- From [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]]: Search engine and technology company",
+        "branch": "routed_wiki",
+        "item_id": "wiki:entities/g001:1",
+        "matched_terms": 2,
+        "direct_matches": 2,
+        "context_block": "[entities/g001]\n- From [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]]: Search engine and technology company",
+        "truncated": false
+      },
+      {
+        "title": "entities/g001",
+        "page_id": "entities/g001",
+        "text": "- google [filed lawsuit against] antitrust lawsuit (from [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]])\n- google [alleges content misappropriation] content misappropriation (from [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]])\n- google [targets AI technologies] artificial intelligence (from [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]])",
+        "branch": "routed_wiki",
+        "item_id": "wiki:entities/g001:2",
+        "matched_terms": 2,
+        "direct_matches": 2,
+        "context_block": "[entities/g001]\n- google [filed lawsuit against] antitrust lawsuit (from [[sources/News_publisher_files_class_action_antitrust_suit_against_Googl",
+        "truncated": true
+      }
+    ],
+    "branches": {
+      "routed_raw": 6,
+      "routed_wiki": 14,
+      "other_wiki": 1
+    }
+  },
+  "error": null,
+  "context": "[raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\nShortly afterward, as the trial neared late afternoon, the government called Adam Yedidia to the stand. A fast-talking graduate of MIT, he and Bankman-Fried were close friends in college, he said. And after Bankman-Fried left Jane Street, the high-frequency trading firm where the former billionaire got his start in finance after MIT, he persuaded Yedidia to join him as a trader at Alameda and then as a developer at FTX.\n\n[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\nThis document discusses the ongoing trial of Sam Bankman-Fried, the former CEO of FTX, focusing on contrasting narratives presented by the prosecution and defense. The prosecution portrays Bankman-Fried as a liar and fraud, while the defense argues he acted in good faith.\n\n[raw:sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]\nSBF allegedly tried to buy off Trump: The TC team’s been trained on the Manhattan Federal Court for the trial of Sam Bankman-Fried, the disgraced entrepreneur accused of orchestrating the collapse of cryptocurrency exchange FTX. But fascinating details about SBF’s political dealings are emerging from a book by Michael Lewis, “Going Infinite,” that debuted on the first day of the trial, like SBF’s attempt to buy off Trump to get him to not run again for president.\n\n[raw:sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]\nInside the SBF trial: Rebecca and Jacquelyn report on the second day of the SBF and FTX trial. The prosecution painted Bankman-Fried as someone who knowingly committed fraud to achieve great wealth, power and influence, while the defense countered that the FTX founder acted in good faith, never meant to commit fraud or steal and basically got in over his head.\n\n[sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]\n- Induced AI, backed by Sam Altman, assists businesses in automating workflows using plain English inputs.\n- The Pixel 8 Pro offers improved cameras, brighter screens, and enhanced AI features compared to the Pixel 7 Pro.\n- Flexport's CEO, Dave Clark, was ousted a year after taking the CEO role.\n- FTX founder Sam Bankman-Fried faces charges of orchestrating the collapse of cryptocurrency exchange FTX.\n- TikTok plans to test an ad-free subscription tier for some users, priced at $4.99.\n- LinkedIn's AI features include an AI-powered talent sourcing platform, LinkedIn Learning coach, and marketing campaign tool.\n- Elon Musk claims X users generate 100 million to 200 million posts daily, but X CEO Linda Yaccarino reports 500 million posts per day.\n- IronNet, founded by a former NSA director, collapsed and laid off its staff following its failure to gain traction.\n\n[concepts/trial-over-crypto-crimes]\n- From [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]]: ongoing legal proceedings against Sam Bankman-Fried for alleged crimes related to FTX and Alameda Research\n\n[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\n- Sam Bankman-Fried is the subject of a trial over alleged crimes related to FTX and Alameda Research\n- The prosecution claims Bankman-Fried stole customer funds and lied to investors\n- The defense argues Bankman-Fried acted in good faith and did not defraud anyone\n\n[concepts/cybercrime]\n- From [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]]: crimes committed through electronic means, often involving hacking or financial fraud\n\n[concepts/c001]\n- From [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]]: Legal action against Google and Alphabet for alleged anticompetitive practices\n\n[concepts/trial-over-crypto-crimes]\nongoing legal proceedings against Sam Bankman-Fried for alleged crimes related to FTX and Alameda Research\n\n[raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\nThe key to his alleged scheme? Alameda Research, a crypto hedge fund he also owned, argued Rehn. Using Caroline Ellison, his on-again off-again girlfriend and the CEO of Alameda, as a front, Bankman-Fried had “secret access” to customer money—both cash and crypto—the government claimed.\n\n[entities/sam-altman-backs-teens-startup]\n- sam-altman-backs-teens-startup [supports] sam-altman-supports-teens-startup (from [[sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]])\n- sam-altman-backs-teens-startup [is involved in] trial over crypto crimes (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- sam-altman-backs-teens-startup [owns] alameda research (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- sam-altman-backs-teens-startup [runs] ftx (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n\n[concepts/trial-over-crypto-crimes]\n- sam-altman-backs-teens-startup [is involved in] trial over crypto crimes (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- trial over crypto crimes [is a case of] startup founder (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- trial over crypto crimes [involves] cybercrime (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- thane rehn [is involved in] trial over crypto crimes (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- mark cohen [is involved in] trial over crypto crimes (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n\n[concepts/cybercrime]\n- trial over crypto crimes [involves] cybercrime (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n\n[raw:sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]\nMore importantly, perhaps, is the suit’s tackling of how AI will impact publishers’ businesses. The problem was recently detailed in a report on Thursday by The Wall Street Journal, which led with a shocking statistic. When online magazine The Atlantic modeled what would happen if Google integrated AI into search, it found that 75% of the time the AI would answer the user’s query without requiring a click-through to its website, losing it traffic. This could have a major impact on publishers’ traffic going forward, as Google today drives nearly 40% of their traffic, according to data from Similarweb.\n\n[raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\nWhat the jury will see is a nerdy startup founder who acted in “good faith,” not the prosecution’s “cartoon of a villain.” (Cohen repeatedly harped on Bankman-Fried’s allegedly good-faith actions throughout his address to the jury.)\n\n[concepts/cybercrime]\ncrimes committed through electronic means, often involving hacking or financial fraud\n\n[sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]\n- Sam Altman supports a teen-founded AI startup\n- Google launches Pixel 8 and Pixel 8 Pro\n- Flexport CEO Dave Clark criticizes the board and founder\n- FTX founder Sam Bankman-Fried faces trial\n- TikTok introduces an ad-free subscription service\n- LinkedIn integrates AI into its recruitment and marketing tools\n- Elon Musk's X platform sees conflicting user activity numbers\n- IronNet, a cybersecurity startup, closes and lays off staff\n\n[entities/ironnet-closure]\n- From [[sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]]: The closure of IronNet, a cybersecurity startup founded by a former NSA director, following its failure to gain traction.\n\n[entities/g001]\n- From [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]]: Search engine and technology company\n\n[entities/g001]\n- google [filed lawsuit against] antitrust lawsuit (from [[sources/News_publisher_files_class_action_antitrust_suit_against_Googl\n\n[Knowledge graph]\nsam-altman-backs-teens-startup [supports] sam-altman-supports-teens-startup (from sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier)\ngoogle [filed lawsuit against] antitrust lawsuit (from sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line)\ngoogle [alleges content misappropriation] content misappropriation (from sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line)\ngoogle [targets AI technologies] artificial intelligence (from sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line)\nhelena world chronicle [files class action lawsuit] antitrust lawsuit (from sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line)\nsam-altman-backs-teens-startup [is involved in] trial over crypto crimes (from sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand)",
+  "answer_prompt": "Answer using only the context. Give a short direct answer (entity, name, number, date, phrase, Yes/No), or unanswerable. Output only the answer.\n\nContext:\n[raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\nShortly afterward, as the trial neared late afternoon, the government called Adam Yedidia to the stand. A fast-talking graduate of MIT, he and Bankman-Fried were close friends in college, he said. And after Bankman-Fried left Jane Street, the high-frequency trading firm where the former billionaire got his start in finance after MIT, he persuaded Yedidia to join him as a trader at Alameda and then as a developer at FTX.\n\n[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\nThis document discusses the ongoing trial of Sam Bankman-Fried, the former CEO of FTX, focusing on contrasting narratives presented by the prosecution and defense. The prosecution portrays Bankman-Fried as a liar and fraud, while the defense argues he acted in good faith.\n\n[raw:sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]\nSBF allegedly tried to buy off Trump: The TC team’s been trained on the Manhattan Federal Court for the trial of Sam Bankman-Fried, the disgraced entrepreneur accused of orchestrating the collapse of cryptocurrency exchange FTX. But fascinating details about SBF’s political dealings are emerging from a book by Michael Lewis, “Going Infinite,” that debuted on the first day of the trial, like SBF’s attempt to buy off Trump to get him to not run again for president.\n\n[raw:sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]\nInside the SBF trial: Rebecca and Jacquelyn report on the second day of the SBF and FTX trial. The prosecution painted Bankman-Fried as someone who knowingly committed fraud to achieve great wealth, power and influence, while the defense countered that the FTX founder acted in good faith, never meant to commit fraud or steal and basically got in over his head.\n\n[sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]\n- Induced AI, backed by Sam Altman, assists businesses in automating workflows using plain English inputs.\n- The Pixel 8 Pro offers improved cameras, brighter screens, and enhanced AI features compared to the Pixel 7 Pro.\n- Flexport's CEO, Dave Clark, was ousted a year after taking the CEO role.\n- FTX founder Sam Bankman-Fried faces charges of orchestrating the collapse of cryptocurrency exchange FTX.\n- TikTok plans to test an ad-free subscription tier for some users, priced at $4.99.\n- LinkedIn's AI features include an AI-powered talent sourcing platform, LinkedIn Learning coach, and marketing campaign tool.\n- Elon Musk claims X users generate 100 million to 200 million posts daily, but X CEO Linda Yaccarino reports 500 million posts per day.\n- IronNet, founded by a former NSA director, collapsed and laid off its staff following its failure to gain traction.\n\n[concepts/trial-over-crypto-crimes]\n- From [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]]: ongoing legal proceedings against Sam Bankman-Fried for alleged crimes related to FTX and Alameda Research\n\n[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\n- Sam Bankman-Fried is the subject of a trial over alleged crimes related to FTX and Alameda Research\n- The prosecution claims Bankman-Fried stole customer funds and lied to investors\n- The defense argues Bankman-Fried acted in good faith and did not defraud anyone\n\n[concepts/cybercrime]\n- From [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]]: crimes committed through electronic means, often involving hacking or financial fraud\n\n[concepts/c001]\n- From [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]]: Legal action against Google and Alphabet for alleged anticompetitive practices\n\n[concepts/trial-over-crypto-crimes]\nongoing legal proceedings against Sam Bankman-Fried for alleged crimes related to FTX and Alameda Research\n\n[raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\nThe key to his alleged scheme? Alameda Research, a crypto hedge fund he also owned, argued Rehn. Using Caroline Ellison, his on-again off-again girlfriend and the CEO of Alameda, as a front, Bankman-Fried had “secret access” to customer money—both cash and crypto—the government claimed.\n\n[entities/sam-altman-backs-teens-startup]\n- sam-altman-backs-teens-startup [supports] sam-altman-supports-teens-startup (from [[sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]])\n- sam-altman-backs-teens-startup [is involved in] trial over crypto crimes (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- sam-altman-backs-teens-startup [owns] alameda research (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- sam-altman-backs-teens-startup [runs] ftx (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n\n[concepts/trial-over-crypto-crimes]\n- sam-altman-backs-teens-startup [is involved in] trial over crypto crimes (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- trial over crypto crimes [is a case of] startup founder (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- trial over crypto crimes [involves] cybercrime (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- thane rehn [is involved in] trial over crypto crimes (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- mark cohen [is involved in] trial over crypto crimes (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n\n[concepts/cybercrime]\n- trial over crypto crimes [involves] cybercrime (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n\n[raw:sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]\nMore importantly, perhaps, is the suit’s tackling of how AI will impact publishers’ businesses. The problem was recently detailed in a report on Thursday by The Wall Street Journal, which led with a shocking statistic. When online magazine The Atlantic modeled what would happen if Google integrated AI into search, it found that 75% of the time the AI would answer the user’s query without requiring a click-through to its website, losing it traffic. This could have a major impact on publishers’ traffic going forward, as Google today drives nearly 40% of their traffic, according to data from Similarweb.\n\n[raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\nWhat the jury will see is a nerdy startup founder who acted in “good faith,” not the prosecution’s “cartoon of a villain.” (Cohen repeatedly harped on Bankman-Fried’s allegedly good-faith actions throughout his address to the jury.)\n\n[concepts/cybercrime]\ncrimes committed through electronic means, often involving hacking or financial fraud\n\n[sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]\n- Sam Altman supports a teen-founded AI startup\n- Google launches Pixel 8 and Pixel 8 Pro\n- Flexport CEO Dave Clark criticizes the board and founder\n- FTX founder Sam Bankman-Fried faces trial\n- TikTok introduces an ad-free subscription service\n- LinkedIn integrates AI into its recruitment and marketing tools\n- Elon Musk's X platform sees conflicting user activity numbers\n- IronNet, a cybersecurity startup, closes and lays off staff\n\n[entities/ironnet-closure]\n- From [[sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]]: The closure of IronNet, a cybersecurity startup founded by a former NSA director, following its failure to gain traction.\n\n[entities/g001]\n- From [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]]: Search engine and technology company\n\n[entities/g001]\n- google [filed lawsuit against] antitrust lawsuit (from [[sources/News_publisher_files_class_action_antitrust_suit_against_Googl\n\n[Knowledge graph]\nsam-altman-backs-teens-startup [supports] sam-altman-supports-teens-startup (from sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier)\ngoogle [filed lawsuit against] antitrust lawsuit (from sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line)\ngoogle [alleges content misappropriation] content misappropriation (from sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line)\ngoogle [targets AI technologies] artificial intelligence (from sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line)\nhelena world chronicle [files class action lawsuit] antitrust lawsuit (from sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line)\nsam-altman-backs-teens-startup [is involved in] trial over crypto crimes (from sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand)\n\nQuestion: Who is the individual facing a jury's assessment of contrasting legal narratives in Fortune, is reported by the same source to have recruited a former Jane Street trader to his ventures, and is accused by the prosecution of committing fraud for personal gain according to TechCrunch?\nAnswer:",
+  "model_call_ids": [
+    53,
+    54,
+    55
+  ],
+  "request_attempts": 3,
+  "failed_requests": 0,
+  "llm_calls": 3,
+  "input_tokens": 8104,
+  "output_tokens": 77,
+  "em": 1.0,
+  "token_f1": 1.0,
+  "rouge_l": 1.0
+}

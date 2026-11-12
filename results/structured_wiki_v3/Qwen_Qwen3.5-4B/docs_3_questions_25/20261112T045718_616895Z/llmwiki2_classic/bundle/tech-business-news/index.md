@@ -1,0 +1,5 @@
+# Notes
+
+* [Helena World Chronicle files antitrust suit against Google and Alphabet](helena-world-chronicle-files-antitrust-suit-against-google.md) - Arkansas publisher Helena World Chronicle filed a class action lawsuit in U.S. District Court in D.C. accusing Google and Alphabet of anticompetitive behavior under the Sherman Act, alleging they siphon off content, readers, and ad revenue through AI technologies like Search Generative Experience (SGE) and Bard, and older tools like the Knowledge Graph.
+* [Tech and Business News: AI Startups, Hardware Launches, and Corporate Shifts](tech-and-business-news-ai-startups-hardware-launches-and.md) - A collection of updates on Induced AI's teenage founders, Google's Pixel 8 launch, Flexport's leadership changes, Sam Bankman-Fried's trial, and various other tech industry developments.
+* [Sam Bankman-Fried trial: Prosecution and Defense opening statements](sam-bankman-fried-trial-prosecution-and-defense-opening.md) - Prosecutor Thane Rehn accused Sam Bankman-Fried of stealing billions via Alameda Research and FTX, while defense lawyer Mark Cohen argued he acted in good faith as a successful startup founder.

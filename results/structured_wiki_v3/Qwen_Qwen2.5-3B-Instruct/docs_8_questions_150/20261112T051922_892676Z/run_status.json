@@ -1,0 +1,99 @@
+{
+  "status": "incomplete",
+  "started_at": "2026-11-12T05:19:22.892833+00:00",
+  "components": {
+    "dataset": {
+      "state": "complete",
+      "documents": 8,
+      "questions": 150
+    },
+    "structured_wiki_build": {
+      "state": "failed",
+      "completed_documents": 4,
+      "error": {
+        "type": "ValueError",
+        "message": "Invalid JSON after two attempts during ingest_extract",
+        "step": null,
+        "status_code": null,
+        "traceback": "Traceback (most recent call last):\n  File \"/workdir/benchmark_llm_wiki.py\", line 672, in run_structured_wiki\n    record = {**wiki.ingest(llm, doc), \"document_id\": doc[\"id\"], \"status\": \"complete\"}\n                ^^^^^^^^^^^^^^^^^^^^^\n  File \"/workdir/benchmark_llm_wiki.py\", line 323, in ingest\n    data = llm.ask_json(EXTRACT.format(title=doc[\"title\"], text=doc[\"text\"]), INGEST_SCHEMA, 4096, \"ingest_extract\")\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workdir/benchmark_llm_wiki.py\", line 218, in ask_json\n    raise ValueError(f\"Invalid JSON after two attempts during {stage}\")\nValueError: Invalid JSON after two attempts during ingest_extract\n"
+      }
+    },
+    "rag_semantic": {
+      "state": "complete",
+      "completed_questions": 150,
+      "expected_questions": 150,
+      "query_errors": 0
+    },
+    "wiki_routed": {
+      "state": "failed",
+      "error": {
+        "type": "ValueError",
+        "message": "Invalid JSON after two attempts during ingest_extract",
+        "step": null,
+        "status_code": null,
+        "traceback": "Traceback (most recent call last):\n  File \"/workdir/benchmark_llm_wiki.py\", line 672, in run_structured_wiki\n    record = {**wiki.ingest(llm, doc), \"document_id\": doc[\"id\"], \"status\": \"complete\"}\n                ^^^^^^^^^^^^^^^^^^^^^\n  File \"/workdir/benchmark_llm_wiki.py\", line 323, in ingest\n    data = llm.ask_json(EXTRACT.format(title=doc[\"title\"], text=doc[\"text\"]), INGEST_SCHEMA, 4096, \"ingest_extract\")\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workdir/benchmark_llm_wiki.py\", line 218, in ask_json\n    raise ValueError(f\"Invalid JSON after two attempts during {stage}\")\nValueError: Invalid JSON after two attempts during ingest_extract\n"
+      },
+      "completed_questions": 0,
+      "expected_questions": 150
+    },
+    "wiki_bm25": {
+      "state": "failed",
+      "error": {
+        "type": "ValueError",
+        "message": "Invalid JSON after two attempts during ingest_extract",
+        "step": null,
+        "status_code": null,
+        "traceback": "Traceback (most recent call last):\n  File \"/workdir/benchmark_llm_wiki.py\", line 672, in run_structured_wiki\n    record = {**wiki.ingest(llm, doc), \"document_id\": doc[\"id\"], \"status\": \"complete\"}\n                ^^^^^^^^^^^^^^^^^^^^^\n  File \"/workdir/benchmark_llm_wiki.py\", line 323, in ingest\n    data = llm.ask_json(EXTRACT.format(title=doc[\"title\"], text=doc[\"text\"]), INGEST_SCHEMA, 4096, \"ingest_extract\")\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workdir/benchmark_llm_wiki.py\", line 218, in ask_json\n    raise ValueError(f\"Invalid JSON after two attempts during {stage}\")\nValueError: Invalid JSON after two attempts during ingest_extract\n"
+      },
+      "completed_questions": 0,
+      "expected_questions": 150
+    },
+    "wiki_hybrid": {
+      "state": "failed",
+      "error": {
+        "type": "ValueError",
+        "message": "Invalid JSON after two attempts during ingest_extract",
+        "step": null,
+        "status_code": null,
+        "traceback": "Traceback (most recent call last):\n  File \"/workdir/benchmark_llm_wiki.py\", line 672, in run_structured_wiki\n    record = {**wiki.ingest(llm, doc), \"document_id\": doc[\"id\"], \"status\": \"complete\"}\n                ^^^^^^^^^^^^^^^^^^^^^\n  File \"/workdir/benchmark_llm_wiki.py\", line 323, in ingest\n    data = llm.ask_json(EXTRACT.format(title=doc[\"title\"], text=doc[\"text\"]), INGEST_SCHEMA, 4096, \"ingest_extract\")\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workdir/benchmark_llm_wiki.py\", line 218, in ask_json\n    raise ValueError(f\"Invalid JSON after two attempts during {stage}\")\nValueError: Invalid JSON after two attempts during ingest_extract\n"
+      },
+      "completed_questions": 0,
+      "expected_questions": 150
+    },
+    "llmwiki2_classic": {
+      "state": "complete",
+      "completed_documents": 8,
+      "expected_documents": 8,
+      "completed_questions": 150,
+      "expected_questions": 150,
+      "error": null,
+      "query_errors": 0,
+      "trace_errors": 0
+    },
+    "llmwiki2_crow": {
+      "state": "complete",
+      "completed_documents": 8,
+      "expected_documents": 8,
+      "completed_questions": 150,
+      "expected_questions": 150,
+      "error": null,
+      "query_errors": 0,
+      "trace_errors": 0
+    }
+  },
+  "run_directory": "/workdir/results/structured_wiki_v3/Qwen_Qwen2.5-3B-Instruct/docs_8_questions_150/20261112T051922_892676Z",
+  "last_update": "2026-11-12T05:46:12.242824+00:00",
+  "completed_at": "2026-11-12T05:46:12.538758+00:00",
+  "expected_systems": [
+    "rag_semantic",
+    "wiki_routed",
+    "wiki_bm25",
+    "wiki_hybrid",
+    "llmwiki2_classic",
+    "llmwiki2_crow"
+  ],
+  "all_systems_complete": false,
+  "paired_comparison_required": true,
+  "paired_comparison_complete": true,
+  "comparison_valid": false
+}

@@ -1,0 +1,200 @@
+{
+  "INGEST_SCHEMA": {
+    "type": "object",
+    "properties": {
+      "summary": {
+        "type": "string"
+      },
+      "key_points": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "facts_and_data": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "entities": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "id",
+            "name",
+            "description",
+            "type"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "concepts": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "id",
+            "name",
+            "description"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "relationships": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "source_id": {
+              "type": "string"
+            },
+            "target_id": {
+              "type": "string"
+            },
+            "relation": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "source_id",
+            "target_id",
+            "relation"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    "required": [
+      "summary",
+      "key_points",
+      "facts_and_data",
+      "entities",
+      "concepts",
+      "relationships"
+    ],
+    "additionalProperties": false
+  },
+  "RECONCILE_SCHEMA": {
+    "type": "object",
+    "properties": {
+      "merge_ids": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "new_id": {
+              "type": "string"
+            },
+            "existing_id": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "new_id",
+            "existing_id"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "conflicts": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "existing_id": {
+              "type": "string"
+            },
+            "existing_description": {
+              "type": "string"
+            },
+            "new_description": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "existing_id",
+            "existing_description",
+            "new_description"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    "required": [
+      "merge_ids",
+      "conflicts"
+    ],
+    "additionalProperties": false
+  },
+  "ROUTE_SCHEMA": {
+    "type": "object",
+    "properties": {
+      "source_pages": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "entity_pages": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "concept_pages": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      }
+    },
+    "required": [
+      "source_pages",
+      "entity_pages",
+      "concept_pages"
+    ],
+    "additionalProperties": false
+  },
+  "TERMS_SCHEMA": {
+    "type": "object",
+    "properties": {
+      "search_terms": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      }
+    },
+    "required": [
+      "search_terms"
+    ],
+    "additionalProperties": false
+  }
+}

@@ -1,0 +1,983 @@
+{
+  "benchmark_version": "structured_wiki_v3",
+  "schema_version": 3,
+  "code_sha256": "7be5d78368235faa689cefc232b58bfa6d3cb0ffe8189552c4d4d77b13fc5868",
+  "source_sha256": {
+    "benchmark_llm_wiki.py": "7be5d78368235faa689cefc232b58bfa6d3cb0ffe8189552c4d4d77b13fc5868",
+    "benchmark_artifacts.py": "c5562125c275ffa903e6d25f7756bd6ac70d984618b97dc0a89b95316c51b0f3",
+    "llmwiki_adapter.py": "1d899e8363a144fd78712ce1ac1663e4b40864d587d2681fbf5d0ebf87e47645",
+    "capture_runtime_metadata.py": "06e9f2cc5d09b2e072ce861afadb998204731375713f6a44b7e856b73b6d08cf",
+    "start_vllm_services.sh": "d0bb9668426dba7f55bbef47a9aa389c34120c052e6029f79557a7587cbb4f1d"
+  },
+  "package_versions": {
+    "llmwiki2": "0.8.0",
+    "vllm": "0.32.0+cu129",
+    "openai": "3.35.1",
+    "datasets": "5.1.0",
+    "sentence-transformers": "6.2.0",
+    "rank-bm25": "0.2.2",
+    "nltk": "3.10.4",
+    "scikit-learn": "1.9.1",
+    "jsonschema": "4.26.0",
+    "numpy": "2.2.6",
+    "llmw2": "not installed in client environment"
+  },
+  "package_provenance": {
+    "distributions": {
+      "llmwiki2": {
+        "status": "installed",
+        "name": "llmwiki2",
+        "version": "0.8.0"
+      },
+      "llmw2": {
+        "status": "not installed"
+      },
+      "vllm": {
+        "status": "installed",
+        "name": "vllm",
+        "version": "0.32.0+cu129",
+        "direct_url": {
+          "url": "file:///vllm-workspace/dist/vllm-0.32.0+cu129-cp38-abi3-linux_x86_64.whl",
+          "archive_info": {}
+        }
+      },
+      "openai": {
+        "status": "installed",
+        "name": "openai",
+        "version": "3.35.1"
+      },
+      "datasets": {
+        "status": "installed",
+        "name": "datasets",
+        "version": "5.1.0"
+      },
+      "sentence-transformers": {
+        "status": "installed",
+        "name": "sentence-transformers",
+        "version": "6.2.0"
+      },
+      "rank-bm25": {
+        "status": "installed",
+        "name": "rank-bm25",
+        "version": "0.2.2"
+      },
+      "nltk": {
+        "status": "installed",
+        "name": "nltk",
+        "version": "3.10.4"
+      },
+      "scikit-learn": {
+        "status": "installed",
+        "name": "scikit-learn",
+        "version": "1.9.1"
+      },
+      "jsonschema": {
+        "status": "installed",
+        "name": "jsonschema",
+        "version": "4.26.0"
+      },
+      "numpy": {
+        "status": "installed",
+        "name": "numpy",
+        "version": "2.2.6"
+      },
+      "rouge-score": {
+        "status": "installed",
+        "name": "rouge_score",
+        "version": "0.1.2"
+      }
+    },
+    "modules": {
+      "llmw2": {
+        "status": "recorded",
+        "path": "/usr/local/lib/python3.12/dist-packages/llmw2/__init__.py",
+        "module_version": "0.8.0",
+        "source_sha256": "d1a43abad5495c191e11213a802363334353a051dd1ebc9e6dd2ce74b53b33e0",
+        "source_files": 51,
+        "source_hash_scope": "relative paths and contents of all package Python files"
+      }
+    }
+  },
+  "top_docs": 3,
+  "max_questions": 25,
+  "wiki_modes": [
+    "classic",
+    "crow"
+  ],
+  "expected_systems": [
+    "rag_semantic",
+    "wiki_routed",
+    "wiki_bm25",
+    "wiki_hybrid",
+    "llmwiki2_classic",
+    "llmwiki2_crow"
+  ],
+  "execution_order": [
+    "rag_semantic",
+    "wiki_routed",
+    "wiki_bm25",
+    "wiki_hybrid",
+    "llmwiki2_classic",
+    "llmwiki2_crow"
+  ],
+  "classifier_model": "LiquidAI/d1-3B",
+  "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+  "context_budget_chars": 12000,
+  "rag_top_k": 3,
+  "rag_chunk_words": 200,
+  "wiki_search": "compiled-page and raw-source paragraphs; BM25 or RRF(k=60)",
+  "wiki_query_preparation": "LLM page selection and term expansion for all three structured-wiki strategies",
+  "llm_settings": {
+    "temperature": 0,
+    "sdk_transport_retries": 0,
+    "json_validation_attempts": 2,
+    "extract_max_tokens": 4096,
+    "reconcile_max_tokens": 1024,
+    "route_max_tokens": 512,
+    "search_terms_max_tokens": 384,
+    "answer_max_tokens": 96
+  },
+  "writeback_enabled": false,
+  "replicates": 1,
+  "randomized_order": false,
+  "direct_retrieval_settings": {
+    "raw_chunk_words": 200,
+    "chunk_overlap_words": 0,
+    "dense_top_k": 3,
+    "raw_paragraph_min_chars": 30,
+    "wiki_paragraph_min_chars": 20,
+    "context_budget_chars": 12000,
+    "graph_reserved_fraction": 0.25,
+    "graph_max_relations": 6,
+    "reconciliation_candidates": "all stored nodes",
+    "index_description_chars": 280,
+    "fallback_pages_per_type": 3,
+    "expansion_excerpt_chars": 2500,
+    "expansion_term_prompt_target": [
+      8,
+      15
+    ],
+    "other_wiki_pages": 3,
+    "selected_term_min_matches": 1,
+    "other_raw_min_matches": 2,
+    "question_unigram_min_chars": 3,
+    "question_bigrams": "adjacent non-stopwords",
+    "stopwords": [
+      "a",
+      "about",
+      "above",
+      "across",
+      "after",
+      "afterwards",
+      "again",
+      "against",
+      "all",
+      "almost",
+      "alone",
+      "along",
+      "already",
+      "also",
+      "although",
+      "always",
+      "am",
+      "among",
+      "amongst",
+      "amoungst",
+      "amount",
+      "an",
+      "and",
+      "another",
+      "any",
+      "anyhow",
+      "anyone",
+      "anything",
+      "anyway",
+      "anywhere",
+      "are",
+      "around",
+      "as",
+      "at",
+      "back",
+      "be",
+      "became",
+      "because",
+      "become",
+      "becomes",
+      "becoming",
+      "been",
+      "before",
+      "beforehand",
+      "behind",
+      "being",
+      "below",
+      "beside",
+      "besides",
+      "between",
+      "beyond",
+      "bill",
+      "both",
+      "bottom",
+      "but",
+      "by",
+      "call",
+      "can",
+      "cannot",
+      "cant",
+      "co",
+      "con",
+      "could",
+      "couldnt",
+      "cry",
+      "de",
+      "describe",
+      "detail",
+      "do",
+      "done",
+      "down",
+      "due",
+      "during",
+      "each",
+      "eg",
+      "eight",
+      "either",
+      "eleven",
+      "else",
+      "elsewhere",
+      "empty",
+      "enough",
+      "etc",
+      "even",
+      "ever",
+      "every",
+      "everyone",
+      "everything",
+      "everywhere",
+      "except",
+      "few",
+      "fifteen",
+      "fifty",
+      "fill",
+      "find",
+      "fire",
+      "first",
+      "five",
+      "for",
+      "former",
+      "formerly",
+      "forty",
+      "found",
+      "four",
+      "from",
+      "front",
+      "full",
+      "further",
+      "get",
+      "give",
+      "go",
+      "had",
+      "has",
+      "hasnt",
+      "have",
+      "he",
+      "hence",
+      "her",
+      "here",
+      "hereafter",
+      "hereby",
+      "herein",
+      "hereupon",
+      "hers",
+      "herself",
+      "him",
+      "himself",
+      "his",
+      "how",
+      "however",
+      "hundred",
+      "i",
+      "ie",
+      "if",
+      "in",
+      "inc",
+      "indeed",
+      "interest",
+      "into",
+      "is",
+      "it",
+      "its",
+      "itself",
+      "keep",
+      "last",
+      "latter",
+      "latterly",
+      "least",
+      "less",
+      "ltd",
+      "made",
+      "many",
+      "may",
+      "me",
+      "meanwhile",
+      "might",
+      "mill",
+      "mine",
+      "more",
+      "moreover",
+      "most",
+      "mostly",
+      "move",
+      "much",
+      "must",
+      "my",
+      "myself",
+      "name",
+      "namely",
+      "neither",
+      "never",
+      "nevertheless",
+      "next",
+      "nine",
+      "no",
+      "nobody",
+      "none",
+      "noone",
+      "nor",
+      "not",
+      "nothing",
+      "now",
+      "nowhere",
+      "of",
+      "off",
+      "often",
+      "on",
+      "once",
+      "one",
+      "only",
+      "onto",
+      "or",
+      "other",
+      "others",
+      "otherwise",
+      "our",
+      "ours",
+      "ourselves",
+      "out",
+      "over",
+      "own",
+      "part",
+      "per",
+      "perhaps",
+      "please",
+      "put",
+      "rather",
+      "re",
+      "same",
+      "see",
+      "seem",
+      "seemed",
+      "seeming",
+      "seems",
+      "serious",
+      "several",
+      "she",
+      "should",
+      "show",
+      "side",
+      "since",
+      "sincere",
+      "six",
+      "sixty",
+      "so",
+      "some",
+      "somehow",
+      "someone",
+      "something",
+      "sometime",
+      "sometimes",
+      "somewhere",
+      "still",
+      "such",
+      "system",
+      "take",
+      "ten",
+      "than",
+      "that",
+      "the",
+      "their",
+      "them",
+      "themselves",
+      "then",
+      "thence",
+      "there",
+      "thereafter",
+      "thereby",
+      "therefore",
+      "therein",
+      "thereupon",
+      "these",
+      "they",
+      "thick",
+      "thin",
+      "third",
+      "this",
+      "those",
+      "though",
+      "three",
+      "through",
+      "throughout",
+      "thru",
+      "thus",
+      "to",
+      "together",
+      "too",
+      "top",
+      "toward",
+      "towards",
+      "twelve",
+      "twenty",
+      "two",
+      "un",
+      "under",
+      "until",
+      "up",
+      "upon",
+      "us",
+      "very",
+      "via",
+      "was",
+      "we",
+      "well",
+      "were",
+      "what",
+      "whatever",
+      "when",
+      "whence",
+      "whenever",
+      "where",
+      "whereafter",
+      "whereas",
+      "whereby",
+      "wherein",
+      "whereupon",
+      "wherever",
+      "whether",
+      "which",
+      "while",
+      "whither",
+      "who",
+      "whoever",
+      "whole",
+      "whom",
+      "whose",
+      "why",
+      "will",
+      "with",
+      "within",
+      "without",
+      "would",
+      "yet",
+      "you",
+      "your",
+      "yours",
+      "yourself",
+      "yourselves"
+    ],
+    "stemmer": "Snowball English",
+    "bm25_package_defaults": {
+      "k1": 1.5,
+      "b": 0.75,
+      "epsilon": 0.25
+    },
+    "rrf_k": 60,
+    "fusion_lists": "all indexed paragraphs",
+    "normalize_embeddings": true
+  },
+  "latency_scope": "Retrieval plus generation, excluding per-query result export. Library timing includes HTTP trace capture.",
+  "relevant_environment": {
+    "BENCHMARK_IMAGE_ID": "sha256:3c8543c949b033d4af9ea5889aff54d8327e588b84d0eb9ed07eaa6b7061c32f",
+    "OKF_LLM_MODEL": "Qwen/Qwen3.5-4B",
+    "OKF_CLASSIFIER_MODEL": "LiquidAI/d1-3B",
+    "BENCHMARK_HOST_METADATA": "/workdir/results/runtime_environment/16453016-8004-20261112T045506Z-host.json",
+    "OKF_LLM_PROVIDER": "custom",
+    "OKF_CLASSIFIER_TIMEOUT": "60",
+    "LLM_MODEL": "Qwen/Qwen3.5-4B",
+    "BENCHMARK_IMAGE": "sha256:3c8543c949b033d4af9ea5889aff54d8327e588b84d0eb9ed07eaa6b7061c32f",
+    "OKF_CLASSIFIER_PROVIDER": "custom",
+    "OKF_LLM_TIMEOUT": "600",
+    "OKF_LLM_BASE_URL": "http://localhost:8000/v1",
+    "LLM_BASE_URL": "http://localhost:8000/v1",
+    "OKF_CLASSIFIER_BASE_URL": "http://localhost:8001/v1",
+    "BENCHMARK_RUNTIME_METADATA": "/workdir/runtime_environment.json",
+    "VLLM_ENABLE_CUDA_COMPATIBILITY": "0",
+    "VLLM_USAGE_SOURCE": "production-docker-image",
+    "VLLM_BUILD_COMMIT": "5df63a7203cdb9328d824a27b682e77c7b9928be",
+    "VLLM_BUILD_PIPELINE": "019d130e-464e-4ff7-b84b-492992c0c06b",
+    "VLLM_BUILD_URL": "https://buildkite.com/vllm/release-v2/builds/8622",
+    "VLLM_IMAGE_TAG": "vllm/vllm-openai:v5df63a7203cdb9328d824a27b682e77c7b9928be-cu129"
+  },
+  "prompt_snapshot": {
+    "source_directory": "/workdir/prompts_benchmark",
+    "source_directory_status": "recorded",
+    "overrides": [
+      {
+        "relative_path": "librarian/find_match.md",
+        "status": "recorded",
+        "snapshot_path": "prompts/overrides/librarian/find_match.md",
+        "bytes": 417,
+        "sha256": "fea4365325cc3b82b9cc4b153837195d34f70758ba3f950b1d5f97fd76724bdd"
+      },
+      {
+        "relative_path": "librarian/name_folder.md",
+        "status": "recorded",
+        "snapshot_path": "prompts/overrides/librarian/name_folder.md",
+        "bytes": 472,
+        "sha256": "7cab50ee8e3d8e62fb58d2bd8dd6a0fee04790f05b52ddcf3549fbabdda561af"
+      },
+      {
+        "relative_path": "librarian/relate.md",
+        "status": "recorded",
+        "snapshot_path": "prompts/overrides/librarian/relate.md",
+        "bytes": 467,
+        "sha256": "172991a20cfbd0de7a8aebcb398b64fecf7ac441a0c3b7656e5eab34b3777b63"
+      },
+      {
+        "relative_path": "librarian/route.md",
+        "status": "recorded",
+        "snapshot_path": "prompts/overrides/librarian/route.md",
+        "bytes": 518,
+        "sha256": "0daa9d97ceb13f28126655487e36ecd148753d84d30d44a129df5d1e70877822"
+      },
+      {
+        "relative_path": "librarian/summarize.md",
+        "status": "recorded",
+        "snapshot_path": "prompts/overrides/librarian/summarize.md",
+        "bytes": 487,
+        "sha256": "f71275867105a1c193d3b54c1c9b25bee0d7e1b4ead748654da2d1ff34fc3e1e"
+      },
+      {
+        "relative_path": "librarian/summarize_combine.md",
+        "status": "recorded",
+        "snapshot_path": "prompts/overrides/librarian/summarize_combine.md",
+        "bytes": 421,
+        "sha256": "4f2589f014caf35f4077bdc8fa07ddac2506d75b32bffac9cff7ad7ee584508a"
+      },
+      {
+        "relative_path": "librarian/summarize_part.md",
+        "status": "recorded",
+        "snapshot_path": "prompts/overrides/librarian/summarize_part.md",
+        "bytes": 436,
+        "sha256": "c6e5aaaa12a23ce8a1629d19d287e7f7bb9d7040c1fc47f5ad2f1b51fa263a80"
+      },
+      {
+        "relative_path": "researcher/answer.md",
+        "status": "recorded",
+        "snapshot_path": "prompts/overrides/researcher/answer.md",
+        "bytes": 536,
+        "sha256": "88f8237874ad3b897db2ce5ffff591dad1f77321f2c35804c47c09befcec5f74"
+      }
+    ],
+    "direct_prompts": {
+      "ANSWER": {
+        "sha256": "11f7ecca10b587d112c600a31b542777f2e25660b189532084fe98825f4af35d",
+        "characters": 194
+      },
+      "EXTRACT": {
+        "sha256": "ace072f6ae907e08d1febd6262e611191517ecfa3fb3b797e4c9fcc977fe123a",
+        "characters": 657
+      },
+      "RECONCILE": {
+        "sha256": "a5cd13f8f9aff0883919d78147137f32bdcc4245b9b137f7dc88841fc1ee6535",
+        "characters": 559
+      },
+      "ROUTE": {
+        "sha256": "ac04d9f074d73ec47243ed7539c4ae0bb0ec875d3cedec3aca5ce2b4c4d939d0",
+        "characters": 277
+      },
+      "SEARCH_TERMS": {
+        "sha256": "18fd6b0de3c6a29904dfa51f9801afbc4568bbf5cc80428b775888e30cec11f4",
+        "characters": 177
+      }
+    },
+    "schemas": {
+      "INGEST_SCHEMA": "49da2038e30d32c01ad649fb769d032fc973abe6977d1ad66143c7dc83711a15",
+      "RECONCILE_SCHEMA": "8c5f091ec68c8075f5399747039a372a04f764e5be6722adfb2af39c9cd64c37",
+      "ROUTE_SCHEMA": "9bdd72c9e2b76b165e6fffb74c4c98220cf10cb37e882a1e94ae19d73dc9c450",
+      "TERMS_SCHEMA": "47624ac5906067f7cb756f6be055e8e7ef77c9e9ddda673798294d3293d0a27a"
+    },
+    "scope": "Project templates and overrides; complete requests are recorded separately by the runner"
+  },
+  "actual_questions": 25,
+  "documents": [
+    "Sam Altman backs teens’ startup, Google unveils the Pixel 8 and TikTok tests an ad-free tier",
+    "News publisher files class action antitrust suit against Google, citing AI’s harms to their bottom line",
+    "Is Sam Bankman-Fried a bad ‘man’ or a good ‘boy’? Lawyers swap opening statements before first witnesses take the stand"
+  ],
+  "document_order": [
+    "Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier",
+    "News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line",
+    "Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand"
+  ],
+  "document_sha256": {
+    "Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier": "5b136a9bad6732b58956655c3e56a7e481b90281a9bccbf43cfb69d40eee0212",
+    "News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line": "3c8d3acaf5086a5a3ff546071a1be9c728c76ee582a688390917fb2d987f796a",
+    "Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand": "7547a91c0f876b858db234b2457d32c9e10413dc05e8f08e0ea78c61bd0dcbcc"
+  },
+  "questions": [
+    {
+      "qa_id": "mhop_5",
+      "question": "Who is the individual alleged to have built a thriving crypto exchange on falsehoods and is accused by the prosecution of committing fraud for personal gain, as reported by both Fortune and TechCrunch?",
+      "reference": "Sam Bankman-Fried",
+      "question_type": "inference_query",
+      "evidence_titles": [
+        "Is Sam Bankman-Fried a bad ‘man’ or a good ‘boy’? Lawyers swap opening statements before first witnesses take the stand",
+        "Sam Altman backs teens’ startup, Google unveils the Pixel 8 and TikTok tests an ad-free tier"
+      ]
+    },
+    {
+      "qa_id": "mhop_156",
+      "question": "Who is the individual that, according to articles from both Fortune and TechCrunch, allegedly constructed a fraudulent facade of success for a crypto exchange, utilized a colleague for clandestine control over customer funds, and pursued personal enrichment and power through deceptive means?",
+      "reference": "Sam Bankman-Fried",
+      "question_type": "inference_query",
+      "evidence_titles": [
+        "Is Sam Bankman-Fried a bad ‘man’ or a good ‘boy’? Lawyers swap opening statements before first witnesses take the stand",
+        "Sam Altman backs teens’ startup, Google unveils the Pixel 8 and TikTok tests an ad-free tier"
+      ]
+    },
+    {
+      "qa_id": "mhop_176",
+      "question": "Does the 'Fortune' article suggest that the success of FTX was built on dishonesty, while the 'TechCrunch' article alleges that Sam Bankman-Fried engaged in fraud for personal benefits, or do both articles imply misconduct on the part of Sam Bankman-Fried?",
+      "reference": "Yes",
+      "question_type": "comparison_query",
+      "evidence_titles": [
+        "Is Sam Bankman-Fried a bad ‘man’ or a good ‘boy’? Lawyers swap opening statements before first witnesses take the stand",
+        "Sam Altman backs teens’ startup, Google unveils the Pixel 8 and TikTok tests an ad-free tier"
+      ]
+    },
+    {
+      "qa_id": "mhop_330",
+      "question": "Who is the individual being judged for their actions in a legal case, where contrasting stories are presented in 'Fortune', is accused of using a front for secret access to customer funds, and is alleged by the prosecution in a 'TechCrunch' article to have committed fraud for personal gain?",
+      "reference": "Sam Bankman-Fried",
+      "question_type": "inference_query",
+      "evidence_titles": [
+        "Is Sam Bankman-Fried a bad ‘man’ or a good ‘boy’? Lawyers swap opening statements before first witnesses take the stand",
+        "Sam Altman backs teens’ startup, Google unveils the Pixel 8 and TikTok tests an ad-free tier"
+      ]
+    },
+    {
+      "qa_id": "mhop_345",
+      "question": "Who is the individual that persuaded Adam Yedidia to leave Jane Street and join both Alameda and FTX, and is also accused by the prosecution of committing fraud for personal gain, as reported by Fortune and TechCrunch?",
+      "reference": "Sam Bankman-Fried",
+      "question_type": "inference_query",
+      "evidence_titles": [
+        "Is Sam Bankman-Fried a bad ‘man’ or a good ‘boy’? Lawyers swap opening statements before first witnesses take the stand",
+        "Sam Altman backs teens’ startup, Google unveils the Pixel 8 and TikTok tests an ad-free tier"
+      ]
+    },
+    {
+      "qa_id": "mhop_384",
+      "question": "Does the 'Fortune' article suggest that Sam Bankman-Fried's actions regarding the management of FTX and customer funds at Alameda Research were based on deceit and misuse, similarly to the allegations of fraud for personal gain mentioned in the 'TechCrunch' article?",
+      "reference": "Yes",
+      "question_type": "comparison_query",
+      "evidence_titles": [
+        "Is Sam Bankman-Fried a bad ‘man’ or a good ‘boy’? Lawyers swap opening statements before first witnesses take the stand",
+        "Sam Altman backs teens’ startup, Google unveils the Pixel 8 and TikTok tests an ad-free tier"
+      ]
+    },
+    {
+      "qa_id": "mhop_506",
+      "question": "Who is the individual facing a jury's assessment of contrasting legal narratives, accused of building a cryptocurrency exchange's success on falsehoods, and alleged to have covertly accessed customer funds through an associate at Alameda Research, all while being charged with intentional fraud for personal gains as reported by Fortune and TechCrunch?",
+      "reference": "Sam Bankman-Fried",
+      "question_type": "inference_query",
+      "evidence_titles": [
+        "Is Sam Bankman-Fried a bad ‘man’ or a good ‘boy’? Lawyers swap opening statements before first witnesses take the stand",
+        "Sam Altman backs teens’ startup, Google unveils the Pixel 8 and TikTok tests an ad-free tier"
+      ]
+    },
+    {
+      "qa_id": "mhop_738",
+      "question": "Who is the individual facing a jury's assessment of contrasting legal narratives in Fortune, is reported by the same source to have recruited a former Jane Street trader to his ventures, and is accused by the prosecution of committing fraud for personal gain according to TechCrunch?",
+      "reference": "Sam Bankman-Fried",
+      "question_type": "inference_query",
+      "evidence_titles": [
+        "Is Sam Bankman-Fried a bad ‘man’ or a good ‘boy’? Lawyers swap opening statements before first witnesses take the stand",
+        "Sam Altman backs teens’ startup, Google unveils the Pixel 8 and TikTok tests an ad-free tier"
+      ]
+    },
+    {
+      "qa_id": "mhop_775",
+      "question": "Does the TechCrunch article suggest that Sam Bankman-Fried's motivation for alleged fraudulent activities was purely altruistic, while the Fortune article focuses on the jury's role in determining the truthfulness of Sam Bankman-Fried's actions, without attributing a specific motive?",
+      "reference": "no",
+      "question_type": "comparison_query",
+      "evidence_titles": [
+        "Sam Altman backs teens’ startup, Google unveils the Pixel 8 and TikTok tests an ad-free tier",
+        "Is Sam Bankman-Fried a bad ‘man’ or a good ‘boy’? Lawyers swap opening statements before first witnesses take the stand"
+      ]
+    },
+    {
+      "qa_id": "mhop_780",
+      "question": "Who is the individual accused of using Caroline Ellison as a front to secretly access Alameda Research's customer funds and is also alleged by the prosecution to have committed fraud for wealth, power, and influence, as reported by both Fortune and TechCrunch?",
+      "reference": "Sam Bankman-Fried",
+      "question_type": "inference_query",
+      "evidence_titles": [
+        "Is Sam Bankman-Fried a bad ‘man’ or a good ‘boy’? Lawyers swap opening statements before first witnesses take the stand",
+        "Sam Altman backs teens’ startup, Google unveils the Pixel 8 and TikTok tests an ad-free tier"
+      ]
+    },
+    {
+      "qa_id": "mhop_802",
+      "question": "Between the TechCrunch report on Google's hardware developments published on October 7, 2023, and the TechCrunch report on the antitrust suit against Google published on December 15, 2023, was there a change in the nature of the issues reported concerning Google?",
+      "reference": "Yes",
+      "question_type": "temporal_query",
+      "evidence_titles": [
+        "News publisher files class action antitrust suit against Google, citing AI’s harms to their bottom line",
+        "Sam Altman backs teens’ startup, Google unveils the Pixel 8 and TikTok tests an ad-free tier"
+      ]
+    },
+    {
+      "qa_id": "mhop_858",
+      "question": "Did the report by Fortune on October 4, 2023, regarding Sam Bankman-Fried's alleged use of Caroline Ellison as a front at Alameda Research, and the subsequent report by TechCrunch involving Sam Bankman-Fried's alleged motives for committing fraud, portray Sam Bankman-Fried's actions inconsistently?",
+      "reference": "no",
+      "question_type": "temporal_query",
+      "evidence_titles": [
+        "Is Sam Bankman-Fried a bad ‘man’ or a good ‘boy’? Lawyers swap opening statements before first witnesses take the stand",
+        "Sam Altman backs teens’ startup, Google unveils the Pixel 8 and TikTok tests an ad-free tier"
+      ]
+    },
+    {
+      "qa_id": "mhop_912",
+      "question": "Was there inconsistency in the portrayal of Sam Bankman-Fried's legal situation according to the 'Fortune' article on October 4, 2023, discussing his actions and the state of FTX, or the 'TechCrunch' article mentioning the prosecution's allegations against him?",
+      "reference": "no",
+      "question_type": "temporal_query",
+      "evidence_titles": [
+        "Is Sam Bankman-Fried a bad ‘man’ or a good ‘boy’? Lawyers swap opening statements before first witnesses take the stand",
+        "Sam Altman backs teens’ startup, Google unveils the Pixel 8 and TikTok tests an ad-free tier"
+      ]
+    },
+    {
+      "qa_id": "mhop_1090",
+      "question": "Which company, recently discussed in TechCrunch articles for both hosting an annual hardware event to showcase new developments and being the subject of a class action antitrust lawsuit by news publishers for its alleged anticompetitive practices, is also known for its search engine and advertising services?",
+      "reference": "Google",
+      "question_type": "inference_query",
+      "evidence_titles": [
+        "Sam Altman backs teens’ startup, Google unveils the Pixel 8 and TikTok tests an ad-free tier",
+        "News publisher files class action antitrust suit against Google, citing AI’s harms to their bottom line"
+      ]
+    },
+    {
+      "qa_id": "mhop_1316",
+      "question": "Who is the individual alleged to have built a successful crypto exchange on falsehoods, convinced a former Jane Street colleague to join his ventures, and is accused by the prosecution of committing fraud for personal gain, as reported by both Fortune and TechCrunch?",
+      "reference": "Sam Bankman-Fried",
+      "question_type": "inference_query",
+      "evidence_titles": [
+        "Is Sam Bankman-Fried a bad ‘man’ or a good ‘boy’? Lawyers swap opening statements before first witnesses take the stand",
+        "Sam Altman backs teens’ startup, Google unveils the Pixel 8 and TikTok tests an ad-free tier"
+      ]
+    },
+    {
+      "qa_id": "mhop_1383",
+      "question": "Was there inconsistency in the portrayal of Sam Bankman-Fried's actions related to the fraud allegations between the report by Fortune on Sam Bankman-Fried's involvement with Adam Yedidia and Caroline Ellison published on October 4, 2023, and the report by TechCrunch on the allegations against Sam Bankman-Fried published after?",
+      "reference": "no",
+      "question_type": "temporal_query",
+      "evidence_titles": [
+        "Is Sam Bankman-Fried a bad ‘man’ or a good ‘boy’? Lawyers swap opening statements before first witnesses take the stand",
+        "Sam Altman backs teens’ startup, Google unveils the Pixel 8 and TikTok tests an ad-free tier"
+      ]
+    },
+    {
+      "qa_id": "mhop_1469",
+      "question": "Between the TechCrunch report on Google's hardware developments published on October 7, 2023, and the TechCrunch report on the antitrust suit against Google published on December 15, 2023, was there no change in the nature of the issues reported concerning Google?",
+      "reference": "no",
+      "question_type": "temporal_query",
+      "evidence_titles": [
+        "News publisher files class action antitrust suit against Google, citing AI’s harms to their bottom line",
+        "Sam Altman backs teens’ startup, Google unveils the Pixel 8 and TikTok tests an ad-free tier"
+      ]
+    },
+    {
+      "qa_id": "mhop_1627",
+      "question": "Who is the individual being judged for alleged fraudulent actions, whose case is being reported by both Fortune and TechCrunch, and is at the center of a legal battle involving contrasting narratives from defense lawyers and prosecutors?",
+      "reference": "Sam Bankman-Fried",
+      "question_type": "inference_query",
+      "evidence_titles": [
+        "Is Sam Bankman-Fried a bad ‘man’ or a good ‘boy’? Lawyers swap opening statements before first witnesses take the stand",
+        "Sam Altman backs teens’ startup, Google unveils the Pixel 8 and TikTok tests an ad-free tier"
+      ]
+    },
+    {
+      "qa_id": "mhop_1640",
+      "question": "Did the 'Fortune' article imply that Sam Bankman-Fried's handling of FTX and customer funds at Alameda Research was entirely transparent and proper, unlike the allegations of fraud for personal gain mentioned in the 'TechCrunch' article?",
+      "reference": "no",
+      "question_type": "comparison_query",
+      "evidence_titles": [
+        "Is Sam Bankman-Fried a bad ‘man’ or a good ‘boy’? Lawyers swap opening statements before first witnesses take the stand",
+        "Sam Altman backs teens’ startup, Google unveils the Pixel 8 and TikTok tests an ad-free tier"
+      ]
+    },
+    {
+      "qa_id": "mhop_1792",
+      "question": "Did the 'Fortune' article suggest that the success of FTX was built on complete transparency, while the 'TechCrunch' article alleges that Sam Bankman-Fried engaged in fraud for personal benefits, or do both articles imply misconduct on the part of Sam Bankman-Fried?",
+      "reference": "no",
+      "question_type": "comparison_query",
+      "evidence_titles": [
+        "Is Sam Bankman-Fried a bad ‘man’ or a good ‘boy’? Lawyers swap opening statements before first witnesses take the stand",
+        "Sam Altman backs teens’ startup, Google unveils the Pixel 8 and TikTok tests an ad-free tier"
+      ]
+    },
+    {
+      "qa_id": "mhop_1928",
+      "question": "Who is the individual whose wealth and influence, as reported by both Fortune and TechCrunch, are under scrutiny by a jury due to allegations of achieving them through fraudulent means related to a crypto exchange?",
+      "reference": "Sam Bankman-Fried",
+      "question_type": "inference_query",
+      "evidence_titles": [
+        "Is Sam Bankman-Fried a bad ‘man’ or a good ‘boy’? Lawyers swap opening statements before first witnesses take the stand",
+        "Sam Altman backs teens’ startup, Google unveils the Pixel 8 and TikTok tests an ad-free tier"
+      ]
+    },
+    {
+      "qa_id": "mhop_2115",
+      "question": "Does the TechCrunch article suggest that Sam Bankman-Fried's motivation for alleged fraudulent activities was for personal gain, while the Fortune article focuses on the jury's role in determining the truthfulness of Sam Bankman-Fried's actions, without attributing a specific motive?",
+      "reference": "Yes",
+      "question_type": "comparison_query",
+      "evidence_titles": [
+        "Sam Altman backs teens’ startup, Google unveils the Pixel 8 and TikTok tests an ad-free tier",
+        "Is Sam Bankman-Fried a bad ‘man’ or a good ‘boy’? Lawyers swap opening statements before first witnesses take the stand"
+      ]
+    },
+    {
+      "qa_id": "mhop_2151",
+      "question": "After the 'Fortune' article on October 4, 2023, discussing Sam Bankman-Fried's actions and the state of FTX, and the 'TechCrunch' article mentioning the prosecution's allegations against Sam Bankman-Fried, is there consistency in the portrayal of Sam Bankman-Fried's legal situation according to these sources?",
+      "reference": "Yes",
+      "question_type": "temporal_query",
+      "evidence_titles": [
+        "Is Sam Bankman-Fried a bad ‘man’ or a good ‘boy’? Lawyers swap opening statements before first witnesses take the stand",
+        "Sam Altman backs teens’ startup, Google unveils the Pixel 8 and TikTok tests an ad-free tier"
+      ]
+    },
+    {
+      "qa_id": "mhop_2157",
+      "question": "Between the report by Fortune on Sam Bankman-Fried's involvement with Adam Yedidia and Caroline Ellison published on October 4, 2023, and the report by TechCrunch on the allegations against Sam Bankman-Fried published after, is there consistency in the portrayal of Sam Bankman-Fried's actions related to the fraud allegations?",
+      "reference": "Yes",
+      "question_type": "temporal_query",
+      "evidence_titles": [
+        "Is Sam Bankman-Fried a bad ‘man’ or a good ‘boy’? Lawyers swap opening statements before first witnesses take the stand",
+        "Sam Altman backs teens’ startup, Google unveils the Pixel 8 and TikTok tests an ad-free tier"
+      ]
+    },
+    {
+      "qa_id": "mhop_2246",
+      "question": "After the report by Fortune on October 4, 2023, regarding Sam Bankman-Fried's alleged use of Caroline Ellison as a front at Alameda Research, and the subsequent report by TechCrunch involving Sam Bankman-Fried's alleged motives for committing fraud, is the portrayal of Sam Bankman-Fried's actions by both news sources consistent?",
+      "reference": "Yes",
+      "question_type": "temporal_query",
+      "evidence_titles": [
+        "Is Sam Bankman-Fried a bad ‘man’ or a good ‘boy’? Lawyers swap opening statements before first witnesses take the stand",
+        "Sam Altman backs teens’ startup, Google unveils the Pixel 8 and TikTok tests an ad-free tier"
+      ]
+    }
+  ],
+  "questions_sha256": "de6865313c1c993a67369cd797d268b532712a2daa4f2506d4d195ef674ec1f4",
+  "dataset": {
+    "name": "yixuantt/MultiHopRAG",
+    "requested_revision": null,
+    "split": "train",
+    "configurations": {
+      "MultiHopRAG": {
+        "rows": 2556,
+        "fingerprint": "6322656ab9ac7885",
+        "builder_version": "0.0.0",
+        "resolved_repository_revisions": [],
+        "download_checksums": {
+          "hf://datasets/yixuantt/MultiHopRAG@71ac0d0bd1f951d2d6b70311f7d2ae404e1ffa82/MultiHopRAG.json": {
+            "num_bytes": 5171312,
+            "checksum": null
+          }
+        }
+      },
+      "corpus": {
+        "rows": 609,
+        "fingerprint": "e0b895b94b913705",
+        "builder_version": "0.0.0",
+        "resolved_repository_revisions": [],
+        "download_checksums": {
+          "hf://datasets/yixuantt/MultiHopRAG@71ac0d0bd1f951d2d6b70311f7d2ae404e1ffa82/corpus.json": {
+            "num_bytes": 6785567,
+            "checksum": null
+          }
+        }
+      }
+    },
+    "full_counts": {
+      "documents": 609,
+      "questions": 2556,
+      "question_types": {
+        "inference_query": 816,
+        "comparison_query": 856,
+        "null_query": 301,
+        "temporal_query": 583
+      },
+      "non_null_with_evidence": 2255,
+      "supporting_document_counts": {
+        "3": 774,
+        "2": 1169,
+        "4": 312
+      }
+    },
+    "eligible_questions_before_cap": 25,
+    "selection": "non-null queries; documents by evidence frequency; dataset question order; no shuffle"
+  },
+  "dataset_statistics": {
+    "documents": 3,
+    "questions": 25,
+    "question_types": {
+      "comparison_query": 6,
+      "inference_query": 11,
+      "temporal_query": 8
+    },
+    "supporting_document_counts": {
+      "2": 25
+    },
+    "question_type_by_supporting_documents": {
+      "comparison_query": {
+        "2": 6
+      },
+      "inference_query": {
+        "2": 11
+      },
+      "temporal_query": {
+        "2": 8
+      }
+    },
+    "document_words": {
+      "count": 3,
+      "min": 952,
+      "mean": 1044,
+      "max": 1179,
+      "total": 3132
+    },
+    "document_characters": {
+      "count": 3,
+      "min": 5911,
+      "mean": 6477,
+      "max": 7126,
+      "total": 19431
+    },
+    "question_words": {
+      "count": 25,
+      "min": 33,
+      "mean": 41.76,
+      "max": 51,
+      "total": 1044
+    },
+    "question_characters": {
+      "count": 25,
+      "min": 201,
+      "mean": 276,
+      "max": 352,
+      "total": 6900
+    },
+    "length_units": {
+      "words": "Whitespace-separated units, as in str.split()",
+      "characters": "Unicode code points, as in len(str); not model tokens"
+    },
+    "support_count_scope": "Distinct annotated source titles, not retrieval steps"
+  }
+}

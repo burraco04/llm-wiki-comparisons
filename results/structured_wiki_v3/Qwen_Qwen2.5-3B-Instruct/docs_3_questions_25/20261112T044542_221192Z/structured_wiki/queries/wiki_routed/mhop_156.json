@@ -1,0 +1,423 @@
+{
+  "qa_id": "mhop_156",
+  "question": "Who is the individual that, according to articles from both Fortune and TechCrunch, allegedly constructed a fraudulent facade of success for a crypto exchange, utilized a colleague for clandestine control over customer funds, and pursued personal enrichment and power through deceptive means?",
+  "reference": "Sam Bankman-Fried",
+  "question_type": "inference_query",
+  "evidence_titles": [
+    "Is Sam Bankman-Fried a bad ‘man’ or a good ‘boy’? Lawyers swap opening statements before first witnesses take the stand",
+    "Sam Altman backs teens’ startup, Google unveils the Pixel 8 and TikTok tests an ad-free tier"
+  ],
+  "system": "wiki_routed",
+  "prediction": "Sam Bankman-Fried",
+  "raw_prediction": "Sam Bankman-Fried",
+  "seconds_wall": 2.0009062319877557,
+  "retrieval": {
+    "routed_ids": [
+      "sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand",
+      "sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier",
+      "concepts/crypto-exchange",
+      "entities/ftx-fallout",
+      "concepts/ftx-collapse",
+      "concepts/c002",
+      "entities/ftx",
+      "entities/sam-altman-backs-teens-startup",
+      "sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line"
+    ],
+    "terms": [
+      "sam bankman fried trial",
+      "alleged fraudulent facade crypto exchange",
+      "control over customer funds",
+      "deceptive means pursuit power",
+      "former ftx ceo",
+      "caroline ellison alameda research",
+      "ftx collapse fallout",
+      "sam bankman fried criminal charges",
+      "individual",
+      "according",
+      "articles",
+      "fortune",
+      "techcrunch",
+      "allegedly",
+      "constructed",
+      "fraudulent",
+      "facade",
+      "success",
+      "crypto",
+      "exchange",
+      "utilized",
+      "colleague",
+      "clandestine",
+      "control",
+      "customer",
+      "funds",
+      "pursued",
+      "personal",
+      "enrichment",
+      "power",
+      "deceptive",
+      "means",
+      "techcrunch allegedly",
+      "allegedly constructed",
+      "fraudulent facade",
+      "crypto exchange",
+      "exchange utilized",
+      "clandestine control",
+      "customer funds",
+      "pursued personal",
+      "personal enrichment",
+      "deceptive means"
+    ],
+    "routing_fallback": true,
+    "timing": {
+      "routing_llm": 0.4330106830020668,
+      "search_terms_llm": 0.990799346996937,
+      "retrieval_code": 0.2589842529996531,
+      "answer_llm": 0.3180868700001156
+    },
+    "candidates": 63,
+    "selected": 24,
+    "chars": 10113,
+    "matched_pages": [
+      "sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand",
+      "sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier",
+      "entities/ftx-fallout",
+      "entities/sam-altman-backs-teens-startup",
+      "concepts/ftx-collapse",
+      "concepts/c002",
+      "entities/ftx",
+      "concepts/startup-founder"
+    ],
+    "kg_triples": 6,
+    "graph_relations": [
+      {
+        "source": "sam-altman-backs-teens-startup",
+        "target": "sam-altman-supports-teens-startup",
+        "relation": "supports",
+        "source_doc": "sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier",
+        "context_line": "sam-altman-backs-teens-startup [supports] sam-altman-supports-teens-startup (from sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier)"
+      },
+      {
+        "source": "ftx-fallout",
+        "target": "ftx-collapse",
+        "relation": "collapse",
+        "source_doc": "sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier",
+        "context_line": "ftx-fallout [collapse] ftx-collapse (from sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier)"
+      },
+      {
+        "source": "g001",
+        "target": "c002",
+        "relation": "alleges content misappropriation",
+        "source_doc": "sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line",
+        "context_line": "google [alleges content misappropriation] content misappropriation (from sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line)"
+      },
+      {
+        "source": "h001",
+        "target": "c002",
+        "relation": "argues about content misappropriation",
+        "source_doc": "sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line",
+        "context_line": "helena world chronicle [argues about content misappropriation] content misappropriation (from sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line)"
+      },
+      {
+        "source": "sam-altman-backs-teens-startup",
+        "target": "trial-over-crypto-crimes",
+        "relation": "is involved in",
+        "source_doc": "sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand",
+        "context_line": "sam-altman-backs-teens-startup [is involved in] trial over crypto crimes (from sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand)"
+      },
+      {
+        "source": "trial-over-crypto-crimes",
+        "target": "startup-founder",
+        "relation": "is a case of",
+        "source_doc": "sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand",
+        "context_line": "trial over crypto crimes [is a case of] startup founder (from sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand)"
+      }
+    ],
+    "selected_passages": [
+      {
+        "title": "sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand",
+        "page_id": "sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand",
+        "text": "- Bankman-Fried was the CEO of FTX and oversaw a crypto exchange that allegedly stole customer funds\n- The trial features pointed allegations and witnesses from both sides\n- Marc-Antoine Julliard, a FTX investor, testified about losing almost $100,000\n- Adam Yedidia, a former colleague of Bankman-Fried, testified about potentially writing code that contributed to a crime\n- The trial involves multiple witnesses, including a former partner at Sequoia Capital and a key Bankman-Fried lieutenant\n- The case highlights the complex nature of the cryptocurrency industry and the challenges faced by startups in this field",
+        "branch": "routed_wiki",
+        "item_id": "wiki:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand:2",
+        "matched_terms": 9,
+        "direct_matches": 8,
+        "context_block": "[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\n- Bankman-Fried was the CEO of FTX and oversaw a crypto exchange that allegedly stole customer funds\n- The trial features pointed allegations and witnesses from both sides\n- Marc-Antoine Julliard, a FTX investor, testified about losing almost $100,000\n- Adam Yedidia, a former colleague of Bankman-Fried, testified about potentially writing code that contributed to a crime\n- The trial involves multiple witnesses, including a former partner at Sequoia Capital and a key Bankman-Fried lieutenant\n- The case highlights the complex nature of the cryptocurrency industry and the challenges faced by startups in this field",
+        "truncated": false
+      },
+      {
+        "title": "raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand",
+        "page_id": "sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand",
+        "text": "The key to his alleged scheme? Alameda Research, a crypto hedge fund he also owned, argued Rehn. Using Caroline Ellison, his on-again off-again girlfriend and the CEO of Alameda, as a front, Bankman-Fried had “secret access” to customer money—both cash and crypto—the government claimed.",
+        "branch": "routed_raw",
+        "item_id": "raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand:6",
+        "matched_terms": 6,
+        "direct_matches": 2,
+        "context_block": "[raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\nThe key to his alleged scheme? Alameda Research, a crypto hedge fund he also owned, argued Rehn. Using Caroline Ellison, his on-again off-again girlfriend and the CEO of Alameda, as a front, Bankman-Fried had “secret access” to customer money—both cash and crypto—the government claimed.",
+        "truncated": false
+      },
+      {
+        "title": "raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand",
+        "page_id": "sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand",
+        "text": "“One year ago, it looked like the defendant was on the top of the world,” began Thane Rehn, a prosecutor for the government, in his opening statement. The former CEO of FTX oversaw a supposedly thriving crypto exchange, jetted between international locales, and hobnobbed with celebrities like Tom Brady and Larry David. He repeatedly emphasized to customers that their money was safe and secure.",
+        "branch": "routed_raw",
+        "item_id": "raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand:4",
+        "matched_terms": 5,
+        "direct_matches": 4,
+        "context_block": "[raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\n“One year ago, it looked like the defendant was on the top of the world,” began Thane Rehn, a prosecutor for the government, in his opening statement. The former CEO of FTX oversaw a supposedly thriving crypto exchange, jetted between international locales, and hobnobbed with celebrities like Tom Brady and Larry David. He repeatedly emphasized to customers that their money was safe and secure.",
+        "truncated": false
+      },
+      {
+        "title": "sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand",
+        "page_id": "sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand",
+        "text": "- Sam Bankman-Fried is the subject of a trial over alleged crimes related to FTX and Alameda Research\n- The prosecution claims Bankman-Fried stole customer funds and lied to investors\n- The defense argues Bankman-Fried acted in good faith and did not defraud anyone",
+        "branch": "routed_wiki",
+        "item_id": "wiki:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand:1",
+        "matched_terms": 5,
+        "direct_matches": 3,
+        "context_block": "[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\n- Sam Bankman-Fried is the subject of a trial over alleged crimes related to FTX and Alameda Research\n- The prosecution claims Bankman-Fried stole customer funds and lied to investors\n- The defense argues Bankman-Fried acted in good faith and did not defraud anyone",
+        "truncated": false
+      },
+      {
+        "title": "raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand",
+        "page_id": "sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand",
+        "text": "Alameda was not subterranean or shady. It was a successful hedge fund, he said. FTX was no Ponzi scheme. It was a “very innovative, successful company.” And the business practices between the two were reasonable, he argued, claiming that Alameda acted legally as an FTX customer, payment processor, and market maker, or financial entity that acts as a trading partner for customers looking to buy and sell cryptocurrencies.",
+        "branch": "routed_raw",
+        "item_id": "raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand:11",
+        "matched_terms": 5,
+        "direct_matches": 3,
+        "context_block": "[raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\nAlameda was not subterranean or shady. It was a successful hedge fund, he said. FTX was no Ponzi scheme. It was a “very innovative, successful company.” And the business practices between the two were reasonable, he argued, claiming that Alameda acted legally as an FTX customer, payment processor, and market maker, or financial entity that acts as a trading partner for customers looking to buy and sell cryptocurrencies.",
+        "truncated": false
+      },
+      {
+        "title": "raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand",
+        "page_id": "sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand",
+        "text": "But “all of that, all of it, was built on lies,” Rehn declared to the jury. “Behind the curtains, he was not what he appeared to be.” What followed was a roughly 30-minute story that repeatedly emphasized how Bankman-Fried allegedly stole customer funds to facilitate his jet-setting lifestyle, donate millions to political candidates, and finance risky bets.",
+        "branch": "routed_raw",
+        "item_id": "raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand:5",
+        "matched_terms": 4,
+        "direct_matches": 4,
+        "context_block": "[raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\nBut “all of that, all of it, was built on lies,” Rehn declared to the jury. “Behind the curtains, he was not what he appeared to be.” What followed was a roughly 30-minute story that repeatedly emphasized how Bankman-Fried allegedly stole customer funds to facilitate his jet-setting lifestyle, donate millions to political candidates, and finance risky bets.",
+        "truncated": false
+      },
+      {
+        "title": "sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier",
+        "page_id": "sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier",
+        "text": "- Induced AI, backed by Sam Altman, assists businesses in automating workflows using plain English inputs.\n- The Pixel 8 Pro offers improved cameras, brighter screens, and enhanced AI features compared to the Pixel 7 Pro.\n- Flexport's CEO, Dave Clark, was ousted a year after taking the CEO role.\n- FTX founder Sam Bankman-Fried faces charges of orchestrating the collapse of cryptocurrency exchange FTX.\n- TikTok plans to test an ad-free subscription tier for some users, priced at $4.99.\n- LinkedIn's AI features include an AI-powered talent sourcing platform, LinkedIn Learning coach, and marketing campaign tool.\n- Elon Musk claims X users generate 100 million to 200 million posts daily, but X CEO Linda Yaccarino reports 500 million posts per day.\n- IronNet, founded by a former NSA director, collapsed and laid off its staff following its failure to gain traction.",
+        "branch": "routed_wiki",
+        "item_id": "wiki:sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier:2",
+        "matched_terms": 4,
+        "direct_matches": 3,
+        "context_block": "[sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]\n- Induced AI, backed by Sam Altman, assists businesses in automating workflows using plain English inputs.\n- The Pixel 8 Pro offers improved cameras, brighter screens, and enhanced AI features compared to the Pixel 7 Pro.\n- Flexport's CEO, Dave Clark, was ousted a year after taking the CEO role.\n- FTX founder Sam Bankman-Fried faces charges of orchestrating the collapse of cryptocurrency exchange FTX.\n- TikTok plans to test an ad-free subscription tier for some users, priced at $4.99.\n- LinkedIn's AI features include an AI-powered talent sourcing platform, LinkedIn Learning coach, and marketing campaign tool.\n- Elon Musk claims X users generate 100 million to 200 million posts daily, but X CEO Linda Yaccarino reports 500 million posts per day.\n- IronNet, founded by a former NSA director, collapsed and laid off its staff following its failure to gain traction.",
+        "truncated": false
+      },
+      {
+        "title": "raw:sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier",
+        "page_id": "sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier",
+        "text": "SBF allegedly tried to buy off Trump: The TC team’s been trained on the Manhattan Federal Court for the trial of Sam Bankman-Fried, the disgraced entrepreneur accused of orchestrating the collapse of cryptocurrency exchange FTX. But fascinating details about SBF’s political dealings are emerging from a book by Michael Lewis, “Going Infinite,” that debuted on the first day of the trial, like SBF’s attempt to buy off Trump to get him to not run again for president.",
+        "branch": "routed_raw",
+        "item_id": "raw:sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier:7",
+        "matched_terms": 4,
+        "direct_matches": 3,
+        "context_block": "[raw:sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]\nSBF allegedly tried to buy off Trump: The TC team’s been trained on the Manhattan Federal Court for the trial of Sam Bankman-Fried, the disgraced entrepreneur accused of orchestrating the collapse of cryptocurrency exchange FTX. But fascinating details about SBF’s political dealings are emerging from a book by Michael Lewis, “Going Infinite,” that debuted on the first day of the trial, like SBF’s attempt to buy off Trump to get him to not run again for president.",
+        "truncated": false
+      },
+      {
+        "title": "raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand",
+        "page_id": "sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand",
+        "text": "Who is Sam Bankman-Fried, the former CEO of crypto exchange FTX? Is he a liar and a fraud? Or did he act in good faith, and like many a startup founder, fly too close to the sun?",
+        "branch": "routed_raw",
+        "item_id": "raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand:0",
+        "matched_terms": 4,
+        "direct_matches": 3,
+        "context_block": "[raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\nWho is Sam Bankman-Fried, the former CEO of crypto exchange FTX? Is he a liar and a fraud? Or did he act in good faith, and like many a startup founder, fly too close to the sun?",
+        "truncated": false
+      },
+      {
+        "title": "raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand",
+        "page_id": "sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand",
+        "text": "On Nov. 8, in the crypto exchange’s final few days, he tried to pull out his cash and crypto. How much? Almost $100,000, he said. And was he ever able to? “Never,” he told prosecutors.",
+        "branch": "routed_raw",
+        "item_id": "raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand:18",
+        "matched_terms": 3,
+        "direct_matches": 3,
+        "context_block": "[raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\nOn Nov. 8, in the crypto exchange’s final few days, he tried to pull out his cash and crypto. How much? Almost $100,000, he said. And was he ever able to? “Never,” he told prosecutors.",
+        "truncated": false
+      },
+      {
+        "title": "entities/ftx-fallout",
+        "page_id": "entities/ftx-fallout",
+        "text": "The aftermath of the FTX cryptocurrency exchange collapse, including Sam Bankman-Fried's trial.",
+        "branch": "routed_wiki",
+        "item_id": "wiki:entities/ftx-fallout:0",
+        "matched_terms": 3,
+        "direct_matches": 2,
+        "context_block": "[entities/ftx-fallout]\nThe aftermath of the FTX cryptocurrency exchange collapse, including Sam Bankman-Fried's trial.",
+        "truncated": false
+      },
+      {
+        "title": "entities/ftx-fallout",
+        "page_id": "entities/ftx-fallout",
+        "text": "- From [[sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]]: The aftermath of the FTX cryptocurrency exchange collapse, including Sam Bankman-Fried's trial.",
+        "branch": "routed_wiki",
+        "item_id": "wiki:entities/ftx-fallout:1",
+        "matched_terms": 3,
+        "direct_matches": 2,
+        "context_block": "[entities/ftx-fallout]\n- From [[sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]]: The aftermath of the FTX cryptocurrency exchange collapse, including Sam Bankman-Fried's trial.",
+        "truncated": false
+      },
+      {
+        "title": "raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand",
+        "page_id": "sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand",
+        "text": "The first was a victim: Marc-Antoine Julliard, a Paris-born cocoa trader who lives in London. In 2021, Julliard, who had coiffed hair and spoke with a strong French accent, decided to invest in crypto and landed on FTX as his exchange of choice, where he traded cryptocurrencies like Bitcoin and Dogecoin.",
+        "branch": "routed_raw",
+        "item_id": "raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand:17",
+        "matched_terms": 3,
+        "direct_matches": 2,
+        "context_block": "[raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\nThe first was a victim: Marc-Antoine Julliard, a Paris-born cocoa trader who lives in London. In 2021, Julliard, who had coiffed hair and spoke with a strong French accent, decided to invest in crypto and landed on FTX as his exchange of choice, where he traded cryptocurrencies like Bitcoin and Dogecoin.",
+        "truncated": false
+      },
+      {
+        "title": "entities/sam-altman-backs-teens-startup",
+        "page_id": "entities/sam-altman-backs-teens-startup",
+        "text": "- From [[sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]]: Sam Altman supports a teen-founded AI startup that helps businesses automate workflows using plain English inputs.\n- From [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]]: former CEO of FTX and the subject of a trial over alleged crimes",
+        "branch": "routed_wiki",
+        "item_id": "wiki:entities/sam-altman-backs-teens-startup:1",
+        "matched_terms": 3,
+        "direct_matches": 0,
+        "context_block": "[entities/sam-altman-backs-teens-startup]\n- From [[sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]]: Sam Altman supports a teen-founded AI startup that helps businesses automate workflows using plain English inputs.\n- From [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]]: former CEO of FTX and the subject of a trial over alleged crimes",
+        "truncated": false
+      },
+      {
+        "title": "concepts/ftx-collapse",
+        "page_id": "concepts/ftx-collapse",
+        "text": "The collapse of the FTX cryptocurrency exchange.",
+        "branch": "routed_wiki",
+        "item_id": "wiki:concepts/ftx-collapse:0",
+        "matched_terms": 2,
+        "direct_matches": 2,
+        "context_block": "[concepts/ftx-collapse]\nThe collapse of the FTX cryptocurrency exchange.",
+        "truncated": false
+      },
+      {
+        "title": "concepts/ftx-collapse",
+        "page_id": "concepts/ftx-collapse",
+        "text": "- From [[sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]]: The collapse of the FTX cryptocurrency exchange.",
+        "branch": "routed_wiki",
+        "item_id": "wiki:concepts/ftx-collapse:1",
+        "matched_terms": 2,
+        "direct_matches": 2,
+        "context_block": "[concepts/ftx-collapse]\n- From [[sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]]: The collapse of the FTX cryptocurrency exchange.",
+        "truncated": false
+      },
+      {
+        "title": "concepts/c002",
+        "page_id": "concepts/c002",
+        "text": "- Existing: Google allegedly using publishers' content without permission | [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]]: Google's AI-powered search technology (SGE) and Google's AI chatbot (Bard AI) allegedly using publishers' content without permission",
+        "branch": "routed_wiki",
+        "item_id": "wiki:concepts/c002:3",
+        "matched_terms": 2,
+        "direct_matches": 2,
+        "context_block": "[concepts/c002]\n- Existing: Google allegedly using publishers' content without permission | [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]]: Google's AI-powered search technology (SGE) and Google's AI chatbot (Bard AI) allegedly using publishers' content without permission",
+        "truncated": false
+      },
+      {
+        "title": "entities/ftx",
+        "page_id": "entities/ftx",
+        "text": "cryptocurrency exchange",
+        "branch": "routed_wiki",
+        "item_id": "wiki:entities/ftx:0",
+        "matched_terms": 2,
+        "direct_matches": 2,
+        "context_block": "[entities/ftx]\ncryptocurrency exchange",
+        "truncated": false
+      },
+      {
+        "title": "entities/ftx",
+        "page_id": "entities/ftx",
+        "text": "- From [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]]: cryptocurrency exchange",
+        "branch": "routed_wiki",
+        "item_id": "wiki:entities/ftx:1",
+        "matched_terms": 2,
+        "direct_matches": 2,
+        "context_block": "[entities/ftx]\n- From [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]]: cryptocurrency exchange",
+        "truncated": false
+      },
+      {
+        "title": "concepts/startup-founder",
+        "page_id": "concepts/startup-founder",
+        "text": "individual who founded and ran a startup, often in the technology or cryptocurrency industries",
+        "branch": "other_wiki",
+        "item_id": "wiki:concepts/startup-founder:0",
+        "matched_terms": 2,
+        "direct_matches": 2,
+        "context_block": "[concepts/startup-founder]\nindividual who founded and ran a startup, often in the technology or cryptocurrency industries",
+        "truncated": false
+      },
+      {
+        "title": "concepts/startup-founder",
+        "page_id": "concepts/startup-founder",
+        "text": "- From [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]]: individual who founded and ran a startup, often in the technology or cryptocurrency industries",
+        "branch": "other_wiki",
+        "item_id": "wiki:concepts/startup-founder:1",
+        "matched_terms": 2,
+        "direct_matches": 2,
+        "context_block": "[concepts/startup-founder]\n- From [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]]: individual who founded and ran a startup, often in the technology or cryptocurrency industries",
+        "truncated": false
+      },
+      {
+        "title": "raw:sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier",
+        "page_id": "sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier",
+        "text": "Hands on with the Pixel 8 Pro: Darrell took the newly unveiled Pixel 8 Pro for a whirl, and he liked what he saw. While very similar to last year’s model (the Pixel 7 Pro), Darrell felt that the improved cameras, brighter screen and enhanced AI-powered features made it enough of an upgrade to (potentially) warrant a purchase — minus the underutilized temperature sensor. Stay tuned for his full review.",
+        "branch": "routed_raw",
+        "item_id": "raw:sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier:5",
+        "matched_terms": 2,
+        "direct_matches": 2,
+        "context_block": "[raw:sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]\nHands on with the Pixel 8 Pro: Darrell took the newly unveiled Pixel 8 Pro for a whirl, and he liked what he saw. While very similar to last year’s model (the Pixel 7 Pro), Darrell felt that the improved cameras, brighter screen and enhanced AI-powered features made it enough of an upgrade to (potentially) warrant a purchase — minus the underutilized temperature sensor. Stay tuned for his full review.",
+        "truncated": false
+      },
+      {
+        "title": "raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand",
+        "page_id": "sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand",
+        "text": "And who was this defendant? Not a crypto “boy” genius, as so many in the media (Fortune included) have written, but a “man” who “stole billions of dollars from thousands of victims,” Rehn said. “You will see the full picture.”",
+        "branch": "routed_raw",
+        "item_id": "raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand:8",
+        "matched_terms": 2,
+        "direct_matches": 2,
+        "context_block": "[raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\nAnd who was this defendant? Not a crypto “boy” genius, as so many in the media (Fortune included) have written, but a “man” who “stole billions of dollars from thousands of victims,” Rehn said. “You will see the full picture.”",
+        "truncated": false
+      },
+      {
+        "title": "raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand",
+        "page_id": "sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand",
+        "text": "When the walls came closing in and the aforementioned plane approached the “eye of the storm,” Bankman-Fried did not act like someone who was guilty. Rather, he was willing to give up his personal wealth to make customers whole, Cohen argued.",
+        "branch": "routed_raw",
+        "item_id": "raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand:13",
+        "matched_terms": 2,
+        "direct_matches": 2,
+        "context_block": "[raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\nWhen the walls came closing in and the aforementioned plane approached the “eye of the storm,” Bankman-Fried did not act like someone who was guilty. Rather, he was willing to give up his personal wealth to make customers whole, Cohen argued.",
+        "truncated": false
+      }
+    ],
+    "branches": {
+      "routed_wiki": 11,
+      "routed_raw": 11,
+      "other_wiki": 2
+    }
+  },
+  "error": null,
+  "context": "[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\n- Bankman-Fried was the CEO of FTX and oversaw a crypto exchange that allegedly stole customer funds\n- The trial features pointed allegations and witnesses from both sides\n- Marc-Antoine Julliard, a FTX investor, testified about losing almost $100,000\n- Adam Yedidia, a former colleague of Bankman-Fried, testified about potentially writing code that contributed to a crime\n- The trial involves multiple witnesses, including a former partner at Sequoia Capital and a key Bankman-Fried lieutenant\n- The case highlights the complex nature of the cryptocurrency industry and the challenges faced by startups in this field\n\n[raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\nThe key to his alleged scheme? Alameda Research, a crypto hedge fund he also owned, argued Rehn. Using Caroline Ellison, his on-again off-again girlfriend and the CEO of Alameda, as a front, Bankman-Fried had “secret access” to customer money—both cash and crypto—the government claimed.\n\n[raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\n“One year ago, it looked like the defendant was on the top of the world,” began Thane Rehn, a prosecutor for the government, in his opening statement. The former CEO of FTX oversaw a supposedly thriving crypto exchange, jetted between international locales, and hobnobbed with celebrities like Tom Brady and Larry David. He repeatedly emphasized to customers that their money was safe and secure.\n\n[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\n- Sam Bankman-Fried is the subject of a trial over alleged crimes related to FTX and Alameda Research\n- The prosecution claims Bankman-Fried stole customer funds and lied to investors\n- The defense argues Bankman-Fried acted in good faith and did not defraud anyone\n\n[raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\nAlameda was not subterranean or shady. It was a successful hedge fund, he said. FTX was no Ponzi scheme. It was a “very innovative, successful company.” And the business practices between the two were reasonable, he argued, claiming that Alameda acted legally as an FTX customer, payment processor, and market maker, or financial entity that acts as a trading partner for customers looking to buy and sell cryptocurrencies.\n\n[raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\nBut “all of that, all of it, was built on lies,” Rehn declared to the jury. “Behind the curtains, he was not what he appeared to be.” What followed was a roughly 30-minute story that repeatedly emphasized how Bankman-Fried allegedly stole customer funds to facilitate his jet-setting lifestyle, donate millions to political candidates, and finance risky bets.\n\n[sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]\n- Induced AI, backed by Sam Altman, assists businesses in automating workflows using plain English inputs.\n- The Pixel 8 Pro offers improved cameras, brighter screens, and enhanced AI features compared to the Pixel 7 Pro.\n- Flexport's CEO, Dave Clark, was ousted a year after taking the CEO role.\n- FTX founder Sam Bankman-Fried faces charges of orchestrating the collapse of cryptocurrency exchange FTX.\n- TikTok plans to test an ad-free subscription tier for some users, priced at $4.99.\n- LinkedIn's AI features include an AI-powered talent sourcing platform, LinkedIn Learning coach, and marketing campaign tool.\n- Elon Musk claims X users generate 100 million to 200 million posts daily, but X CEO Linda Yaccarino reports 500 million posts per day.\n- IronNet, founded by a former NSA director, collapsed and laid off its staff following its failure to gain traction.\n\n[raw:sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]\nSBF allegedly tried to buy off Trump: The TC team’s been trained on the Manhattan Federal Court for the trial of Sam Bankman-Fried, the disgraced entrepreneur accused of orchestrating the collapse of cryptocurrency exchange FTX. But fascinating details about SBF’s political dealings are emerging from a book by Michael Lewis, “Going Infinite,” that debuted on the first day of the trial, like SBF’s attempt to buy off Trump to get him to not run again for president.\n\n[raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\nWho is Sam Bankman-Fried, the former CEO of crypto exchange FTX? Is he a liar and a fraud? Or did he act in good faith, and like many a startup founder, fly too close to the sun?\n\n[raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\nOn Nov. 8, in the crypto exchange’s final few days, he tried to pull out his cash and crypto. How much? Almost $100,000, he said. And was he ever able to? “Never,” he told prosecutors.\n\n[entities/ftx-fallout]\nThe aftermath of the FTX cryptocurrency exchange collapse, including Sam Bankman-Fried's trial.\n\n[entities/ftx-fallout]\n- From [[sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]]: The aftermath of the FTX cryptocurrency exchange collapse, including Sam Bankman-Fried's trial.\n\n[raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\nThe first was a victim: Marc-Antoine Julliard, a Paris-born cocoa trader who lives in London. In 2021, Julliard, who had coiffed hair and spoke with a strong French accent, decided to invest in crypto and landed on FTX as his exchange of choice, where he traded cryptocurrencies like Bitcoin and Dogecoin.\n\n[entities/sam-altman-backs-teens-startup]\n- From [[sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]]: Sam Altman supports a teen-founded AI startup that helps businesses automate workflows using plain English inputs.\n- From [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]]: former CEO of FTX and the subject of a trial over alleged crimes\n\n[concepts/ftx-collapse]\nThe collapse of the FTX cryptocurrency exchange.\n\n[concepts/ftx-collapse]\n- From [[sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]]: The collapse of the FTX cryptocurrency exchange.\n\n[concepts/c002]\n- Existing: Google allegedly using publishers' content without permission | [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]]: Google's AI-powered search technology (SGE) and Google's AI chatbot (Bard AI) allegedly using publishers' content without permission\n\n[entities/ftx]\ncryptocurrency exchange\n\n[entities/ftx]\n- From [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]]: cryptocurrency exchange\n\n[concepts/startup-founder]\nindividual who founded and ran a startup, often in the technology or cryptocurrency industries\n\n[concepts/startup-founder]\n- From [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]]: individual who founded and ran a startup, often in the technology or cryptocurrency industries\n\n[raw:sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]\nHands on with the Pixel 8 Pro: Darrell took the newly unveiled Pixel 8 Pro for a whirl, and he liked what he saw. While very similar to last year’s model (the Pixel 7 Pro), Darrell felt that the improved cameras, brighter screen and enhanced AI-powered features made it enough of an upgrade to (potentially) warrant a purchase — minus the underutilized temperature sensor. Stay tuned for his full review.\n\n[raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\nAnd who was this defendant? Not a crypto “boy” genius, as so many in the media (Fortune included) have written, but a “man” who “stole billions of dollars from thousands of victims,” Rehn said. “You will see the full picture.”\n\n[raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\nWhen the walls came closing in and the aforementioned plane approached the “eye of the storm,” Bankman-Fried did not act like someone who was guilty. Rather, he was willing to give up his personal wealth to make customers whole, Cohen argued.\n\n[Knowledge graph]\nsam-altman-backs-teens-startup [supports] sam-altman-supports-teens-startup (from sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier)\nftx-fallout [collapse] ftx-collapse (from sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier)\ngoogle [alleges content misappropriation] content misappropriation (from sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line)\nhelena world chronicle [argues about content misappropriation] content misappropriation (from sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line)\nsam-altman-backs-teens-startup [is involved in] trial over crypto crimes (from sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand)\ntrial over crypto crimes [is a case of] startup founder (from sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand)",
+  "answer_prompt": "Answer using only the context. Give a short direct answer (entity, name, number, date, phrase, Yes/No), or unanswerable. Output only the answer.\n\nContext:\n[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\n- Bankman-Fried was the CEO of FTX and oversaw a crypto exchange that allegedly stole customer funds\n- The trial features pointed allegations and witnesses from both sides\n- Marc-Antoine Julliard, a FTX investor, testified about losing almost $100,000\n- Adam Yedidia, a former colleague of Bankman-Fried, testified about potentially writing code that contributed to a crime\n- The trial involves multiple witnesses, including a former partner at Sequoia Capital and a key Bankman-Fried lieutenant\n- The case highlights the complex nature of the cryptocurrency industry and the challenges faced by startups in this field\n\n[raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\nThe key to his alleged scheme? Alameda Research, a crypto hedge fund he also owned, argued Rehn. Using Caroline Ellison, his on-again off-again girlfriend and the CEO of Alameda, as a front, Bankman-Fried had “secret access” to customer money—both cash and crypto—the government claimed.\n\n[raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\n“One year ago, it looked like the defendant was on the top of the world,” began Thane Rehn, a prosecutor for the government, in his opening statement. The former CEO of FTX oversaw a supposedly thriving crypto exchange, jetted between international locales, and hobnobbed with celebrities like Tom Brady and Larry David. He repeatedly emphasized to customers that their money was safe and secure.\n\n[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\n- Sam Bankman-Fried is the subject of a trial over alleged crimes related to FTX and Alameda Research\n- The prosecution claims Bankman-Fried stole customer funds and lied to investors\n- The defense argues Bankman-Fried acted in good faith and did not defraud anyone\n\n[raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\nAlameda was not subterranean or shady. It was a successful hedge fund, he said. FTX was no Ponzi scheme. It was a “very innovative, successful company.” And the business practices between the two were reasonable, he argued, claiming that Alameda acted legally as an FTX customer, payment processor, and market maker, or financial entity that acts as a trading partner for customers looking to buy and sell cryptocurrencies.\n\n[raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\nBut “all of that, all of it, was built on lies,” Rehn declared to the jury. “Behind the curtains, he was not what he appeared to be.” What followed was a roughly 30-minute story that repeatedly emphasized how Bankman-Fried allegedly stole customer funds to facilitate his jet-setting lifestyle, donate millions to political candidates, and finance risky bets.\n\n[sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]\n- Induced AI, backed by Sam Altman, assists businesses in automating workflows using plain English inputs.\n- The Pixel 8 Pro offers improved cameras, brighter screens, and enhanced AI features compared to the Pixel 7 Pro.\n- Flexport's CEO, Dave Clark, was ousted a year after taking the CEO role.\n- FTX founder Sam Bankman-Fried faces charges of orchestrating the collapse of cryptocurrency exchange FTX.\n- TikTok plans to test an ad-free subscription tier for some users, priced at $4.99.\n- LinkedIn's AI features include an AI-powered talent sourcing platform, LinkedIn Learning coach, and marketing campaign tool.\n- Elon Musk claims X users generate 100 million to 200 million posts daily, but X CEO Linda Yaccarino reports 500 million posts per day.\n- IronNet, founded by a former NSA director, collapsed and laid off its staff following its failure to gain traction.\n\n[raw:sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]\nSBF allegedly tried to buy off Trump: The TC team’s been trained on the Manhattan Federal Court for the trial of Sam Bankman-Fried, the disgraced entrepreneur accused of orchestrating the collapse of cryptocurrency exchange FTX. But fascinating details about SBF’s political dealings are emerging from a book by Michael Lewis, “Going Infinite,” that debuted on the first day of the trial, like SBF’s attempt to buy off Trump to get him to not run again for president.\n\n[raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\nWho is Sam Bankman-Fried, the former CEO of crypto exchange FTX? Is he a liar and a fraud? Or did he act in good faith, and like many a startup founder, fly too close to the sun?\n\n[raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\nOn Nov. 8, in the crypto exchange’s final few days, he tried to pull out his cash and crypto. How much? Almost $100,000, he said. And was he ever able to? “Never,” he told prosecutors.\n\n[entities/ftx-fallout]\nThe aftermath of the FTX cryptocurrency exchange collapse, including Sam Bankman-Fried's trial.\n\n[entities/ftx-fallout]\n- From [[sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]]: The aftermath of the FTX cryptocurrency exchange collapse, including Sam Bankman-Fried's trial.\n\n[raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\nThe first was a victim: Marc-Antoine Julliard, a Paris-born cocoa trader who lives in London. In 2021, Julliard, who had coiffed hair and spoke with a strong French accent, decided to invest in crypto and landed on FTX as his exchange of choice, where he traded cryptocurrencies like Bitcoin and Dogecoin.\n\n[entities/sam-altman-backs-teens-startup]\n- From [[sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]]: Sam Altman supports a teen-founded AI startup that helps businesses automate workflows using plain English inputs.\n- From [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]]: former CEO of FTX and the subject of a trial over alleged crimes\n\n[concepts/ftx-collapse]\nThe collapse of the FTX cryptocurrency exchange.\n\n[concepts/ftx-collapse]\n- From [[sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]]: The collapse of the FTX cryptocurrency exchange.\n\n[concepts/c002]\n- Existing: Google allegedly using publishers' content without permission | [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]]: Google's AI-powered search technology (SGE) and Google's AI chatbot (Bard AI) allegedly using publishers' content without permission\n\n[entities/ftx]\ncryptocurrency exchange\n\n[entities/ftx]\n- From [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]]: cryptocurrency exchange\n\n[concepts/startup-founder]\nindividual who founded and ran a startup, often in the technology or cryptocurrency industries\n\n[concepts/startup-founder]\n- From [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]]: individual who founded and ran a startup, often in the technology or cryptocurrency industries\n\n[raw:sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]\nHands on with the Pixel 8 Pro: Darrell took the newly unveiled Pixel 8 Pro for a whirl, and he liked what he saw. While very similar to last year’s model (the Pixel 7 Pro), Darrell felt that the improved cameras, brighter screen and enhanced AI-powered features made it enough of an upgrade to (potentially) warrant a purchase — minus the underutilized temperature sensor. Stay tuned for his full review.\n\n[raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\nAnd who was this defendant? Not a crypto “boy” genius, as so many in the media (Fortune included) have written, but a “man” who “stole billions of dollars from thousands of victims,” Rehn said. “You will see the full picture.”\n\n[raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\nWhen the walls came closing in and the aforementioned plane approached the “eye of the storm,” Bankman-Fried did not act like someone who was guilty. Rather, he was willing to give up his personal wealth to make customers whole, Cohen argued.\n\n[Knowledge graph]\nsam-altman-backs-teens-startup [supports] sam-altman-supports-teens-startup (from sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier)\nftx-fallout [collapse] ftx-collapse (from sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier)\ngoogle [alleges content misappropriation] content misappropriation (from sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line)\nhelena world chronicle [argues about content misappropriation] content misappropriation (from sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line)\nsam-altman-backs-teens-startup [is involved in] trial over crypto crimes (from sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand)\ntrial over crypto crimes [is a case of] startup founder (from sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand)\n\nQuestion: Who is the individual that, according to articles from both Fortune and TechCrunch, allegedly constructed a fraudulent facade of success for a crypto exchange, utilized a colleague for clandestine control over customer funds, and pursued personal enrichment and power through deceptive means?\nAnswer:",
+  "model_call_ids": [
+    35,
+    36,
+    37
+  ],
+  "request_attempts": 3,
+  "failed_requests": 0,
+  "llm_calls": 3,
+  "input_tokens": 8258,
+  "output_tokens": 91,
+  "em": 1.0,
+  "token_f1": 1.0,
+  "rouge_l": 1.0
+}

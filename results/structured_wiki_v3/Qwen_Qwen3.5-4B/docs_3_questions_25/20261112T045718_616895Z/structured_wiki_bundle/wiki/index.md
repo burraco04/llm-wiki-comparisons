@@ -1,0 +1,83 @@
+# Wiki index
+
+- sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier: This TechCrunch Week in Review highlights major tech developments including Sam Altman's support for a teen-founded AI startup, Google's hardware event showcasing the Pixel 8 series, and TikTok's experimental ad-free subscription. The digest also covers significant corporate turm
+- entities/sam-altman: AI entrepreneur and backer of the teen-founded startup Induced AI.
+- entities/induced-ai: An AI startup founded by teenagers that automates business workflows using plain English.
+- entities/google: A search and consumer tech giant that unveiled the Pixel 8 series and updated Android 14.
+- entities/pixel-8-pro: A smartphone released by Google featuring improved cameras and a brighter screen.
+- entities/pixel-fold: A foldable smartphone unveiled at Google's annual hardware event.
+- entities/flexport: A freight forwarding and customs brokerage startup valued at $8 billion.
+- entities/dave-clark: Former Amazon executive who was ousted as CEO of Flexport.
+- entities/sam-bankman-fried: Disgraced entrepreneur accused of orchestrating the collapse of cryptocurrency exchange FTX.
+- entities/ftx: A cryptocurrency exchange that collapsed, leading to the trial of Sam Bankman-Fried.
+- entities/michael-lewis: Author of the book 'Going Infinite' which details SBF's political dealings.
+- entities/donald-trump: Former U.S. President allegedly targeted by SBF in an attempt to prevent his re-election.
+- entities/tiktok: A social media platform testing an ad-free subscription tier for $4.99.
+- entities/linkedin: A professional networking platform unveiling new AI tools for recruiting and marketing.
+- entities/linda-yaccarino: CEO of X who offered a higher daily post count than Elon Musk previously claimed.
+- entities/x: A social media platform formerly known as Twitter, led by Elon Musk and Linda Yaccarino.
+- entities/keith-alexander: Retired four-star general and founder of the cybersecurity startup IronNet.
+- entities/ironnet: A Virginia-based cybersecurity startup founded by Keith Alexander that shut down in 2022.
+- entities/manhattan-federal-court: The venue for the trial of Sam Bankman-Fried.
+- entities/techcrunch: A technology news site publishing the Week in Review digest.
+- concepts/ai-startup-backing: The practice of established figures or organizations investing in or supporting new artificial intelligence ventures.
+- concepts/hardware-unveiling: The public announcement and launch of new consumer electronics devices by technology companies.
+- concepts/corporate-turmoil: Significant internal conflict or leadership changes within a company, such as CEO oustings or board disputes.
+- concepts/legal-trial: A formal court proceeding where evidence is presented to determine guilt or innocence, often involving high-profile figures.
+- concepts/subscription-model: A business model where users pay a recurring fee to access premium features or services, such as ad-free content.
+- concepts/ai-integration: The incorporation of artificial intelligence tools into existing platforms to enhance functionality in areas like recruiting and marketing.
+- concepts/cybersecurity-collapse: The failure of a cybersecurity firm, often resulting in layoffs, stock decline, and the departure of high-profile founders.
+- sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line: Helena World Chronicle, LLC has filed a class action antitrust lawsuit against Google and Alphabet in the U.S. District Court in D.C., alleging that Google's AI technologies, including Search Generative Experience (SGE) and Bard, along with older features like the Knowledge Graph
+- entities/helena-world-chronicle-llc: Arkansas-based publisher that filed the class action antitrust suit against Google.
+- entities/google-llc: Technology company accused of anticompetitive behavior and AI misuse of publisher content.
+- entities/alphabet-inc: Parent company of Google accused in the antitrust lawsuit.
+- entities/us-district-court-dc: Federal court where the class action lawsuit was filed.
+- entities/the-atlantic: Online magazine used in a Wall Street Journal report to model AI search impacts.
+- entities/wall-street-journal: Publication that reported on the impact of Google AI on publisher traffic.
+- entities/similarweb: Data source cited regarding Google's traffic share for publishers.
+- entities/axel-springer: Publisher that licensed news for AI model training with OpenAI.
+- entities/openai: Company with which Axel Springer licensed news for AI training.
+- entities/meta: Company with unresolved negotiations regarding content payment deals in Canada.
+- entities/canadian-government: Government entity that reached an agreement with Google for media content payments.
+- entities/hausfeld: Law firm handling the class action lawsuit against Google.
+- entities/epic-games: Company involved in a recent lawsuit against Google over app store antitrust issues.
+- entities/us-justice-department: Government entity that filed a separate antitrust suit against Google.
+- entities/news-media-alliance: Organization that published a 2023 report on AI training data sources.
+- entities/allen-institute-for-ai: Research institution that worked with the Washington Post on AI training data analysis.
+- entities/search-generative-experience: Google's AI technology accused of keeping users in a walled garden and plagiarizing content.
+- entities/bard-ai: Google's chatbot accused of being trained on misappropriated news and magazine data.
+- entities/knowledge-graph: Google's database launched in 2012 that extracts information from publisher websites.
+- entities/featured-snippets: Google technology that algorithmically extracts answers from webpages, shifting traffic away from publishers.
+- entities/googlebot: Web crawler used by both Google's general search and SGE.
+- entities/adsense: Google's advertising platform cited in the lawsuit regarding changing rates.
+- concepts/antitrust-violation: Legal claim that Google's business practices violate U.S. antitrust laws like the Sherman Act.
+- concepts/content-misappropriation: The alleged practice of Google extracting and using publisher content without consent or fair compensation.
+- concepts/ai-training-data: The dataset used to train AI models, including news and media content from publishers.
+- concepts/traffic-redirection: The shift of user attention from publisher websites to Google's search results and AI features.
+- concepts/walled-garden: A metaphor for keeping users within Google's ecosystem rather than directing them to external publishers.
+- concepts/class-action-lawsuit: A legal proceeding where a group of people with similar claims sue a defendant collectively.
+- concepts/injunctive-relief: A court order requiring a party to do or stop doing a specific action, such as obtaining consent for data use.
+- concepts/digital-news-ecommerce: The business model of news publishers relying on web traffic and ad revenue.
+- sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand: The second day of the Sam Bankman-Fried trial featured starkly contrasting opening statements where prosecutors painted him as a liar who stole billions for a lavish lifestyle, while his defense argued he was a good-faith startup founder who acted innovatively and was willing to 
+- entities/alameda-research: A crypto hedge fund owned by Sam Bankman-Fried.
+- entities/caroline-ellison: Former CEO of Alameda Research and Sam Bankman-Fried's girlfriend.
+- entities/thane-rehn: A prosecutor for the government who gave the prosecution's opening statement.
+- entities/mark-cohen: One of Sam Bankman-Fried's lawyers who gave the defense's opening statement.
+- entities/damian-williams: U.S. attorney for the Southern District of New York.
+- entities/marc-antoine-julliard: A Paris-born cocoa trader who lives in London and testified as a victim.
+- entities/adam-yedidia: A former friend of Bankman-Fried and MIT graduate who testified with legal immunity.
+- entities/matt-huang: A former partner at Sequoia Capital expected to testify.
+- entities/gary-wang: A key Bankman-Fried lieutenant and one of the government's star witnesses.
+- entities/jane-street: A high-frequency trading firm where Bankman-Fried started his finance career.
+- entities/sequoia-capital: A high-powered venture capital firm where Matt Huang previously worked.
+- entities/brooklyn: The location of the prison where Bankman-Fried spent time.
+- entities/new-york: The city where the trial is being held.
+- entities/london: The city where Marc-Antoine Julliard lives.
+- entities/paris: The birthplace of Marc-Antoine Julliard.
+- entities/tom-brady: A celebrity mentioned in the prosecution's account of Bankman-Fried's lifestyle.
+- entities/larry-david: A celebrity mentioned in the prosecution's account of Bankman-Fried's lifestyle.
+- concepts/good-faith: The defense's argument that Bankman-Fried acted honestly and without intent to defraud.
+- concepts/startup-failure: The analogy used by the defense comparing building a business to flying a plane.
+- concepts/ponzi-scheme: A term used by the prosecution to describe FTX's alleged structure.
+- concepts/customer-funds: The money belonging to FTX users that was allegedly misappropriated.
+- concepts/jury-selection: The process where a jury was selected on Wednesday morning before the trial.

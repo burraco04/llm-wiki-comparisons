@@ -1,0 +1,247 @@
+{
+  "qa_id": "mhop_2074",
+  "question": "Who is the individual that Fortune claims used a colleague as a front for improper financial access, whom TechCrunch did not compare to Warren Buffet, and who has faced allegations by the prosecution of committing fraud for personal gain, as reported by TechCrunch?",
+  "reference": "Sam Bankman-Fried",
+  "question_type": "inference_query",
+  "evidence_titles": [
+    "Is Sam Bankman-Fried a bad ‘man’ or a good ‘boy’? Lawyers swap opening statements before first witnesses take the stand",
+    "SBF’s trial starts soon, but how did he — and FTX — get here?",
+    "SBF, riding high on FTX, reportedly offered $5B to Trump to cancel President re-run",
+    "Sam Altman backs teens’ startup, Google unveils the Pixel 8 and TikTok tests an ad-free tier"
+  ],
+  "system": "wiki_routed",
+  "prediction": "Sam Bankman-Fried",
+  "raw_prediction": "Sam Bankman-Fried",
+  "seconds_wall": 7.879779501003213,
+  "retrieval": {
+    "routed_ids": [
+      "sources/SBF_s_trial_starts_soon_but_how_did_he_and_FTX_get_here",
+      "sources/SBF_riding_high_on_FTX_reportedly_offered_5B_to_Trump_to_cancel_President_re-run",
+      "entities/sam-bankman-fried",
+      "entities/ftx",
+      "entities/michael-lewis",
+      "entities/damian-williams",
+      "entities/thane-rehn",
+      "entities/alameda-research"
+    ],
+    "terms": [
+      "sam bankman-fried ftx trial fraud",
+      "sbf colleague front improper financial access",
+      "techcrunch warren buffet comparison sbf",
+      "sbf prosecution fraud personal gain allegations",
+      "sam bankman-fried criminal trial charges",
+      "ftx collapse sam bankman-fried fraud",
+      "sbf alameda research financial mismanagement",
+      "sam bankman-fried caroline ellison witness",
+      "sbf trial manhattan federal court",
+      "sam bankman-fried michael lewis going infinite",
+      "sbf political donations trump offer",
+      "sam bankman-fried bankruptcy chapter 11",
+      "ftx balance sheet coindesk november 2022",
+      "sam bankman-fried guilty pleas gary wang ellison",
+      "sbf trial mark cohen defense attorney",
+      "individual",
+      "fortune",
+      "claims",
+      "used",
+      "colleague",
+      "improper",
+      "financial",
+      "access",
+      "techcrunch",
+      "did",
+      "compare",
+      "warren",
+      "buffet",
+      "faced",
+      "allegations",
+      "prosecution",
+      "committing",
+      "fraud",
+      "personal",
+      "gain",
+      "reported",
+      "fortune claims",
+      "claims used",
+      "improper financial",
+      "financial access",
+      "techcrunch did",
+      "warren buffet",
+      "faced allegations",
+      "committing fraud",
+      "personal gain"
+    ],
+    "routing_fallback": false,
+    "timing": {
+      "routing_llm": 2.8235983080085134,
+      "search_terms_llm": 3.1788800709909992,
+      "retrieval_code": 1.546394759992836,
+      "answer_llm": 0.3308846690051723
+    },
+    "candidates": 76,
+    "selected": 8,
+    "chars": 9990,
+    "matched_pages": [
+      "entities/sam-bankman-fried",
+      "sources/SBF_riding_high_on_FTX_reportedly_offered_5B_to_Trump_to_cancel_President_re-run",
+      "sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier",
+      "sources/SBF_s_trial_starts_soon_but_how_did_he_and_FTX_get_here"
+    ],
+    "kg_triples": 6,
+    "graph_relations": [
+      {
+        "source": "sam-bankman-fried",
+        "target": "ftx",
+        "relation": "orchestrated_collapse_of",
+        "source_doc": "sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier",
+        "context_line": "Sam Bankman-Fried [orchestrated_collapse_of] FTX (from sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier)"
+      },
+      {
+        "source": "michael-lewis",
+        "target": "sam-bankman-fried",
+        "relation": "wrote_about",
+        "source_doc": "sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier",
+        "context_line": "Michael Lewis [wrote_about] Sam Bankman-Fried (from sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier)"
+      },
+      {
+        "source": "sam-bankman-fried",
+        "target": "donald-trump",
+        "relation": "attempted_to_buy_off",
+        "source_doc": "sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier",
+        "context_line": "Sam Bankman-Fried [attempted_to_buy_off] Donald Trump (from sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier)"
+      },
+      {
+        "source": "sam-bankman-fried",
+        "target": "manhattan-federal-court",
+        "relation": "tried_in",
+        "source_doc": "sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier",
+        "context_line": "Sam Bankman-Fried [tried_in] Manhattan Federal Court (from sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier)"
+      },
+      {
+        "source": "sam-bankman-fried",
+        "target": "ftx",
+        "relation": "was former CEO of",
+        "source_doc": "sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand",
+        "context_line": "Sam Bankman-Fried [was former CEO of] FTX (from sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand)"
+      },
+      {
+        "source": "sam-bankman-fried",
+        "target": "alameda-research",
+        "relation": "owned",
+        "source_doc": "sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand",
+        "context_line": "Sam Bankman-Fried [owned] Alameda Research (from sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand)"
+      }
+    ],
+    "selected_passages": [
+      {
+        "title": "entities/sam-bankman-fried",
+        "page_id": "entities/sam-bankman-fried",
+        "text": "- Sam Bankman-Fried [orchestrated_collapse_of] FTX (from [[sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]])\n- Michael Lewis [wrote_about] Sam Bankman-Fried (from [[sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]])\n- Sam Bankman-Fried [attempted_to_buy_off] Donald Trump (from [[sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]])\n- Sam Bankman-Fried [tried_in] Manhattan Federal Court (from [[sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]])\n- Sam Bankman-Fried [was former CEO of] FTX (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- Sam Bankman-Fried [owned] Alameda Research (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- Sam Bankman-Fried [had relationship with] Caroline Ellison (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- Thane Rehn [accused of crimes] Sam Bankman-Fried (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- Mark Cohen [defended] Sam Bankman-Fried (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- Adam Yedidia [was close friend of] Sam Bankman-Fried (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- Sam Bankman-Fried [worked at] Jane Street (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- Sam Bankman-Fried [co-founded] FTX (from [[sources/SBF_s_trial_starts_soon_but_how_did_he_and_FTX_get_here]])\n- Sam Bankman-Fried [co-founded] Alameda Research (from [[sources/SBF_s_trial_starts_soon_but_how_did_he_and_FTX_get_here]])\n- Damian Williams [accused of crimes by] Sam Bankman-Fried (from [[sources/SBF_s_trial_starts_soon_but_how_did_he_and_FTX_get_here]])\n- Palo Alto [was under house arrest at] Sam Bankman-Fried (from [[sources/SBF_s_trial_starts_soon_but_how_did_he_and_FTX_get_here]])\n- Sam Bankman-Fried [founded] FTX (from [[sources/SBF_riding_high_on_FTX_reportedly_offered_5B_to_Trump_to_cancel_President_re-run]])\n- Sam Bankman-Fried [linked to] Alameda Research (from [[sources/SBF_riding_high_on_FTX_reportedly_offered_5B_to_Trump_to_cancel_President_re-run]])\n- Sam Bankman-Fried [offered money to] Donald Trump (from [[sources/SBF_riding_high_on_FTX_reportedly_offered_5B_to_Trump_to_cancel_President_re-run]])\n- Sam Bankman-Fried [met with] Mitch McConnell (from [[sources/SBF_riding_high_on_FTX_reportedly_offered_5B_to_Trump_to_cancel_President_re-run]])\n- Michael Lewis [wrote about] Sam Bankman-Fried (from [[sources/SBF_riding_high_on_FTX_reportedly_offered_5B_to_Trump_to_cancel_President_re-run]])\n- Sam Bankman-Fried [asked to sponsor] Met Costume Ball (from [[sources/SBF_riding_high_on_FTX_reportedly_offered_5B_to_Trump_to_cancel_President_re-run]])\n- Sam Bankman-Fried [accused of] Financial Fraud (from [[sources/SBF_riding_high_on_FTX_reportedly_offered_5B_to_Trump_to_cancel_President_re-run]])\n- Sam Bankman-Fried [engaged in] Political Maneuvering (from [[sources/SBF_riding_high_on_FTX_reportedly_offered_5B_to_Trump_to_cancel_President_re-run]])",
+        "branch": "routed_wiki",
+        "item_id": "wiki:entities/sam-bankman-fried:2",
+        "matched_terms": 9,
+        "direct_matches": 5,
+        "context_block": "[entities/sam-bankman-fried]\n- Sam Bankman-Fried [orchestrated_collapse_of] FTX (from [[sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]])\n- Michael Lewis [wrote_about] Sam Bankman-Fried (from [[sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]])\n- Sam Bankman-Fried [attempted_to_buy_off] Donald Trump (from [[sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]])\n- Sam Bankman-Fried [tried_in] Manhattan Federal Court (from [[sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]])\n- Sam Bankman-Fried [was former CEO of] FTX (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- Sam Bankman-Fried [owned] Alameda Research (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- Sam Bankman-Fried [had relationship with] Caroline Ellison (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- Thane Rehn [accused of crimes] Sam Bankman-Fried (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- Mark Cohen [defended] Sam Bankman-Fried (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- Adam Yedidia [was close friend of] Sam Bankman-Fried (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- Sam Bankman-Fried [worked at] Jane Street (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- Sam Bankman-Fried [co-founded] FTX (from [[sources/SBF_s_trial_starts_soon_but_how_did_he_and_FTX_get_here]])\n- Sam Bankman-Fried [co-founded] Alameda Research (from [[sources/SBF_s_trial_starts_soon_but_how_did_he_and_FTX_get_here]])\n- Damian Williams [accused of crimes by] Sam Bankman-Fried (from [[sources/SBF_s_trial_starts_soon_but_how_did_he_and_FTX_get_here]])\n- Palo Alto [was under house arrest at] Sam Bankman-Fried (from [[sources/SBF_s_trial_starts_soon_but_how_did_he_and_FTX_get_here]])\n- Sam Bankman-Fried [founded] FTX (from [[sources/SBF_riding_high_on_FTX_reportedly_offered_5B_to_Trump_to_cancel_President_re-run]])\n- Sam Bankman-Fried [linked to] Alameda Research (from [[sources/SBF_riding_high_on_FTX_reportedly_offered_5B_to_Trump_to_cancel_President_re-run]])\n- Sam Bankman-Fried [offered money to] Donald Trump (from [[sources/SBF_riding_high_on_FTX_reportedly_offered_5B_to_Trump_to_cancel_President_re-run]])\n- Sam Bankman-Fried [met with] Mitch McConnell (from [[sources/SBF_riding_high_on_FTX_reportedly_offered_5B_to_Trump_to_cancel_President_re-run]])\n- Michael Lewis [wrote about] Sam Bankman-Fried (from [[sources/SBF_riding_high_on_FTX_reportedly_offered_5B_to_Trump_to_cancel_President_re-run]])\n- Sam Bankman-Fried [asked to sponsor] Met Costume Ball (from [[sources/SBF_riding_high_on_FTX_reportedly_offered_5B_to_Trump_to_cancel_President_re-run]])\n- Sam Bankman-Fried [accused of] Financial Fraud (from [[sources/SBF_riding_high_on_FTX_reportedly_offered_5B_to_Trump_to_cancel_President_re-run]])\n- Sam Bankman-Fried [engaged in] Political Maneuvering (from [[sources/SBF_riding_high_on_FTX_reportedly_offered_5B_to_Trump_to_cancel_President_re-run]])",
+        "truncated": false
+      },
+      {
+        "title": "sources/SBF_riding_high_on_FTX_reportedly_offered_5B_to_Trump_to_cancel_President_re-run",
+        "page_id": "sources/SBF_riding_high_on_FTX_reportedly_offered_5B_to_Trump_to_cancel_President_re-run",
+        "text": "- Sam Bankman-Fried is facing trial on seven charges of fraud and conspiracy related to the collapse of FTX.\n- Michael Lewis's book 'Going Infinite' details SBF's rise, his relationship with Lewis, and an alleged $5 billion offer to Donald Trump to cancel his presidential run.\n- SBF engaged in significant political maneuvering, meeting with Mitch McConnell and seeking to fund candidates on both sides of the aisle.\n- The document highlights public criticism of SBF and the media's coverage, contrasting it with the financial reality of the FTX collapse.\n- SBF's company, FTX, collapsed after cryptocurrency valuations fell, leading to accusations of fraud and conspiracy.",
+        "branch": "routed_wiki",
+        "item_id": "wiki:sources/SBF_riding_high_on_FTX_reportedly_offered_5B_to_Trump_to_cancel_President_re-run:1",
+        "matched_terms": 9,
+        "direct_matches": 3,
+        "context_block": "[sources/SBF_riding_high_on_FTX_reportedly_offered_5B_to_Trump_to_cancel_President_re-run]\n- Sam Bankman-Fried is facing trial on seven charges of fraud and conspiracy related to the collapse of FTX.\n- Michael Lewis's book 'Going Infinite' details SBF's rise, his relationship with Lewis, and an alleged $5 billion offer to Donald Trump to cancel his presidential run.\n- SBF engaged in significant political maneuvering, meeting with Mitch McConnell and seeking to fund candidates on both sides of the aisle.\n- The document highlights public criticism of SBF and the media's coverage, contrasting it with the financial reality of the FTX collapse.\n- SBF's company, FTX, collapsed after cryptocurrency valuations fell, leading to accusations of fraud and conspiracy.",
+        "truncated": false
+      },
+      {
+        "title": "sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier",
+        "page_id": "sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier",
+        "text": "- Induced AI was founded this year.\n- Induced AI converts back-office tasks from plain English to pseudo-code in real time.\n- The Pixel 8 Pro is similar to the Pixel 7 Pro but features improved cameras and a brighter screen.\n- Flexport is valued at $8 billion.\n- Dave Clark was ousted as CEO of Flexport just one year into his job.\n- Dave Clark made comments about Flexport on social media site X.\n- The SBF trial is taking place in Manhattan Federal Court.\n- Michael Lewis wrote the book 'Going Infinite'.\n- The book 'Going Infinite' debuted on the first day of the SBF trial.\n- Gmail bulk senders must authenticate emails starting next year.\n- Gmail bulk senders must offer an easy way to unsubscribe.\n- Gmail bulk senders must stay under a reported spam threshold.\n- TikTok's ad-free tier costs $4.99.\n- TikTok is piloting its ad-free plan in a single English-speaking market outside the U.S.\n- LinkedIn unveiled new AI features for job hunting, marketing, and sales.\n- Elon Musk stated X users generate 100 million to 200 million posts daily in September.\n- X CEO Linda Yaccarino claimed X sees 500 million posts per day.\n- IronNet was founded in 2014.\n- IronNet was founded by retired four-star general Keith Alexander.\n- IronNet raised more than $400 million in funding.\n- IronNet went public in August 2021.\n- IronNet is based in Virginia.\n- IronNet laid off its remaining staff after shutting down.\n- TechCrunch's WiR column is published every Saturday.\n- The SBF trial involves the prosecution of knowingly committing fraud for wealth and power.\n- The defense in the SBF trial argues Bankman-Fried acted in good faith.",
+        "branch": "other_wiki",
+        "item_id": "wiki:sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier:2",
+        "matched_terms": 8,
+        "direct_matches": 6,
+        "context_block": "[sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]\n- Induced AI was founded this year.\n- Induced AI converts back-office tasks from plain English to pseudo-code in real time.\n- The Pixel 8 Pro is similar to the Pixel 7 Pro but features improved cameras and a brighter screen.\n- Flexport is valued at $8 billion.\n- Dave Clark was ousted as CEO of Flexport just one year into his job.\n- Dave Clark made comments about Flexport on social media site X.\n- The SBF trial is taking place in Manhattan Federal Court.\n- Michael Lewis wrote the book 'Going Infinite'.\n- The book 'Going Infinite' debuted on the first day of the SBF trial.\n- Gmail bulk senders must authenticate emails starting next year.\n- Gmail bulk senders must offer an easy way to unsubscribe.\n- Gmail bulk senders must stay under a reported spam threshold.\n- TikTok's ad-free tier costs $4.99.\n- TikTok is piloting its ad-free plan in a single English-speaking market outside the U.S.\n- LinkedIn unveiled new AI features for job hunting, marketing, and sales.\n- Elon Musk stated X users generate 100 million to 200 million posts daily in September.\n- X CEO Linda Yaccarino claimed X sees 500 million posts per day.\n- IronNet was founded in 2014.\n- IronNet was founded by retired four-star general Keith Alexander.\n- IronNet raised more than $400 million in funding.\n- IronNet went public in August 2021.\n- IronNet is based in Virginia.\n- IronNet laid off its remaining staff after shutting down.\n- TechCrunch's WiR column is published every Saturday.\n- The SBF trial involves the prosecution of knowingly committing fraud for wealth and power.\n- The defense in the SBF trial argues Bankman-Fried acted in good faith.",
+        "truncated": false
+      },
+      {
+        "title": "entities/sam-bankman-fried",
+        "page_id": "entities/sam-bankman-fried",
+        "text": "- From [[sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]]: Disgraced entrepreneur accused of orchestrating the collapse of FTX.\n- From [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]]: Former CEO of FTX and owner of Alameda Research, central figure in the trial.\n- From [[sources/SBF_s_trial_starts_soon_but_how_did_he_and_FTX_get_here]]: Former CEO of FTX and co-founder of Alameda Research, currently facing criminal trial.\n- From [[sources/SBF_riding_high_on_FTX_reportedly_offered_5B_to_Trump_to_cancel_President_re-run]]: Disgraced cryptocurrency entrepreneur and founder of FTX accused of financial fraud.",
+        "branch": "routed_wiki",
+        "item_id": "wiki:entities/sam-bankman-fried:1",
+        "matched_terms": 8,
+        "direct_matches": 5,
+        "context_block": "[entities/sam-bankman-fried]\n- From [[sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]]: Disgraced entrepreneur accused of orchestrating the collapse of FTX.\n- From [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]]: Former CEO of FTX and owner of Alameda Research, central figure in the trial.\n- From [[sources/SBF_s_trial_starts_soon_but_how_did_he_and_FTX_get_here]]: Former CEO of FTX and co-founder of Alameda Research, currently facing criminal trial.\n- From [[sources/SBF_riding_high_on_FTX_reportedly_offered_5B_to_Trump_to_cancel_President_re-run]]: Disgraced cryptocurrency entrepreneur and founder of FTX accused of financial fraud.",
+        "truncated": false
+      },
+      {
+        "title": "raw:sources/SBF_s_trial_starts_soon_but_how_did_he_and_FTX_get_here",
+        "page_id": "sources/SBF_s_trial_starts_soon_but_how_did_he_and_FTX_get_here",
+        "text": "Bankman-Fried was even compared to Warren Buffet and many called him the white horse of crypto (TechCrunch never did, for what it’s worth).",
+        "branch": "routed_raw",
+        "item_id": "raw:sources/SBF_s_trial_starts_soon_but_how_did_he_and_FTX_get_here:7",
+        "matched_terms": 7,
+        "direct_matches": 6,
+        "context_block": "[raw:sources/SBF_s_trial_starts_soon_but_how_did_he_and_FTX_get_here]\nBankman-Fried was even compared to Warren Buffet and many called him the white horse of crypto (TechCrunch never did, for what it’s worth).",
+        "truncated": false
+      },
+      {
+        "title": "sources/SBF_riding_high_on_FTX_reportedly_offered_5B_to_Trump_to_cancel_President_re-run",
+        "page_id": "sources/SBF_riding_high_on_FTX_reportedly_offered_5B_to_Trump_to_cancel_President_re-run",
+        "text": "- SBF pleaded not-guilty to seven charges of fraud and conspiracy.\n- The trial is set to take place in Manhattan Federal Court.\n- Michael Lewis's book 'Going Infinite' is set to debut on the first day of the trial.\n- SBF raised approximately $2 billion, including $1 billion in 2021, from backers.\n- Backers included Sequoia, Temasek, and Tiger Global.\n- SBF was the richest person in the world under 30 at the time.\n- SBF met with Mitch McConnell to discuss funding political candidates.\n- Tom Brady was paid $55 million for a marketing deal with FTX.\n- Steph Curry was paid $35 million for a marketing deal with FTX.\n- Anna Wintour contacted SBF to sponsor the Met Costume Ball.\n- FTX trade volume climbed to $15 billion per day.\n- SBF was denied bail.\n- SBF met with Michael Lewis more than 100 times over two years.\n- Ayelet Noff is the CEO and founder of Sliced Brand.\n- Alameda Research is the sister company to FTX.\n- The trial involves allegations of orchestrating one of the biggest financial frauds in American history.\n- Michael Lewis wrote 'Liar's Poker', 'Moneyball', and 'The Big Short'.",
+        "branch": "routed_wiki",
+        "item_id": "wiki:sources/SBF_riding_high_on_FTX_reportedly_offered_5B_to_Trump_to_cancel_President_re-run:2",
+        "matched_terms": 6,
+        "direct_matches": 4,
+        "context_block": "[sources/SBF_riding_high_on_FTX_reportedly_offered_5B_to_Trump_to_cancel_President_re-run]\n- SBF pleaded not-guilty to seven charges of fraud and conspiracy.\n- The trial is set to take place in Manhattan Federal Court.\n- Michael Lewis's book 'Going Infinite' is set to debut on the first day of the trial.\n- SBF raised approximately $2 billion, including $1 billion in 2021, from backers.\n- Backers included Sequoia, Temasek, and Tiger Global.\n- SBF was the richest person in the world under 30 at the time.\n- SBF met with Mitch McConnell to discuss funding political candidates.\n- Tom Brady was paid $55 million for a marketing deal with FTX.\n- Steph Curry was paid $35 million for a marketing deal with FTX.\n- Anna Wintour contacted SBF to sponsor the Met Costume Ball.\n- FTX trade volume climbed to $15 billion per day.\n- SBF was denied bail.\n- SBF met with Michael Lewis more than 100 times over two years.\n- Ayelet Noff is the CEO and founder of Sliced Brand.\n- Alameda Research is the sister company to FTX.\n- The trial involves allegations of orchestrating one of the biggest financial frauds in American history.\n- Michael Lewis wrote 'Liar's Poker', 'Moneyball', and 'The Big Short'.",
+        "truncated": false
+      },
+      {
+        "title": "sources/SBF_s_trial_starts_soon_but_how_did_he_and_FTX_get_here",
+        "page_id": "sources/SBF_s_trial_starts_soon_but_how_did_he_and_FTX_get_here",
+        "text": "Sam Bankman-Fried's criminal trial for seven counts of fraud and conspiracy against FTX has begun, following the exchange's collapse in November 2022 due to severe liquidity issues and mismanagement of customer funds. The once-valued $32 billion crypto empire filed for Chapter 11 bankruptcy, leading to the arrest of Bankman-Fried and the guilty pleas of former executives Gary Wang and Caroline Ellison, while the trial proceeds with high-profile legal representation.",
+        "branch": "routed_wiki",
+        "item_id": "wiki:sources/SBF_s_trial_starts_soon_but_how_did_he_and_FTX_get_here:0",
+        "matched_terms": 6,
+        "direct_matches": 2,
+        "context_block": "[sources/SBF_s_trial_starts_soon_but_how_did_he_and_FTX_get_here]\nSam Bankman-Fried's criminal trial for seven counts of fraud and conspiracy against FTX has begun, following the exchange's collapse in November 2022 due to severe liquidity issues and mismanagement of customer funds. The once-valued $32 billion crypto empire filed for Chapter 11 bankruptcy, leading to the arrest of Bankman-Fried and the guilty pleas of former executives Gary Wang and Caroline Ellison, while the trial proceeds with high-profile legal representation.",
+        "truncated": false
+      },
+      {
+        "title": "sources/SBF_riding_high_on_FTX_reportedly_offered_5B_to_Trump_to_cancel_President_re-run",
+        "page_id": "sources/SBF_riding_high_on_FTX_reportedly_offered_5B_to_Trump_to_cancel_President_re-run",
+        "text": "This document details the upcoming trial of Sam Bankman-Fried (SBF) regarding the collapse of FTX and Alameda Research, highlighting Michael Lewis's book 'Going Infinite' which chronicles SBF's rise and alleged attempts to buy off Donald Trump with a $5 billion offer. The text contrasts SBF's positive media coverage and perceived idealism with public outrage over the financial fraud, noting his political maneuvering and the subsequent crash of cryptocurrency valuations on the platform.",
+        "branch": "routed_wiki",
+        "item_id": "wiki:sources/SBF_riding_high_on_FTX_reportedly_offered_5B_to_Trump_to_cancel_President_re-run:0",
+        "matched_terms": 6,
+        "direct_matches": 2,
+        "context_block": "[sources/SBF_riding_high_on_FTX_reportedly_offered_5B_to_Trump_to_cancel_President_re-run]\nThis document details the upcoming trial of",
+        "truncated": true
+      }
+    ],
+    "branches": {
+      "routed_wiki": 6,
+      "other_wiki": 1,
+      "routed_raw": 1
+    }
+  },
+  "error": null,
+  "context": "[entities/sam-bankman-fried]\n- Sam Bankman-Fried [orchestrated_collapse_of] FTX (from [[sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]])\n- Michael Lewis [wrote_about] Sam Bankman-Fried (from [[sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]])\n- Sam Bankman-Fried [attempted_to_buy_off] Donald Trump (from [[sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]])\n- Sam Bankman-Fried [tried_in] Manhattan Federal Court (from [[sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]])\n- Sam Bankman-Fried [was former CEO of] FTX (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- Sam Bankman-Fried [owned] Alameda Research (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- Sam Bankman-Fried [had relationship with] Caroline Ellison (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- Thane Rehn [accused of crimes] Sam Bankman-Fried (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- Mark Cohen [defended] Sam Bankman-Fried (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- Adam Yedidia [was close friend of] Sam Bankman-Fried (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- Sam Bankman-Fried [worked at] Jane Street (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- Sam Bankman-Fried [co-founded] FTX (from [[sources/SBF_s_trial_starts_soon_but_how_did_he_and_FTX_get_here]])\n- Sam Bankman-Fried [co-founded] Alameda Research (from [[sources/SBF_s_trial_starts_soon_but_how_did_he_and_FTX_get_here]])\n- Damian Williams [accused of crimes by] Sam Bankman-Fried (from [[sources/SBF_s_trial_starts_soon_but_how_did_he_and_FTX_get_here]])\n- Palo Alto [was under house arrest at] Sam Bankman-Fried (from [[sources/SBF_s_trial_starts_soon_but_how_did_he_and_FTX_get_here]])\n- Sam Bankman-Fried [founded] FTX (from [[sources/SBF_riding_high_on_FTX_reportedly_offered_5B_to_Trump_to_cancel_President_re-run]])\n- Sam Bankman-Fried [linked to] Alameda Research (from [[sources/SBF_riding_high_on_FTX_reportedly_offered_5B_to_Trump_to_cancel_President_re-run]])\n- Sam Bankman-Fried [offered money to] Donald Trump (from [[sources/SBF_riding_high_on_FTX_reportedly_offered_5B_to_Trump_to_cancel_President_re-run]])\n- Sam Bankman-Fried [met with] Mitch McConnell (from [[sources/SBF_riding_high_on_FTX_reportedly_offered_5B_to_Trump_to_cancel_President_re-run]])\n- Michael Lewis [wrote about] Sam Bankman-Fried (from [[sources/SBF_riding_high_on_FTX_reportedly_offered_5B_to_Trump_to_cancel_President_re-run]])\n- Sam Bankman-Fried [asked to sponsor] Met Costume Ball (from [[sources/SBF_riding_high_on_FTX_reportedly_offered_5B_to_Trump_to_cancel_President_re-run]])\n- Sam Bankman-Fried [accused of] Financial Fraud (from [[sources/SBF_riding_high_on_FTX_reportedly_offered_5B_to_Trump_to_cancel_President_re-run]])\n- Sam Bankman-Fried [engaged in] Political Maneuvering (from [[sources/SBF_riding_high_on_FTX_reportedly_offered_5B_to_Trump_to_cancel_President_re-run]])\n\n[sources/SBF_riding_high_on_FTX_reportedly_offered_5B_to_Trump_to_cancel_President_re-run]\n- Sam Bankman-Fried is facing trial on seven charges of fraud and conspiracy related to the collapse of FTX.\n- Michael Lewis's book 'Going Infinite' details SBF's rise, his relationship with Lewis, and an alleged $5 billion offer to Donald Trump to cancel his presidential run.\n- SBF engaged in significant political maneuvering, meeting with Mitch McConnell and seeking to fund candidates on both sides of the aisle.\n- The document highlights public criticism of SBF and the media's coverage, contrasting it with the financial reality of the FTX collapse.\n- SBF's company, FTX, collapsed after cryptocurrency valuations fell, leading to accusations of fraud and conspiracy.\n\n[sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]\n- Induced AI was founded this year.\n- Induced AI converts back-office tasks from plain English to pseudo-code in real time.\n- The Pixel 8 Pro is similar to the Pixel 7 Pro but features improved cameras and a brighter screen.\n- Flexport is valued at $8 billion.\n- Dave Clark was ousted as CEO of Flexport just one year into his job.\n- Dave Clark made comments about Flexport on social media site X.\n- The SBF trial is taking place in Manhattan Federal Court.\n- Michael Lewis wrote the book 'Going Infinite'.\n- The book 'Going Infinite' debuted on the first day of the SBF trial.\n- Gmail bulk senders must authenticate emails starting next year.\n- Gmail bulk senders must offer an easy way to unsubscribe.\n- Gmail bulk senders must stay under a reported spam threshold.\n- TikTok's ad-free tier costs $4.99.\n- TikTok is piloting its ad-free plan in a single English-speaking market outside the U.S.\n- LinkedIn unveiled new AI features for job hunting, marketing, and sales.\n- Elon Musk stated X users generate 100 million to 200 million posts daily in September.\n- X CEO Linda Yaccarino claimed X sees 500 million posts per day.\n- IronNet was founded in 2014.\n- IronNet was founded by retired four-star general Keith Alexander.\n- IronNet raised more than $400 million in funding.\n- IronNet went public in August 2021.\n- IronNet is based in Virginia.\n- IronNet laid off its remaining staff after shutting down.\n- TechCrunch's WiR column is published every Saturday.\n- The SBF trial involves the prosecution of knowingly committing fraud for wealth and power.\n- The defense in the SBF trial argues Bankman-Fried acted in good faith.\n\n[entities/sam-bankman-fried]\n- From [[sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]]: Disgraced entrepreneur accused of orchestrating the collapse of FTX.\n- From [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]]: Former CEO of FTX and owner of Alameda Research, central figure in the trial.\n- From [[sources/SBF_s_trial_starts_soon_but_how_did_he_and_FTX_get_here]]: Former CEO of FTX and co-founder of Alameda Research, currently facing criminal trial.\n- From [[sources/SBF_riding_high_on_FTX_reportedly_offered_5B_to_Trump_to_cancel_President_re-run]]: Disgraced cryptocurrency entrepreneur and founder of FTX accused of financial fraud.\n\n[raw:sources/SBF_s_trial_starts_soon_but_how_did_he_and_FTX_get_here]\nBankman-Fried was even compared to Warren Buffet and many called him the white horse of crypto (TechCrunch never did, for what it’s worth).\n\n[sources/SBF_riding_high_on_FTX_reportedly_offered_5B_to_Trump_to_cancel_President_re-run]\n- SBF pleaded not-guilty to seven charges of fraud and conspiracy.\n- The trial is set to take place in Manhattan Federal Court.\n- Michael Lewis's book 'Going Infinite' is set to debut on the first day of the trial.\n- SBF raised approximately $2 billion, including $1 billion in 2021, from backers.\n- Backers included Sequoia, Temasek, and Tiger Global.\n- SBF was the richest person in the world under 30 at the time.\n- SBF met with Mitch McConnell to discuss funding political candidates.\n- Tom Brady was paid $55 million for a marketing deal with FTX.\n- Steph Curry was paid $35 million for a marketing deal with FTX.\n- Anna Wintour contacted SBF to sponsor the Met Costume Ball.\n- FTX trade volume climbed to $15 billion per day.\n- SBF was denied bail.\n- SBF met with Michael Lewis more than 100 times over two years.\n- Ayelet Noff is the CEO and founder of Sliced Brand.\n- Alameda Research is the sister company to FTX.\n- The trial involves allegations of orchestrating one of the biggest financial frauds in American history.\n- Michael Lewis wrote 'Liar's Poker', 'Moneyball', and 'The Big Short'.\n\n[sources/SBF_s_trial_starts_soon_but_how_did_he_and_FTX_get_here]\nSam Bankman-Fried's criminal trial for seven counts of fraud and conspiracy against FTX has begun, following the exchange's collapse in November 2022 due to severe liquidity issues and mismanagement of customer funds. The once-valued $32 billion crypto empire filed for Chapter 11 bankruptcy, leading to the arrest of Bankman-Fried and the guilty pleas of former executives Gary Wang and Caroline Ellison, while the trial proceeds with high-profile legal representation.\n\n[sources/SBF_riding_high_on_FTX_reportedly_offered_5B_to_Trump_to_cancel_President_re-run]\nThis document details the upcoming trial of\n\n[Knowledge graph]\nSam Bankman-Fried [orchestrated_collapse_of] FTX (from sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier)\nMichael Lewis [wrote_about] Sam Bankman-Fried (from sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier)\nSam Bankman-Fried [attempted_to_buy_off] Donald Trump (from sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier)\nSam Bankman-Fried [tried_in] Manhattan Federal Court (from sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier)\nSam Bankman-Fried [was former CEO of] FTX (from sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand)\nSam Bankman-Fried [owned] Alameda Research (from sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand)",
+  "answer_prompt": "Answer using only the context. Give a short direct answer (entity, name, number, date, phrase, Yes/No), or unanswerable. Output only the answer.\n\nContext:\n[entities/sam-bankman-fried]\n- Sam Bankman-Fried [orchestrated_collapse_of] FTX (from [[sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]])\n- Michael Lewis [wrote_about] Sam Bankman-Fried (from [[sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]])\n- Sam Bankman-Fried [attempted_to_buy_off] Donald Trump (from [[sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]])\n- Sam Bankman-Fried [tried_in] Manhattan Federal Court (from [[sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]])\n- Sam Bankman-Fried [was former CEO of] FTX (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- Sam Bankman-Fried [owned] Alameda Research (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- Sam Bankman-Fried [had relationship with] Caroline Ellison (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- Thane Rehn [accused of crimes] Sam Bankman-Fried (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- Mark Cohen [defended] Sam Bankman-Fried (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- Adam Yedidia [was close friend of] Sam Bankman-Fried (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- Sam Bankman-Fried [worked at] Jane Street (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- Sam Bankman-Fried [co-founded] FTX (from [[sources/SBF_s_trial_starts_soon_but_how_did_he_and_FTX_get_here]])\n- Sam Bankman-Fried [co-founded] Alameda Research (from [[sources/SBF_s_trial_starts_soon_but_how_did_he_and_FTX_get_here]])\n- Damian Williams [accused of crimes by] Sam Bankman-Fried (from [[sources/SBF_s_trial_starts_soon_but_how_did_he_and_FTX_get_here]])\n- Palo Alto [was under house arrest at] Sam Bankman-Fried (from [[sources/SBF_s_trial_starts_soon_but_how_did_he_and_FTX_get_here]])\n- Sam Bankman-Fried [founded] FTX (from [[sources/SBF_riding_high_on_FTX_reportedly_offered_5B_to_Trump_to_cancel_President_re-run]])\n- Sam Bankman-Fried [linked to] Alameda Research (from [[sources/SBF_riding_high_on_FTX_reportedly_offered_5B_to_Trump_to_cancel_President_re-run]])\n- Sam Bankman-Fried [offered money to] Donald Trump (from [[sources/SBF_riding_high_on_FTX_reportedly_offered_5B_to_Trump_to_cancel_President_re-run]])\n- Sam Bankman-Fried [met with] Mitch McConnell (from [[sources/SBF_riding_high_on_FTX_reportedly_offered_5B_to_Trump_to_cancel_President_re-run]])\n- Michael Lewis [wrote about] Sam Bankman-Fried (from [[sources/SBF_riding_high_on_FTX_reportedly_offered_5B_to_Trump_to_cancel_President_re-run]])\n- Sam Bankman-Fried [asked to sponsor] Met Costume Ball (from [[sources/SBF_riding_high_on_FTX_reportedly_offered_5B_to_Trump_to_cancel_President_re-run]])\n- Sam Bankman-Fried [accused of] Financial Fraud (from [[sources/SBF_riding_high_on_FTX_reportedly_offered_5B_to_Trump_to_cancel_President_re-run]])\n- Sam Bankman-Fried [engaged in] Political Maneuvering (from [[sources/SBF_riding_high_on_FTX_reportedly_offered_5B_to_Trump_to_cancel_President_re-run]])\n\n[sources/SBF_riding_high_on_FTX_reportedly_offered_5B_to_Trump_to_cancel_President_re-run]\n- Sam Bankman-Fried is facing trial on seven charges of fraud and conspiracy related to the collapse of FTX.\n- Michael Lewis's book 'Going Infinite' details SBF's rise, his relationship with Lewis, and an alleged $5 billion offer to Donald Trump to cancel his presidential run.\n- SBF engaged in significant political maneuvering, meeting with Mitch McConnell and seeking to fund candidates on both sides of the aisle.\n- The document highlights public criticism of SBF and the media's coverage, contrasting it with the financial reality of the FTX collapse.\n- SBF's company, FTX, collapsed after cryptocurrency valuations fell, leading to accusations of fraud and conspiracy.\n\n[sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]\n- Induced AI was founded this year.\n- Induced AI converts back-office tasks from plain English to pseudo-code in real time.\n- The Pixel 8 Pro is similar to the Pixel 7 Pro but features improved cameras and a brighter screen.\n- Flexport is valued at $8 billion.\n- Dave Clark was ousted as CEO of Flexport just one year into his job.\n- Dave Clark made comments about Flexport on social media site X.\n- The SBF trial is taking place in Manhattan Federal Court.\n- Michael Lewis wrote the book 'Going Infinite'.\n- The book 'Going Infinite' debuted on the first day of the SBF trial.\n- Gmail bulk senders must authenticate emails starting next year.\n- Gmail bulk senders must offer an easy way to unsubscribe.\n- Gmail bulk senders must stay under a reported spam threshold.\n- TikTok's ad-free tier costs $4.99.\n- TikTok is piloting its ad-free plan in a single English-speaking market outside the U.S.\n- LinkedIn unveiled new AI features for job hunting, marketing, and sales.\n- Elon Musk stated X users generate 100 million to 200 million posts daily in September.\n- X CEO Linda Yaccarino claimed X sees 500 million posts per day.\n- IronNet was founded in 2014.\n- IronNet was founded by retired four-star general Keith Alexander.\n- IronNet raised more than $400 million in funding.\n- IronNet went public in August 2021.\n- IronNet is based in Virginia.\n- IronNet laid off its remaining staff after shutting down.\n- TechCrunch's WiR column is published every Saturday.\n- The SBF trial involves the prosecution of knowingly committing fraud for wealth and power.\n- The defense in the SBF trial argues Bankman-Fried acted in good faith.\n\n[entities/sam-bankman-fried]\n- From [[sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]]: Disgraced entrepreneur accused of orchestrating the collapse of FTX.\n- From [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]]: Former CEO of FTX and owner of Alameda Research, central figure in the trial.\n- From [[sources/SBF_s_trial_starts_soon_but_how_did_he_and_FTX_get_here]]: Former CEO of FTX and co-founder of Alameda Research, currently facing criminal trial.\n- From [[sources/SBF_riding_high_on_FTX_reportedly_offered_5B_to_Trump_to_cancel_President_re-run]]: Disgraced cryptocurrency entrepreneur and founder of FTX accused of financial fraud.\n\n[raw:sources/SBF_s_trial_starts_soon_but_how_did_he_and_FTX_get_here]\nBankman-Fried was even compared to Warren Buffet and many called him the white horse of crypto (TechCrunch never did, for what it’s worth).\n\n[sources/SBF_riding_high_on_FTX_reportedly_offered_5B_to_Trump_to_cancel_President_re-run]\n- SBF pleaded not-guilty to seven charges of fraud and conspiracy.\n- The trial is set to take place in Manhattan Federal Court.\n- Michael Lewis's book 'Going Infinite' is set to debut on the first day of the trial.\n- SBF raised approximately $2 billion, including $1 billion in 2021, from backers.\n- Backers included Sequoia, Temasek, and Tiger Global.\n- SBF was the richest person in the world under 30 at the time.\n- SBF met with Mitch McConnell to discuss funding political candidates.\n- Tom Brady was paid $55 million for a marketing deal with FTX.\n- Steph Curry was paid $35 million for a marketing deal with FTX.\n- Anna Wintour contacted SBF to sponsor the Met Costume Ball.\n- FTX trade volume climbed to $15 billion per day.\n- SBF was denied bail.\n- SBF met with Michael Lewis more than 100 times over two years.\n- Ayelet Noff is the CEO and founder of Sliced Brand.\n- Alameda Research is the sister company to FTX.\n- The trial involves allegations of orchestrating one of the biggest financial frauds in American history.\n- Michael Lewis wrote 'Liar's Poker', 'Moneyball', and 'The Big Short'.\n\n[sources/SBF_s_trial_starts_soon_but_how_did_he_and_FTX_get_here]\nSam Bankman-Fried's criminal trial for seven counts of fraud and conspiracy against FTX has begun, following the exchange's collapse in November 2022 due to severe liquidity issues and mismanagement of customer funds. The once-valued $32 billion crypto empire filed for Chapter 11 bankruptcy, leading to the arrest of Bankman-Fried and the guilty pleas of former executives Gary Wang and Caroline Ellison, while the trial proceeds with high-profile legal representation.\n\n[sources/SBF_riding_high_on_FTX_reportedly_offered_5B_to_Trump_to_cancel_President_re-run]\nThis document details the upcoming trial of\n\n[Knowledge graph]\nSam Bankman-Fried [orchestrated_collapse_of] FTX (from sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier)\nMichael Lewis [wrote_about] Sam Bankman-Fried (from sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier)\nSam Bankman-Fried [attempted_to_buy_off] Donald Trump (from sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier)\nSam Bankman-Fried [tried_in] Manhattan Federal Court (from sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier)\nSam Bankman-Fried [was former CEO of] FTX (from sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand)\nSam Bankman-Fried [owned] Alameda Research (from sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand)\n\nQuestion: Who is the individual that Fortune claims used a colleague as a front for improper financial access, whom TechCrunch did not compare to Warren Buffet, and who has faced allegations by the prosecution of committing fraud for personal gain, as reported by TechCrunch?\nAnswer:",
+  "model_call_ids": [
+    625,
+    626,
+    627
+  ],
+  "request_attempts": 3,
+  "failed_requests": 0,
+  "llm_calls": 3,
+  "input_tokens": 13539,
+  "output_tokens": 368,
+  "em": 1.0,
+  "token_f1": 1.0,
+  "rouge_l": 1.0
+}

@@ -1,0 +1,281 @@
+{
+  "qa_id": "mhop_5",
+  "question": "Who is the individual alleged to have built a thriving crypto exchange on falsehoods and is accused by the prosecution of committing fraud for personal gain, as reported by both Fortune and TechCrunch?",
+  "reference": "Sam Bankman-Fried",
+  "question_type": "inference_query",
+  "evidence_titles": [
+    "Is Sam Bankman-Fried a bad ‘man’ or a good ‘boy’? Lawyers swap opening statements before first witnesses take the stand",
+    "Sam Altman backs teens’ startup, Google unveils the Pixel 8 and TikTok tests an ad-free tier"
+  ],
+  "system": "wiki_routed",
+  "prediction": "Sam Bankman-Fried",
+  "raw_prediction": "Sam Bankman-Fried",
+  "seconds_wall": 5.376168625007267,
+  "retrieval": {
+    "routed_ids": [
+      "sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand",
+      "entities/sam-bankman-fried",
+      "entities/ftx",
+      "entities/techcrunch",
+      "entities/michael-lewis",
+      "concepts/legal-trial",
+      "concepts/ponzi-scheme",
+      "concepts/customer-funds"
+    ],
+    "terms": [
+      "sam bankman-fried ftx fraud",
+      "sam bankman-fried crypto exchange collapse",
+      "sbf alameda research scheme",
+      "ftx trial prosecutors allegations",
+      "sam bankman-fried fortune techcrunch",
+      "sbf customer funds misappropriation",
+      "sam bankman-fried ponzi scheme",
+      "ftx ceo fraud trial",
+      "sam bankman-fried good faith defense",
+      "alameda research ftx collapse",
+      "sam bankman-fried political donations",
+      "ftx trial opening statements",
+      "sam bankman-fried gary wang witness",
+      "caroline ellison ftx alameda",
+      "sam bankman-fried manhattan federal court",
+      "individual",
+      "alleged",
+      "built",
+      "thriving",
+      "crypto",
+      "exchange",
+      "falsehoods",
+      "accused",
+      "prosecution",
+      "committing",
+      "fraud",
+      "personal",
+      "gain",
+      "reported",
+      "fortune",
+      "techcrunch",
+      "individual alleged",
+      "thriving crypto",
+      "crypto exchange",
+      "committing fraud",
+      "personal gain"
+    ],
+    "routing_fallback": false,
+    "timing": {
+      "routing_llm": 1.6845314490055898,
+      "search_terms_llm": 2.6575750409974717,
+      "retrieval_code": 0.5544076990045141,
+      "answer_llm": 0.47962835599901155
+    },
+    "candidates": 43,
+    "selected": 12,
+    "chars": 10008,
+    "matched_pages": [
+      "sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier",
+      "sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand",
+      "entities/sam-bankman-fried",
+      "entities/ftx"
+    ],
+    "kg_triples": 6,
+    "graph_relations": [
+      {
+        "source": "sam-bankman-fried",
+        "target": "ftx",
+        "relation": "orchestrated_collapse_of",
+        "source_doc": "sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier",
+        "context_line": "Sam Bankman-Fried [orchestrated_collapse_of] FTX (from sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier)"
+      },
+      {
+        "source": "michael-lewis",
+        "target": "sam-bankman-fried",
+        "relation": "wrote_about",
+        "source_doc": "sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier",
+        "context_line": "Michael Lewis [wrote_about] Sam Bankman-Fried (from sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier)"
+      },
+      {
+        "source": "sam-bankman-fried",
+        "target": "manhattan-federal-court",
+        "relation": "tried_in",
+        "source_doc": "sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier",
+        "context_line": "Sam Bankman-Fried [tried_in] Manhattan Federal Court (from sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier)"
+      },
+      {
+        "source": "sam-bankman-fried",
+        "target": "ftx",
+        "relation": "was CEO of",
+        "source_doc": "sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand",
+        "context_line": "Sam Bankman-Fried [was CEO of] FTX (from sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand)"
+      },
+      {
+        "source": "sam-bankman-fried",
+        "target": "alameda-research",
+        "relation": "owned",
+        "source_doc": "sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand",
+        "context_line": "Sam Bankman-Fried [owned] Alameda Research (from sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand)"
+      },
+      {
+        "source": "sam-bankman-fried",
+        "target": "caroline-ellison",
+        "relation": "was girlfriend of",
+        "source_doc": "sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand",
+        "context_line": "Sam Bankman-Fried [was girlfriend of] Caroline Ellison (from sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand)"
+      }
+    ],
+    "selected_passages": [
+      {
+        "title": "raw:sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier",
+        "page_id": "sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier",
+        "text": "SBF allegedly tried to buy off Trump: The TC team’s been trained on the Manhattan Federal Court for the trial of Sam Bankman-Fried, the disgraced entrepreneur accused of orchestrating the collapse of cryptocurrency exchange FTX. But fascinating details about SBF’s political dealings are emerging from a book by Michael Lewis, “Going Infinite,” that debuted on the first day of the trial, like SBF’s attempt to buy off Trump to get him to not run again for president.",
+        "branch": "other_raw",
+        "item_id": "raw:sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier:7",
+        "matched_terms": 6,
+        "direct_matches": 5,
+        "context_block": "[raw:sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]\nSBF allegedly tried to buy off Trump: The TC team’s been trained on the Manhattan Federal Court for the trial of Sam Bankman-Fried, the disgraced entrepreneur accused of orchestrating the collapse of cryptocurrency exchange FTX. But fascinating details about SBF’s political dealings are emerging from a book by Michael Lewis, “Going Infinite,” that debuted on the first day of the trial, like SBF’s attempt to buy off Trump to get him to not run again for president.",
+        "truncated": false
+      },
+      {
+        "title": "sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier",
+        "page_id": "sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier",
+        "text": "- Induced AI was founded this year.\n- Induced AI converts back-office tasks from plain English to pseudo-code in real time.\n- The Pixel 8 Pro is similar to the Pixel 7 Pro but features improved cameras and a brighter screen.\n- Google's hardware event also announced updates to Android 14, Pixel Buds, and the Pixel Watch 2.\n- Flexport is a freight forwarding and customs brokerage startup valued at $8 billion.\n- Dave Clark was ousted as CEO of Flexport just one year into his job.\n- Clark made comments about Flexport on social media site X.\n- The SBF trial is taking place in the Manhattan Federal Court.\n- Michael Lewis wrote the book 'Going Infinite' which debuted on the first day of the SBF trial.\n- Gmail announced changes requiring bulk senders to authenticate emails starting next year.\n- TikTok's ad-free tier costs $4.99 per month.\n- TikTok is piloting its ad-free plan in a single English-speaking market outside the U.S.\n- LinkedIn unveiled new AI features for its Recruiter, Learning, and marketing products.\n- Elon Musk previously stated X users generate 100 to 200 million posts daily.\n- X CEO Linda Yaccarino claimed X sees 500 million posts per day.\n- IronNet was founded in 2014 by retired four-star general Keith Alexander.\n- IronNet raised more than $400 million in funding.\n- IronNet went public in August 2021.\n- IronNet is based in Virginia.\n- TechCrunch's Week in Review column is published every Saturday.\n- The SBF trial involves the prosecution of fraud charges against Sam Bankman-Fried.\n- The defense in the SBF trial argues Bankman-Fried acted in good faith.\n- Fearless Fund is a firm barred from awarding grants to Black women founders.\n- Breathe Battery Technologies developed software to improve lithium-ion battery charging and longevity.",
+        "branch": "other_wiki",
+        "item_id": "wiki:sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier:2",
+        "matched_terms": 6,
+        "direct_matches": 4,
+        "context_block": "[sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]\n- Induced AI was founded this year.\n- Induced AI converts back-office tasks from plain English to pseudo-code in real time.\n- The Pixel 8 Pro is similar to the Pixel 7 Pro but features improved cameras and a brighter screen.\n- Google's hardware event also announced updates to Android 14, Pixel Buds, and the Pixel Watch 2.\n- Flexport is a freight forwarding and customs brokerage startup valued at $8 billion.\n- Dave Clark was ousted as CEO of Flexport just one year into his job.\n- Clark made comments about Flexport on social media site X.\n- The SBF trial is taking place in the Manhattan Federal Court.\n- Michael Lewis wrote the book 'Going Infinite' which debuted on the first day of the SBF trial.\n- Gmail announced changes requiring bulk senders to authenticate emails starting next year.\n- TikTok's ad-free tier costs $4.99 per month.\n- TikTok is piloting its ad-free plan in a single English-speaking market outside the U.S.\n- LinkedIn unveiled new AI features for its Recruiter, Learning, and marketing products.\n- Elon Musk previously stated X users generate 100 to 200 million posts daily.\n- X CEO Linda Yaccarino claimed X sees 500 million posts per day.\n- IronNet was founded in 2014 by retired four-star general Keith Alexander.\n- IronNet raised more than $400 million in funding.\n- IronNet went public in August 2021.\n- IronNet is based in Virginia.\n- TechCrunch's Week in Review column is published every Saturday.\n- The SBF trial involves the prosecution of fraud charges against Sam Bankman-Fried.\n- The defense in the SBF trial argues Bankman-Fried acted in good faith.\n- Fearless Fund is a firm barred from awarding grants to Black women founders.\n- Breathe Battery Technologies developed software to improve lithium-ion battery charging and longevity.",
+        "truncated": false
+      },
+      {
+        "title": "sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand",
+        "page_id": "sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand",
+        "text": "- Sam Bankman-Fried was the former CEO of FTX.\n- The trial took place on the second day with lawyers swapping opening statements.\n- Thane Rehn is a prosecutor for the government.\n- Mark Cohen is one of Bankman-Fried's lawyers.\n- Caroline Ellison is the former CEO of Alameda Research.\n- Damian Williams is the U.S. attorney for the Southern District of New York.\n- Bankman-Fried's parents are his professorial parents.\n- Tom Brady and Larry David are celebrities mentioned in the prosecution's account.\n- Alameda Research is a crypto hedge fund owned by Bankman-Fried.\n- FTX is a crypto exchange where Bankman-Fried was CEO.\n- Marc-Antoine Julliard is a Paris-born cocoa trader who lives in London.\n- Julliard tried to pull out almost $100,000 on Nov. 8.\n- Adam Yedidia is a fast-talking graduate of MIT.\n- Yedidia worked at Jane Street before joining Alameda and FTX.\n- Jane Street is a high-frequency trading firm.\n- Matt Huang is a former partner at Sequoia Capital.\n- Gary Wang is a key Bankman-Fried lieutenant.\n- Bankman-Fried spent about seven weeks in a Brooklyn prison.\n- The trial was held in New York.\n- Court adjourned at 4:30 p.m. on the day of testimony.",
+        "branch": "routed_wiki",
+        "item_id": "wiki:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand:2",
+        "matched_terms": 6,
+        "direct_matches": 4,
+        "context_block": "[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\n- Sam Bankman-Fried was the former CEO of FTX.\n- The trial took place on the second day with lawyers swapping opening statements.\n- Thane Rehn is a prosecutor for the government.\n- Mark Cohen is one of Bankman-Fried's lawyers.\n- Caroline Ellison is the former CEO of Alameda Research.\n- Damian Williams is the U.S. attorney for the Southern District of New York.\n- Bankman-Fried's parents are his professorial parents.\n- Tom Brady and Larry David are celebrities mentioned in the prosecution's account.\n- Alameda Research is a crypto hedge fund owned by Bankman-Fried.\n- FTX is a crypto exchange where Bankman-Fried was CEO.\n- Marc-Antoine Julliard is a Paris-born cocoa trader who lives in London.\n- Julliard tried to pull out almost $100,000 on Nov. 8.\n- Adam Yedidia is a fast-talking graduate of MIT.\n- Yedidia worked at Jane Street before joining Alameda and FTX.\n- Jane Street is a high-frequency trading firm.\n- Matt Huang is a former partner at Sequoia Capital.\n- Gary Wang is a key Bankman-Fried lieutenant.\n- Bankman-Fried spent about seven weeks in a Brooklyn prison.\n- The trial was held in New York.\n- Court adjourned at 4:30 p.m. on the day of testimony.",
+        "truncated": false
+      },
+      {
+        "title": "entities/sam-bankman-fried",
+        "page_id": "entities/sam-bankman-fried",
+        "text": "- Sam Bankman-Fried [orchestrated_collapse_of] FTX (from [[sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]])\n- Michael Lewis [wrote_about] Sam Bankman-Fried (from [[sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]])\n- Sam Bankman-Fried [tried_in] Manhattan Federal Court (from [[sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]])\n- Sam Bankman-Fried [was CEO of] FTX (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- Sam Bankman-Fried [owned] Alameda Research (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- Sam Bankman-Fried [was girlfriend of] Caroline Ellison (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- Thane Rehn [accused of crimes] Sam Bankman-Fried (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- Mark Cohen [defended] Sam Bankman-Fried (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- Adam Yedidia [was close friend of] Sam Bankman-Fried (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- Damian Williams [prosecuted] Sam Bankman-Fried (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- Gary Wang [was lieutenant of] Sam Bankman-Fried (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])",
+        "branch": "routed_wiki",
+        "item_id": "wiki:entities/sam-bankman-fried:2",
+        "matched_terms": 6,
+        "direct_matches": 1,
+        "context_block": "[entities/sam-bankman-fried]\n- Sam Bankman-Fried [orchestrated_collapse_of] FTX (from [[sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]])\n- Michael Lewis [wrote_about] Sam Bankman-Fried (from [[sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]])\n- Sam Bankman-Fried [tried_in] Manhattan Federal Court (from [[sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]])\n- Sam Bankman-Fried [was CEO of] FTX (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- Sam Bankman-Fried [owned] Alameda Research (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- Sam Bankman-Fried [was girlfriend of] Caroline Ellison (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- Thane Rehn [accused of crimes] Sam Bankman-Fried (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- Mark Cohen [defended] Sam Bankman-Fried (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- Adam Yedidia [was close friend of] Sam Bankman-Fried (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- Damian Williams [prosecuted] Sam Bankman-Fried (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- Gary Wang [was lieutenant of] Sam Bankman-Fried (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])",
+        "truncated": false
+      },
+      {
+        "title": "raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand",
+        "page_id": "sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand",
+        "text": "“One year ago, it looked like the defendant was on the top of the world,” began Thane Rehn, a prosecutor for the government, in his opening statement. The former CEO of FTX oversaw a supposedly thriving crypto exchange, jetted between international locales, and hobnobbed with celebrities like Tom Brady and Larry David. He repeatedly emphasized to customers that their money was safe and secure.",
+        "branch": "routed_raw",
+        "item_id": "raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand:4",
+        "matched_terms": 5,
+        "direct_matches": 5,
+        "context_block": "[raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\n“One year ago, it looked like the defendant was on the top of the world,” began Thane Rehn, a prosecutor for the government, in his opening statement. The former CEO of FTX oversaw a supposedly thriving crypto exchange, jetted between international locales, and hobnobbed with celebrities like Tom Brady and Larry David. He repeatedly emphasized to customers that their money was safe and secure.",
+        "truncated": false
+      },
+      {
+        "title": "raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand",
+        "page_id": "sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand",
+        "text": "Who is Sam Bankman-Fried, the former CEO of crypto exchange FTX? Is he a liar and a fraud? Or did he act in good faith, and like many a startup founder, fly too close to the sun?",
+        "branch": "routed_raw",
+        "item_id": "raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand:0",
+        "matched_terms": 5,
+        "direct_matches": 4,
+        "context_block": "[raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\nWho is Sam Bankman-Fried, the former CEO of crypto exchange FTX? Is he a liar and a fraud? Or did he act in good faith, and like many a startup founder, fly too close to the sun?",
+        "truncated": false
+      },
+      {
+        "title": "entities/sam-bankman-fried",
+        "page_id": "entities/sam-bankman-fried",
+        "text": "- From [[sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]]: Disgraced entrepreneur accused of orchestrating the collapse of cryptocurrency exchange FTX.\n- From [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]]: Former CEO of FTX and owner of Alameda Research, central figure in the trial.",
+        "branch": "routed_wiki",
+        "item_id": "wiki:entities/sam-bankman-fried:1",
+        "matched_terms": 5,
+        "direct_matches": 3,
+        "context_block": "[entities/sam-bankman-fried]\n- From [[sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]]: Disgraced entrepreneur accused of orchestrating the collapse of cryptocurrency exchange FTX.\n- From [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]]: Former CEO of FTX and owner of Alameda Research, central figure in the trial.",
+        "truncated": false
+      },
+      {
+        "title": "raw:sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier",
+        "page_id": "sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier",
+        "text": "Inside the SBF trial: Rebecca and Jacquelyn report on the second day of the SBF and FTX trial. The prosecution painted Bankman-Fried as someone who knowingly committed fraud to achieve great wealth, power and influence, while the defense countered that the FTX founder acted in good faith, never meant to commit fraud or steal and basically got in over his head.",
+        "branch": "other_raw",
+        "item_id": "raw:sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier:18",
+        "matched_terms": 5,
+        "direct_matches": 2,
+        "context_block": "[raw:sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]\nInside the SBF trial: Rebecca and Jacquelyn report on the second day of the SBF and FTX trial. The prosecution painted Bankman-Fried as someone who knowingly committed fraud to achieve great wealth, power and influence, while the defense countered that the FTX founder acted in good faith, never meant to commit fraud or steal and basically got in over his head.",
+        "truncated": false
+      },
+      {
+        "title": "entities/ftx",
+        "page_id": "entities/ftx",
+        "text": "- From [[sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]]: A cryptocurrency exchange that collapsed, leading to the trial of Sam Bankman-Fried.\n- From [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]]: A crypto exchange where Sam Bankman-Fried served as CEO.",
+        "branch": "routed_wiki",
+        "item_id": "wiki:entities/ftx:1",
+        "matched_terms": 4,
+        "direct_matches": 3,
+        "context_block": "[entities/ftx]\n- From [[sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]]: A cryptocurrency exchange that collapsed, leading to the trial of Sam Bankman-Fried.\n- From [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]]: A crypto exchange where Sam Bankman-Fried served as CEO.",
+        "truncated": false
+      },
+      {
+        "title": "entities/sam-bankman-fried",
+        "page_id": "entities/sam-bankman-fried",
+        "text": "Disgraced entrepreneur accused of orchestrating the collapse of cryptocurrency exchange FTX.",
+        "branch": "routed_wiki",
+        "item_id": "wiki:entities/sam-bankman-fried:0",
+        "matched_terms": 3,
+        "direct_matches": 3,
+        "context_block": "[entities/sam-bankman-fried]\nDisgraced entrepreneur accused of orchestrating the collapse of cryptocurrency exchange FTX.",
+        "truncated": false
+      },
+      {
+        "title": "sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand",
+        "page_id": "sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand",
+        "text": "- Prosecutors alleged Bankman-Fried stole customer funds to finance his lifestyle, political donations, and risky bets through Alameda Research.\n- Defense attorneys argued Bankman-Fried acted in good faith, built successful businesses, and did not defraud anyone.\n- Witnesses include a victim who lost nearly $100,000, a former friend who admitted to unwittingly writing criminal code, and upcoming star witness Gary Wang.\n- The trial highlights the debate over whether Bankman-Fried was a 'man' who lied or a 'boy' who made mistakes in a high-risk startup environment.\n- Key figures like Caroline Ellison, Damian Williams, and venture capital partners are expected to provide further insight into the alleged scheme.",
+        "branch": "routed_wiki",
+        "item_id": "wiki:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand:1",
+        "matched_terms": 3,
+        "direct_matches": 3,
+        "context_block": "[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\n- Prosecutors alleged Bankman-Fried stole customer funds to finance his lifestyle, political donations, and risky bets through Alameda Research.\n- Defense attorneys argued Bankman-Fried acted in good faith, built successful businesses, and did not defraud anyone.\n- Witnesses include a victim who lost nearly $100,000, a former friend who admitted to unwittingly writing criminal code, and upcoming star witness Gary Wang.\n- The trial highlights the debate over whether Bankman-Fried was a 'man' who lied or a 'boy' who made mistakes in a high-risk startup environment.\n- Key figures like Caroline Ellison, Damian Williams, and venture capital partners are expected to provide further insight into the alleged scheme.",
+        "truncated": false
+      },
+      {
+        "title": "raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand",
+        "page_id": "sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand",
+        "text": "The key to his alleged scheme? Alameda Research, a crypto hedge fund he also owned, argued Rehn. Using Caroline Ellison, his on-again off-again girlfriend and the CEO of Alameda, as a front, Bankman-Fried had “secret access” to customer money—both cash and crypto—the government claimed.",
+        "branch": "routed_raw",
+        "item_id": "raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand:6",
+        "matched_terms": 3,
+        "direct_matches": 3,
+        "context_block": "[raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\nThe key to his alleged scheme? ",
+        "truncated": true
+      }
+    ],
+    "branches": {
+      "other_raw": 2,
+      "other_wiki": 1,
+      "routed_wiki": 6,
+      "routed_raw": 3
+    }
+  },
+  "error": null,
+  "context": "[raw:sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]\nSBF allegedly tried to buy off Trump: The TC team’s been trained on the Manhattan Federal Court for the trial of Sam Bankman-Fried, the disgraced entrepreneur accused of orchestrating the collapse of cryptocurrency exchange FTX. But fascinating details about SBF’s political dealings are emerging from a book by Michael Lewis, “Going Infinite,” that debuted on the first day of the trial, like SBF’s attempt to buy off Trump to get him to not run again for president.\n\n[sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]\n- Induced AI was founded this year.\n- Induced AI converts back-office tasks from plain English to pseudo-code in real time.\n- The Pixel 8 Pro is similar to the Pixel 7 Pro but features improved cameras and a brighter screen.\n- Google's hardware event also announced updates to Android 14, Pixel Buds, and the Pixel Watch 2.\n- Flexport is a freight forwarding and customs brokerage startup valued at $8 billion.\n- Dave Clark was ousted as CEO of Flexport just one year into his job.\n- Clark made comments about Flexport on social media site X.\n- The SBF trial is taking place in the Manhattan Federal Court.\n- Michael Lewis wrote the book 'Going Infinite' which debuted on the first day of the SBF trial.\n- Gmail announced changes requiring bulk senders to authenticate emails starting next year.\n- TikTok's ad-free tier costs $4.99 per month.\n- TikTok is piloting its ad-free plan in a single English-speaking market outside the U.S.\n- LinkedIn unveiled new AI features for its Recruiter, Learning, and marketing products.\n- Elon Musk previously stated X users generate 100 to 200 million posts daily.\n- X CEO Linda Yaccarino claimed X sees 500 million posts per day.\n- IronNet was founded in 2014 by retired four-star general Keith Alexander.\n- IronNet raised more than $400 million in funding.\n- IronNet went public in August 2021.\n- IronNet is based in Virginia.\n- TechCrunch's Week in Review column is published every Saturday.\n- The SBF trial involves the prosecution of fraud charges against Sam Bankman-Fried.\n- The defense in the SBF trial argues Bankman-Fried acted in good faith.\n- Fearless Fund is a firm barred from awarding grants to Black women founders.\n- Breathe Battery Technologies developed software to improve lithium-ion battery charging and longevity.\n\n[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\n- Sam Bankman-Fried was the former CEO of FTX.\n- The trial took place on the second day with lawyers swapping opening statements.\n- Thane Rehn is a prosecutor for the government.\n- Mark Cohen is one of Bankman-Fried's lawyers.\n- Caroline Ellison is the former CEO of Alameda Research.\n- Damian Williams is the U.S. attorney for the Southern District of New York.\n- Bankman-Fried's parents are his professorial parents.\n- Tom Brady and Larry David are celebrities mentioned in the prosecution's account.\n- Alameda Research is a crypto hedge fund owned by Bankman-Fried.\n- FTX is a crypto exchange where Bankman-Fried was CEO.\n- Marc-Antoine Julliard is a Paris-born cocoa trader who lives in London.\n- Julliard tried to pull out almost $100,000 on Nov. 8.\n- Adam Yedidia is a fast-talking graduate of MIT.\n- Yedidia worked at Jane Street before joining Alameda and FTX.\n- Jane Street is a high-frequency trading firm.\n- Matt Huang is a former partner at Sequoia Capital.\n- Gary Wang is a key Bankman-Fried lieutenant.\n- Bankman-Fried spent about seven weeks in a Brooklyn prison.\n- The trial was held in New York.\n- Court adjourned at 4:30 p.m. on the day of testimony.\n\n[entities/sam-bankman-fried]\n- Sam Bankman-Fried [orchestrated_collapse_of] FTX (from [[sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]])\n- Michael Lewis [wrote_about] Sam Bankman-Fried (from [[sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]])\n- Sam Bankman-Fried [tried_in] Manhattan Federal Court (from [[sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]])\n- Sam Bankman-Fried [was CEO of] FTX (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- Sam Bankman-Fried [owned] Alameda Research (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- Sam Bankman-Fried [was girlfriend of] Caroline Ellison (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- Thane Rehn [accused of crimes] Sam Bankman-Fried (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- Mark Cohen [defended] Sam Bankman-Fried (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- Adam Yedidia [was close friend of] Sam Bankman-Fried (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- Damian Williams [prosecuted] Sam Bankman-Fried (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- Gary Wang [was lieutenant of] Sam Bankman-Fried (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n\n[raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\n“One year ago, it looked like the defendant was on the top of the world,” began Thane Rehn, a prosecutor for the government, in his opening statement. The former CEO of FTX oversaw a supposedly thriving crypto exchange, jetted between international locales, and hobnobbed with celebrities like Tom Brady and Larry David. He repeatedly emphasized to customers that their money was safe and secure.\n\n[raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\nWho is Sam Bankman-Fried, the former CEO of crypto exchange FTX? Is he a liar and a fraud? Or did he act in good faith, and like many a startup founder, fly too close to the sun?\n\n[entities/sam-bankman-fried]\n- From [[sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]]: Disgraced entrepreneur accused of orchestrating the collapse of cryptocurrency exchange FTX.\n- From [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]]: Former CEO of FTX and owner of Alameda Research, central figure in the trial.\n\n[raw:sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]\nInside the SBF trial: Rebecca and Jacquelyn report on the second day of the SBF and FTX trial. The prosecution painted Bankman-Fried as someone who knowingly committed fraud to achieve great wealth, power and influence, while the defense countered that the FTX founder acted in good faith, never meant to commit fraud or steal and basically got in over his head.\n\n[entities/ftx]\n- From [[sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]]: A cryptocurrency exchange that collapsed, leading to the trial of Sam Bankman-Fried.\n- From [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]]: A crypto exchange where Sam Bankman-Fried served as CEO.\n\n[entities/sam-bankman-fried]\nDisgraced entrepreneur accused of orchestrating the collapse of cryptocurrency exchange FTX.\n\n[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\n- Prosecutors alleged Bankman-Fried stole customer funds to finance his lifestyle, political donations, and risky bets through Alameda Research.\n- Defense attorneys argued Bankman-Fried acted in good faith, built successful businesses, and did not defraud anyone.\n- Witnesses include a victim who lost nearly $100,000, a former friend who admitted to unwittingly writing criminal code, and upcoming star witness Gary Wang.\n- The trial highlights the debate over whether Bankman-Fried was a 'man' who lied or a 'boy' who made mistakes in a high-risk startup environment.\n- Key figures like Caroline Ellison, Damian Williams, and venture capital partners are expected to provide further insight into the alleged scheme.\n\n[raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\nThe key to his alleged scheme? \n\n[Knowledge graph]\nSam Bankman-Fried [orchestrated_collapse_of] FTX (from sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier)\nMichael Lewis [wrote_about] Sam Bankman-Fried (from sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier)\nSam Bankman-Fried [tried_in] Manhattan Federal Court (from sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier)\nSam Bankman-Fried [was CEO of] FTX (from sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand)\nSam Bankman-Fried [owned] Alameda Research (from sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand)\nSam Bankman-Fried [was girlfriend of] Caroline Ellison (from sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand)",
+  "answer_prompt": "Answer using only the context. Give a short direct answer (entity, name, number, date, phrase, Yes/No), or unanswerable. Output only the answer.\n\nContext:\n[raw:sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]\nSBF allegedly tried to buy off Trump: The TC team’s been trained on the Manhattan Federal Court for the trial of Sam Bankman-Fried, the disgraced entrepreneur accused of orchestrating the collapse of cryptocurrency exchange FTX. But fascinating details about SBF’s political dealings are emerging from a book by Michael Lewis, “Going Infinite,” that debuted on the first day of the trial, like SBF’s attempt to buy off Trump to get him to not run again for president.\n\n[sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]\n- Induced AI was founded this year.\n- Induced AI converts back-office tasks from plain English to pseudo-code in real time.\n- The Pixel 8 Pro is similar to the Pixel 7 Pro but features improved cameras and a brighter screen.\n- Google's hardware event also announced updates to Android 14, Pixel Buds, and the Pixel Watch 2.\n- Flexport is a freight forwarding and customs brokerage startup valued at $8 billion.\n- Dave Clark was ousted as CEO of Flexport just one year into his job.\n- Clark made comments about Flexport on social media site X.\n- The SBF trial is taking place in the Manhattan Federal Court.\n- Michael Lewis wrote the book 'Going Infinite' which debuted on the first day of the SBF trial.\n- Gmail announced changes requiring bulk senders to authenticate emails starting next year.\n- TikTok's ad-free tier costs $4.99 per month.\n- TikTok is piloting its ad-free plan in a single English-speaking market outside the U.S.\n- LinkedIn unveiled new AI features for its Recruiter, Learning, and marketing products.\n- Elon Musk previously stated X users generate 100 to 200 million posts daily.\n- X CEO Linda Yaccarino claimed X sees 500 million posts per day.\n- IronNet was founded in 2014 by retired four-star general Keith Alexander.\n- IronNet raised more than $400 million in funding.\n- IronNet went public in August 2021.\n- IronNet is based in Virginia.\n- TechCrunch's Week in Review column is published every Saturday.\n- The SBF trial involves the prosecution of fraud charges against Sam Bankman-Fried.\n- The defense in the SBF trial argues Bankman-Fried acted in good faith.\n- Fearless Fund is a firm barred from awarding grants to Black women founders.\n- Breathe Battery Technologies developed software to improve lithium-ion battery charging and longevity.\n\n[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\n- Sam Bankman-Fried was the former CEO of FTX.\n- The trial took place on the second day with lawyers swapping opening statements.\n- Thane Rehn is a prosecutor for the government.\n- Mark Cohen is one of Bankman-Fried's lawyers.\n- Caroline Ellison is the former CEO of Alameda Research.\n- Damian Williams is the U.S. attorney for the Southern District of New York.\n- Bankman-Fried's parents are his professorial parents.\n- Tom Brady and Larry David are celebrities mentioned in the prosecution's account.\n- Alameda Research is a crypto hedge fund owned by Bankman-Fried.\n- FTX is a crypto exchange where Bankman-Fried was CEO.\n- Marc-Antoine Julliard is a Paris-born cocoa trader who lives in London.\n- Julliard tried to pull out almost $100,000 on Nov. 8.\n- Adam Yedidia is a fast-talking graduate of MIT.\n- Yedidia worked at Jane Street before joining Alameda and FTX.\n- Jane Street is a high-frequency trading firm.\n- Matt Huang is a former partner at Sequoia Capital.\n- Gary Wang is a key Bankman-Fried lieutenant.\n- Bankman-Fried spent about seven weeks in a Brooklyn prison.\n- The trial was held in New York.\n- Court adjourned at 4:30 p.m. on the day of testimony.\n\n[entities/sam-bankman-fried]\n- Sam Bankman-Fried [orchestrated_collapse_of] FTX (from [[sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]])\n- Michael Lewis [wrote_about] Sam Bankman-Fried (from [[sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]])\n- Sam Bankman-Fried [tried_in] Manhattan Federal Court (from [[sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]])\n- Sam Bankman-Fried [was CEO of] FTX (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- Sam Bankman-Fried [owned] Alameda Research (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- Sam Bankman-Fried [was girlfriend of] Caroline Ellison (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- Thane Rehn [accused of crimes] Sam Bankman-Fried (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- Mark Cohen [defended] Sam Bankman-Fried (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- Adam Yedidia [was close friend of] Sam Bankman-Fried (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- Damian Williams [prosecuted] Sam Bankman-Fried (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- Gary Wang [was lieutenant of] Sam Bankman-Fried (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n\n[raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\n“One year ago, it looked like the defendant was on the top of the world,” began Thane Rehn, a prosecutor for the government, in his opening statement. The former CEO of FTX oversaw a supposedly thriving crypto exchange, jetted between international locales, and hobnobbed with celebrities like Tom Brady and Larry David. He repeatedly emphasized to customers that their money was safe and secure.\n\n[raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\nWho is Sam Bankman-Fried, the former CEO of crypto exchange FTX? Is he a liar and a fraud? Or did he act in good faith, and like many a startup founder, fly too close to the sun?\n\n[entities/sam-bankman-fried]\n- From [[sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]]: Disgraced entrepreneur accused of orchestrating the collapse of cryptocurrency exchange FTX.\n- From [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]]: Former CEO of FTX and owner of Alameda Research, central figure in the trial.\n\n[raw:sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]\nInside the SBF trial: Rebecca and Jacquelyn report on the second day of the SBF and FTX trial. The prosecution painted Bankman-Fried as someone who knowingly committed fraud to achieve great wealth, power and influence, while the defense countered that the FTX founder acted in good faith, never meant to commit fraud or steal and basically got in over his head.\n\n[entities/ftx]\n- From [[sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]]: A cryptocurrency exchange that collapsed, leading to the trial of Sam Bankman-Fried.\n- From [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]]: A crypto exchange where Sam Bankman-Fried served as CEO.\n\n[entities/sam-bankman-fried]\nDisgraced entrepreneur accused of orchestrating the collapse of cryptocurrency exchange FTX.\n\n[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\n- Prosecutors alleged Bankman-Fried stole customer funds to finance his lifestyle, political donations, and risky bets through Alameda Research.\n- Defense attorneys argued Bankman-Fried acted in good faith, built successful businesses, and did not defraud anyone.\n- Witnesses include a victim who lost nearly $100,000, a former friend who admitted to unwittingly writing criminal code, and upcoming star witness Gary Wang.\n- The trial highlights the debate over whether Bankman-Fried was a 'man' who lied or a 'boy' who made mistakes in a high-risk startup environment.\n- Key figures like Caroline Ellison, Damian Williams, and venture capital partners are expected to provide further insight into the alleged scheme.\n\n[raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\nThe key to his alleged scheme? \n\n[Knowledge graph]\nSam Bankman-Fried [orchestrated_collapse_of] FTX (from sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier)\nMichael Lewis [wrote_about] Sam Bankman-Fried (from sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier)\nSam Bankman-Fried [tried_in] Manhattan Federal Court (from sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier)\nSam Bankman-Fried [was CEO of] FTX (from sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand)\nSam Bankman-Fried [owned] Alameda Research (from sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand)\nSam Bankman-Fried [was girlfriend of] Caroline Ellison (from sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand)\n\nQuestion: Who is the individual alleged to have built a thriving crypto exchange on falsehoods and is accused by the prosecution of committing fraud for personal gain, as reported by both Fortune and TechCrunch?\nAnswer:",
+  "model_call_ids": [
+    31,
+    32,
+    33
+  ],
+  "request_attempts": 3,
+  "failed_requests": 0,
+  "llm_calls": 3,
+  "input_tokens": 8571,
+  "output_tokens": 287,
+  "em": 1.0,
+  "token_f1": 1.0,
+  "rouge_l": 1.0
+}

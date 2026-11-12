@@ -1,0 +1,397 @@
+{
+  "captured_at": "2026-11-12T04:45:42.264357+00:00",
+  "scope": "Resources visible to the benchmark process; launcher metadata is separate",
+  "platform": {
+    "python": "3.12.3",
+    "executable": "/usr/local/bin/python"
+  },
+  "cpu": {
+    "logical_cpus": 48,
+    "model": "AMD EPYC 7443 24-Core Processor",
+    "physical_cores": 24,
+    "sockets": 1,
+    "source": "/proc/cpuinfo and os.cpu_count"
+  },
+  "memory": {
+    "status": "recorded",
+    "source": "/proc/meminfo",
+    "total_bytes": 134995050496,
+    "available_bytes": 90598563840,
+    "swap_total_bytes": 66571984896,
+    "cgroup_limit_bytes": "max",
+    "cgroup_limit_source": "/sys/fs/cgroup/memory.max"
+  },
+  "os": {
+    "system": "Linux",
+    "kernel": "5.4.0-216-generic",
+    "machine": "x86_64",
+    "platform": "Linux-5.4.0-216-generic-x86_64-with-glibc2.39",
+    "distribution": {
+      "PRETTY_NAME": "Ubuntu 24.04.2 LTS",
+      "NAME": "Ubuntu",
+      "VERSION_ID": "24.04",
+      "VERSION": "24.04.2 LTS (Noble Numbat)",
+      "ID": "ubuntu"
+    }
+  },
+  "gpus": {
+    "status": "recorded",
+    "devices": [
+      {
+        "index": 0,
+        "uuid": "GPU-48b1d974-b35b-525d-c124-667cfdaff186",
+        "name": "NVIDIA GeForce RTX 3090",
+        "memory_total_mib": 24576,
+        "driver_version": "570.211.01"
+      },
+      {
+        "index": 1,
+        "uuid": "GPU-190ed79c-3a8f-eed8-4e94-0e8a6d7b9384",
+        "name": "NVIDIA GeForce RTX 3090",
+        "memory_total_mib": 24576,
+        "driver_version": "570.211.01"
+      }
+    ],
+    "source": "nvidia-smi device inventory"
+  },
+  "launcher_metadata": {
+    "status": "recorded",
+    "path": "/workdir/runtime_environment.json",
+    "data": {
+      "schema_version": 1,
+      "phase": "container",
+      "captured_at_utc": "2026-11-12T04:44:30.490698+00:00",
+      "host": {
+        "schema_version": 1,
+        "phase": "host",
+        "captured_at_utc": "2026-11-12T04:44:29.905198+00:00",
+        "machine": {
+          "os_release": {
+            "NAME": "Ubuntu",
+            "VERSION": "20.04.6 LTS (Focal Fossa)",
+            "ID": "ubuntu",
+            "ID_LIKE": "debian",
+            "PRETTY_NAME": "Ubuntu 20.04.6 LTS",
+            "VERSION_ID": "20.04",
+            "HOME_URL": "https://www.ubuntu.com/",
+            "SUPPORT_URL": "https://help.ubuntu.com/",
+            "BUG_REPORT_URL": "https://bugs.launchpad.net/ubuntu/",
+            "PRIVACY_POLICY_URL": "https://www.ubuntu.com/legal/terms-and-policies/privacy-policy",
+            "VERSION_CODENAME": "focal",
+            "UBUNTU_CODENAME": "focal"
+          },
+          "kernel": "5.4.0-216-generic",
+          "architecture": "x86_64",
+          "cpu": {
+            "Architecture": "x86_64",
+            "CPU(s)": "48",
+            "Thread(s) per core": "2",
+            "Core(s) per socket": "24",
+            "Socket(s)": "1",
+            "Model name": "AMD EPYC 7443 24-Core Processor"
+          },
+          "cpu_query_error": null,
+          "logical_cpu_count": 48,
+          "cpu_affinity": [
+            0,
+            1,
+            24,
+            25
+          ],
+          "memory": {
+            "MemTotal": "131831104 kB",
+            "SwapTotal": "65011704 kB"
+          },
+          "gpus": [
+            {
+              "index": "0",
+              "uuid": "GPU-48b1d974-b35b-525d-c124-667cfdaff186",
+              "name": "NVIDIA GeForce RTX 3090",
+              "total_memory_mib": "24576",
+              "free_memory_mib_at_capture": "24124",
+              "driver_version": "570.211.01"
+            },
+            {
+              "index": "1",
+              "uuid": "GPU-585638e5-d6b7-97e1-cc87-9d5173977604",
+              "name": "NVIDIA GeForce RTX 3090",
+              "total_memory_mib": "24576",
+              "free_memory_mib_at_capture": "2434",
+              "driver_version": "570.211.01"
+            },
+            {
+              "index": "2",
+              "uuid": "GPU-190ed79c-3a8f-eed8-4e94-0e8a6d7b9384",
+              "name": "NVIDIA GeForce RTX 3090",
+              "total_memory_mib": "24576",
+              "free_memory_mib_at_capture": "24124",
+              "driver_version": "570.211.01"
+            },
+            {
+              "index": "3",
+              "uuid": "GPU-4203a7da-86b5-5949-426d-ef72b5f92385",
+              "name": "NVIDIA GeForce RTX 3090",
+              "total_memory_mib": "24576",
+              "free_memory_mib_at_capture": "2384",
+              "driver_version": "570.211.01"
+            }
+          ],
+          "gpu_query_error": null,
+          "cgroup_limits": {
+            "memory_max_bytes": null,
+            "memory_limit_v1_bytes": null,
+            "cpu_max": null
+          }
+        },
+        "allocation": {
+          "gpu_uuids": [
+            "GPU-48b1d974-b35b-525d-c124-667cfdaff186",
+            "GPU-190ed79c-3a8f-eed8-4e94-0e8a6d7b9384"
+          ],
+          "cpus_per_task": "4",
+          "memory_per_node_mib": "16384",
+          "memory_per_cpu_mib": null
+        }
+      },
+      "container": {
+        "machine": {
+          "os_release": {
+            "PRETTY_NAME": "Ubuntu 24.04.2 LTS",
+            "NAME": "Ubuntu",
+            "VERSION_ID": "24.04",
+            "VERSION": "24.04.2 LTS (Noble Numbat)",
+            "VERSION_CODENAME": "noble",
+            "ID": "ubuntu",
+            "ID_LIKE": "debian",
+            "HOME_URL": "https://www.ubuntu.com/",
+            "SUPPORT_URL": "https://help.ubuntu.com/",
+            "BUG_REPORT_URL": "https://bugs.launchpad.net/ubuntu/",
+            "PRIVACY_POLICY_URL": "https://www.ubuntu.com/legal/terms-and-policies/privacy-policy",
+            "UBUNTU_CODENAME": "noble",
+            "LOGO": "ubuntu-logo"
+          },
+          "kernel": "5.4.0-216-generic",
+          "architecture": "x86_64",
+          "cpu": {
+            "Architecture": "x86_64",
+            "CPU(s)": "48",
+            "Model name": "AMD EPYC 7443 24-Core Processor",
+            "Thread(s) per core": "2",
+            "Core(s) per socket": "24",
+            "Socket(s)": "1"
+          },
+          "cpu_query_error": null,
+          "logical_cpu_count": 48,
+          "cpu_affinity": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22,
+            23,
+            24,
+            25,
+            26,
+            27,
+            28,
+            29,
+            30,
+            31,
+            32,
+            33,
+            34,
+            35,
+            36,
+            37,
+            38,
+            39,
+            40,
+            41,
+            42,
+            43,
+            44,
+            45,
+            46,
+            47
+          ],
+          "memory": {
+            "MemTotal": "131831104 kB",
+            "SwapTotal": "65011704 kB"
+          },
+          "gpus": [
+            {
+              "index": "0",
+              "uuid": "GPU-48b1d974-b35b-525d-c124-667cfdaff186",
+              "name": "NVIDIA GeForce RTX 3090",
+              "total_memory_mib": "24576",
+              "free_memory_mib_at_capture": "24124",
+              "driver_version": "570.211.01"
+            },
+            {
+              "index": "1",
+              "uuid": "GPU-190ed79c-3a8f-eed8-4e94-0e8a6d7b9384",
+              "name": "NVIDIA GeForce RTX 3090",
+              "total_memory_mib": "24576",
+              "free_memory_mib_at_capture": "24124",
+              "driver_version": "570.211.01"
+            }
+          ],
+          "gpu_query_error": null,
+          "cgroup_limits": {
+            "memory_max_bytes": "max",
+            "memory_limit_v1_bytes": null,
+            "cpu_max": null
+          }
+        },
+        "versions": {
+          "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+          "executable": "/usr/local/bin/python",
+          "packages": {
+            "vllm": "0.32.0+cu129",
+            "torch": "2.13.0+cu129",
+            "torchvision": "0.28.0+cu129",
+            "torchaudio": "2.11.0+cu129",
+            "torchcodec": "0.16.0+cu129",
+            "transformers": "5.19.0",
+            "tokenizers": "0.23.3",
+            "huggingface-hub": "2.2.0",
+            "numpy": "2.2.6",
+            "openai": "3.35.1",
+            "datasets": "5.1.0",
+            "llmwiki2": "0.8.0",
+            "rank-bm25": "0.2.2",
+            "rouge-score": "0.1.2",
+            "sentence-transformers": "6.2.0",
+            "jsonschema": "4.26.0",
+            "nltk": "3.10.4",
+            "scikit-learn": "1.9.1",
+            "pydantic": "2.14.1",
+            "fastapi": "0.136.3"
+          }
+        }
+      },
+      "build": {
+        "schema_version": 1,
+        "phase": "build",
+        "captured_at_utc": "2026-11-10T10:39:37.211609+00:00",
+        "versions": {
+          "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+          "executable": "/usr/local/bin/python",
+          "packages": {
+            "vllm": "0.32.0+cu129",
+            "torch": "2.13.0+cu129",
+            "torchvision": "0.28.0+cu129",
+            "torchaudio": "2.11.0+cu129",
+            "torchcodec": "0.16.0+cu129",
+            "transformers": "5.19.0",
+            "tokenizers": "0.23.3",
+            "huggingface-hub": "2.2.0",
+            "numpy": "2.2.6",
+            "openai": "3.35.1",
+            "datasets": "5.1.0",
+            "llmwiki2": "0.8.0",
+            "rank-bm25": "0.2.2",
+            "rouge-score": "0.1.2",
+            "sentence-transformers": "6.2.0",
+            "jsonschema": "4.26.0",
+            "nltk": "3.10.4",
+            "scikit-learn": "1.9.1",
+            "pydantic": "2.14.1",
+            "fastapi": "0.136.3"
+          }
+        },
+        "sha256": {
+          "benchmark_llm_wiki.py": "7be5d78368235faa689cefc232b58bfa6d3cb0ffe8189552c4d4d77b13fc5868",
+          "benchmark_artifacts.py": "c5562125c275ffa903e6d25f7756bd6ac70d984618b97dc0a89b95316c51b0f3",
+          "llmwiki_adapter.py": "1d899e8363a144fd78712ce1ac1663e4b40864d587d2681fbf5d0ebf87e47645",
+          "start_vllm_services.sh": "d0bb9668426dba7f55bbef47a9aa389c34120c052e6029f79557a7587cbb4f1d",
+          "capture_runtime_metadata.py": "06e9f2cc5d09b2e072ce861afadb998204731375713f6a44b7e856b73b6d08cf",
+          "prompts_benchmark/librarian/find_match.md": "fea4365325cc3b82b9cc4b153837195d34f70758ba3f950b1d5f97fd76724bdd",
+          "prompts_benchmark/librarian/name_folder.md": "7cab50ee8e3d8e62fb58d2bd8dd6a0fee04790f05b52ddcf3549fbabdda561af",
+          "prompts_benchmark/librarian/relate.md": "172991a20cfbd0de7a8aebcb398b64fecf7ac441a0c3b7656e5eab34b3777b63",
+          "prompts_benchmark/librarian/route.md": "0daa9d97ceb13f28126655487e36ecd148753d84d30d44a129df5d1e70877822",
+          "prompts_benchmark/librarian/summarize.md": "f71275867105a1c193d3b54c1c9b25bee0d7e1b4ead748654da2d1ff34fc3e1e",
+          "prompts_benchmark/librarian/summarize_combine.md": "4f2589f014caf35f4077bdc8fa07ddac2506d75b32bffac9cff7ad7ee584508a",
+          "prompts_benchmark/librarian/summarize_part.md": "c6e5aaaa12a23ce8a1629d19d287e7f7bb9d7040c1fc47f5ad2f1b51fa263a80",
+          "prompts_benchmark/researcher/answer.md": "88f8237874ad3b897db2ce5ffff591dad1f77321f2c35804c47c09befcec5f74",
+          "/tmp/requirements.txt": "48eaf1df5e5f908e76ffadedbc38febbb4e1a517d34fa3d6e100ff7d33c875c2"
+        }
+      },
+      "image": {
+        "tag": "sha256:3c8543c949b033d4af9ea5889aff54d8327e588b84d0eb9ed07eaa6b7061c32f",
+        "id": "sha256:3c8543c949b033d4af9ea5889aff54d8327e588b84d0eb9ed07eaa6b7061c32f"
+      },
+      "services": {
+        "llm": {
+          "device": "0",
+          "argv": [
+            "vllm",
+            "serve",
+            "Qwen/Qwen2.5-3B-Instruct",
+            "--host",
+            "0.0.0.0",
+            "--port",
+            "8000",
+            "--served-model-name",
+            "Qwen/Qwen2.5-3B-Instruct",
+            "--max-model-len",
+            "32768",
+            "--gpu-memory-utilization",
+            "0.85",
+            "--max-num-seqs",
+            "32",
+            "--default-chat-template-kwargs",
+            "{\"enable_thinking\": false}",
+            "--enable-prefix-caching"
+          ]
+        },
+        "classifier": {
+          "device": "1",
+          "argv": [
+            "vllm",
+            "serve",
+            "LiquidAI/d1-3B",
+            "--host",
+            "0.0.0.0",
+            "--port",
+            "8001",
+            "--served-model-name",
+            "LiquidAI/d1-3B",
+            "--max-model-len",
+            "8192",
+            "--gpu-memory-utilization",
+            "0.85",
+            "--max-num-seqs",
+            "8",
+            "--logprobs-mode",
+            "raw_logprobs",
+            "--no-enable-prefix-caching"
+          ]
+        }
+      }
+    }
+  },
+  "visible_devices": {
+    "CUDA_VISIBLE_DEVICES": null,
+    "NVIDIA_VISIBLE_DEVICES": "all"
+  },
+  "measurement_scope": "Inventory and startup snapshot; no peak-memory or energy measurement"
+}
