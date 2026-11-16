@@ -1,0 +1,7 @@
+# Notes
+
+* [Apple defends Google Search deal in court: 'There wasn't a valid alternative'](apple-defends-google-search-deal-in-court-there-wasn-t-a.md) - Eddy Cue testified in US v. Google that Apple had no valid alternative to Google's search engine, negotiated the 2016 ISA with Sundar Pichai, and argued the deal prioritized user experience and privacy over economics.
+* [Sam Bankman-Fried trial opening statements and witness testimony](sam-bankman-fried-trial-opening-statements-and-witness.md) - A summary of the opening statements by prosecutors and defense lawyers in Sam Bankman-Fried's trial, followed by details of early witness testimony.
+* [SBF's $5B offer to Trump to cancel presidential run](sbf-s-5b-offer-to-trump-to-cancel-presidential-run.md) - SBF reportedly offered $5 billion to Donald Trump to cancel his 2024 presidential re-run, a move occurring as he faced fraud charges and FTX's collapse.
+* [SBF's trial and the rise and fall of FTX](sbf-s-trial-and-the-rise-and-fall-of-ftx.md) - This note covers Sam Bankman-Fried's criminal trial, the founding and rapid expansion of FTX and Alameda Research, the collapse triggered by Binance's withdrawal, the subsequent bankruptcy, arrests, and legal proceedings.
+* [Google antitrust case: key facts and trial developments](google-antitrust-case-key-facts-and-trial-developments.md) - Overview of the U.S. government's antitrust trial against Google, including CEO testimony, financial data on default search engine deals, and potential regulatory outcomes.

@@ -1,0 +1,330 @@
+{
+  "qa_id": "mhop_2029",
+  "question": "Does the TechCrunch article on the Google antitrust case report the same amount of money spent by Google in 2021 to maintain its default search engine status across various platforms as the amount cited in another TechCrunch article discussing payments for default search engine status?",
+  "reference": "Yes",
+  "question_type": "comparison_query",
+  "evidence_titles": [
+    "5 things we learned so far about the Google antitrust case",
+    "News publisher files class action antitrust suit against Google, citing AI’s harms to their bottom line"
+  ],
+  "system": "wiki_routed",
+  "prediction": "No",
+  "raw_prediction": "No",
+  "seconds_wall": 3.1600357920106035,
+  "retrieval": {
+    "routed_ids": [
+      "entities/g001",
+      "entities/g002",
+      "entities/h001",
+      "entities/sg001",
+      "entities/b001",
+      "concepts/c001",
+      "concepts/c002",
+      "concepts/c003",
+      "concepts/c004"
+    ],
+    "terms": [
+      "google antitrust lawsuit 2021",
+      "default search engine status payments",
+      "google antitrust case payments",
+      "google antitrust lawsuit settlement",
+      "google antitrust case 2021",
+      "google antitrust payments",
+      "google antitrust lawsuit details",
+      "google antitrust case 2021 payments",
+      "does",
+      "techcrunch",
+      "article",
+      "google",
+      "antitrust",
+      "case",
+      "report",
+      "money",
+      "spent",
+      "2021",
+      "maintain",
+      "default",
+      "search",
+      "engine",
+      "status",
+      "various",
+      "platforms",
+      "cited",
+      "discussing",
+      "payments",
+      "techcrunch article",
+      "google antitrust",
+      "antitrust case",
+      "case report",
+      "money spent",
+      "default search",
+      "search engine",
+      "engine status",
+      "various platforms",
+      "article discussing",
+      "discussing payments"
+    ],
+    "routing_fallback": false,
+    "timing": {
+      "routing_llm": 1.5063240519957617,
+      "search_terms_llm": 0.8597563810180873,
+      "retrieval_code": 0.5426906599896029,
+      "answer_llm": 0.2512421040155459
+    },
+    "candidates": 94,
+    "selected": 16,
+    "chars": 9901,
+    "matched_pages": [
+      "sources/5_things_we_learned_so_far_about_the_Google_antitrust_case",
+      "entities/g001",
+      "concepts/default-search-engine",
+      "sources/Apple_defends_Google_Search_deal_in_court_There_wasn_t_a_valid_alternative",
+      "sources/Is_Google_Search_better_than_the_rest_And_is_that_fair",
+      "sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line"
+    ],
+    "kg_triples": 6,
+    "graph_relations": [
+      {
+        "source": "g001",
+        "target": "c001",
+        "relation": "filed lawsuit against",
+        "source_doc": "sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line",
+        "context_line": "google [filed lawsuit against] antitrust lawsuit (from sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line)"
+      },
+      {
+        "source": "g001",
+        "target": "c002",
+        "relation": "alleges content misappropriation",
+        "source_doc": "sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line",
+        "context_line": "google [alleges content misappropriation] content misappropriation (from sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line)"
+      },
+      {
+        "source": "g001",
+        "target": "c003",
+        "relation": "targets AI technologies",
+        "source_doc": "sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line",
+        "context_line": "google [targets AI technologies] artificial intelligence (from sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line)"
+      },
+      {
+        "source": "g001",
+        "target": "t-001",
+        "relation": "involved_in",
+        "source_doc": "sources/5_things_we_learned_so_far_about_the_Google_antitrust_case",
+        "context_line": "google [involved_in] antitrust trial (from sources/5_things_we_learned_so_far_about_the_Google_antitrust_case)"
+      },
+      {
+        "source": "g001",
+        "target": "c-001",
+        "relation": "did_not_agree_to_request_from",
+        "source_doc": "sources/5_things_we_learned_so_far_about_the_Google_antitrust_case",
+        "context_line": "google [did_not_agree_to_request_from] tim cook (from sources/5_things_we_learned_so_far_about_the_Google_antitrust_case)"
+      },
+      {
+        "source": "g001",
+        "target": "default-search-engine",
+        "relation": "uses_practice_of",
+        "source_doc": "sources/5_things_we_learned_so_far_about_the_Google_antitrust_case",
+        "context_line": "google [uses_practice_of] default-search-engine (from sources/5_things_we_learned_so_far_about_the_Google_antitrust_case)"
+      }
+    ],
+    "selected_passages": [
+      {
+        "title": "sources/5_things_we_learned_so_far_about_the_Google_antitrust_case",
+        "page_id": "sources/5_things_we_learned_so_far_about_the_Google_antitrust_case",
+        "text": "This document discusses the ongoing antitrust trial against Google, focusing on the company's practices and defenses. Key points include Google's payments to secure default search engine status, attempts to preinstall Google services on Apple devices, and the deletion of internal chat logs. The case highlights the struggle between Google's dominance and the need for fair competition.",
+        "branch": "other_wiki",
+        "item_id": "wiki:sources/5_things_we_learned_so_far_about_the_Google_antitrust_case:0",
+        "matched_terms": 18,
+        "direct_matches": 11,
+        "context_block": "[sources/5_things_we_learned_so_far_about_the_Google_antitrust_case]\nThis document discusses the ongoing antitrust trial against Google, focusing on the company's practices and defenses. Key points include Google's payments to secure default search engine status, attempts to preinstall Google services on Apple devices, and the deletion of internal chat logs. The case highlights the struggle between Google's dominance and the need for fair competition.",
+        "truncated": false
+      },
+      {
+        "title": "sources/5_things_we_learned_so_far_about_the_Google_antitrust_case",
+        "page_id": "sources/5_things_we_learned_so_far_about_the_Google_antitrust_case",
+        "text": "- Google paid $26.3 billion in 2021 to be the default search engine across various platforms.\n- Google attempted to get Apple to preinstall Google services on iPhones but failed.\n- Google deleted internal chat logs during a litigation hold, leading to controversy.\n- The case is expected to continue for several weeks, potentially affecting other tech giants' practices.\n- The outcome could require Google to share data with competitors and alter its business practices.",
+        "branch": "other_wiki",
+        "item_id": "wiki:sources/5_things_we_learned_so_far_about_the_Google_antitrust_case:1",
+        "matched_terms": 11,
+        "direct_matches": 11,
+        "context_block": "[sources/5_things_we_learned_so_far_about_the_Google_antitrust_case]\n- Google paid $26.3 billion in 2021 to be the default search engine across various platforms.\n- Google attempted to get Apple to preinstall Google services on iPhones but failed.\n- Google deleted internal chat logs during a litigation hold, leading to controversy.\n- The case is expected to continue for several weeks, potentially affecting other tech giants' practices.\n- The outcome could require Google to share data with competitors and alter its business practices.",
+        "truncated": false
+      },
+      {
+        "title": "entities/g001",
+        "page_id": "entities/g001",
+        "text": "- From [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]]: Search engine and technology company\n- From [[sources/5_things_we_learned_so_far_about_the_Google_antitrust_case]]: The tech giant involved in the antitrust trial, known for its dominant position in the online search market.\n- From [[sources/5_things_we_learned_so_far_about_the_Google_antitrust_case]]: CEO of Google, who testified in the antitrust trial defending the company's business tactics.\n- From [[sources/5_things_we_learned_so_far_about_the_Google_antitrust_case]]: The party filing the antitrust lawsuit against Google, seeking to halt Google's alleged anticompetitive practices.\n- From [[sources/5_things_we_learned_so_far_about_the_Google_antitrust_case]]: The tech company with whom Google has a deal to make Google the default search engine.",
+        "branch": "routed_wiki",
+        "item_id": "wiki:entities/g001:1",
+        "matched_terms": 11,
+        "direct_matches": 8,
+        "context_block": "[entities/g001]\n- From [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]]: Search engine and technology company\n- From [[sources/5_things_we_learned_so_far_about_the_Google_antitrust_case]]: The tech giant involved in the antitrust trial, known for its dominant position in the online search market.\n- From [[sources/5_things_we_learned_so_far_about_the_Google_antitrust_case]]: CEO of Google, who testified in the antitrust trial defending the company's business tactics.\n- From [[sources/5_things_we_learned_so_far_about_the_Google_antitrust_case]]: The party filing the antitrust lawsuit against Google, seeking to halt Google's alleged anticompetitive practices.\n- From [[sources/5_things_we_learned_so_far_about_the_Google_antitrust_case]]: The tech company with whom Google has a deal to make Google the default search engine.",
+        "truncated": false
+      },
+      {
+        "title": "entities/g001",
+        "page_id": "entities/g001",
+        "text": "- google [filed lawsuit against] antitrust lawsuit (from [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]])\n- google [alleges content misappropriation] content misappropriation (from [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]])\n- google [targets AI technologies] artificial intelligence (from [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]])\n- google [involved_in] antitrust trial (from [[sources/5_things_we_learned_so_far_about_the_Google_antitrust_case]])\n- google [did_not_agree_to_request_from] tim cook (from [[sources/5_things_we_learned_so_far_about_the_Google_antitrust_case]])\n- google [uses_practice_of] default-search-engine (from [[sources/5_things_we_learned_so_far_about_the_Google_antitrust_case]])\n- google [deleted_internal_chat_logs_during_litigation_hold] data collection (from [[sources/5_things_we_learned_so_far_about_the_Google_antitrust_case]])",
+        "branch": "routed_wiki",
+        "item_id": "wiki:entities/g001:2",
+        "matched_terms": 11,
+        "direct_matches": 6,
+        "context_block": "[entities/g001]\n- google [filed lawsuit against] antitrust lawsuit (from [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]])\n- google [alleges content misappropriation] content misappropriation (from [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]])\n- google [targets AI technologies] artificial intelligence (from [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]])\n- google [involved_in] antitrust trial (from [[sources/5_things_we_learned_so_far_about_the_Google_antitrust_case]])\n- google [did_not_agree_to_request_from] tim cook (from [[sources/5_things_we_learned_so_far_about_the_Google_antitrust_case]])\n- google [uses_practice_of] default-search-engine (from [[sources/5_things_we_learned_so_far_about_the_Google_antitrust_case]])\n- google [deleted_internal_chat_logs_during_litigation_hold] data collection (from [[sources/5_things_we_learned_so_far_about_the_Google_antitrust_case]])",
+        "truncated": false
+      },
+      {
+        "title": "concepts/default-search-engine",
+        "page_id": "concepts/default-search-engine",
+        "text": "- From [[sources/Apple_defends_Google_Search_deal_in_court_There_wasn_t_a_valid_alternative]]: Google is the default search engine on Apple devices as per the Information Services Agreement (ISA)\n- From [[sources/5_things_we_learned_so_far_about_the_Google_antitrust_case]]: The practice of making a particular search engine the default choice for users, often facilitated by agreements with hardware manufacturers.",
+        "branch": "other_wiki",
+        "item_id": "wiki:concepts/default-search-engine:1",
+        "matched_terms": 10,
+        "direct_matches": 8,
+        "context_block": "[concepts/default-search-engine]\n- From [[sources/Apple_defends_Google_Search_deal_in_court_There_wasn_t_a_valid_alternative]]: Google is the default search engine on Apple devices as per the Information Services Agreement (ISA)\n- From [[sources/5_things_we_learned_so_far_about_the_Google_antitrust_case]]: The practice of making a particular search engine the default choice for users, often facilitated by agreements with hardware manufacturers.",
+        "truncated": false
+      },
+      {
+        "title": "raw:sources/Apple_defends_Google_Search_deal_in_court_There_wasn_t_a_valid_alternative",
+        "page_id": "sources/Apple_defends_Google_Search_deal_in_court_There_wasn_t_a_valid_alternative",
+        "text": "Cue was on the stand as a witness in US v. Google, the landmark antitrust trial over Google’s search business. Cue is one of the highest-profile witnesses in the case so far, in part because the deal between Google and Apple — which makes Google the default search engine on all Apple devices and pays Apple billions of dollars a year — is central to the US Department of Justice’s case against Google.",
+        "branch": "other_raw",
+        "item_id": "raw:sources/Apple_defends_Google_Search_deal_in_court_There_wasn_t_a_valid_alternative:2",
+        "matched_terms": 10,
+        "direct_matches": 8,
+        "context_block": "[raw:sources/Apple_defends_Google_Search_deal_in_court_There_wasn_t_a_valid_alternative]\nCue was on the stand as a witness in US v. Google, the landmark antitrust trial over Google’s search business. Cue is one of the highest-profile witnesses in the case so far, in part because the deal between Google and Apple — which makes Google the default search engine on all Apple devices and pays Apple billions of dollars a year — is central to the US Department of Justice’s case against Google.",
+        "truncated": false
+      },
+      {
+        "title": "concepts/default-search-engine",
+        "page_id": "concepts/default-search-engine",
+        "text": "- google [uses_practice_of] default-search-engine (from [[sources/5_things_we_learned_so_far_about_the_Google_antitrust_case]])",
+        "branch": "other_wiki",
+        "item_id": "wiki:concepts/default-search-engine:2",
+        "matched_terms": 10,
+        "direct_matches": 6,
+        "context_block": "[concepts/default-search-engine]\n- google [uses_practice_of] default-search-engine (from [[sources/5_things_we_learned_so_far_about_the_Google_antitrust_case]])",
+        "truncated": false
+      },
+      {
+        "title": "raw:sources/5_things_we_learned_so_far_about_the_Google_antitrust_case",
+        "page_id": "sources/5_things_we_learned_so_far_about_the_Google_antitrust_case",
+        "text": "Monday’s trial hearing revealed plenty of juicy tidbits, including the $26.3 billion Google spent making itself the default search engine across platforms in 2021, how Google tried to take it further and have Chrome preinstalled on iPhones and more.",
+        "branch": "other_raw",
+        "item_id": "raw:sources/5_things_we_learned_so_far_about_the_Google_antitrust_case:4",
+        "matched_terms": 9,
+        "direct_matches": 9,
+        "context_block": "[raw:sources/5_things_we_learned_so_far_about_the_Google_antitrust_case]\nMonday’s trial hearing revealed plenty of juicy tidbits, including the $26.3 billion Google spent making itself the default search engine across platforms in 2021, how Google tried to take it further and have Chrome preinstalled on iPhones and more.",
+        "truncated": false
+      },
+      {
+        "title": "sources/5_things_we_learned_so_far_about_the_Google_antitrust_case",
+        "page_id": "sources/5_things_we_learned_so_far_about_the_Google_antitrust_case",
+        "text": "- Google spent $26.3 billion in 2021 to secure its position as the default search engine.\n- Apple received $18 billion of Google's $26.3 billion payment in 2021.\n- Google agreed not to promote Chrome to Safari users as part of its search deal with Apple.\n- Google attempted to preinstall Google services on iPhones in 2018 but was unsuccessful.\n- Google deleted internal chat logs during a litigation hold, raising concerns about data retention policies.",
+        "branch": "other_wiki",
+        "item_id": "wiki:sources/5_things_we_learned_so_far_about_the_Google_antitrust_case:2",
+        "matched_terms": 9,
+        "direct_matches": 8,
+        "context_block": "[sources/5_things_we_learned_so_far_about_the_Google_antitrust_case]\n- Google spent $26.3 billion in 2021 to secure its position as the default search engine.\n- Apple received $18 billion of Google's $26.3 billion payment in 2021.\n- Google agreed not to promote Chrome to Safari users as part of its search deal with Apple.\n- Google attempted to preinstall Google services on iPhones in 2018 but was unsuccessful.\n- Google deleted internal chat logs during a litigation hold, raising concerns about data retention policies.",
+        "truncated": false
+      },
+      {
+        "title": "sources/Apple_defends_Google_Search_deal_in_court_There_wasn_t_a_valid_alternative",
+        "page_id": "sources/Apple_defends_Google_Search_deal_in_court_There_wasn_t_a_valid_alternative",
+        "text": "In the US v. Google antitrust trial, Eddy Cue, Apple's Senior Vice President of Internet Software & Services, testified about the Information Services Agreement (ISA) with Google, which makes Google the default search engine on Apple devices. The deal has been in place since 2002, and Apple negotiated a higher revenue share with Google in 2016. During his testimony, Cue emphasized that Apple believed in Google's product quality and prioritized user privacy, stating there was no viable alternative to Google at the time.",
+        "branch": "other_wiki",
+        "item_id": "wiki:sources/Apple_defends_Google_Search_deal_in_court_There_wasn_t_a_valid_alternative:0",
+        "matched_terms": 8,
+        "direct_matches": 8,
+        "context_block": "[sources/Apple_defends_Google_Search_deal_in_court_There_wasn_t_a_valid_alternative]\nIn the US v. Google antitrust trial, Eddy Cue, Apple's Senior Vice President of Internet Software & Services, testified about the Information Services Agreement (ISA) with Google, which makes Google the default search engine on Apple devices. The deal has been in place since 2002, and Apple negotiated a higher revenue share with Google in 2016. During his testimony, Cue emphasized that Apple believed in Google's product quality and prioritized user privacy, stating there was no viable alternative to Google at the time.",
+        "truncated": false
+      },
+      {
+        "title": "raw:sources/Apple_defends_Google_Search_deal_in_court_There_wasn_t_a_valid_alternative",
+        "page_id": "sources/Apple_defends_Google_Search_deal_in_court_There_wasn_t_a_valid_alternative",
+        "text": "That question — whether Apple picked Google because it’s the most lucrative choice or the best product — was a key part of Cue’s testimony and, in fact, a key part of the DOJ’s entire case against Google. The Justice Department is focused on the deals Google makes — with Apple but also with Samsung and Mozilla and many others — to ensure it is the default search engine on practically every platform.",
+        "branch": "other_raw",
+        "item_id": "raw:sources/Apple_defends_Google_Search_deal_in_court_There_wasn_t_a_valid_alternative:8",
+        "matched_terms": 8,
+        "direct_matches": 7,
+        "context_block": "[raw:sources/Apple_defends_Google_Search_deal_in_court_There_wasn_t_a_valid_alternative]\nThat question — whether Apple picked Google because it’s the most lucrative choice or the best product — was a key part of Cue’s testimony and, in fact, a key part of the DOJ’s entire case against Google. The Justice Department is focused on the deals Google makes — with Apple but also with Samsung and Mozilla and many others — to ensure it is the default search engine on practically every platform.",
+        "truncated": false
+      },
+      {
+        "title": "raw:sources/5_things_we_learned_so_far_about_the_Google_antitrust_case",
+        "page_id": "sources/5_things_we_learned_so_far_about_the_Google_antitrust_case",
+        "text": "Google CEO Sundar Pichai testified Monday in the U.S. government’s antitrust trial against the company. The executive defended Google’s business tactics, including its deal with Apple and other partners to make Google the default search engine.",
+        "branch": "other_raw",
+        "item_id": "raw:sources/5_things_we_learned_so_far_about_the_Google_antitrust_case:0",
+        "matched_terms": 8,
+        "direct_matches": 7,
+        "context_block": "[raw:sources/5_things_we_learned_so_far_about_the_Google_antitrust_case]\nGoogle CEO Sundar Pichai testified Monday in the U.S. government’s antitrust trial against the company. The executive defended Google’s business tactics, including its deal with Apple and other partners to make Google the default search engine.",
+        "truncated": false
+      },
+      {
+        "title": "raw:sources/5_things_we_learned_so_far_about_the_Google_antitrust_case",
+        "page_id": "sources/5_things_we_learned_so_far_about_the_Google_antitrust_case",
+        "text": "Google paid $26 billion in 2021 to be everyone’s default search engine",
+        "branch": "other_raw",
+        "item_id": "raw:sources/5_things_we_learned_so_far_about_the_Google_antitrust_case:5",
+        "matched_terms": 7,
+        "direct_matches": 7,
+        "context_block": "[raw:sources/5_things_we_learned_so_far_about_the_Google_antitrust_case]\nGoogle paid $26 billion in 2021 to be everyone’s default search engine",
+        "truncated": false
+      },
+      {
+        "title": "raw:sources/5_things_we_learned_so_far_about_the_Google_antitrust_case",
+        "page_id": "sources/5_things_we_learned_so_far_about_the_Google_antitrust_case",
+        "text": "The amount that Google spent on homepage market share has been a fixing point in the trial. Earlier this month, the CEOs of Microsoft and DuckDuckGo testified that their search engines would have been far more successful, even competitive with Google, had they been able to make similar deals with Apple. Microsoft CEO Satya Nadella even said he was willing to spend $15 billion per year to get Bing into Apple’s default search, per The Information.",
+        "branch": "other_raw",
+        "item_id": "raw:sources/5_things_we_learned_so_far_about_the_Google_antitrust_case:11",
+        "matched_terms": 7,
+        "direct_matches": 7,
+        "context_block": "[raw:sources/5_things_we_learned_so_far_about_the_Google_antitrust_case]\nThe amount that Google spent on homepage market share has been a fixing point in the trial. Earlier this month, the CEOs of Microsoft and DuckDuckGo testified that their search engines would have been far more successful, even competitive with Google, had they been able to make similar deals with Apple. Microsoft CEO Satya Nadella even said he was willing to spend $15 billion per year to get Bing into Apple’s default search, per The Information.",
+        "truncated": false
+      },
+      {
+        "title": "raw:sources/Is_Google_Search_better_than_the_rest_And_is_that_fair",
+        "page_id": "sources/Is_Google_Search_better_than_the_rest_And_is_that_fair",
+        "text": "For the US, which has to prove that Google somehow broke the law to achieve the status quo, this legal case could be an uphill battle. But for the rest of us, it offers a rare opportunity for some insight into what the tech giant does with its enormous market share. Is it still focused on being the best? Or, as has been alleged, does it use its ubiquity to squeeze us for money even at the expense of product quality? How ‘organic’ are Google’s results? This month, Wired posted an opinion article by lawyer and privacy advocate Megan Gray, which alleged that Google had accidentally revealed during the trial that it manipulates people’s search queries for maximum ad revenue. The example given was replacing a search for “children’s clothing” with “NIKOLAI-brand kidswear”. Loading Google rejected this in very strong terms, saying the piece was misleading and inaccurate while denying ever altering search terms. Wired removed the article for not meeting its standards, but the degree to which it was shared on social media and boosted in write-ups at other outlets shows just how willing people are to accept foul play on Google’s part. A suspicion of privacy invasion and inappropriate data handling follows the company at all times.",
+        "branch": "other_raw",
+        "item_id": "raw:sources/Is_Google_Search_better_than_the_rest_And_is_that_fair:2",
+        "matched_terms": 7,
+        "direct_matches": 7,
+        "context_block": "[raw:sources/Is_Google_Search_better_than_the_rest_And_is_that_fair]\nFor the US, which has to prove that Google somehow broke the law to achieve the status quo, this legal case could be an uphill battle. But for the rest of us, it offers a rare opportunity for some insight into what the tech giant does with its enormous market share. Is it still focused on being the best? Or, as has been alleged, does it use its ubiquity to squeeze us for money even at the expense of product quality? How ‘organic’ are Google’s results? This month, Wired posted an opinion article by lawyer and privacy advocate Megan Gray, which alleged that Google had accidentally revealed during the trial that it manipulates people’s search queries for maximum ad revenue. The example given was replacing a search for “children’s clothing” with “NIKOLAI-brand kidswear”. Loading Google rejected this in very strong terms, saying the piece was misleading and inaccurate while denying ever altering search terms. Wired removed the article for not meeting its standards, but the degree to which it was shared on social media and boosted in write-ups at other outlets shows just how willing people are to accept foul play on Google’s part. A suspicion of privacy invasion and inappropriate data handling follows the company at all times.",
+        "truncated": false
+      },
+      {
+        "title": "raw:sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line",
+        "page_id": "sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line",
+        "text": "A new class action lawsuit filed this week in the U.S. District Court in D.C. accuses Google and parent company Alphabet of anticompetitive behavior in violation of U.S. antitrust law, the Sherman Act, and others, on behalf of news publishers. The case, filed by Arkansas-based publisher Helena World Chronicle, argues that Google “siphons off” news publishers’ content, their readers and ad revenue through anticompetitive means. It also specifically cites new AI technologies like Google’s Search Generative Experience (SGE) and Bard AI chatbot as worsening the problem.",
+        "branch": "other_raw",
+        "item_id": "raw:sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line:0",
+        "matched_terms": 7,
+        "direct_matches": 4,
+        "context_block": "[raw:sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]\nA new class action lawsuit filed this week in the U.S. District Court in D.C. accuses Google and parent company Alphabet of anticompetitive behavior in violation of U.S. antitrust law, the Sherman Act, and others, on behalf of news publishers. The case, filed by Arkansas-based publisher Helena World Chronicle, argues that Google “siphons off” news publishers’ content, their readers and ad revenue through anticompetitive means. It also specifically cites new AI technologies like Google’s Search Generative Experience (SGE) and Bard AI c",
+        "truncated": true
+      }
+    ],
+    "branches": {
+      "other_wiki": 6,
+      "routed_wiki": 2,
+      "other_raw": 8
+    }
+  },
+  "error": null,
+  "context": "[sources/5_things_we_learned_so_far_about_the_Google_antitrust_case]\nThis document discusses the ongoing antitrust trial against Google, focusing on the company's practices and defenses. Key points include Google's payments to secure default search engine status, attempts to preinstall Google services on Apple devices, and the deletion of internal chat logs. The case highlights the struggle between Google's dominance and the need for fair competition.\n\n[sources/5_things_we_learned_so_far_about_the_Google_antitrust_case]\n- Google paid $26.3 billion in 2021 to be the default search engine across various platforms.\n- Google attempted to get Apple to preinstall Google services on iPhones but failed.\n- Google deleted internal chat logs during a litigation hold, leading to controversy.\n- The case is expected to continue for several weeks, potentially affecting other tech giants' practices.\n- The outcome could require Google to share data with competitors and alter its business practices.\n\n[entities/g001]\n- From [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]]: Search engine and technology company\n- From [[sources/5_things_we_learned_so_far_about_the_Google_antitrust_case]]: The tech giant involved in the antitrust trial, known for its dominant position in the online search market.\n- From [[sources/5_things_we_learned_so_far_about_the_Google_antitrust_case]]: CEO of Google, who testified in the antitrust trial defending the company's business tactics.\n- From [[sources/5_things_we_learned_so_far_about_the_Google_antitrust_case]]: The party filing the antitrust lawsuit against Google, seeking to halt Google's alleged anticompetitive practices.\n- From [[sources/5_things_we_learned_so_far_about_the_Google_antitrust_case]]: The tech company with whom Google has a deal to make Google the default search engine.\n\n[entities/g001]\n- google [filed lawsuit against] antitrust lawsuit (from [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]])\n- google [alleges content misappropriation] content misappropriation (from [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]])\n- google [targets AI technologies] artificial intelligence (from [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]])\n- google [involved_in] antitrust trial (from [[sources/5_things_we_learned_so_far_about_the_Google_antitrust_case]])\n- google [did_not_agree_to_request_from] tim cook (from [[sources/5_things_we_learned_so_far_about_the_Google_antitrust_case]])\n- google [uses_practice_of] default-search-engine (from [[sources/5_things_we_learned_so_far_about_the_Google_antitrust_case]])\n- google [deleted_internal_chat_logs_during_litigation_hold] data collection (from [[sources/5_things_we_learned_so_far_about_the_Google_antitrust_case]])\n\n[concepts/default-search-engine]\n- From [[sources/Apple_defends_Google_Search_deal_in_court_There_wasn_t_a_valid_alternative]]: Google is the default search engine on Apple devices as per the Information Services Agreement (ISA)\n- From [[sources/5_things_we_learned_so_far_about_the_Google_antitrust_case]]: The practice of making a particular search engine the default choice for users, often facilitated by agreements with hardware manufacturers.\n\n[raw:sources/Apple_defends_Google_Search_deal_in_court_There_wasn_t_a_valid_alternative]\nCue was on the stand as a witness in US v. Google, the landmark antitrust trial over Google’s search business. Cue is one of the highest-profile witnesses in the case so far, in part because the deal between Google and Apple — which makes Google the default search engine on all Apple devices and pays Apple billions of dollars a year — is central to the US Department of Justice’s case against Google.\n\n[concepts/default-search-engine]\n- google [uses_practice_of] default-search-engine (from [[sources/5_things_we_learned_so_far_about_the_Google_antitrust_case]])\n\n[raw:sources/5_things_we_learned_so_far_about_the_Google_antitrust_case]\nMonday’s trial hearing revealed plenty of juicy tidbits, including the $26.3 billion Google spent making itself the default search engine across platforms in 2021, how Google tried to take it further and have Chrome preinstalled on iPhones and more.\n\n[sources/5_things_we_learned_so_far_about_the_Google_antitrust_case]\n- Google spent $26.3 billion in 2021 to secure its position as the default search engine.\n- Apple received $18 billion of Google's $26.3 billion payment in 2021.\n- Google agreed not to promote Chrome to Safari users as part of its search deal with Apple.\n- Google attempted to preinstall Google services on iPhones in 2018 but was unsuccessful.\n- Google deleted internal chat logs during a litigation hold, raising concerns about data retention policies.\n\n[sources/Apple_defends_Google_Search_deal_in_court_There_wasn_t_a_valid_alternative]\nIn the US v. Google antitrust trial, Eddy Cue, Apple's Senior Vice President of Internet Software & Services, testified about the Information Services Agreement (ISA) with Google, which makes Google the default search engine on Apple devices. The deal has been in place since 2002, and Apple negotiated a higher revenue share with Google in 2016. During his testimony, Cue emphasized that Apple believed in Google's product quality and prioritized user privacy, stating there was no viable alternative to Google at the time.\n\n[raw:sources/Apple_defends_Google_Search_deal_in_court_There_wasn_t_a_valid_alternative]\nThat question — whether Apple picked Google because it’s the most lucrative choice or the best product — was a key part of Cue’s testimony and, in fact, a key part of the DOJ’s entire case against Google. The Justice Department is focused on the deals Google makes — with Apple but also with Samsung and Mozilla and many others — to ensure it is the default search engine on practically every platform.\n\n[raw:sources/5_things_we_learned_so_far_about_the_Google_antitrust_case]\nGoogle CEO Sundar Pichai testified Monday in the U.S. government’s antitrust trial against the company. The executive defended Google’s business tactics, including its deal with Apple and other partners to make Google the default search engine.\n\n[raw:sources/5_things_we_learned_so_far_about_the_Google_antitrust_case]\nGoogle paid $26 billion in 2021 to be everyone’s default search engine\n\n[raw:sources/5_things_we_learned_so_far_about_the_Google_antitrust_case]\nThe amount that Google spent on homepage market share has been a fixing point in the trial. Earlier this month, the CEOs of Microsoft and DuckDuckGo testified that their search engines would have been far more successful, even competitive with Google, had they been able to make similar deals with Apple. Microsoft CEO Satya Nadella even said he was willing to spend $15 billion per year to get Bing into Apple’s default search, per The Information.\n\n[raw:sources/Is_Google_Search_better_than_the_rest_And_is_that_fair]\nFor the US, which has to prove that Google somehow broke the law to achieve the status quo, this legal case could be an uphill battle. But for the rest of us, it offers a rare opportunity for some insight into what the tech giant does with its enormous market share. Is it still focused on being the best? Or, as has been alleged, does it use its ubiquity to squeeze us for money even at the expense of product quality? How ‘organic’ are Google’s results? This month, Wired posted an opinion article by lawyer and privacy advocate Megan Gray, which alleged that Google had accidentally revealed during the trial that it manipulates people’s search queries for maximum ad revenue. The example given was replacing a search for “children’s clothing” with “NIKOLAI-brand kidswear”. Loading Google rejected this in very strong terms, saying the piece was misleading and inaccurate while denying ever altering search terms. Wired removed the article for not meeting its standards, but the degree to which it was shared on social media and boosted in write-ups at other outlets shows just how willing people are to accept foul play on Google’s part. A suspicion of privacy invasion and inappropriate data handling follows the company at all times.\n\n[raw:sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]\nA new class action lawsuit filed this week in the U.S. District Court in D.C. accuses Google and parent company Alphabet of anticompetitive behavior in violation of U.S. antitrust law, the Sherman Act, and others, on behalf of news publishers. The case, filed by Arkansas-based publisher Helena World Chronicle, argues that Google “siphons off” news publishers’ content, their readers and ad revenue through anticompetitive means. It also specifically cites new AI technologies like Google’s Search Generative Experience (SGE) and Bard AI c\n\n[Knowledge graph]\ngoogle [filed lawsuit against] antitrust lawsuit (from sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line)\ngoogle [alleges content misappropriation] content misappropriation (from sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line)\ngoogle [targets AI technologies] artificial intelligence (from sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line)\ngoogle [involved_in] antitrust trial (from sources/5_things_we_learned_so_far_about_the_Google_antitrust_case)\ngoogle [did_not_agree_to_request_from] tim cook (from sources/5_things_we_learned_so_far_about_the_Google_antitrust_case)\ngoogle [uses_practice_of] default-search-engine (from sources/5_things_we_learned_so_far_about_the_Google_antitrust_case)",
+  "answer_prompt": "Answer using only the context. Give a short direct answer (entity, name, number, date, phrase, Yes/No), or unanswerable. Output only the answer.\n\nContext:\n[sources/5_things_we_learned_so_far_about_the_Google_antitrust_case]\nThis document discusses the ongoing antitrust trial against Google, focusing on the company's practices and defenses. Key points include Google's payments to secure default search engine status, attempts to preinstall Google services on Apple devices, and the deletion of internal chat logs. The case highlights the struggle between Google's dominance and the need for fair competition.\n\n[sources/5_things_we_learned_so_far_about_the_Google_antitrust_case]\n- Google paid $26.3 billion in 2021 to be the default search engine across various platforms.\n- Google attempted to get Apple to preinstall Google services on iPhones but failed.\n- Google deleted internal chat logs during a litigation hold, leading to controversy.\n- The case is expected to continue for several weeks, potentially affecting other tech giants' practices.\n- The outcome could require Google to share data with competitors and alter its business practices.\n\n[entities/g001]\n- From [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]]: Search engine and technology company\n- From [[sources/5_things_we_learned_so_far_about_the_Google_antitrust_case]]: The tech giant involved in the antitrust trial, known for its dominant position in the online search market.\n- From [[sources/5_things_we_learned_so_far_about_the_Google_antitrust_case]]: CEO of Google, who testified in the antitrust trial defending the company's business tactics.\n- From [[sources/5_things_we_learned_so_far_about_the_Google_antitrust_case]]: The party filing the antitrust lawsuit against Google, seeking to halt Google's alleged anticompetitive practices.\n- From [[sources/5_things_we_learned_so_far_about_the_Google_antitrust_case]]: The tech company with whom Google has a deal to make Google the default search engine.\n\n[entities/g001]\n- google [filed lawsuit against] antitrust lawsuit (from [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]])\n- google [alleges content misappropriation] content misappropriation (from [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]])\n- google [targets AI technologies] artificial intelligence (from [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]])\n- google [involved_in] antitrust trial (from [[sources/5_things_we_learned_so_far_about_the_Google_antitrust_case]])\n- google [did_not_agree_to_request_from] tim cook (from [[sources/5_things_we_learned_so_far_about_the_Google_antitrust_case]])\n- google [uses_practice_of] default-search-engine (from [[sources/5_things_we_learned_so_far_about_the_Google_antitrust_case]])\n- google [deleted_internal_chat_logs_during_litigation_hold] data collection (from [[sources/5_things_we_learned_so_far_about_the_Google_antitrust_case]])\n\n[concepts/default-search-engine]\n- From [[sources/Apple_defends_Google_Search_deal_in_court_There_wasn_t_a_valid_alternative]]: Google is the default search engine on Apple devices as per the Information Services Agreement (ISA)\n- From [[sources/5_things_we_learned_so_far_about_the_Google_antitrust_case]]: The practice of making a particular search engine the default choice for users, often facilitated by agreements with hardware manufacturers.\n\n[raw:sources/Apple_defends_Google_Search_deal_in_court_There_wasn_t_a_valid_alternative]\nCue was on the stand as a witness in US v. Google, the landmark antitrust trial over Google’s search business. Cue is one of the highest-profile witnesses in the case so far, in part because the deal between Google and Apple — which makes Google the default search engine on all Apple devices and pays Apple billions of dollars a year — is central to the US Department of Justice’s case against Google.\n\n[concepts/default-search-engine]\n- google [uses_practice_of] default-search-engine (from [[sources/5_things_we_learned_so_far_about_the_Google_antitrust_case]])\n\n[raw:sources/5_things_we_learned_so_far_about_the_Google_antitrust_case]\nMonday’s trial hearing revealed plenty of juicy tidbits, including the $26.3 billion Google spent making itself the default search engine across platforms in 2021, how Google tried to take it further and have Chrome preinstalled on iPhones and more.\n\n[sources/5_things_we_learned_so_far_about_the_Google_antitrust_case]\n- Google spent $26.3 billion in 2021 to secure its position as the default search engine.\n- Apple received $18 billion of Google's $26.3 billion payment in 2021.\n- Google agreed not to promote Chrome to Safari users as part of its search deal with Apple.\n- Google attempted to preinstall Google services on iPhones in 2018 but was unsuccessful.\n- Google deleted internal chat logs during a litigation hold, raising concerns about data retention policies.\n\n[sources/Apple_defends_Google_Search_deal_in_court_There_wasn_t_a_valid_alternative]\nIn the US v. Google antitrust trial, Eddy Cue, Apple's Senior Vice President of Internet Software & Services, testified about the Information Services Agreement (ISA) with Google, which makes Google the default search engine on Apple devices. The deal has been in place since 2002, and Apple negotiated a higher revenue share with Google in 2016. During his testimony, Cue emphasized that Apple believed in Google's product quality and prioritized user privacy, stating there was no viable alternative to Google at the time.\n\n[raw:sources/Apple_defends_Google_Search_deal_in_court_There_wasn_t_a_valid_alternative]\nThat question — whether Apple picked Google because it’s the most lucrative choice or the best product — was a key part of Cue’s testimony and, in fact, a key part of the DOJ’s entire case against Google. The Justice Department is focused on the deals Google makes — with Apple but also with Samsung and Mozilla and many others — to ensure it is the default search engine on practically every platform.\n\n[raw:sources/5_things_we_learned_so_far_about_the_Google_antitrust_case]\nGoogle CEO Sundar Pichai testified Monday in the U.S. government’s antitrust trial against the company. The executive defended Google’s business tactics, including its deal with Apple and other partners to make Google the default search engine.\n\n[raw:sources/5_things_we_learned_so_far_about_the_Google_antitrust_case]\nGoogle paid $26 billion in 2021 to be everyone’s default search engine\n\n[raw:sources/5_things_we_learned_so_far_about_the_Google_antitrust_case]\nThe amount that Google spent on homepage market share has been a fixing point in the trial. Earlier this month, the CEOs of Microsoft and DuckDuckGo testified that their search engines would have been far more successful, even competitive with Google, had they been able to make similar deals with Apple. Microsoft CEO Satya Nadella even said he was willing to spend $15 billion per year to get Bing into Apple’s default search, per The Information.\n\n[raw:sources/Is_Google_Search_better_than_the_rest_And_is_that_fair]\nFor the US, which has to prove that Google somehow broke the law to achieve the status quo, this legal case could be an uphill battle. But for the rest of us, it offers a rare opportunity for some insight into what the tech giant does with its enormous market share. Is it still focused on being the best? Or, as has been alleged, does it use its ubiquity to squeeze us for money even at the expense of product quality? How ‘organic’ are Google’s results? This month, Wired posted an opinion article by lawyer and privacy advocate Megan Gray, which alleged that Google had accidentally revealed during the trial that it manipulates people’s search queries for maximum ad revenue. The example given was replacing a search for “children’s clothing” with “NIKOLAI-brand kidswear”. Loading Google rejected this in very strong terms, saying the piece was misleading and inaccurate while denying ever altering search terms. Wired removed the article for not meeting its standards, but the degree to which it was shared on social media and boosted in write-ups at other outlets shows just how willing people are to accept foul play on Google’s part. A suspicion of privacy invasion and inappropriate data handling follows the company at all times.\n\n[raw:sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]\nA new class action lawsuit filed this week in the U.S. District Court in D.C. accuses Google and parent company Alphabet of anticompetitive behavior in violation of U.S. antitrust law, the Sherman Act, and others, on behalf of news publishers. The case, filed by Arkansas-based publisher Helena World Chronicle, argues that Google “siphons off” news publishers’ content, their readers and ad revenue through anticompetitive means. It also specifically cites new AI technologies like Google’s Search Generative Experience (SGE) and Bard AI c\n\n[Knowledge graph]\ngoogle [filed lawsuit against] antitrust lawsuit (from sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line)\ngoogle [alleges content misappropriation] content misappropriation (from sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line)\ngoogle [targets AI technologies] artificial intelligence (from sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line)\ngoogle [involved_in] antitrust trial (from sources/5_things_we_learned_so_far_about_the_Google_antitrust_case)\ngoogle [did_not_agree_to_request_from] tim cook (from sources/5_things_we_learned_so_far_about_the_Google_antitrust_case)\ngoogle [uses_practice_of] default-search-engine (from sources/5_things_we_learned_so_far_about_the_Google_antitrust_case)\n\nQuestion: Does the TechCrunch article on the Google antitrust case report the same amount of money spent by Google in 2021 to maintain its default search engine status across various platforms as the amount cited in another TechCrunch article discussing payments for default search engine status?\nAnswer:",
+  "model_call_ids": [
+    578,
+    579,
+    580
+  ],
+  "request_attempts": 3,
+  "failed_requests": 0,
+  "llm_calls": 3,
+  "input_tokens": 7229,
+  "output_tokens": 206,
+  "em": 0.0,
+  "token_f1": 0.0,
+  "rouge_l": 0.0
+}

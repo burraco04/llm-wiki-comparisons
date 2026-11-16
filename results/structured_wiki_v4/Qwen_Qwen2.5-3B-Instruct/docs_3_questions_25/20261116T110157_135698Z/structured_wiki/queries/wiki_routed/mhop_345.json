@@ -1,0 +1,357 @@
+{
+  "qa_id": "mhop_345",
+  "question": "Who is the individual that persuaded Adam Yedidia to leave Jane Street and join both Alameda and FTX, and is also accused by the prosecution of committing fraud for personal gain, as reported by Fortune and TechCrunch?",
+  "reference": "Sam Bankman-Fried",
+  "question_type": "inference_query",
+  "evidence_titles": [
+    "Is Sam Bankman-Fried a bad ‘man’ or a good ‘boy’? Lawyers swap opening statements before first witnesses take the stand",
+    "Sam Altman backs teens’ startup, Google unveils the Pixel 8 and TikTok tests an ad-free tier"
+  ],
+  "system": "wiki_routed",
+  "prediction": "Sam Bankman-Fried",
+  "raw_prediction": "Sam Bankman-Fried",
+  "seconds_wall": 1.6109683160029817,
+  "retrieval": {
+    "routed_ids": [
+      "entities/adam-yedidia",
+      "concepts/bankman-fried-characterization"
+    ],
+    "terms": [
+      "sam bankman fried",
+      "alameda research",
+      "ftx",
+      "adam yedidia",
+      "bankman fried scheme",
+      "bankman fried testimony",
+      "bankman fried fraud",
+      "bankman fried accuser",
+      "individual",
+      "persuaded",
+      "adam",
+      "yedidia",
+      "leave",
+      "jane",
+      "street",
+      "join",
+      "alameda",
+      "accused",
+      "prosecution",
+      "committing",
+      "fraud",
+      "personal",
+      "gain",
+      "reported",
+      "fortune",
+      "techcrunch",
+      "persuaded adam",
+      "leave jane",
+      "jane street",
+      "committing fraud",
+      "personal gain"
+    ],
+    "routing_fallback": false,
+    "timing": {
+      "routing_llm": 0.5796169810055289,
+      "search_terms_llm": 0.5240037929906975,
+      "retrieval_code": 0.18358003598405048,
+      "answer_llm": 0.3237493630149402
+    },
+    "candidates": 26,
+    "selected": 21,
+    "chars": 9727,
+    "matched_pages": [
+      "sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand",
+      "sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier",
+      "entities/sam-bankman-fried",
+      "concepts/bankman-fried-characterization",
+      "concepts/alameda-research-scheme",
+      "entities/adam-yedidia",
+      "sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line"
+    ],
+    "kg_triples": 4,
+    "graph_relations": [
+      {
+        "source": "sam-bankman-fried",
+        "target": "bankman-fried-characterization",
+        "relation": "accused",
+        "source_doc": "sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand",
+        "context_line": "sam-bankman-fried [accused] bankman-fried-characterization (from sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand)"
+      },
+      {
+        "source": "sam-bankman-fried",
+        "target": "bankman-fried-characterization",
+        "relation": "defended",
+        "source_doc": "sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand",
+        "context_line": "sam-bankman-fried [defended] bankman-fried-characterization (from sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand)"
+      },
+      {
+        "source": "sam-bankman-fried",
+        "target": "alameda-research-scheme",
+        "relation": "involved",
+        "source_doc": "sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand",
+        "context_line": "sam-bankman-fried [involved] alameda-research-scheme (from sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand)"
+      },
+      {
+        "source": "alameda-research-scheme",
+        "target": "bankman-fried-characterization",
+        "relation": "alleged",
+        "source_doc": "sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand",
+        "context_line": "alameda-research-scheme [alleged] bankman-fried-characterization (from sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand)"
+      }
+    ],
+    "selected_passages": [
+      {
+        "title": "raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand",
+        "page_id": "sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand",
+        "text": "Shortly afterward, as the trial neared late afternoon, the government called Adam Yedidia to the stand. A fast-talking graduate of MIT, he and Bankman-Fried were close friends in college, he said. And after Bankman-Fried left Jane Street, the high-frequency trading firm where the former billionaire got his start in finance after MIT, he persuaded Yedidia to join him as a trader at Alameda and then as a developer at FTX.",
+        "branch": "other_raw",
+        "item_id": "raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand:19",
+        "matched_terms": 11,
+        "direct_matches": 10,
+        "context_block": "[raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\nShortly afterward, as the trial neared late afternoon, the government called Adam Yedidia to the stand. A fast-talking graduate of MIT, he and Bankman-Fried were close friends in college, he said. And after Bankman-Fried left Jane Street, the high-frequency trading firm where the former billionaire got his start in finance after MIT, he persuaded Yedidia to join him as a trader at Alameda and then as a developer at FTX.",
+        "truncated": false
+      },
+      {
+        "title": "raw:sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier",
+        "page_id": "sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier",
+        "text": "Inside the SBF trial: Rebecca and Jacquelyn report on the second day of the SBF and FTX trial. The prosecution painted Bankman-Fried as someone who knowingly committed fraud to achieve great wealth, power and influence, while the defense countered that the FTX founder acted in good faith, never meant to commit fraud or steal and basically got in over his head.",
+        "branch": "other_raw",
+        "item_id": "raw:sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier:18",
+        "matched_terms": 7,
+        "direct_matches": 3,
+        "context_block": "[raw:sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]\nInside the SBF trial: Rebecca and Jacquelyn report on the second day of the SBF and FTX trial. The prosecution painted Bankman-Fried as someone who knowingly committed fraud to achieve great wealth, power and influence, while the defense countered that the FTX founder acted in good faith, never meant to commit fraud or steal and basically got in over his head.",
+        "truncated": false
+      },
+      {
+        "title": "sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand",
+        "page_id": "sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand",
+        "text": "- FTX was once a thriving crypto exchange\n- Bankman-Fried jetted between international locations\n- Ellison, his girlfriend and Alameda CEO, had secret access to customer funds\n- Bankman-Fried allegedly lied to customers about safety\n- Prosecution alleges Bankman-Fried used Alameda to steal from FTX\n- Bankman-Fried reportedly donated millions to political candidates\n- Prosecution claims Bankman-Fried concealed money flows and forged documents\n- Bankman-Fried allegedly used Alameda as a front to steal from FTX\n- Bankman-Fried claimed he gave up personal wealth to make customers whole\n- Julliard invested almost $100,000 in FTX but never recovered\n- Yedidia was a college friend of Bankman-Fried and a former Alameda developer\n- Huang and Wang are expected to testify next\n- Ellison is a key witness for the prosecution",
+        "branch": "other_wiki",
+        "item_id": "wiki:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand:2",
+        "matched_terms": 6,
+        "direct_matches": 6,
+        "context_block": "[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\n- FTX was once a thriving crypto exchange\n- Bankman-Fried jetted between international locations\n- Ellison, his girlfriend and Alameda CEO, had secret access to customer funds\n- Bankman-Fried allegedly lied to customers about safety\n- Prosecution alleges Bankman-Fried used Alameda to steal from FTX\n- Bankman-Fried reportedly donated millions to political candidates\n- Prosecution claims Bankman-Fried concealed money flows and forged documents\n- Bankman-Fried allegedly used Alameda as a front to steal from FTX\n- Bankman-Fried claimed he gave up personal wealth to make customers whole\n- Julliard invested almost $100,000 in FTX but never recovered\n- Yedidia was a college friend of Bankman-Fried and a former Alameda developer\n- Huang and Wang are expected to testify next\n- Ellison is a key witness for the prosecution",
+        "truncated": false
+      },
+      {
+        "title": "entities/sam-bankman-fried",
+        "page_id": "entities/sam-bankman-fried",
+        "text": "- From [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]]: Former CEO of FTX, accused of fraud and theft in the FTX collapse",
+        "branch": "other_wiki",
+        "item_id": "wiki:entities/sam-bankman-fried:1",
+        "matched_terms": 6,
+        "direct_matches": 3,
+        "context_block": "[entities/sam-bankman-fried]\n- From [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]]: Former CEO of FTX, accused of fraud and theft in the FTX collapse",
+        "truncated": false
+      },
+      {
+        "title": "entities/sam-bankman-fried",
+        "page_id": "entities/sam-bankman-fried",
+        "text": "- sam-bankman-fried [accused] bankman-fried-characterization (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- sam-bankman-fried [defended] bankman-fried-characterization (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- sam-bankman-fried [involved] alameda-research-scheme (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])",
+        "branch": "other_wiki",
+        "item_id": "wiki:entities/sam-bankman-fried:2",
+        "matched_terms": 6,
+        "direct_matches": 2,
+        "context_block": "[entities/sam-bankman-fried]\n- sam-bankman-fried [accused] bankman-fried-characterization (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- sam-bankman-fried [defended] bankman-fried-characterization (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- sam-bankman-fried [involved] alameda-research-scheme (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])",
+        "truncated": false
+      },
+      {
+        "title": "concepts/bankman-fried-characterization",
+        "page_id": "concepts/bankman-fried-characterization",
+        "text": "- sam-bankman-fried [accused] bankman-fried-characterization (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- sam-bankman-fried [defended] bankman-fried-characterization (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- alameda-research-scheme [alleged] bankman-fried-characterization (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])",
+        "branch": "routed_wiki",
+        "item_id": "wiki:concepts/bankman-fried-characterization:2",
+        "matched_terms": 6,
+        "direct_matches": 2,
+        "context_block": "[concepts/bankman-fried-characterization]\n- sam-bankman-fried [accused] bankman-fried-characterization (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- sam-bankman-fried [defended] bankman-fried-characterization (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- alameda-research-scheme [alleged] bankman-fried-characterization (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])",
+        "truncated": false
+      },
+      {
+        "title": "sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand",
+        "page_id": "sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand",
+        "text": "The trial focuses on whether Sam Bankman-Fried, former CEO of FTX, is a liar and fraud or a well-meaning founder. The prosecution portrays him as a criminal who stole billions from thousands of victims, while his defense argues he acted in good faith.",
+        "branch": "other_wiki",
+        "item_id": "wiki:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand:0",
+        "matched_terms": 5,
+        "direct_matches": 3,
+        "context_block": "[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\nThe trial focuses on whether Sam Bankman-Fried, former CEO of FTX, is a liar and fraud or a well-meaning founder. The prosecution portrays him as a criminal who stole billions from thousands of victims, while his defense argues he acted in good faith.",
+        "truncated": false
+      },
+      {
+        "title": "raw:sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier",
+        "page_id": "sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier",
+        "text": "SBF allegedly tried to buy off Trump: The TC team’s been trained on the Manhattan Federal Court for the trial of Sam Bankman-Fried, the disgraced entrepreneur accused of orchestrating the collapse of cryptocurrency exchange FTX. But fascinating details about SBF’s political dealings are emerging from a book by Michael Lewis, “Going Infinite,” that debuted on the first day of the trial, like SBF’s attempt to buy off Trump to get him to not run again for president.",
+        "branch": "other_raw",
+        "item_id": "raw:sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier:7",
+        "matched_terms": 5,
+        "direct_matches": 3,
+        "context_block": "[raw:sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]\nSBF allegedly tried to buy off Trump: The TC team’s been trained on the Manhattan Federal Court for the trial of Sam Bankman-Fried, the disgraced entrepreneur accused of orchestrating the collapse of cryptocurrency exchange FTX. But fascinating details about SBF’s political dealings are emerging from a book by Michael Lewis, “Going Infinite,” that debuted on the first day of the trial, like SBF’s attempt to buy off Trump to get him to not run again for president.",
+        "truncated": false
+      },
+      {
+        "title": "sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand",
+        "page_id": "sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand",
+        "text": "- Trial examines Sam Bankman-Fried's role in FTX\n- Prosecution accuses him of stealing from customers\n- Defense claims he acted in good faith, not a criminal\n- Witnesses include a crypto trader and a college friend\n- Court adjourns after calling first two witnesses",
+        "branch": "other_wiki",
+        "item_id": "wiki:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand:1",
+        "matched_terms": 5,
+        "direct_matches": 2,
+        "context_block": "[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\n- Trial examines Sam Bankman-Fried's role in FTX\n- Prosecution accuses him of stealing from customers\n- Defense claims he acted in good faith, not a criminal\n- Witnesses include a crypto trader and a college friend\n- Court adjourns after calling first two witnesses",
+        "truncated": false
+      },
+      {
+        "title": "concepts/alameda-research-scheme",
+        "page_id": "concepts/alameda-research-scheme",
+        "text": "- From [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]]: Alameda Research's alleged involvement in FTX's collapse",
+        "branch": "other_wiki",
+        "item_id": "wiki:concepts/alameda-research-scheme:1",
+        "matched_terms": 4,
+        "direct_matches": 3,
+        "context_block": "[concepts/alameda-research-scheme]\n- From [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]]: Alameda Research's alleged involvement in FTX's collapse",
+        "truncated": false
+      },
+      {
+        "title": "raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand",
+        "page_id": "sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand",
+        "text": "The key to his alleged scheme? Alameda Research, a crypto hedge fund he also owned, argued Rehn. Using Caroline Ellison, his on-again off-again girlfriend and the CEO of Alameda, as a front, Bankman-Fried had “secret access” to customer money—both cash and crypto—the government claimed.",
+        "branch": "other_raw",
+        "item_id": "raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand:6",
+        "matched_terms": 4,
+        "direct_matches": 3,
+        "context_block": "[raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\nThe key to his alleged scheme? Alameda Research, a crypto hedge fund he also owned, argued Rehn. Using Caroline Ellison, his on-again off-again girlfriend and the CEO of Alameda, as a front, Bankman-Fried had “secret access” to customer money—both cash and crypto—the government claimed.",
+        "truncated": false
+      },
+      {
+        "title": "raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand",
+        "page_id": "sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand",
+        "text": "Who is Sam Bankman-Fried, the former CEO of crypto exchange FTX? Is he a liar and a fraud? Or did he act in good faith, and like many a startup founder, fly too close to the sun?",
+        "branch": "other_raw",
+        "item_id": "raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand:0",
+        "matched_terms": 4,
+        "direct_matches": 2,
+        "context_block": "[raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\nWho is Sam Bankman-Fried, the former CEO of crypto exchange FTX? Is he a liar and a fraud? Or did he act in good faith, and like many a startup founder, fly too close to the sun?",
+        "truncated": false
+      },
+      {
+        "title": "concepts/alameda-research-scheme",
+        "page_id": "concepts/alameda-research-scheme",
+        "text": "- sam-bankman-fried [involved] alameda-research-scheme (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- alameda-research-scheme [alleged] bankman-fried-characterization (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])",
+        "branch": "other_wiki",
+        "item_id": "wiki:concepts/alameda-research-scheme:2",
+        "matched_terms": 4,
+        "direct_matches": 1,
+        "context_block": "[concepts/alameda-research-scheme]\n- sam-bankman-fried [involved] alameda-research-scheme (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- alameda-research-scheme [alleged] bankman-fried-characterization (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])",
+        "truncated": false
+      },
+      {
+        "title": "entities/sam-bankman-fried",
+        "page_id": "entities/sam-bankman-fried",
+        "text": "Former CEO of FTX, accused of fraud and theft in the FTX collapse",
+        "branch": "other_wiki",
+        "item_id": "wiki:entities/sam-bankman-fried:0",
+        "matched_terms": 3,
+        "direct_matches": 3,
+        "context_block": "[entities/sam-bankman-fried]\nFormer CEO of FTX, accused of fraud and theft in the FTX collapse",
+        "truncated": false
+      },
+      {
+        "title": "concepts/alameda-research-scheme",
+        "page_id": "concepts/alameda-research-scheme",
+        "text": "Alameda Research's alleged involvement in FTX's collapse",
+        "branch": "other_wiki",
+        "item_id": "wiki:concepts/alameda-research-scheme:0",
+        "matched_terms": 3,
+        "direct_matches": 3,
+        "context_block": "[concepts/alameda-research-scheme]\nAlameda Research's alleged involvement in FTX's collapse",
+        "truncated": false
+      },
+      {
+        "title": "raw:sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier",
+        "page_id": "sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier",
+        "text": "Gmail fights back against spammers: Google this week announced a series of significant changes to how it handles email from bulk senders in an effort to cut down on spam and other unwanted emails. The company says that, starting next year, bulk senders will need to authenticate their emails, offer an easy way to unsubscribe and stay under a reported spam threshold.",
+        "branch": "other_raw",
+        "item_id": "raw:sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier:8",
+        "matched_terms": 2,
+        "direct_matches": 2,
+        "context_block": "[raw:sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]\nGmail fights back against spammers: Google this week announced a series of significant changes to how it handles email from bulk senders in an effort to cut down on spam and other unwanted emails. The company says that, starting next year, bulk senders will need to authenticate their emails, offer an easy way to unsubscribe and stay under a reported spam threshold.",
+        "truncated": false
+      },
+      {
+        "title": "raw:sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier",
+        "page_id": "sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier",
+        "text": "On the hunt for a new podcast to listen to while you work out, do the dishes or rake the leaves (now that fall’s arrived)? Look no further than TechCrunch’s roster, which covers the world of startups, the blockchain and more.",
+        "branch": "other_raw",
+        "item_id": "raw:sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier:13",
+        "matched_terms": 2,
+        "direct_matches": 2,
+        "context_block": "[raw:sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]\nOn the hunt for a new podcast to listen to while you work out, do the dishes or rake the leaves (now that fall’s arrived)? Look no further than TechCrunch’s roster, which covers the world of startups, the blockchain and more.",
+        "truncated": false
+      },
+      {
+        "title": "raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand",
+        "page_id": "sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand",
+        "text": "Alameda was not subterranean or shady. It was a successful hedge fund, he said. FTX was no Ponzi scheme. It was a “very innovative, successful company.” And the business practices between the two were reasonable, he argued, claiming that Alameda acted legally as an FTX customer, payment processor, and market maker, or financial entity that acts as a trading partner for customers looking to buy and sell cryptocurrencies.",
+        "branch": "other_raw",
+        "item_id": "raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand:11",
+        "matched_terms": 2,
+        "direct_matches": 2,
+        "context_block": "[raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\nAlameda was not subterranean or shady. It was a successful hedge fund, he said. FTX was no Ponzi scheme. It was a “very innovative, successful company.” And the business practices between the two were reasonable, he argued, claiming that Alameda acted legally as an FTX customer, payment processor, and market maker, or financial entity that acts as a trading partner for customers looking to buy and sell cryptocurrencies.",
+        "truncated": false
+      },
+      {
+        "title": "entities/adam-yedidia",
+        "page_id": "entities/adam-yedidia",
+        "text": "- From [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]]: MIT graduate and former colleague of Bankman-Fried, testified for the prosecution",
+        "branch": "routed_wiki",
+        "item_id": "wiki:entities/adam-yedidia:1",
+        "matched_terms": 2,
+        "direct_matches": 1,
+        "context_block": "[entities/adam-yedidia]\n- From [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]]: MIT graduate and former colleague of Bankman-Fried, testified for the prosecution",
+        "truncated": false
+      },
+      {
+        "title": "concepts/bankman-fried-characterization",
+        "page_id": "concepts/bankman-fried-characterization",
+        "text": "- From [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]]: Prosecution portrays Bankman-Fried as a criminal, defense as a well-meaning founder",
+        "branch": "routed_wiki",
+        "item_id": "wiki:concepts/bankman-fried-characterization:1",
+        "matched_terms": 2,
+        "direct_matches": 1,
+        "context_block": "[concepts/bankman-fried-characterization]\n- From [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]]: Prosecution portrays Bankman-Fried as a criminal, defense as a well-meaning founder",
+        "truncated": false
+      },
+      {
+        "title": "raw:sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line",
+        "page_id": "sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line",
+        "text": "More importantly, perhaps, is the suit’s tackling of how AI will impact publishers’ businesses. The problem was recently detailed in a report on Thursday by The Wall Street Journal, which led with a shocking statistic. When online magazine The Atlantic modeled what would happen if Google integrated AI into search, it found that 75% of the time the AI would answer the user’s query without requiring a click-through to its website, losing it traffic. This could have a major impact on publishers’ traffic going forward, as Google today drives nearly 40% of their traffic, according to data from Similarweb.",
+        "branch": "other_raw",
+        "item_id": "raw:sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line:6",
+        "matched_terms": 2,
+        "direct_matches": 1,
+        "context_block": "[raw:sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]\nMore importantly, perhaps, is the suit’s tackling of how AI will impact publishers’ businesses. The problem was recently detailed in a report on Thursday by The Wall Street Journal, which led with a shocking statistic. When online magazine The Atlantic modeled what would happen if Google integrated AI into search, it found that 75% of the time the AI would answer the user’s query without requiring a click-through to its website, losing it traffic. This could have a major impact on publishers’ traffic going forward, as Google today drives nearly 40% of their traffic, according to data from Similarweb.",
+        "truncated": false
+      }
+    ],
+    "branches": {
+      "other_raw": 9,
+      "other_wiki": 9,
+      "routed_wiki": 3
+    }
+  },
+  "error": null,
+  "context": "[raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\nShortly afterward, as the trial neared late afternoon, the government called Adam Yedidia to the stand. A fast-talking graduate of MIT, he and Bankman-Fried were close friends in college, he said. And after Bankman-Fried left Jane Street, the high-frequency trading firm where the former billionaire got his start in finance after MIT, he persuaded Yedidia to join him as a trader at Alameda and then as a developer at FTX.\n\n[raw:sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]\nInside the SBF trial: Rebecca and Jacquelyn report on the second day of the SBF and FTX trial. The prosecution painted Bankman-Fried as someone who knowingly committed fraud to achieve great wealth, power and influence, while the defense countered that the FTX founder acted in good faith, never meant to commit fraud or steal and basically got in over his head.\n\n[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\n- FTX was once a thriving crypto exchange\n- Bankman-Fried jetted between international locations\n- Ellison, his girlfriend and Alameda CEO, had secret access to customer funds\n- Bankman-Fried allegedly lied to customers about safety\n- Prosecution alleges Bankman-Fried used Alameda to steal from FTX\n- Bankman-Fried reportedly donated millions to political candidates\n- Prosecution claims Bankman-Fried concealed money flows and forged documents\n- Bankman-Fried allegedly used Alameda as a front to steal from FTX\n- Bankman-Fried claimed he gave up personal wealth to make customers whole\n- Julliard invested almost $100,000 in FTX but never recovered\n- Yedidia was a college friend of Bankman-Fried and a former Alameda developer\n- Huang and Wang are expected to testify next\n- Ellison is a key witness for the prosecution\n\n[entities/sam-bankman-fried]\n- From [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]]: Former CEO of FTX, accused of fraud and theft in the FTX collapse\n\n[entities/sam-bankman-fried]\n- sam-bankman-fried [accused] bankman-fried-characterization (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- sam-bankman-fried [defended] bankman-fried-characterization (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- sam-bankman-fried [involved] alameda-research-scheme (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n\n[concepts/bankman-fried-characterization]\n- sam-bankman-fried [accused] bankman-fried-characterization (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- sam-bankman-fried [defended] bankman-fried-characterization (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- alameda-research-scheme [alleged] bankman-fried-characterization (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n\n[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\nThe trial focuses on whether Sam Bankman-Fried, former CEO of FTX, is a liar and fraud or a well-meaning founder. The prosecution portrays him as a criminal who stole billions from thousands of victims, while his defense argues he acted in good faith.\n\n[raw:sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]\nSBF allegedly tried to buy off Trump: The TC team’s been trained on the Manhattan Federal Court for the trial of Sam Bankman-Fried, the disgraced entrepreneur accused of orchestrating the collapse of cryptocurrency exchange FTX. But fascinating details about SBF’s political dealings are emerging from a book by Michael Lewis, “Going Infinite,” that debuted on the first day of the trial, like SBF’s attempt to buy off Trump to get him to not run again for president.\n\n[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\n- Trial examines Sam Bankman-Fried's role in FTX\n- Prosecution accuses him of stealing from customers\n- Defense claims he acted in good faith, not a criminal\n- Witnesses include a crypto trader and a college friend\n- Court adjourns after calling first two witnesses\n\n[concepts/alameda-research-scheme]\n- From [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]]: Alameda Research's alleged involvement in FTX's collapse\n\n[raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\nThe key to his alleged scheme? Alameda Research, a crypto hedge fund he also owned, argued Rehn. Using Caroline Ellison, his on-again off-again girlfriend and the CEO of Alameda, as a front, Bankman-Fried had “secret access” to customer money—both cash and crypto—the government claimed.\n\n[raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\nWho is Sam Bankman-Fried, the former CEO of crypto exchange FTX? Is he a liar and a fraud? Or did he act in good faith, and like many a startup founder, fly too close to the sun?\n\n[concepts/alameda-research-scheme]\n- sam-bankman-fried [involved] alameda-research-scheme (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- alameda-research-scheme [alleged] bankman-fried-characterization (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n\n[entities/sam-bankman-fried]\nFormer CEO of FTX, accused of fraud and theft in the FTX collapse\n\n[concepts/alameda-research-scheme]\nAlameda Research's alleged involvement in FTX's collapse\n\n[raw:sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]\nGmail fights back against spammers: Google this week announced a series of significant changes to how it handles email from bulk senders in an effort to cut down on spam and other unwanted emails. The company says that, starting next year, bulk senders will need to authenticate their emails, offer an easy way to unsubscribe and stay under a reported spam threshold.\n\n[raw:sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]\nOn the hunt for a new podcast to listen to while you work out, do the dishes or rake the leaves (now that fall’s arrived)? Look no further than TechCrunch’s roster, which covers the world of startups, the blockchain and more.\n\n[raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\nAlameda was not subterranean or shady. It was a successful hedge fund, he said. FTX was no Ponzi scheme. It was a “very innovative, successful company.” And the business practices between the two were reasonable, he argued, claiming that Alameda acted legally as an FTX customer, payment processor, and market maker, or financial entity that acts as a trading partner for customers looking to buy and sell cryptocurrencies.\n\n[entities/adam-yedidia]\n- From [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]]: MIT graduate and former colleague of Bankman-Fried, testified for the prosecution\n\n[concepts/bankman-fried-characterization]\n- From [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]]: Prosecution portrays Bankman-Fried as a criminal, defense as a well-meaning founder\n\n[raw:sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]\nMore importantly, perhaps, is the suit’s tackling of how AI will impact publishers’ businesses. The problem was recently detailed in a report on Thursday by The Wall Street Journal, which led with a shocking statistic. When online magazine The Atlantic modeled what would happen if Google integrated AI into search, it found that 75% of the time the AI would answer the user’s query without requiring a click-through to its website, losing it traffic. This could have a major impact on publishers’ traffic going forward, as Google today drives nearly 40% of their traffic, according to data from Similarweb.\n\n[Knowledge graph]\nsam-bankman-fried [accused] bankman-fried-characterization (from sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand)\nsam-bankman-fried [defended] bankman-fried-characterization (from sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand)\nsam-bankman-fried [involved] alameda-research-scheme (from sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand)\nalameda-research-scheme [alleged] bankman-fried-characterization (from sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand)",
+  "answer_prompt": "Answer using only the context. Give a short direct answer (entity, name, number, date, phrase, Yes/No), or unanswerable. Output only the answer.\n\nContext:\n[raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\nShortly afterward, as the trial neared late afternoon, the government called Adam Yedidia to the stand. A fast-talking graduate of MIT, he and Bankman-Fried were close friends in college, he said. And after Bankman-Fried left Jane Street, the high-frequency trading firm where the former billionaire got his start in finance after MIT, he persuaded Yedidia to join him as a trader at Alameda and then as a developer at FTX.\n\n[raw:sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]\nInside the SBF trial: Rebecca and Jacquelyn report on the second day of the SBF and FTX trial. The prosecution painted Bankman-Fried as someone who knowingly committed fraud to achieve great wealth, power and influence, while the defense countered that the FTX founder acted in good faith, never meant to commit fraud or steal and basically got in over his head.\n\n[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\n- FTX was once a thriving crypto exchange\n- Bankman-Fried jetted between international locations\n- Ellison, his girlfriend and Alameda CEO, had secret access to customer funds\n- Bankman-Fried allegedly lied to customers about safety\n- Prosecution alleges Bankman-Fried used Alameda to steal from FTX\n- Bankman-Fried reportedly donated millions to political candidates\n- Prosecution claims Bankman-Fried concealed money flows and forged documents\n- Bankman-Fried allegedly used Alameda as a front to steal from FTX\n- Bankman-Fried claimed he gave up personal wealth to make customers whole\n- Julliard invested almost $100,000 in FTX but never recovered\n- Yedidia was a college friend of Bankman-Fried and a former Alameda developer\n- Huang and Wang are expected to testify next\n- Ellison is a key witness for the prosecution\n\n[entities/sam-bankman-fried]\n- From [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]]: Former CEO of FTX, accused of fraud and theft in the FTX collapse\n\n[entities/sam-bankman-fried]\n- sam-bankman-fried [accused] bankman-fried-characterization (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- sam-bankman-fried [defended] bankman-fried-characterization (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- sam-bankman-fried [involved] alameda-research-scheme (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n\n[concepts/bankman-fried-characterization]\n- sam-bankman-fried [accused] bankman-fried-characterization (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- sam-bankman-fried [defended] bankman-fried-characterization (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- alameda-research-scheme [alleged] bankman-fried-characterization (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n\n[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\nThe trial focuses on whether Sam Bankman-Fried, former CEO of FTX, is a liar and fraud or a well-meaning founder. The prosecution portrays him as a criminal who stole billions from thousands of victims, while his defense argues he acted in good faith.\n\n[raw:sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]\nSBF allegedly tried to buy off Trump: The TC team’s been trained on the Manhattan Federal Court for the trial of Sam Bankman-Fried, the disgraced entrepreneur accused of orchestrating the collapse of cryptocurrency exchange FTX. But fascinating details about SBF’s political dealings are emerging from a book by Michael Lewis, “Going Infinite,” that debuted on the first day of the trial, like SBF’s attempt to buy off Trump to get him to not run again for president.\n\n[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\n- Trial examines Sam Bankman-Fried's role in FTX\n- Prosecution accuses him of stealing from customers\n- Defense claims he acted in good faith, not a criminal\n- Witnesses include a crypto trader and a college friend\n- Court adjourns after calling first two witnesses\n\n[concepts/alameda-research-scheme]\n- From [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]]: Alameda Research's alleged involvement in FTX's collapse\n\n[raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\nThe key to his alleged scheme? Alameda Research, a crypto hedge fund he also owned, argued Rehn. Using Caroline Ellison, his on-again off-again girlfriend and the CEO of Alameda, as a front, Bankman-Fried had “secret access” to customer money—both cash and crypto—the government claimed.\n\n[raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\nWho is Sam Bankman-Fried, the former CEO of crypto exchange FTX? Is he a liar and a fraud? Or did he act in good faith, and like many a startup founder, fly too close to the sun?\n\n[concepts/alameda-research-scheme]\n- sam-bankman-fried [involved] alameda-research-scheme (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- alameda-research-scheme [alleged] bankman-fried-characterization (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n\n[entities/sam-bankman-fried]\nFormer CEO of FTX, accused of fraud and theft in the FTX collapse\n\n[concepts/alameda-research-scheme]\nAlameda Research's alleged involvement in FTX's collapse\n\n[raw:sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]\nGmail fights back against spammers: Google this week announced a series of significant changes to how it handles email from bulk senders in an effort to cut down on spam and other unwanted emails. The company says that, starting next year, bulk senders will need to authenticate their emails, offer an easy way to unsubscribe and stay under a reported spam threshold.\n\n[raw:sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]\nOn the hunt for a new podcast to listen to while you work out, do the dishes or rake the leaves (now that fall’s arrived)? Look no further than TechCrunch’s roster, which covers the world of startups, the blockchain and more.\n\n[raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\nAlameda was not subterranean or shady. It was a successful hedge fund, he said. FTX was no Ponzi scheme. It was a “very innovative, successful company.” And the business practices between the two were reasonable, he argued, claiming that Alameda acted legally as an FTX customer, payment processor, and market maker, or financial entity that acts as a trading partner for customers looking to buy and sell cryptocurrencies.\n\n[entities/adam-yedidia]\n- From [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]]: MIT graduate and former colleague of Bankman-Fried, testified for the prosecution\n\n[concepts/bankman-fried-characterization]\n- From [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]]: Prosecution portrays Bankman-Fried as a criminal, defense as a well-meaning founder\n\n[raw:sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]\nMore importantly, perhaps, is the suit’s tackling of how AI will impact publishers’ businesses. The problem was recently detailed in a report on Thursday by The Wall Street Journal, which led with a shocking statistic. When online magazine The Atlantic modeled what would happen if Google integrated AI into search, it found that 75% of the time the AI would answer the user’s query without requiring a click-through to its website, losing it traffic. This could have a major impact on publishers’ traffic going forward, as Google today drives nearly 40% of their traffic, according to data from Similarweb.\n\n[Knowledge graph]\nsam-bankman-fried [accused] bankman-fried-characterization (from sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand)\nsam-bankman-fried [defended] bankman-fried-characterization (from sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand)\nsam-bankman-fried [involved] alameda-research-scheme (from sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand)\nalameda-research-scheme [alleged] bankman-fried-characterization (from sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand)\n\nQuestion: Who is the individual that persuaded Adam Yedidia to leave Jane Street and join both Alameda and FTX, and is also accused by the prosecution of committing fraud for personal gain, as reported by Fortune and TechCrunch?\nAnswer:",
+  "model_call_ids": [
+    45,
+    46,
+    47
+  ],
+  "request_attempts": 3,
+  "failed_requests": 0,
+  "llm_calls": 3,
+  "input_tokens": 4651,
+  "output_tokens": 103,
+  "em": 1.0,
+  "token_f1": 1.0,
+  "rouge_l": 1.0
+}

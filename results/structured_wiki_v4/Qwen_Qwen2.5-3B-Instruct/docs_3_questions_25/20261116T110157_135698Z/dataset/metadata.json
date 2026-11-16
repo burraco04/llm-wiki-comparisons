@@ -1,0 +1,49 @@
+{
+  "name": "yixuantt/MultiHopRAG",
+  "requested_revision": null,
+  "split": "train",
+  "configurations": {
+    "MultiHopRAG": {
+      "rows": 2556,
+      "fingerprint": "6322656ab9ac7885",
+      "builder_version": "0.0.0",
+      "resolved_repository_revisions": [],
+      "download_checksums": {
+        "hf://datasets/yixuantt/MultiHopRAG@71ac0d0bd1f951d2d6b70311f7d2ae404e1ffa82/MultiHopRAG.json": {
+          "num_bytes": 5171312,
+          "checksum": null
+        }
+      }
+    },
+    "corpus": {
+      "rows": 609,
+      "fingerprint": "e0b895b94b913705",
+      "builder_version": "0.0.0",
+      "resolved_repository_revisions": [],
+      "download_checksums": {
+        "hf://datasets/yixuantt/MultiHopRAG@71ac0d0bd1f951d2d6b70311f7d2ae404e1ffa82/corpus.json": {
+          "num_bytes": 6785567,
+          "checksum": null
+        }
+      }
+    }
+  },
+  "full_counts": {
+    "documents": 609,
+    "questions": 2556,
+    "question_types": {
+      "inference_query": 816,
+      "comparison_query": 856,
+      "null_query": 301,
+      "temporal_query": 583
+    },
+    "non_null_with_evidence": 2255,
+    "supporting_document_counts": {
+      "3": 774,
+      "2": 1169,
+      "4": 312
+    }
+  },
+  "eligible_questions_before_cap": 25,
+  "selection": "non-null queries; documents by evidence frequency; dataset question order; no shuffle"
+}

@@ -1,0 +1,306 @@
+{
+  "qa_id": "mhop_330",
+  "question": "Who is the individual being judged for their actions in a legal case, where contrasting stories are presented in 'Fortune', is accused of using a front for secret access to customer funds, and is alleged by the prosecution in a 'TechCrunch' article to have committed fraud for personal gain?",
+  "reference": "Sam Bankman-Fried",
+  "question_type": "inference_query",
+  "evidence_titles": [
+    "Is Sam Bankman-Fried a bad ‘man’ or a good ‘boy’? Lawyers swap opening statements before first witnesses take the stand",
+    "Sam Altman backs teens’ startup, Google unveils the Pixel 8 and TikTok tests an ad-free tier"
+  ],
+  "system": "wiki_routed",
+  "prediction": "Sam Bankman-Fried",
+  "raw_prediction": "Sam Bankman-Fried",
+  "seconds_wall": 6.054566865990637,
+  "retrieval": {
+    "routed_ids": [
+      "sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand",
+      "entities/sam-bankman-fried",
+      "entities/ftx",
+      "entities/manhattan-federal-court",
+      "entities/alameda-research",
+      "entities/thane-rehn",
+      "entities/marc-antoine-julliard",
+      "entities/nov-8",
+      "concepts/legal-trial",
+      "concepts/opening-statement",
+      "concepts/ponzi-scheme",
+      "concepts/good-faith"
+    ],
+    "terms": [
+      "sam bankman-fried trial opening statements",
+      "ftx fraud prosecution vs defense",
+      "sam bankman-fried alameda research front",
+      "customer funds secret access ftx",
+      "sam bankman-fried fraud personal gain",
+      "fortune sam bankman-fried crypto boy",
+      "techcrunch sbf fraud allegations",
+      "sam bankman-fried good faith defense",
+      "thane rehn prosecution opening statement",
+      "marc-antoine julliard ftx victim testimony",
+      "adam yedidia ftx code witness",
+      "sam bankman-fried manhattan federal court",
+      "caroline ellison alameda ceo",
+      "ftx collapse legal case",
+      "sam bankman-fried ponzi scheme trial",
+      "individual",
+      "judged",
+      "actions",
+      "legal",
+      "case",
+      "contrasting",
+      "stories",
+      "presented",
+      "fortune",
+      "accused",
+      "using",
+      "secret",
+      "access",
+      "customer",
+      "funds",
+      "alleged",
+      "prosecution",
+      "techcrunch",
+      "article",
+      "committed",
+      "fraud",
+      "personal",
+      "gain",
+      "legal case",
+      "contrasting stories",
+      "secret access",
+      "customer funds",
+      "techcrunch article",
+      "committed fraud",
+      "personal gain"
+    ],
+    "routing_fallback": false,
+    "timing": {
+      "routing_llm": 2.128645084972959,
+      "search_terms_llm": 2.8878653010178823,
+      "retrieval_code": 0.5738373220083304,
+      "answer_llm": 0.46419892899575643
+    },
+    "candidates": 55,
+    "selected": 13,
+    "chars": 9990,
+    "matched_pages": [
+      "sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand",
+      "sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier",
+      "sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line",
+      "concepts/ai-content-misappropriation",
+      "entities/sam-bankman-fried"
+    ],
+    "kg_triples": 6,
+    "graph_relations": [
+      {
+        "source": "sam-bankman-fried",
+        "target": "ftx",
+        "relation": "orchestrated_collapse_of",
+        "source_doc": "sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier",
+        "context_line": "Sam Bankman-Fried [orchestrated_collapse_of] FTX (from sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier)"
+      },
+      {
+        "source": "michael-lewis",
+        "target": "sam-bankman-fried",
+        "relation": "wrote_about",
+        "source_doc": "sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier",
+        "context_line": "Michael Lewis [wrote_about] Sam Bankman-Fried (from sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier)"
+      },
+      {
+        "source": "sam-bankman-fried",
+        "target": "donald-trump",
+        "relation": "attempted_to_buy_off",
+        "source_doc": "sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier",
+        "context_line": "Sam Bankman-Fried [attempted_to_buy_off] Donald Trump (from sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier)"
+      },
+      {
+        "source": "sam-bankman-fried",
+        "target": "manhattan-federal-court",
+        "relation": "tried_in",
+        "source_doc": "sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier",
+        "context_line": "Sam Bankman-Fried [tried_in] Manhattan Federal Court (from sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier)"
+      },
+      {
+        "source": "sam-bankman-fried",
+        "target": "ftx",
+        "relation": "was former CEO of",
+        "source_doc": "sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand",
+        "context_line": "Sam Bankman-Fried [was former CEO of] FTX (from sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand)"
+      },
+      {
+        "source": "sam-bankman-fried",
+        "target": "alameda-research",
+        "relation": "owned",
+        "source_doc": "sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand",
+        "context_line": "Sam Bankman-Fried [owned] Alameda Research (from sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand)"
+      }
+    ],
+    "selected_passages": [
+      {
+        "title": "raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand",
+        "page_id": "sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand",
+        "text": "The key to his alleged scheme? Alameda Research, a crypto hedge fund he also owned, argued Rehn. Using Caroline Ellison, his on-again off-again girlfriend and the CEO of Alameda, as a front, Bankman-Fried had “secret access” to customer money—both cash and crypto—the government claimed.",
+        "branch": "routed_raw",
+        "item_id": "raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand:6",
+        "matched_terms": 10,
+        "direct_matches": 7,
+        "context_block": "[raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\nThe key to his alleged scheme? Alameda Research, a crypto hedge fund he also owned, argued Rehn. Using Caroline Ellison, his on-again off-again girlfriend and the CEO of Alameda, as a front, Bankman-Fried had “secret access” to customer money—both cash and crypto—the government claimed.",
+        "truncated": false
+      },
+      {
+        "title": "sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand",
+        "page_id": "sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand",
+        "text": "- Sam Bankman-Fried was the former CEO of FTX.\n- The trial took place on the second day.\n- Thane Rehn was the prosecutor for the government.\n- Mark Cohen was one of Bankman-Fried's lawyers.\n- Damian Williams is the U.S. attorney for the Southern District of New York.\n- Caroline Ellison was the CEO of Alameda Research.\n- Alameda Research is a crypto hedge fund owned by Bankman-Fried.\n- Jane Street is a high-frequency trading firm where Bankman-Fried started.\n- Matt Huang is a former partner at Sequoia Capital.\n- Marc-Antoine Julliard is a Paris-born cocoa trader living in London.\n- Julliard invested in Bitcoin and Dogecoin on FTX.\n- Julliard tried to withdraw almost $100,000 on November 8.\n- Adam Yedidia is a graduate of MIT.\n- Yedidia was a close friend of Bankman-Fried in college.\n- Yedidia worked as a trader at Alameda and a developer at FTX.\n- Yedidia has legal immunity during his testimony.\n- Bankman-Fried spent about seven weeks in a Brooklyn prison.\n- The prosecution's story lasted roughly 30 minutes.\n- Tom Brady and Larry David are celebrities mentioned in the prosecution's account.\n- Fortune magazine is cited as having written about Bankman-Fried as a 'crypto boy' genius.",
+        "branch": "routed_wiki",
+        "item_id": "wiki:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand:2",
+        "matched_terms": 8,
+        "direct_matches": 3,
+        "context_block": "[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\n- Sam Bankman-Fried was the former CEO of FTX.\n- The trial took place on the second day.\n- Thane Rehn was the prosecutor for the government.\n- Mark Cohen was one of Bankman-Fried's lawyers.\n- Damian Williams is the U.S. attorney for the Southern District of New York.\n- Caroline Ellison was the CEO of Alameda Research.\n- Alameda Research is a crypto hedge fund owned by Bankman-Fried.\n- Jane Street is a high-frequency trading firm where Bankman-Fried started.\n- Matt Huang is a former partner at Sequoia Capital.\n- Marc-Antoine Julliard is a Paris-born cocoa trader living in London.\n- Julliard invested in Bitcoin and Dogecoin on FTX.\n- Julliard tried to withdraw almost $100,000 on November 8.\n- Adam Yedidia is a graduate of MIT.\n- Yedidia was a close friend of Bankman-Fried in college.\n- Yedidia worked as a trader at Alameda and a developer at FTX.\n- Yedidia has legal immunity during his testimony.\n- Bankman-Fried spent about seven weeks in a Brooklyn prison.\n- The prosecution's story lasted roughly 30 minutes.\n- Tom Brady and Larry David are celebrities mentioned in the prosecution's account.\n- Fortune magazine is cited as having written about Bankman-Fried as a 'crypto boy' genius.",
+        "truncated": false
+      },
+      {
+        "title": "sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier",
+        "page_id": "sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier",
+        "text": "- Induced AI was founded this year.\n- Induced AI converts back-office tasks from plain English to pseudo-code in real time.\n- The Pixel 8 Pro is similar to the Pixel 7 Pro but features improved cameras and a brighter screen.\n- Flexport is valued at $8 billion.\n- Dave Clark was ousted as CEO of Flexport just one year into his job.\n- Dave Clark made comments about Flexport on social media site X.\n- The SBF trial is taking place in Manhattan Federal Court.\n- Michael Lewis wrote the book 'Going Infinite'.\n- The book 'Going Infinite' debuted on the first day of the SBF trial.\n- Gmail bulk senders must authenticate emails starting next year.\n- Gmail bulk senders must offer an easy way to unsubscribe.\n- Gmail bulk senders must stay under a reported spam threshold.\n- TikTok's ad-free tier costs $4.99.\n- TikTok is piloting its ad-free plan in a single English-speaking market outside the U.S.\n- LinkedIn unveiled new AI features for job hunting, marketing, and sales.\n- Elon Musk stated X users generate 100 million to 200 million posts daily in September.\n- X CEO Linda Yaccarino claimed X sees 500 million posts per day.\n- IronNet was founded in 2014.\n- IronNet was founded by retired four-star general Keith Alexander.\n- IronNet raised more than $400 million in funding.\n- IronNet went public in August 2021.\n- IronNet is based in Virginia.\n- IronNet laid off its remaining staff after shutting down.\n- TechCrunch's WiR column is published every Saturday.\n- The SBF trial involves the prosecution of knowingly committing fraud for wealth and power.\n- The defense in the SBF trial argues Bankman-Fried acted in good faith.",
+        "branch": "other_wiki",
+        "item_id": "wiki:sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier:2",
+        "matched_terms": 6,
+        "direct_matches": 3,
+        "context_block": "[sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]\n- Induced AI was founded this year.\n- Induced AI converts back-office tasks from plain English to pseudo-code in real time.\n- The Pixel 8 Pro is similar to the Pixel 7 Pro but features improved cameras and a brighter screen.\n- Flexport is valued at $8 billion.\n- Dave Clark was ousted as CEO of Flexport just one year into his job.\n- Dave Clark made comments about Flexport on social media site X.\n- The SBF trial is taking place in Manhattan Federal Court.\n- Michael Lewis wrote the book 'Going Infinite'.\n- The book 'Going Infinite' debuted on the first day of the SBF trial.\n- Gmail bulk senders must authenticate emails starting next year.\n- Gmail bulk senders must offer an easy way to unsubscribe.\n- Gmail bulk senders must stay under a reported spam threshold.\n- TikTok's ad-free tier costs $4.99.\n- TikTok is piloting its ad-free plan in a single English-speaking market outside the U.S.\n- LinkedIn unveiled new AI features for job hunting, marketing, and sales.\n- Elon Musk stated X users generate 100 million to 200 million posts daily in September.\n- X CEO Linda Yaccarino claimed X sees 500 million posts per day.\n- IronNet was founded in 2014.\n- IronNet was founded by retired four-star general Keith Alexander.\n- IronNet raised more than $400 million in funding.\n- IronNet went public in August 2021.\n- IronNet is based in Virginia.\n- IronNet laid off its remaining staff after shutting down.\n- TechCrunch's WiR column is published every Saturday.\n- The SBF trial involves the prosecution of knowingly committing fraud for wealth and power.\n- The defense in the SBF trial argues Bankman-Fried acted in good faith.",
+        "truncated": false
+      },
+      {
+        "title": "sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand",
+        "page_id": "sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand",
+        "text": "- Prosecutors alleged Bankman-Fried stole customer funds to finance his lifestyle, political donations, and risky bets via Alameda Research.\n- Defense attorneys argued Bankman-Fried acted in good faith, built successful businesses, and did not defraud anyone.\n- Witnesses included a victim who lost nearly $100,000 and a former friend who admitted to writing code that may have contributed to the scheme.\n- The trial featured high-profile attendees including Bankman-Fried's parents, U.S. Attorney Damian Williams, and venture capitalist Matt Huang.\n- Bankman-Fried spent seven weeks in a Brooklyn prison before this trial, resulting in more prominent cheekbones.",
+        "branch": "routed_wiki",
+        "item_id": "wiki:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand:1",
+        "matched_terms": 5,
+        "direct_matches": 5,
+        "context_block": "[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\n- Prosecutors alleged Bankman-Fried stole customer funds to finance his lifestyle, political donations, and risky bets via Alameda Research.\n- Defense attorneys argued Bankman-Fried acted in good faith, built successful businesses, and did not defraud anyone.\n- Witnesses included a victim who lost nearly $100,000 and a former friend who admitted to writing code that may have contributed to the scheme.\n- The trial featured high-profile attendees including Bankman-Fried's parents, U.S. Attorney Damian Williams, and venture capitalist Matt Huang.\n- Bankman-Fried spent seven weeks in a Brooklyn prison before this trial, resulting in more prominent cheekbones.",
+        "truncated": false
+      },
+      {
+        "title": "raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand",
+        "page_id": "sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand",
+        "text": "But “all of that, all of it, was built on lies,” Rehn declared to the jury. “Behind the curtains, he was not what he appeared to be.” What followed was a roughly 30-minute story that repeatedly emphasized how Bankman-Fried allegedly stole customer funds to facilitate his jet-setting lifestyle, donate millions to political candidates, and finance risky bets.",
+        "branch": "routed_raw",
+        "item_id": "raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand:5",
+        "matched_terms": 5,
+        "direct_matches": 4,
+        "context_block": "[raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\nBut “all of that, all of it, was built on lies,” Rehn declared to the jury. “Behind the curtains, he was not what he appeared to be.” What followed was a roughly 30-minute story that repeatedly emphasized how Bankman-Fried allegedly stole customer funds to facilitate his jet-setting lifestyle, donate millions to political candidates, and finance risky bets.",
+        "truncated": false
+      },
+      {
+        "title": "sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line",
+        "page_id": "sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line",
+        "text": "- Helena World Chronicle filed a class action antitrust suit against Google and Alphabet in the U.S. District Court in D.C.\n- The lawsuit alleges Google uses AI technologies like SGE and Bard to misappropriate publisher content and reduce traffic to news sites.\n- Plaintiffs claim Google's actions violate the Sherman Act and Clayton Act, seeking monetary and injunctive relief.\n- Reports suggest publishers could lose 20-40% of website traffic when Google's AI products fully roll out.\n- The case follows a recent agreement where Google pays Canadian media $73.5 million annually for content use.",
+        "branch": "other_wiki",
+        "item_id": "wiki:sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line:1",
+        "matched_terms": 5,
+        "direct_matches": 3,
+        "context_block": "[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]\n- Helena World Chronicle filed a class action antitrust suit against Google and Alphabet in the U.S. District Court in D.C.\n- The lawsuit alleges Google uses AI technologies like SGE and Bard to misappropriate publisher content and reduce traffic to news sites.\n- Plaintiffs claim Google's actions violate the Sherman Act and Clayton Act, seeking monetary and injunctive relief.\n- Reports suggest publishers could lose 20-40% of website traffic when Google's AI products fully roll out.\n- The case follows a recent agreement where Google pays Canadian media $73.5 million annually for content use.",
+        "truncated": false
+      },
+      {
+        "title": "raw:sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier",
+        "page_id": "sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier",
+        "text": "Inside the SBF trial: Rebecca and Jacquelyn report on the second day of the SBF and FTX trial. The prosecution painted Bankman-Fried as someone who knowingly committed fraud to achieve great wealth, power and influence, while the defense countered that the FTX founder acted in good faith, never meant to commit fraud or steal and basically got in over his head.",
+        "branch": "other_raw",
+        "item_id": "raw:sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier:18",
+        "matched_terms": 4,
+        "direct_matches": 4,
+        "context_block": "[raw:sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]\nInside the SBF trial: Rebecca and Jacquelyn report on the second day of the SBF and FTX trial. The prosecution painted Bankman-Fried as someone who knowingly committed fraud to achieve great wealth, power and influence, while the defense countered that the FTX founder acted in good faith, never meant to commit fraud or steal and basically got in over his head.",
+        "truncated": false
+      },
+      {
+        "title": "concepts/ai-content-misappropriation",
+        "page_id": "concepts/ai-content-misappropriation",
+        "text": "- From [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]]: The alleged practice of using AI to extract and utilize publisher content without consent.",
+        "branch": "other_wiki",
+        "item_id": "wiki:concepts/ai-content-misappropriation:1",
+        "matched_terms": 4,
+        "direct_matches": 3,
+        "context_block": "[concepts/ai-content-misappropriation]\n- From [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]]: The alleged practice of using AI to extract and utilize publisher content without consent.",
+        "truncated": false
+      },
+      {
+        "title": "raw:sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier",
+        "page_id": "sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier",
+        "text": "SBF allegedly tried to buy off Trump: The TC team’s been trained on the Manhattan Federal Court for the trial of Sam Bankman-Fried, the disgraced entrepreneur accused of orchestrating the collapse of cryptocurrency exchange FTX. But fascinating details about SBF’s political dealings are emerging from a book by Michael Lewis, “Going Infinite,” that debuted on the first day of the trial, like SBF’s attempt to buy off Trump to get him to not run again for president.",
+        "branch": "other_raw",
+        "item_id": "raw:sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier:7",
+        "matched_terms": 4,
+        "direct_matches": 3,
+        "context_block": "[raw:sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]\nSBF allegedly tried to buy off Trump: The TC team’s been trained on the Manhattan Federal Court for the trial of Sam Bankman-Fried, the disgraced entrepreneur accused of orchestrating the collapse of cryptocurrency exchange FTX. But fascinating details about SBF’s political dealings are emerging from a book by Michael Lewis, “Going Infinite,” that debuted on the first day of the trial, like SBF’s attempt to buy off Trump to get him to not run again for president.",
+        "truncated": false
+      },
+      {
+        "title": "sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line",
+        "page_id": "sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line",
+        "text": "Helena World Chronicle, LLC has filed a class action antitrust lawsuit against Google and Alphabet in the U.S. District Court in D.C., alleging that Google's AI technologies, including Search Generative Experience (SGE) and Bard, along with older features like the Knowledge Graph, are siphoning content, readers, and ad revenue from news publishers. The suit claims these practices violate the Sherman Act and Clayton Act by discouraging users from visiting publisher websites, potentially causing publishers to lose 20-40% of their traffic, and seeks an injunction requiring consent for using publisher data to train AI models.",
+        "branch": "other_wiki",
+        "item_id": "wiki:sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line:0",
+        "matched_terms": 4,
+        "direct_matches": 2,
+        "context_block": "[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]\nHelena World Chronicle, LLC has filed a class action antitrust lawsuit against Google and Alphabet in the U.S. District Court in D.C., alleging that Google's AI technologies, including Search Generative Experience (SGE) and Bard, along with older features like the Knowledge Graph, are siphoning content, readers, and ad revenue from news publishers. The suit claims these practices violate the Sherman Act and Clayton Act by discouraging users from visiting publisher websites, potentially causing publishers to lose 20-40% of their traffic, and seeks an injunction requiring consent for using publisher data to train AI models.",
+        "truncated": false
+      },
+      {
+        "title": "sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand",
+        "page_id": "sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand",
+        "text": "The second day of the Sam Bankman-Fried trial featured starkly contrasting opening statements where prosecutors painted him as a liar who stole billions for a lavish lifestyle, while his defense argued he was a good-faith startup founder who acted innovatively. The day concluded with the testimony of victim Marc-Antoine Julliard and former friend Adam Yedidia, who revealed his concerns about unwittingly contributing to the alleged crimes through code he wrote.",
+        "branch": "routed_wiki",
+        "item_id": "wiki:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand:0",
+        "matched_terms": 4,
+        "direct_matches": 2,
+        "context_block": "[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\nThe second day of the Sam Bankman-Fried trial featured starkly contrasting opening statements where prosecutors painted him as a liar who stole billions for a lavish lifestyle, while his defense argued he was a good-faith startup founder who acted innovatively. The day concluded with the testimony of victim Marc-Antoine Julliard and former friend Adam Yedidia, who revealed his concerns about unwittingly contributing to the alleged crimes through code he wrote.",
+        "truncated": false
+      },
+      {
+        "title": "raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand",
+        "page_id": "sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand",
+        "text": "Alameda was not subterranean or shady. It was a successful hedge fund, he said. FTX was no Ponzi scheme. It was a “very innovative, successful company.” And the business practices between the two were reasonable, he argued, claiming that Alameda acted legally as an FTX customer, payment processor, and market maker, or financial entity that acts as a trading partner for customers looking to buy and sell cryptocurrencies.",
+        "branch": "routed_raw",
+        "item_id": "raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand:11",
+        "matched_terms": 4,
+        "direct_matches": 2,
+        "context_block": "[raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\nAlameda was not subterranean or shady. It was a successful hedge fund, he said. FTX was no Ponzi scheme. It was a “very innovative, successful company.” And the business practices between the two were reasonable, he argued, claiming that Alameda acted legally as an FTX customer, payment processor, and market maker, or financial entity that acts as a trading partner for customers looking to buy and sell cryptocurrencies.",
+        "truncated": false
+      },
+      {
+        "title": "entities/sam-bankman-fried",
+        "page_id": "entities/sam-bankman-fried",
+        "text": "- Sam Bankman-Fried [orchestrated_collapse_of] FTX (from [[sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]])\n- Michael Lewis [wrote_about] Sam Bankman-Fried (from [[sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]])\n- Sam Bankman-Fried [attempted_to_buy_off] Donald Trump (from [[sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]])\n- Sam Bankman-Fried [tried_in] Manhattan Federal Court (from [[sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]])\n- Sam Bankman-Fried [was former CEO of] FTX (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- Sam Bankman-Fried [owned] Alameda Research (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- Sam Bankman-Fried [had relationship with] Caroline Ellison (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- Thane Rehn [accused of crimes] Sam Bankman-Fried (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- Mark Cohen [defended] Sam Bankman-Fried (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- Adam Yedidia [was close friend of] Sam Bankman-Fried (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- Sam Bankman-Fried [worked at] Jane Street (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])",
+        "branch": "routed_wiki",
+        "item_id": "wiki:entities/sam-bankman-fried:2",
+        "matched_terms": 4,
+        "direct_matches": 1,
+        "context_block": "[entities/sam-bankman-fried]\n- Sam Bankman-Fried [orchestrated_collapse_of] FTX (from [[sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]])\n- Michael Lewis [wrote_about] Sam Bankman-Fried (from [[sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]])\n-",
+        "truncated": true
+      }
+    ],
+    "branches": {
+      "routed_raw": 3,
+      "routed_wiki": 4,
+      "other_wiki": 4,
+      "other_raw": 2
+    }
+  },
+  "error": null,
+  "context": "[raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\nThe key to his alleged scheme? Alameda Research, a crypto hedge fund he also owned, argued Rehn. Using Caroline Ellison, his on-again off-again girlfriend and the CEO of Alameda, as a front, Bankman-Fried had “secret access” to customer money—both cash and crypto—the government claimed.\n\n[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\n- Sam Bankman-Fried was the former CEO of FTX.\n- The trial took place on the second day.\n- Thane Rehn was the prosecutor for the government.\n- Mark Cohen was one of Bankman-Fried's lawyers.\n- Damian Williams is the U.S. attorney for the Southern District of New York.\n- Caroline Ellison was the CEO of Alameda Research.\n- Alameda Research is a crypto hedge fund owned by Bankman-Fried.\n- Jane Street is a high-frequency trading firm where Bankman-Fried started.\n- Matt Huang is a former partner at Sequoia Capital.\n- Marc-Antoine Julliard is a Paris-born cocoa trader living in London.\n- Julliard invested in Bitcoin and Dogecoin on FTX.\n- Julliard tried to withdraw almost $100,000 on November 8.\n- Adam Yedidia is a graduate of MIT.\n- Yedidia was a close friend of Bankman-Fried in college.\n- Yedidia worked as a trader at Alameda and a developer at FTX.\n- Yedidia has legal immunity during his testimony.\n- Bankman-Fried spent about seven weeks in a Brooklyn prison.\n- The prosecution's story lasted roughly 30 minutes.\n- Tom Brady and Larry David are celebrities mentioned in the prosecution's account.\n- Fortune magazine is cited as having written about Bankman-Fried as a 'crypto boy' genius.\n\n[sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]\n- Induced AI was founded this year.\n- Induced AI converts back-office tasks from plain English to pseudo-code in real time.\n- The Pixel 8 Pro is similar to the Pixel 7 Pro but features improved cameras and a brighter screen.\n- Flexport is valued at $8 billion.\n- Dave Clark was ousted as CEO of Flexport just one year into his job.\n- Dave Clark made comments about Flexport on social media site X.\n- The SBF trial is taking place in Manhattan Federal Court.\n- Michael Lewis wrote the book 'Going Infinite'.\n- The book 'Going Infinite' debuted on the first day of the SBF trial.\n- Gmail bulk senders must authenticate emails starting next year.\n- Gmail bulk senders must offer an easy way to unsubscribe.\n- Gmail bulk senders must stay under a reported spam threshold.\n- TikTok's ad-free tier costs $4.99.\n- TikTok is piloting its ad-free plan in a single English-speaking market outside the U.S.\n- LinkedIn unveiled new AI features for job hunting, marketing, and sales.\n- Elon Musk stated X users generate 100 million to 200 million posts daily in September.\n- X CEO Linda Yaccarino claimed X sees 500 million posts per day.\n- IronNet was founded in 2014.\n- IronNet was founded by retired four-star general Keith Alexander.\n- IronNet raised more than $400 million in funding.\n- IronNet went public in August 2021.\n- IronNet is based in Virginia.\n- IronNet laid off its remaining staff after shutting down.\n- TechCrunch's WiR column is published every Saturday.\n- The SBF trial involves the prosecution of knowingly committing fraud for wealth and power.\n- The defense in the SBF trial argues Bankman-Fried acted in good faith.\n\n[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\n- Prosecutors alleged Bankman-Fried stole customer funds to finance his lifestyle, political donations, and risky bets via Alameda Research.\n- Defense attorneys argued Bankman-Fried acted in good faith, built successful businesses, and did not defraud anyone.\n- Witnesses included a victim who lost nearly $100,000 and a former friend who admitted to writing code that may have contributed to the scheme.\n- The trial featured high-profile attendees including Bankman-Fried's parents, U.S. Attorney Damian Williams, and venture capitalist Matt Huang.\n- Bankman-Fried spent seven weeks in a Brooklyn prison before this trial, resulting in more prominent cheekbones.\n\n[raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\nBut “all of that, all of it, was built on lies,” Rehn declared to the jury. “Behind the curtains, he was not what he appeared to be.” What followed was a roughly 30-minute story that repeatedly emphasized how Bankman-Fried allegedly stole customer funds to facilitate his jet-setting lifestyle, donate millions to political candidates, and finance risky bets.\n\n[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]\n- Helena World Chronicle filed a class action antitrust suit against Google and Alphabet in the U.S. District Court in D.C.\n- The lawsuit alleges Google uses AI technologies like SGE and Bard to misappropriate publisher content and reduce traffic to news sites.\n- Plaintiffs claim Google's actions violate the Sherman Act and Clayton Act, seeking monetary and injunctive relief.\n- Reports suggest publishers could lose 20-40% of website traffic when Google's AI products fully roll out.\n- The case follows a recent agreement where Google pays Canadian media $73.5 million annually for content use.\n\n[raw:sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]\nInside the SBF trial: Rebecca and Jacquelyn report on the second day of the SBF and FTX trial. The prosecution painted Bankman-Fried as someone who knowingly committed fraud to achieve great wealth, power and influence, while the defense countered that the FTX founder acted in good faith, never meant to commit fraud or steal and basically got in over his head.\n\n[concepts/ai-content-misappropriation]\n- From [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]]: The alleged practice of using AI to extract and utilize publisher content without consent.\n\n[raw:sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]\nSBF allegedly tried to buy off Trump: The TC team’s been trained on the Manhattan Federal Court for the trial of Sam Bankman-Fried, the disgraced entrepreneur accused of orchestrating the collapse of cryptocurrency exchange FTX. But fascinating details about SBF’s political dealings are emerging from a book by Michael Lewis, “Going Infinite,” that debuted on the first day of the trial, like SBF’s attempt to buy off Trump to get him to not run again for president.\n\n[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]\nHelena World Chronicle, LLC has filed a class action antitrust lawsuit against Google and Alphabet in the U.S. District Court in D.C., alleging that Google's AI technologies, including Search Generative Experience (SGE) and Bard, along with older features like the Knowledge Graph, are siphoning content, readers, and ad revenue from news publishers. The suit claims these practices violate the Sherman Act and Clayton Act by discouraging users from visiting publisher websites, potentially causing publishers to lose 20-40% of their traffic, and seeks an injunction requiring consent for using publisher data to train AI models.\n\n[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\nThe second day of the Sam Bankman-Fried trial featured starkly contrasting opening statements where prosecutors painted him as a liar who stole billions for a lavish lifestyle, while his defense argued he was a good-faith startup founder who acted innovatively. The day concluded with the testimony of victim Marc-Antoine Julliard and former friend Adam Yedidia, who revealed his concerns about unwittingly contributing to the alleged crimes through code he wrote.\n\n[raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\nAlameda was not subterranean or shady. It was a successful hedge fund, he said. FTX was no Ponzi scheme. It was a “very innovative, successful company.” And the business practices between the two were reasonable, he argued, claiming that Alameda acted legally as an FTX customer, payment processor, and market maker, or financial entity that acts as a trading partner for customers looking to buy and sell cryptocurrencies.\n\n[entities/sam-bankman-fried]\n- Sam Bankman-Fried [orchestrated_collapse_of] FTX (from [[sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]])\n- Michael Lewis [wrote_about] Sam Bankman-Fried (from [[sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]])\n-\n\n[Knowledge graph]\nSam Bankman-Fried [orchestrated_collapse_of] FTX (from sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier)\nMichael Lewis [wrote_about] Sam Bankman-Fried (from sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier)\nSam Bankman-Fried [attempted_to_buy_off] Donald Trump (from sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier)\nSam Bankman-Fried [tried_in] Manhattan Federal Court (from sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier)\nSam Bankman-Fried [was former CEO of] FTX (from sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand)\nSam Bankman-Fried [owned] Alameda Research (from sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand)",
+  "answer_prompt": "Answer using only the context. Give a short direct answer (entity, name, number, date, phrase, Yes/No), or unanswerable. Output only the answer.\n\nContext:\n[raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\nThe key to his alleged scheme? Alameda Research, a crypto hedge fund he also owned, argued Rehn. Using Caroline Ellison, his on-again off-again girlfriend and the CEO of Alameda, as a front, Bankman-Fried had “secret access” to customer money—both cash and crypto—the government claimed.\n\n[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\n- Sam Bankman-Fried was the former CEO of FTX.\n- The trial took place on the second day.\n- Thane Rehn was the prosecutor for the government.\n- Mark Cohen was one of Bankman-Fried's lawyers.\n- Damian Williams is the U.S. attorney for the Southern District of New York.\n- Caroline Ellison was the CEO of Alameda Research.\n- Alameda Research is a crypto hedge fund owned by Bankman-Fried.\n- Jane Street is a high-frequency trading firm where Bankman-Fried started.\n- Matt Huang is a former partner at Sequoia Capital.\n- Marc-Antoine Julliard is a Paris-born cocoa trader living in London.\n- Julliard invested in Bitcoin and Dogecoin on FTX.\n- Julliard tried to withdraw almost $100,000 on November 8.\n- Adam Yedidia is a graduate of MIT.\n- Yedidia was a close friend of Bankman-Fried in college.\n- Yedidia worked as a trader at Alameda and a developer at FTX.\n- Yedidia has legal immunity during his testimony.\n- Bankman-Fried spent about seven weeks in a Brooklyn prison.\n- The prosecution's story lasted roughly 30 minutes.\n- Tom Brady and Larry David are celebrities mentioned in the prosecution's account.\n- Fortune magazine is cited as having written about Bankman-Fried as a 'crypto boy' genius.\n\n[sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]\n- Induced AI was founded this year.\n- Induced AI converts back-office tasks from plain English to pseudo-code in real time.\n- The Pixel 8 Pro is similar to the Pixel 7 Pro but features improved cameras and a brighter screen.\n- Flexport is valued at $8 billion.\n- Dave Clark was ousted as CEO of Flexport just one year into his job.\n- Dave Clark made comments about Flexport on social media site X.\n- The SBF trial is taking place in Manhattan Federal Court.\n- Michael Lewis wrote the book 'Going Infinite'.\n- The book 'Going Infinite' debuted on the first day of the SBF trial.\n- Gmail bulk senders must authenticate emails starting next year.\n- Gmail bulk senders must offer an easy way to unsubscribe.\n- Gmail bulk senders must stay under a reported spam threshold.\n- TikTok's ad-free tier costs $4.99.\n- TikTok is piloting its ad-free plan in a single English-speaking market outside the U.S.\n- LinkedIn unveiled new AI features for job hunting, marketing, and sales.\n- Elon Musk stated X users generate 100 million to 200 million posts daily in September.\n- X CEO Linda Yaccarino claimed X sees 500 million posts per day.\n- IronNet was founded in 2014.\n- IronNet was founded by retired four-star general Keith Alexander.\n- IronNet raised more than $400 million in funding.\n- IronNet went public in August 2021.\n- IronNet is based in Virginia.\n- IronNet laid off its remaining staff after shutting down.\n- TechCrunch's WiR column is published every Saturday.\n- The SBF trial involves the prosecution of knowingly committing fraud for wealth and power.\n- The defense in the SBF trial argues Bankman-Fried acted in good faith.\n\n[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\n- Prosecutors alleged Bankman-Fried stole customer funds to finance his lifestyle, political donations, and risky bets via Alameda Research.\n- Defense attorneys argued Bankman-Fried acted in good faith, built successful businesses, and did not defraud anyone.\n- Witnesses included a victim who lost nearly $100,000 and a former friend who admitted to writing code that may have contributed to the scheme.\n- The trial featured high-profile attendees including Bankman-Fried's parents, U.S. Attorney Damian Williams, and venture capitalist Matt Huang.\n- Bankman-Fried spent seven weeks in a Brooklyn prison before this trial, resulting in more prominent cheekbones.\n\n[raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\nBut “all of that, all of it, was built on lies,” Rehn declared to the jury. “Behind the curtains, he was not what he appeared to be.” What followed was a roughly 30-minute story that repeatedly emphasized how Bankman-Fried allegedly stole customer funds to facilitate his jet-setting lifestyle, donate millions to political candidates, and finance risky bets.\n\n[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]\n- Helena World Chronicle filed a class action antitrust suit against Google and Alphabet in the U.S. District Court in D.C.\n- The lawsuit alleges Google uses AI technologies like SGE and Bard to misappropriate publisher content and reduce traffic to news sites.\n- Plaintiffs claim Google's actions violate the Sherman Act and Clayton Act, seeking monetary and injunctive relief.\n- Reports suggest publishers could lose 20-40% of website traffic when Google's AI products fully roll out.\n- The case follows a recent agreement where Google pays Canadian media $73.5 million annually for content use.\n\n[raw:sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]\nInside the SBF trial: Rebecca and Jacquelyn report on the second day of the SBF and FTX trial. The prosecution painted Bankman-Fried as someone who knowingly committed fraud to achieve great wealth, power and influence, while the defense countered that the FTX founder acted in good faith, never meant to commit fraud or steal and basically got in over his head.\n\n[concepts/ai-content-misappropriation]\n- From [[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]]: The alleged practice of using AI to extract and utilize publisher content without consent.\n\n[raw:sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]\nSBF allegedly tried to buy off Trump: The TC team’s been trained on the Manhattan Federal Court for the trial of Sam Bankman-Fried, the disgraced entrepreneur accused of orchestrating the collapse of cryptocurrency exchange FTX. But fascinating details about SBF’s political dealings are emerging from a book by Michael Lewis, “Going Infinite,” that debuted on the first day of the trial, like SBF’s attempt to buy off Trump to get him to not run again for president.\n\n[sources/News_publisher_files_class_action_antitrust_suit_against_Google_citing_AI_s_harms_to_their_bottom_line]\nHelena World Chronicle, LLC has filed a class action antitrust lawsuit against Google and Alphabet in the U.S. District Court in D.C., alleging that Google's AI technologies, including Search Generative Experience (SGE) and Bard, along with older features like the Knowledge Graph, are siphoning content, readers, and ad revenue from news publishers. The suit claims these practices violate the Sherman Act and Clayton Act by discouraging users from visiting publisher websites, potentially causing publishers to lose 20-40% of their traffic, and seeks an injunction requiring consent for using publisher data to train AI models.\n\n[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\nThe second day of the Sam Bankman-Fried trial featured starkly contrasting opening statements where prosecutors painted him as a liar who stole billions for a lavish lifestyle, while his defense argued he was a good-faith startup founder who acted innovatively. The day concluded with the testimony of victim Marc-Antoine Julliard and former friend Adam Yedidia, who revealed his concerns about unwittingly contributing to the alleged crimes through code he wrote.\n\n[raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\nAlameda was not subterranean or shady. It was a successful hedge fund, he said. FTX was no Ponzi scheme. It was a “very innovative, successful company.” And the business practices between the two were reasonable, he argued, claiming that Alameda acted legally as an FTX customer, payment processor, and market maker, or financial entity that acts as a trading partner for customers looking to buy and sell cryptocurrencies.\n\n[entities/sam-bankman-fried]\n- Sam Bankman-Fried [orchestrated_collapse_of] FTX (from [[sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]])\n- Michael Lewis [wrote_about] Sam Bankman-Fried (from [[sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]])\n-\n\n[Knowledge graph]\nSam Bankman-Fried [orchestrated_collapse_of] FTX (from sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier)\nMichael Lewis [wrote_about] Sam Bankman-Fried (from sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier)\nSam Bankman-Fried [attempted_to_buy_off] Donald Trump (from sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier)\nSam Bankman-Fried [tried_in] Manhattan Federal Court (from sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier)\nSam Bankman-Fried [was former CEO of] FTX (from sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand)\nSam Bankman-Fried [owned] Alameda Research (from sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand)\n\nQuestion: Who is the individual being judged for their actions in a legal case, where contrasting stories are presented in 'Fortune', is accused of using a front for secret access to customer funds, and is alleged by the prosecution in a 'TechCrunch' article to have committed fraud for personal gain?\nAnswer:",
+  "model_call_ids": [
+    40,
+    41,
+    42
+  ],
+  "request_attempts": 3,
+  "failed_requests": 0,
+  "llm_calls": 3,
+  "input_tokens": 8655,
+  "output_tokens": 333,
+  "em": 1.0,
+  "token_f1": 1.0,
+  "rouge_l": 1.0
+}

@@ -1,0 +1,4 @@
+# Notes
+
+* [Tech News: Sam Altman backs teen startup, Google unveils Pixel 8, and more industry updates](tech-news-sam-altman-backs-teen-startup-google-unveils-pixel.md) - This note covers Sam Altman's support for Induced AI, Google's Pixel 8 and Android 14 launch, various tech reviews and controversies, and emerging AI developments across LinkedIn, cybersecurity, and battery technology.
+* [Helena World Chronicle files antitrust suit against Google and Alphabet](helena-world-chronicle-files-antitrust-suit-against-google.md) - Arkansas publisher Helena World Chronicle filed a class action lawsuit in U.S. District Court in D.C. accusing Google and Alphabet of anticompetitive behavior under the Sherman Act, alleging they siphon off content, readers, and ad revenue through AI and older technologies.

@@ -1,0 +1,319 @@
+{
+  "qa_id": "mhop_345",
+  "question": "Who is the individual that persuaded Adam Yedidia to leave Jane Street and join both Alameda and FTX, and is also accused by the prosecution of committing fraud for personal gain, as reported by Fortune and TechCrunch?",
+  "reference": "Sam Bankman-Fried",
+  "question_type": "inference_query",
+  "evidence_titles": [
+    "Is Sam Bankman-Fried a bad ‘man’ or a good ‘boy’? Lawyers swap opening statements before first witnesses take the stand",
+    "Sam Altman backs teens’ startup, Google unveils the Pixel 8 and TikTok tests an ad-free tier"
+  ],
+  "system": "wiki_routed",
+  "prediction": "Sam Bankman-Fried",
+  "raw_prediction": "Sam Bankman-Fried",
+  "seconds_wall": 3.5270423569891136,
+  "retrieval": {
+    "routed_ids": [
+      "entities/sam-bankman-fried",
+      "entities/ftx",
+      "entities/alameda-research",
+      "entities/caroline-ellison",
+      "entities/thane-rehn",
+      "entities/mark-cohen",
+      "entities/marc-antoine-julliard",
+      "entities/adam-yedidia",
+      "concepts/bankman-fried-characterization",
+      "concepts/alameda-research-scheme",
+      "concepts/cryptocurrency-exchange-collapse",
+      "concepts/crypto-industry-crisis",
+      "concepts/fraud-and-conspiracy-charges"
+    ],
+    "terms": [
+      "sam bankman fried testimony",
+      "adam yedidia ftx",
+      "sam bankman fried alameda research",
+      "sam bankman fried fraud charges",
+      "sam bankman fried ftx collapse",
+      "sam bankman fried legal troubles",
+      "sam bankman fried ftx partnership",
+      "sam bankman fried ftx investors",
+      "individual",
+      "persuaded",
+      "adam",
+      "yedidia",
+      "leave",
+      "jane",
+      "street",
+      "join",
+      "alameda",
+      "ftx",
+      "accused",
+      "prosecution",
+      "committing",
+      "fraud",
+      "personal",
+      "gain",
+      "reported",
+      "fortune",
+      "techcrunch",
+      "persuaded adam",
+      "adam yedidia",
+      "leave jane",
+      "jane street",
+      "committing fraud",
+      "personal gain"
+    ],
+    "routing_fallback": false,
+    "timing": {
+      "routing_llm": 1.7162055420049,
+      "search_terms_llm": 0.9722473040164914,
+      "retrieval_code": 0.5006789859908167,
+      "answer_llm": 0.3378882219840307
+    },
+    "candidates": 65,
+    "selected": 15,
+    "chars": 10001,
+    "matched_pages": [
+      "sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand",
+      "entities/sam-bankman-fried",
+      "sources/SBF_s_trial_starts_soon_but_how_did_he_and_FTX_get_here",
+      "sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier",
+      "sources/SBF_riding_high_on_FTX_reportedly_offered_5B_to_Trump_to_cancel_President_re-run",
+      "concepts/fraud-and-conspiracy-charges",
+      "entities/ftx",
+      "concepts/alameda-research-scheme"
+    ],
+    "kg_triples": 6,
+    "graph_relations": [
+      {
+        "source": "sam-bankman-fried",
+        "target": "bankman-fried-characterization",
+        "relation": "accused",
+        "source_doc": "sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand",
+        "context_line": "sam-bankman-fried [accused] bankman-fried-characterization (from sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand)"
+      },
+      {
+        "source": "sam-bankman-fried",
+        "target": "bankman-fried-characterization",
+        "relation": "defended",
+        "source_doc": "sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand",
+        "context_line": "sam-bankman-fried [defended] bankman-fried-characterization (from sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand)"
+      },
+      {
+        "source": "sam-bankman-fried",
+        "target": "alameda-research-scheme",
+        "relation": "involved",
+        "source_doc": "sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand",
+        "context_line": "sam-bankman-fried [involved] alameda-research-scheme (from sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand)"
+      },
+      {
+        "source": "alameda-research-scheme",
+        "target": "bankman-fried-characterization",
+        "relation": "alleged",
+        "source_doc": "sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand",
+        "context_line": "alameda-research-scheme [alleged] bankman-fried-characterization (from sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand)"
+      },
+      {
+        "source": "sam-bankman-fried",
+        "target": "ftx",
+        "relation": "co-founded",
+        "source_doc": "sources/SBF_s_trial_starts_soon_but_how_did_he_and_FTX_get_here",
+        "context_line": "sam-bankman-fried [co-founded] ftx (from sources/SBF_s_trial_starts_soon_but_how_did_he_and_FTX_get_here)"
+      },
+      {
+        "source": "sam-bankman-fried",
+        "target": "alameda-research",
+        "relation": "co-founded",
+        "source_doc": "sources/SBF_s_trial_starts_soon_but_how_did_he_and_FTX_get_here",
+        "context_line": "sam-bankman-fried [co-founded] alameda-research (from sources/SBF_s_trial_starts_soon_but_how_did_he_and_FTX_get_here)"
+      }
+    ],
+    "selected_passages": [
+      {
+        "title": "raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand",
+        "page_id": "sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand",
+        "text": "Shortly afterward, as the trial neared late afternoon, the government called Adam Yedidia to the stand. A fast-talking graduate of MIT, he and Bankman-Fried were close friends in college, he said. And after Bankman-Fried left Jane Street, the high-frequency trading firm where the former billionaire got his start in finance after MIT, he persuaded Yedidia to join him as a trader at Alameda and then as a developer at FTX.",
+        "branch": "other_raw",
+        "item_id": "raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand:19",
+        "matched_terms": 12,
+        "direct_matches": 10,
+        "context_block": "[raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\nShortly afterward, as the trial neared late afternoon, the government called Adam Yedidia to the stand. A fast-talking graduate of MIT, he and Bankman-Fried were close friends in college, he said. And after Bankman-Fried left Jane Street, the high-frequency trading firm where the former billionaire got his start in finance after MIT, he persuaded Yedidia to join him as a trader at Alameda and then as a developer at FTX.",
+        "truncated": false
+      },
+      {
+        "title": "entities/sam-bankman-fried",
+        "page_id": "entities/sam-bankman-fried",
+        "text": "- sam-bankman-fried [accused] bankman-fried-characterization (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- sam-bankman-fried [defended] bankman-fried-characterization (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- sam-bankman-fried [involved] alameda-research-scheme (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- sam-bankman-fried [co-founded] ftx (from [[sources/SBF_s_trial_starts_soon_but_how_did_he_and_FTX_get_here]])\n- sam-bankman-fried [co-founded] alameda-research (from [[sources/SBF_s_trial_starts_soon_but_how_did_he_and_FTX_get_here]])\n- sam-bankman-fried [faced] fraud-and-conspiracy-charges (from [[sources/SBF_s_trial_starts_soon_but_how_did_he_and_FTX_get_here]])\n- sam-bankman-fried [owns] ftx (from [[sources/SBF_riding_high_on_FTX_reportedly_offered_5B_to_Trump_to_cancel_President_re-run]])\n- sam-bankman-fried [interviewed-by] 60 Minutes (from [[sources/SBF_riding_high_on_FTX_reportedly_offered_5B_to_Trump_to_cancel_President_re-run]])\n- Michael Lewis [introduced-to] sam-bankman-fried (from [[sources/SBF_riding_high_on_FTX_reportedly_offered_5B_to_Trump_to_cancel_President_re-run]])",
+        "branch": "routed_wiki",
+        "item_id": "wiki:entities/sam-bankman-fried:2",
+        "matched_terms": 7,
+        "direct_matches": 5,
+        "context_block": "[entities/sam-bankman-fried]\n- sam-bankman-fried [accused] bankman-fried-characterization (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- sam-bankman-fried [defended] bankman-fried-characterization (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- sam-bankman-fried [involved] alameda-research-scheme (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- sam-bankman-fried [co-founded] ftx (from [[sources/SBF_s_trial_starts_soon_but_how_did_he_and_FTX_get_here]])\n- sam-bankman-fried [co-founded] alameda-research (from [[sources/SBF_s_trial_starts_soon_but_how_did_he_and_FTX_get_here]])\n- sam-bankman-fried [faced] fraud-and-conspiracy-charges (from [[sources/SBF_s_trial_starts_soon_but_how_did_he_and_FTX_get_here]])\n- sam-bankman-fried [owns] ftx (from [[sources/SBF_riding_high_on_FTX_reportedly_offered_5B_to_Trump_to_cancel_President_re-run]])\n- sam-bankman-fried [interviewed-by] 60 Minutes (from [[sources/SBF_riding_high_on_FTX_reportedly_offered_5B_to_Trump_to_cancel_President_re-run]])\n- Michael Lewis [introduced-to] sam-bankman-fried (from [[sources/SBF_riding_high_on_FTX_reportedly_offered_5B_to_Trump_to_cancel_President_re-run]])",
+        "truncated": false
+      },
+      {
+        "title": "sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand",
+        "page_id": "sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand",
+        "text": "- FTX was once a thriving crypto exchange\n- Bankman-Fried jetted between international locations\n- Ellison, his girlfriend and Alameda CEO, had secret access to customer funds\n- Bankman-Fried allegedly lied to customers about safety\n- Prosecution alleges Bankman-Fried used Alameda to steal from FTX\n- Bankman-Fried reportedly donated millions to political candidates\n- Prosecution claims Bankman-Fried concealed money flows and forged documents\n- Bankman-Fried allegedly used Alameda as a front to steal from FTX\n- Bankman-Fried claimed he gave up personal wealth to make customers whole\n- Julliard invested almost $100,000 in FTX but never recovered\n- Yedidia was a college friend of Bankman-Fried and a former Alameda developer\n- Huang and Wang are expected to testify next\n- Ellison is a key witness for the prosecution",
+        "branch": "other_wiki",
+        "item_id": "wiki:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand:2",
+        "matched_terms": 6,
+        "direct_matches": 6,
+        "context_block": "[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\n- FTX was once a thriving crypto exchange\n- Bankman-Fried jetted between international locations\n- Ellison, his girlfriend and Alameda CEO, had secret access to customer funds\n- Bankman-Fried allegedly lied to customers about safety\n- Prosecution alleges Bankman-Fried used Alameda to steal from FTX\n- Bankman-Fried reportedly donated millions to political candidates\n- Prosecution claims Bankman-Fried concealed money flows and forged documents\n- Bankman-Fried allegedly used Alameda as a front to steal from FTX\n- Bankman-Fried claimed he gave up personal wealth to make customers whole\n- Julliard invested almost $100,000 in FTX but never recovered\n- Yedidia was a college friend of Bankman-Fried and a former Alameda developer\n- Huang and Wang are expected to testify next\n- Ellison is a key witness for the prosecution",
+        "truncated": false
+      },
+      {
+        "title": "entities/sam-bankman-fried",
+        "page_id": "entities/sam-bankman-fried",
+        "text": "- From [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]]: Former CEO of FTX, accused of fraud and theft in the FTX collapse\n- From [[sources/SBF_s_trial_starts_soon_but_how_did_he_and_FTX_get_here]]: The former CEO of FTX, who is facing criminal charges for fraud and conspiracy related to the exchange's collapse.\n- From [[sources/SBF_riding_high_on_FTX_reportedly_offered_5B_to_Trump_to_cancel_President_re-run]]: Cryptocurrency entrepreneur accused of orchestrating the collapse of FTX.",
+        "branch": "routed_wiki",
+        "item_id": "wiki:entities/sam-bankman-fried:1",
+        "matched_terms": 6,
+        "direct_matches": 4,
+        "context_block": "[entities/sam-bankman-fried]\n- From [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]]: Former CEO of FTX, accused of fraud and theft in the FTX collapse\n- From [[sources/SBF_s_trial_starts_soon_but_how_did_he_and_FTX_get_here]]: The former CEO of FTX, who is facing criminal charges for fraud and conspiracy related to the exchange's collapse.\n- From [[sources/SBF_riding_high_on_FTX_reportedly_offered_5B_to_Trump_to_cancel_President_re-run]]: Cryptocurrency entrepreneur accused of orchestrating the collapse of FTX.",
+        "truncated": false
+      },
+      {
+        "title": "sources/SBF_s_trial_starts_soon_but_how_did_he_and_FTX_get_here",
+        "page_id": "sources/SBF_s_trial_starts_soon_but_how_did_he_and_FTX_get_here",
+        "text": "- Sam Bankman-Fried is facing trial for fraud and conspiracy related to FTX\n- FTX was founded by Bankman-Fried in 2019 and peaked at $32 billion in valuation\n- FTX faced a liquidity crisis and collapsed in early 2022\n- Bankman-Fried maintains his innocence but faces multiple criminal charges\n- FTX and Alameda Research, Bankman-Fried's trading firm, filed for bankruptcy",
+        "branch": "other_wiki",
+        "item_id": "wiki:sources/SBF_s_trial_starts_soon_but_how_did_he_and_FTX_get_here:1",
+        "matched_terms": 6,
+        "direct_matches": 3,
+        "context_block": "[sources/SBF_s_trial_starts_soon_but_how_did_he_and_FTX_get_here]\n- Sam Bankman-Fried is facing trial for fraud and conspiracy related to FTX\n- FTX was founded by Bankman-Fried in 2019 and peaked at $32 billion in valuation\n- FTX faced a liquidity crisis and collapsed in early 2022\n- Bankman-Fried maintains his innocence but faces multiple criminal charges\n- FTX and Alameda Research, Bankman-Fried's trading firm, filed for bankruptcy",
+        "truncated": false
+      },
+      {
+        "title": "raw:sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier",
+        "page_id": "sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier",
+        "text": "Inside the SBF trial: Rebecca and Jacquelyn report on the second day of the SBF and FTX trial. The prosecution painted Bankman-Fried as someone who knowingly committed fraud to achieve great wealth, power and influence, while the defense countered that the FTX founder acted in good faith, never meant to commit fraud or steal and basically got in over his head.",
+        "branch": "other_raw",
+        "item_id": "raw:sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier:18",
+        "matched_terms": 6,
+        "direct_matches": 3,
+        "context_block": "[raw:sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]\nInside the SBF trial: Rebecca and Jacquelyn report on the second day of the SBF and FTX trial. The prosecution painted Bankman-Fried as someone who knowingly committed fraud to achieve great wealth, power and influence, while the defense countered that the FTX founder acted in good faith, never meant to commit fraud or steal and basically got in over his head.",
+        "truncated": false
+      },
+      {
+        "title": "sources/SBF_riding_high_on_FTX_reportedly_offered_5B_to_Trump_to_cancel_President_re-run",
+        "page_id": "sources/SBF_riding_high_on_FTX_reportedly_offered_5B_to_Trump_to_cancel_President_re-run",
+        "text": "- SBF pleaded not guilty to multiple charges of fraud and conspiracy\n- Lewis was introduced to SBF in early 2021 by a friend seeking to invest in FTX\n- Lewis claims he was initially not planning to write a book about SBF\n- FTX's daily trading volume peaked at $15 billion\n- SBF raised $2 billion from investors including Sequoia, Temasek, and Tiger Global\n- SBF attempted to secure political support for his crypto ventures\n- The value of cryptocurrencies on FTX plummeted after the exchange's collapse\n- SBF's company, Alameda Research, was linked to financial discrepancies\n- SBF is accused of misleading investors and potentially manipulating the market\n- The book 'Going Infinite' is set to debut during SBF's trial\n- SBF's wealth increased from nothing to $22.5 billion in just 18 months\n- SBF's appearance on 60 Minutes was described as nervous and strategic\n- Anna Wintour reportedly reached out to SBF for sponsorship of her Met Costume Ball",
+        "branch": "other_wiki",
+        "item_id": "wiki:sources/SBF_riding_high_on_FTX_reportedly_offered_5B_to_Trump_to_cancel_President_re-run:2",
+        "matched_terms": 5,
+        "direct_matches": 5,
+        "context_block": "[sources/SBF_riding_high_on_FTX_reportedly_offered_5B_to_Trump_to_cancel_President_re-run]\n- SBF pleaded not guilty to multiple charges of fraud and conspiracy\n- Lewis was introduced to SBF in early 2021 by a friend seeking to invest in FTX\n- Lewis claims he was initially not planning to write a book about SBF\n- FTX's daily trading volume peaked at $15 billion\n- SBF raised $2 billion from investors including Sequoia, Temasek, and Tiger Global\n- SBF attempted to secure political support for his crypto ventures\n- The value of cryptocurrencies on FTX plummeted after the exchange's collapse\n- SBF's company, Alameda Research, was linked to financial discrepancies\n- SBF is accused of misleading investors and potentially manipulating the market\n- The book 'Going Infinite' is set to debut during SBF's trial\n- SBF's wealth increased from nothing to $22.5 billion in just 18 months\n- SBF's appearance on 60 Minutes was described as nervous and strategic\n- Anna Wintour reportedly reached out to SBF for sponsorship of her Met Costume Ball",
+        "truncated": false
+      },
+      {
+        "title": "concepts/fraud-and-conspiracy-charges",
+        "page_id": "concepts/fraud-and-conspiracy-charges",
+        "text": "- From [[sources/SBF_s_trial_starts_soon_but_how_did_he_and_FTX_get_here]]: Legal actions taken against individuals or entities for fraudulent activities and/or conspiring to commit illegal acts.",
+        "branch": "routed_wiki",
+        "item_id": "wiki:concepts/fraud-and-conspiracy-charges:1",
+        "matched_terms": 5,
+        "direct_matches": 4,
+        "context_block": "[concepts/fraud-and-conspiracy-charges]\n- From [[sources/SBF_s_trial_starts_soon_but_how_did_he_and_FTX_get_here]]: Legal actions taken against individuals or entities for fraudulent activities and/or conspiring to commit illegal acts.",
+        "truncated": false
+      },
+      {
+        "title": "entities/ftx",
+        "page_id": "entities/ftx",
+        "text": "- sam-bankman-fried [co-founded] ftx (from [[sources/SBF_s_trial_starts_soon_but_how_did_he_and_FTX_get_here]])\n- ftx [provided-capital-to] alameda-research (from [[sources/SBF_s_trial_starts_soon_but_how_did_he_and_FTX_get_here]])\n- ftx [resulted-in] cryptocurrency-exchange-collapse (from [[sources/SBF_s_trial_starts_soon_but_how_did_he_and_FTX_get_here]])\n- sam-bankman-fried [owns] ftx (from [[sources/SBF_riding_high_on_FTX_reportedly_offered_5B_to_Trump_to_cancel_President_re-run]])",
+        "branch": "routed_wiki",
+        "item_id": "wiki:entities/ftx:2",
+        "matched_terms": 5,
+        "direct_matches": 3,
+        "context_block": "[entities/ftx]\n- sam-bankman-fried [co-founded] ftx (from [[sources/SBF_s_trial_starts_soon_but_how_did_he_and_FTX_get_here]])\n- ftx [provided-capital-to] alameda-research (from [[sources/SBF_s_trial_starts_soon_but_how_did_he_and_FTX_get_here]])\n- ftx [resulted-in] cryptocurrency-exchange-collapse (from [[sources/SBF_s_trial_starts_soon_but_how_did_he_and_FTX_get_here]])\n- sam-bankman-fried [owns] ftx (from [[sources/SBF_riding_high_on_FTX_reportedly_offered_5B_to_Trump_to_cancel_President_re-run]])",
+        "truncated": false
+      },
+      {
+        "title": "sources/SBF_s_trial_starts_soon_but_how_did_he_and_FTX_get_here",
+        "page_id": "sources/SBF_s_trial_starts_soon_but_how_did_he_and_FTX_get_here",
+        "text": "- FTX was founded by Sam Bankman-Fried in 2019\n- FTX reached a peak valuation of $32 billion in 2022\n- Alameda Research received over $2 billion in capital from investors\n- FTX had a balance sheet showing assets significantly higher than the market value of its tokens\n- Binance pulled out $2.1 billion in BUSD and FTT from FTX\n- FTX filed for Chapter 11 bankruptcy in mid-November 2022\n- FTX's collapse led to the bankruptcy of BlockFi and Genesis Global Trading\n- FTX's collapse affected billions of crypto assets in legal proceedings\n- Bankman-Fried maintains his innocence but faces multiple criminal charges\n- FTX and Alameda Research's former CEO, Caroline Ellison, pleaded guilty to federal charges\n- FTX's collapse caused significant damage to the crypto industry\n- Bankman-Fried is represented by Cohen & Gresser and Mark Cohen, a high-profile defense attorney\n- FTX's collapse resulted in the loss of billions of dollars for investors and creditors\n- FTX's collapse highlighted the risks associated with unregulated cryptocurrency exchanges",
+        "branch": "other_wiki",
+        "item_id": "wiki:sources/SBF_s_trial_starts_soon_but_how_did_he_and_FTX_get_here:2",
+        "matched_terms": 5,
+        "direct_matches": 2,
+        "context_block": "[sources/SBF_s_trial_starts_soon_but_how_did_he_and_FTX_get_here]\n- FTX was founded by Sam Bankman-Fried in 2019\n- FTX reached a peak valuation of $32 billion in 2022\n- Alameda Research received over $2 billion in capital from investors\n- FTX had a balance sheet showing assets significantly higher than the market value of its tokens\n- Binance pulled out $2.1 billion in BUSD and FTT from FTX\n- FTX filed for Chapter 11 bankruptcy in mid-November 2022\n- FTX's collapse led to the bankruptcy of BlockFi and Genesis Global Trading\n- FTX's collapse affected billions of crypto assets in legal proceedings\n- Bankman-Fried maintains his innocence but faces multiple criminal charges\n- FTX and Alameda Research's former CEO, Caroline Ellison, pleaded guilty to federal charges\n- FTX's collapse caused significant damage to the crypto industry\n- Bankman-Fried is represented by Cohen & Gresser and Mark Cohen, a high-profile defense attorney\n- FTX's collapse resulted in the loss of billions of dollars for investors and creditors\n- FTX's collapse highlighted the risks associated with unregulated cryptocurrency exchanges",
+        "truncated": false
+      },
+      {
+        "title": "concepts/fraud-and-conspiracy-charges",
+        "page_id": "concepts/fraud-and-conspiracy-charges",
+        "text": "Legal actions taken against individuals or entities for fraudulent activities and/or conspiring to commit illegal acts.",
+        "branch": "routed_wiki",
+        "item_id": "wiki:concepts/fraud-and-conspiracy-charges:0",
+        "matched_terms": 4,
+        "direct_matches": 3,
+        "context_block": "[concepts/fraud-and-conspiracy-charges]\nLegal actions taken against individuals or entities for fraudulent activities and/or conspiring to commit illegal acts.",
+        "truncated": false
+      },
+      {
+        "title": "raw:sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier",
+        "page_id": "sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier",
+        "text": "SBF allegedly tried to buy off Trump: The TC team’s been trained on the Manhattan Federal Court for the trial of Sam Bankman-Fried, the disgraced entrepreneur accused of orchestrating the collapse of cryptocurrency exchange FTX. But fascinating details about SBF’s political dealings are emerging from a book by Michael Lewis, “Going Infinite,” that debuted on the first day of the trial, like SBF’s attempt to buy off Trump to get him to not run again for president.",
+        "branch": "other_raw",
+        "item_id": "raw:sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier:7",
+        "matched_terms": 4,
+        "direct_matches": 3,
+        "context_block": "[raw:sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]\nSBF allegedly tried to buy off Trump: The TC team’s been trained on the Manhattan Federal Court for the trial of Sam Bankman-Fried, the disgraced entrepreneur accused of orchestrating the collapse of cryptocurrency exchange FTX. But fascinating details about SBF’s political dealings are emerging from a book by Michael Lewis, “Going Infinite,” that debuted on the first day of the trial, like SBF’s attempt to buy off Trump to get him to not run again for president.",
+        "truncated": false
+      },
+      {
+        "title": "raw:sources/SBF_riding_high_on_FTX_reportedly_offered_5B_to_Trump_to_cancel_President_re-run",
+        "page_id": "sources/SBF_riding_high_on_FTX_reportedly_offered_5B_to_Trump_to_cancel_President_re-run",
+        "text": "Come Tuesday, our eyes will be trained on the Manhattan Federal Court for the trial of Sam Bankman-Fried, the disgraced cryptocurrency entrepreneur accused of orchestrating “one of the biggest financial frauds in American history”: the multibillion-dollar collapse of FTX, the crypto exchange he founded and led.",
+        "branch": "other_raw",
+        "item_id": "raw:sources/SBF_riding_high_on_FTX_reportedly_offered_5B_to_Trump_to_cancel_President_re-run:0",
+        "matched_terms": 4,
+        "direct_matches": 3,
+        "context_block": "[raw:sources/SBF_riding_high_on_FTX_reportedly_offered_5B_to_Trump_to_cancel_President_re-run]\nCome Tuesday, our eyes will be trained on the Manhattan Federal Court for the trial of Sam Bankman-Fried, the disgraced cryptocurrency entrepreneur accused of orchestrating “one of the biggest financial frauds in American history”: the multibillion-dollar collapse of FTX, the crypto exchange he founded and led.",
+        "truncated": false
+      },
+      {
+        "title": "concepts/alameda-research-scheme",
+        "page_id": "concepts/alameda-research-scheme",
+        "text": "- From [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]]: Alameda Research's alleged involvement in FTX's collapse",
+        "branch": "routed_wiki",
+        "item_id": "wiki:concepts/alameda-research-scheme:1",
+        "matched_terms": 4,
+        "direct_matches": 2,
+        "context_block": "[concepts/alameda-research-scheme]\n- From [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]]: Alameda Research's alleged involvement in FTX's collapse",
+        "truncated": false
+      },
+      {
+        "title": "raw:sources/SBF_s_trial_starts_soon_but_how_did_he_and_FTX_get_here",
+        "page_id": "sources/SBF_s_trial_starts_soon_but_how_did_he_and_FTX_get_here",
+        "text": "Bankman-Fried, however, maintained his innocence. At The New York Times’ DealBook Summit, he appeared virtually from the Bahamas, saying “I didn’t ever try to commit fraud on anyone; I was shocked by what happened this month.” In a published DM exchange with a Vox reporter, he said he regretted filing for bankruptcy and thought that “regulators make everything worse.”",
+        "branch": "other_raw",
+        "item_id": "raw:sources/SBF_s_trial_starts_soon_but_how_did_he_and_FTX_get_here:14",
+        "matched_terms": 4,
+        "direct_matches": 1,
+        "context_block": "[raw:sources/SBF_s_trial_starts_soon_but_how_did_he_and_FTX_get_here]\nBankman-Fried, however, maintained his innocence. At The New York Times’ DealBook Summit, he appeared virtually from the Bahamas, saying “I didn’t ever try to commit fraud on anyone; I was shocked by what happened this month.” In a publi",
+        "truncated": true
+      }
+    ],
+    "branches": {
+      "other_raw": 5,
+      "routed_wiki": 6,
+      "other_wiki": 4
+    }
+  },
+  "error": null,
+  "context": "[raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\nShortly afterward, as the trial neared late afternoon, the government called Adam Yedidia to the stand. A fast-talking graduate of MIT, he and Bankman-Fried were close friends in college, he said. And after Bankman-Fried left Jane Street, the high-frequency trading firm where the former billionaire got his start in finance after MIT, he persuaded Yedidia to join him as a trader at Alameda and then as a developer at FTX.\n\n[entities/sam-bankman-fried]\n- sam-bankman-fried [accused] bankman-fried-characterization (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- sam-bankman-fried [defended] bankman-fried-characterization (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- sam-bankman-fried [involved] alameda-research-scheme (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- sam-bankman-fried [co-founded] ftx (from [[sources/SBF_s_trial_starts_soon_but_how_did_he_and_FTX_get_here]])\n- sam-bankman-fried [co-founded] alameda-research (from [[sources/SBF_s_trial_starts_soon_but_how_did_he_and_FTX_get_here]])\n- sam-bankman-fried [faced] fraud-and-conspiracy-charges (from [[sources/SBF_s_trial_starts_soon_but_how_did_he_and_FTX_get_here]])\n- sam-bankman-fried [owns] ftx (from [[sources/SBF_riding_high_on_FTX_reportedly_offered_5B_to_Trump_to_cancel_President_re-run]])\n- sam-bankman-fried [interviewed-by] 60 Minutes (from [[sources/SBF_riding_high_on_FTX_reportedly_offered_5B_to_Trump_to_cancel_President_re-run]])\n- Michael Lewis [introduced-to] sam-bankman-fried (from [[sources/SBF_riding_high_on_FTX_reportedly_offered_5B_to_Trump_to_cancel_President_re-run]])\n\n[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\n- FTX was once a thriving crypto exchange\n- Bankman-Fried jetted between international locations\n- Ellison, his girlfriend and Alameda CEO, had secret access to customer funds\n- Bankman-Fried allegedly lied to customers about safety\n- Prosecution alleges Bankman-Fried used Alameda to steal from FTX\n- Bankman-Fried reportedly donated millions to political candidates\n- Prosecution claims Bankman-Fried concealed money flows and forged documents\n- Bankman-Fried allegedly used Alameda as a front to steal from FTX\n- Bankman-Fried claimed he gave up personal wealth to make customers whole\n- Julliard invested almost $100,000 in FTX but never recovered\n- Yedidia was a college friend of Bankman-Fried and a former Alameda developer\n- Huang and Wang are expected to testify next\n- Ellison is a key witness for the prosecution\n\n[entities/sam-bankman-fried]\n- From [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]]: Former CEO of FTX, accused of fraud and theft in the FTX collapse\n- From [[sources/SBF_s_trial_starts_soon_but_how_did_he_and_FTX_get_here]]: The former CEO of FTX, who is facing criminal charges for fraud and conspiracy related to the exchange's collapse.\n- From [[sources/SBF_riding_high_on_FTX_reportedly_offered_5B_to_Trump_to_cancel_President_re-run]]: Cryptocurrency entrepreneur accused of orchestrating the collapse of FTX.\n\n[sources/SBF_s_trial_starts_soon_but_how_did_he_and_FTX_get_here]\n- Sam Bankman-Fried is facing trial for fraud and conspiracy related to FTX\n- FTX was founded by Bankman-Fried in 2019 and peaked at $32 billion in valuation\n- FTX faced a liquidity crisis and collapsed in early 2022\n- Bankman-Fried maintains his innocence but faces multiple criminal charges\n- FTX and Alameda Research, Bankman-Fried's trading firm, filed for bankruptcy\n\n[raw:sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]\nInside the SBF trial: Rebecca and Jacquelyn report on the second day of the SBF and FTX trial. The prosecution painted Bankman-Fried as someone who knowingly committed fraud to achieve great wealth, power and influence, while the defense countered that the FTX founder acted in good faith, never meant to commit fraud or steal and basically got in over his head.\n\n[sources/SBF_riding_high_on_FTX_reportedly_offered_5B_to_Trump_to_cancel_President_re-run]\n- SBF pleaded not guilty to multiple charges of fraud and conspiracy\n- Lewis was introduced to SBF in early 2021 by a friend seeking to invest in FTX\n- Lewis claims he was initially not planning to write a book about SBF\n- FTX's daily trading volume peaked at $15 billion\n- SBF raised $2 billion from investors including Sequoia, Temasek, and Tiger Global\n- SBF attempted to secure political support for his crypto ventures\n- The value of cryptocurrencies on FTX plummeted after the exchange's collapse\n- SBF's company, Alameda Research, was linked to financial discrepancies\n- SBF is accused of misleading investors and potentially manipulating the market\n- The book 'Going Infinite' is set to debut during SBF's trial\n- SBF's wealth increased from nothing to $22.5 billion in just 18 months\n- SBF's appearance on 60 Minutes was described as nervous and strategic\n- Anna Wintour reportedly reached out to SBF for sponsorship of her Met Costume Ball\n\n[concepts/fraud-and-conspiracy-charges]\n- From [[sources/SBF_s_trial_starts_soon_but_how_did_he_and_FTX_get_here]]: Legal actions taken against individuals or entities for fraudulent activities and/or conspiring to commit illegal acts.\n\n[entities/ftx]\n- sam-bankman-fried [co-founded] ftx (from [[sources/SBF_s_trial_starts_soon_but_how_did_he_and_FTX_get_here]])\n- ftx [provided-capital-to] alameda-research (from [[sources/SBF_s_trial_starts_soon_but_how_did_he_and_FTX_get_here]])\n- ftx [resulted-in] cryptocurrency-exchange-collapse (from [[sources/SBF_s_trial_starts_soon_but_how_did_he_and_FTX_get_here]])\n- sam-bankman-fried [owns] ftx (from [[sources/SBF_riding_high_on_FTX_reportedly_offered_5B_to_Trump_to_cancel_President_re-run]])\n\n[sources/SBF_s_trial_starts_soon_but_how_did_he_and_FTX_get_here]\n- FTX was founded by Sam Bankman-Fried in 2019\n- FTX reached a peak valuation of $32 billion in 2022\n- Alameda Research received over $2 billion in capital from investors\n- FTX had a balance sheet showing assets significantly higher than the market value of its tokens\n- Binance pulled out $2.1 billion in BUSD and FTT from FTX\n- FTX filed for Chapter 11 bankruptcy in mid-November 2022\n- FTX's collapse led to the bankruptcy of BlockFi and Genesis Global Trading\n- FTX's collapse affected billions of crypto assets in legal proceedings\n- Bankman-Fried maintains his innocence but faces multiple criminal charges\n- FTX and Alameda Research's former CEO, Caroline Ellison, pleaded guilty to federal charges\n- FTX's collapse caused significant damage to the crypto industry\n- Bankman-Fried is represented by Cohen & Gresser and Mark Cohen, a high-profile defense attorney\n- FTX's collapse resulted in the loss of billions of dollars for investors and creditors\n- FTX's collapse highlighted the risks associated with unregulated cryptocurrency exchanges\n\n[concepts/fraud-and-conspiracy-charges]\nLegal actions taken against individuals or entities for fraudulent activities and/or conspiring to commit illegal acts.\n\n[raw:sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]\nSBF allegedly tried to buy off Trump: The TC team’s been trained on the Manhattan Federal Court for the trial of Sam Bankman-Fried, the disgraced entrepreneur accused of orchestrating the collapse of cryptocurrency exchange FTX. But fascinating details about SBF’s political dealings are emerging from a book by Michael Lewis, “Going Infinite,” that debuted on the first day of the trial, like SBF’s attempt to buy off Trump to get him to not run again for president.\n\n[raw:sources/SBF_riding_high_on_FTX_reportedly_offered_5B_to_Trump_to_cancel_President_re-run]\nCome Tuesday, our eyes will be trained on the Manhattan Federal Court for the trial of Sam Bankman-Fried, the disgraced cryptocurrency entrepreneur accused of orchestrating “one of the biggest financial frauds in American history”: the multibillion-dollar collapse of FTX, the crypto exchange he founded and led.\n\n[concepts/alameda-research-scheme]\n- From [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]]: Alameda Research's alleged involvement in FTX's collapse\n\n[raw:sources/SBF_s_trial_starts_soon_but_how_did_he_and_FTX_get_here]\nBankman-Fried, however, maintained his innocence. At The New York Times’ DealBook Summit, he appeared virtually from the Bahamas, saying “I didn’t ever try to commit fraud on anyone; I was shocked by what happened this month.” In a publi\n\n[Knowledge graph]\nsam-bankman-fried [accused] bankman-fried-characterization (from sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand)\nsam-bankman-fried [defended] bankman-fried-characterization (from sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand)\nsam-bankman-fried [involved] alameda-research-scheme (from sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand)\nalameda-research-scheme [alleged] bankman-fried-characterization (from sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand)\nsam-bankman-fried [co-founded] ftx (from sources/SBF_s_trial_starts_soon_but_how_did_he_and_FTX_get_here)\nsam-bankman-fried [co-founded] alameda-research (from sources/SBF_s_trial_starts_soon_but_how_did_he_and_FTX_get_here)",
+  "answer_prompt": "Answer using only the context. Give a short direct answer (entity, name, number, date, phrase, Yes/No), or unanswerable. Output only the answer.\n\nContext:\n[raw:sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\nShortly afterward, as the trial neared late afternoon, the government called Adam Yedidia to the stand. A fast-talking graduate of MIT, he and Bankman-Fried were close friends in college, he said. And after Bankman-Fried left Jane Street, the high-frequency trading firm where the former billionaire got his start in finance after MIT, he persuaded Yedidia to join him as a trader at Alameda and then as a developer at FTX.\n\n[entities/sam-bankman-fried]\n- sam-bankman-fried [accused] bankman-fried-characterization (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- sam-bankman-fried [defended] bankman-fried-characterization (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- sam-bankman-fried [involved] alameda-research-scheme (from [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]])\n- sam-bankman-fried [co-founded] ftx (from [[sources/SBF_s_trial_starts_soon_but_how_did_he_and_FTX_get_here]])\n- sam-bankman-fried [co-founded] alameda-research (from [[sources/SBF_s_trial_starts_soon_but_how_did_he_and_FTX_get_here]])\n- sam-bankman-fried [faced] fraud-and-conspiracy-charges (from [[sources/SBF_s_trial_starts_soon_but_how_did_he_and_FTX_get_here]])\n- sam-bankman-fried [owns] ftx (from [[sources/SBF_riding_high_on_FTX_reportedly_offered_5B_to_Trump_to_cancel_President_re-run]])\n- sam-bankman-fried [interviewed-by] 60 Minutes (from [[sources/SBF_riding_high_on_FTX_reportedly_offered_5B_to_Trump_to_cancel_President_re-run]])\n- Michael Lewis [introduced-to] sam-bankman-fried (from [[sources/SBF_riding_high_on_FTX_reportedly_offered_5B_to_Trump_to_cancel_President_re-run]])\n\n[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]\n- FTX was once a thriving crypto exchange\n- Bankman-Fried jetted between international locations\n- Ellison, his girlfriend and Alameda CEO, had secret access to customer funds\n- Bankman-Fried allegedly lied to customers about safety\n- Prosecution alleges Bankman-Fried used Alameda to steal from FTX\n- Bankman-Fried reportedly donated millions to political candidates\n- Prosecution claims Bankman-Fried concealed money flows and forged documents\n- Bankman-Fried allegedly used Alameda as a front to steal from FTX\n- Bankman-Fried claimed he gave up personal wealth to make customers whole\n- Julliard invested almost $100,000 in FTX but never recovered\n- Yedidia was a college friend of Bankman-Fried and a former Alameda developer\n- Huang and Wang are expected to testify next\n- Ellison is a key witness for the prosecution\n\n[entities/sam-bankman-fried]\n- From [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]]: Former CEO of FTX, accused of fraud and theft in the FTX collapse\n- From [[sources/SBF_s_trial_starts_soon_but_how_did_he_and_FTX_get_here]]: The former CEO of FTX, who is facing criminal charges for fraud and conspiracy related to the exchange's collapse.\n- From [[sources/SBF_riding_high_on_FTX_reportedly_offered_5B_to_Trump_to_cancel_President_re-run]]: Cryptocurrency entrepreneur accused of orchestrating the collapse of FTX.\n\n[sources/SBF_s_trial_starts_soon_but_how_did_he_and_FTX_get_here]\n- Sam Bankman-Fried is facing trial for fraud and conspiracy related to FTX\n- FTX was founded by Bankman-Fried in 2019 and peaked at $32 billion in valuation\n- FTX faced a liquidity crisis and collapsed in early 2022\n- Bankman-Fried maintains his innocence but faces multiple criminal charges\n- FTX and Alameda Research, Bankman-Fried's trading firm, filed for bankruptcy\n\n[raw:sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]\nInside the SBF trial: Rebecca and Jacquelyn report on the second day of the SBF and FTX trial. The prosecution painted Bankman-Fried as someone who knowingly committed fraud to achieve great wealth, power and influence, while the defense countered that the FTX founder acted in good faith, never meant to commit fraud or steal and basically got in over his head.\n\n[sources/SBF_riding_high_on_FTX_reportedly_offered_5B_to_Trump_to_cancel_President_re-run]\n- SBF pleaded not guilty to multiple charges of fraud and conspiracy\n- Lewis was introduced to SBF in early 2021 by a friend seeking to invest in FTX\n- Lewis claims he was initially not planning to write a book about SBF\n- FTX's daily trading volume peaked at $15 billion\n- SBF raised $2 billion from investors including Sequoia, Temasek, and Tiger Global\n- SBF attempted to secure political support for his crypto ventures\n- The value of cryptocurrencies on FTX plummeted after the exchange's collapse\n- SBF's company, Alameda Research, was linked to financial discrepancies\n- SBF is accused of misleading investors and potentially manipulating the market\n- The book 'Going Infinite' is set to debut during SBF's trial\n- SBF's wealth increased from nothing to $22.5 billion in just 18 months\n- SBF's appearance on 60 Minutes was described as nervous and strategic\n- Anna Wintour reportedly reached out to SBF for sponsorship of her Met Costume Ball\n\n[concepts/fraud-and-conspiracy-charges]\n- From [[sources/SBF_s_trial_starts_soon_but_how_did_he_and_FTX_get_here]]: Legal actions taken against individuals or entities for fraudulent activities and/or conspiring to commit illegal acts.\n\n[entities/ftx]\n- sam-bankman-fried [co-founded] ftx (from [[sources/SBF_s_trial_starts_soon_but_how_did_he_and_FTX_get_here]])\n- ftx [provided-capital-to] alameda-research (from [[sources/SBF_s_trial_starts_soon_but_how_did_he_and_FTX_get_here]])\n- ftx [resulted-in] cryptocurrency-exchange-collapse (from [[sources/SBF_s_trial_starts_soon_but_how_did_he_and_FTX_get_here]])\n- sam-bankman-fried [owns] ftx (from [[sources/SBF_riding_high_on_FTX_reportedly_offered_5B_to_Trump_to_cancel_President_re-run]])\n\n[sources/SBF_s_trial_starts_soon_but_how_did_he_and_FTX_get_here]\n- FTX was founded by Sam Bankman-Fried in 2019\n- FTX reached a peak valuation of $32 billion in 2022\n- Alameda Research received over $2 billion in capital from investors\n- FTX had a balance sheet showing assets significantly higher than the market value of its tokens\n- Binance pulled out $2.1 billion in BUSD and FTT from FTX\n- FTX filed for Chapter 11 bankruptcy in mid-November 2022\n- FTX's collapse led to the bankruptcy of BlockFi and Genesis Global Trading\n- FTX's collapse affected billions of crypto assets in legal proceedings\n- Bankman-Fried maintains his innocence but faces multiple criminal charges\n- FTX and Alameda Research's former CEO, Caroline Ellison, pleaded guilty to federal charges\n- FTX's collapse caused significant damage to the crypto industry\n- Bankman-Fried is represented by Cohen & Gresser and Mark Cohen, a high-profile defense attorney\n- FTX's collapse resulted in the loss of billions of dollars for investors and creditors\n- FTX's collapse highlighted the risks associated with unregulated cryptocurrency exchanges\n\n[concepts/fraud-and-conspiracy-charges]\nLegal actions taken against individuals or entities for fraudulent activities and/or conspiring to commit illegal acts.\n\n[raw:sources/Sam_Altman_backs_teens_startup_Google_unveils_the_Pixel_8_and_TikTok_tests_an_ad-free_tier]\nSBF allegedly tried to buy off Trump: The TC team’s been trained on the Manhattan Federal Court for the trial of Sam Bankman-Fried, the disgraced entrepreneur accused of orchestrating the collapse of cryptocurrency exchange FTX. But fascinating details about SBF’s political dealings are emerging from a book by Michael Lewis, “Going Infinite,” that debuted on the first day of the trial, like SBF’s attempt to buy off Trump to get him to not run again for president.\n\n[raw:sources/SBF_riding_high_on_FTX_reportedly_offered_5B_to_Trump_to_cancel_President_re-run]\nCome Tuesday, our eyes will be trained on the Manhattan Federal Court for the trial of Sam Bankman-Fried, the disgraced cryptocurrency entrepreneur accused of orchestrating “one of the biggest financial frauds in American history”: the multibillion-dollar collapse of FTX, the crypto exchange he founded and led.\n\n[concepts/alameda-research-scheme]\n- From [[sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand]]: Alameda Research's alleged involvement in FTX's collapse\n\n[raw:sources/SBF_s_trial_starts_soon_but_how_did_he_and_FTX_get_here]\nBankman-Fried, however, maintained his innocence. At The New York Times’ DealBook Summit, he appeared virtually from the Bahamas, saying “I didn’t ever try to commit fraud on anyone; I was shocked by what happened this month.” In a publi\n\n[Knowledge graph]\nsam-bankman-fried [accused] bankman-fried-characterization (from sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand)\nsam-bankman-fried [defended] bankman-fried-characterization (from sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand)\nsam-bankman-fried [involved] alameda-research-scheme (from sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand)\nalameda-research-scheme [alleged] bankman-fried-characterization (from sources/Is_Sam_Bankman-Fried_a_bad_man_or_a_good_boy_Lawyers_swap_opening_statements_before_first_witnesses_take_the_stand)\nsam-bankman-fried [co-founded] ftx (from sources/SBF_s_trial_starts_soon_but_how_did_he_and_FTX_get_here)\nsam-bankman-fried [co-founded] alameda-research (from sources/SBF_s_trial_starts_soon_but_how_did_he_and_FTX_get_here)\n\nQuestion: Who is the individual that persuaded Adam Yedidia to leave Jane Street and join both Alameda and FTX, and is also accused by the prosecution of committing fraud for personal gain, as reported by Fortune and TechCrunch?\nAnswer:",
+  "model_call_ids": [
+    224,
+    225,
+    226
+  ],
+  "request_attempts": 3,
+  "failed_requests": 0,
+  "llm_calls": 3,
+  "input_tokens": 8616,
+  "output_tokens": 231,
+  "em": 1.0,
+  "token_f1": 1.0,
+  "rouge_l": 1.0
+}
