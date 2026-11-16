@@ -39,7 +39,7 @@ MODEL="${1:?usage: $0 <hf_model> -- <command ...>}"; shift
 PORT="${PORT:-8000}"
 MEM="${GPU_MEM_UTIL:-0.85}"
 MAXLEN="${MAX_MODEL_LEN:-32768}"
-VLLM_IMAGE="${VLLM_IMAGE:-llm-wiki-benchmark:structured-wiki-v3}"
+VLLM_IMAGE="${VLLM_IMAGE:-llm-wiki-benchmark:structured-wiki-v4}"
 RESULTS_DIR="${RESULTS_DIR:-$PWD/results}"
 mkdir -p "$RESULTS_DIR"
 RESULTS_DIR="$(cd "$RESULTS_DIR" && pwd)"

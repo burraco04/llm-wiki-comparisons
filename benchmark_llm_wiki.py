@@ -39,8 +39,16 @@ from benchmark_artifacts import (
 ROOT = Path(__file__).resolve().parent
 OUT = ROOT / "results"
 EMBEDDING_MODEL = "sentence-transformers/all-MiniLM-L6-v2"
-BENCHMARK_VERSION = "structured_wiki_v3"
+BENCHMARK_VERSION = "structured_wiki_v4"
 CONTEXT_BUDGET = 12000
+JSON_MAX_REQUESTS = 3
+JSON_INVALID_ATTEMPTS = 2
+JSON_TOKEN_MULTIPLIER = 4
+JSON_CONTEXT_RESERVE = 128
+JSON_RETRY_INSTRUCTION = (
+    "\nPrevious JSON was invalid or incomplete. Return compact JSON: no indentation "
+    "or whitespace padding; no repeated items or relations. Close every array and object."
+)
 STEMMER = SnowballStemmer("english")
 DIRECT_SYSTEMS = ("rag_semantic", "wiki_routed", "wiki_bm25", "wiki_hybrid")
 WIKI_MODES = ("classic", "crow")
@@ -138,8 +146,18 @@ def make_dataset(top_docs: int, max_questions: int, *, revision: str | None = No
     return docs, questions[:max_questions]
 
 
+class JSONGenerationError(ValueError):
+    def __init__(self, message: str, *, truncated: bool):
+        super().__init__(message)
+        self.truncated = truncated
+
+
 class VLLM:
-    def __init__(self, model: str, base_url: str, api_key: str, timeout: float, events_path: Path | None = None):
+    def __init__(self, model: str, base_url: str, api_key: str, timeout: float,
+                 events_path: Path | None = None, *, context_tokens: int = 32768):
+        if context_tokens <= JSON_CONTEXT_RESERVE:
+            raise ValueError("context_tokens must exceed the JSON retry reserve")
+        self.context_tokens = context_tokens
         self.model, self.client = model, OpenAI(base_url=base_url.rstrip("/"), api_key=api_key, timeout=timeout, max_retries=0)
         self.calls = self.input_tokens = self.output_tokens = 0
         self.structured_output = True
@@ -189,33 +207,59 @@ class VLLM:
         return (choice.message.content or "").strip()
 
     def ask_json(self, prompt: str, schema: dict, max_tokens: int, stage: str) -> dict[str, Any]:
-        """Validate complete JSON responses; retry once, then report the failure.
+        """Validate JSON, repairing truncation with bounded extra output space.
 
         Only an explicit server rejection of JSON-schema support disables it.
         Transport/authentication errors propagate instead of masquerading as bad JSON.
         """
-        for attempt in range(2):
+        budget, ceiling = max_tokens, max_tokens * JSON_TOKEN_MULTIPLIER
+        invalid_attempts, saw_truncation = 0, False
+        for attempt in range(JSON_MAX_REQUESTS):
             response_format = {"type": "json_schema", "json_schema": {
                 "name": "wiki_response", "strict": True, "schema": schema,
             }} if self.structured_output else None
             request = prompt + "\n\nReturn one JSON object matching this schema:\n" + json.dumps(schema)
             if attempt:
-                request += "\nThe previous reply was invalid or incomplete. Return complete JSON only."
+                request += JSON_RETRY_INSTRUCTION
             try:
-                raw = self.ask(request, max_tokens, response_format=response_format, stage=stage)
+                raw = self.ask(request, budget, response_format=response_format, stage=stage)
             except BadRequestError as exc:
                 message = str(exc).lower()
                 if not self.structured_output or not any(x in message for x in ("response_format", "json_schema", "structured output", "structured_outputs")):
                     raise
                 self.structured_output = False
-                raw = self.ask(request, max_tokens, stage=stage)
+                raw = self.ask(request, budget, stage=stage)
+            event = self.events[-1]
+            event["json_attempt"] = attempt + 1
             data = parse_json_object(raw)
             try:
                 validate(data, schema)
+                event["json_validation"] = "valid"
                 return data
             except ValidationError:
                 self.json_failures += 1
-        raise ValueError(f"Invalid JSON after two attempts during {stage}")
+                event["json_validation"] = "invalid"
+            if event.get("finish_reason") == "length":
+                saw_truncation = True
+                # Use measured prompt tokens, not a characters-to-tokens estimate.
+                # The reserve covers the extra repair instruction on the next call.
+                available = self.context_tokens - event["input_tokens"] - JSON_CONTEXT_RESERVE
+                next_budget = min(budget * 2, ceiling, available)
+                event["json_retry"] = {"reason": "output_length", "next_max_tokens": next_budget,
+                                       "context_tokens": self.context_tokens}
+                if next_budget <= budget:
+                    break
+                budget = next_budget
+            else:
+                invalid_attempts += 1
+                event["json_retry"] = {"reason": "schema_validation", "next_max_tokens": budget}
+                if invalid_attempts >= JSON_INVALID_ATTEMPTS:
+                    break
+        raise JSONGenerationError(
+            f"Invalid JSON after {attempt + 1} generation attempts during {stage} "
+            f"(output_truncated={saw_truncation}, last_max_tokens={event['request']['max_tokens']})",
+            truncated=saw_truncation,
+        )
 
     def snapshot(self) -> tuple[int, int, int]: return self.calls, self.input_tokens, self.output_tokens
     def delta(self, before: tuple[int, int, int]) -> dict[str, int]:
@@ -320,7 +364,31 @@ class StructuredWiki:
         started, before = time.perf_counter(), llm.snapshot()
         timing = {}
         t = time.perf_counter()
-        data = llm.ask_json(EXTRACT.format(title=doc["title"], text=doc["text"]), INGEST_SCHEMA, 4096, "ingest_extract")
+        extract_prompt = EXTRACT.format(title=doc["title"], text=doc["text"])
+        extraction_mode = "single"
+        try:
+            data = llm.ask_json(extract_prompt, INGEST_SCHEMA, 4096, "ingest_extract")
+        except JSONGenerationError as exc:
+            if not exc.truncated:
+                raise
+            # Repeated whitespace/relations may not terminate even with more tokens.
+            # Retry smaller independent outputs from the SAME full original source;
+            # never repair or admit the truncated response as source knowledge.
+            extraction_mode = "sectioned_after_truncation"
+            data = {}
+            for section, fields in (
+                ("facts", ("summary", "key_points", "facts_and_data")),
+                ("nodes", ("entities", "concepts")),
+                ("relations", ("relationships",)),
+            ):
+                schema = object_schema({field: INGEST_SCHEMA["properties"][field] for field in fields})
+                prompt = (extract_prompt + "\n\nRecovery: return ONLY these fields: " + ", ".join(fields)
+                          + ". Use compact JSON, no whitespace padding, and list each item only once.")
+                if section == "relations":
+                    prompt += ("\nUse only these previously extracted nodes and their exact IDs:\n"
+                               + json.dumps({field: data[field] for field in ("entities", "concepts")}, ensure_ascii=False))
+                data.update(llm.ask_json(prompt, schema, 4096, "ingest_extract_" + section))
+            validate(data, INGEST_SCHEMA)
         timing["pass1_llm"] = time.perf_counter() - t
         # Invalid extraction aborts this wiki's construction instead of substituting a
         # source-only wiki. Raw model output is never truncated to its first line.
@@ -399,7 +467,8 @@ class StructuredWiki:
         self.rebuild_pages()
         timing["write_code"] = time.perf_counter() - t
         row = {"document": doc["title"], "seconds_wall": time.perf_counter() - started, **llm.delta(before),
-               "timing": timing, "created": created, "updated": list(dict.fromkeys(updated)),
+               "timing": timing, "extraction_mode": extraction_mode,
+               "created": created, "updated": list(dict.fromkeys(updated)),
                "merges": merge_map, "conflicts": conflicts, "rejected_relations": rejected_relations,
                "entities_extracted": sum(i["node_type"] == "entity" for i in items),
                "concepts_extracted": sum(i["node_type"] == "concept" for i in items)}
@@ -1194,6 +1263,8 @@ def main(argv: list[str] | None = None) -> int:
                         help="Independent note-wiki modes, in execution order (default: classic crow).")
     parser.add_argument("--dataset-revision", default=None,
                         help="Optional Hugging Face revision; actual dataset fingerprints/checksums are always saved.")
+    parser.add_argument("--llm-context-tokens", type=int, default=os.getenv("LLM_MAX_MODEL_LEN", "32768"),
+                        help="Served context limit used to bound JSON retries (defaults to LLM_MAX_MODEL_LEN).")
     args = parser.parse_args(argv)
     if not args.model:
         parser.error("--model is required (or set LLM_MODEL)")
@@ -1203,6 +1274,8 @@ def main(argv: list[str] | None = None) -> int:
         parser.error("--top-docs and --max-questions must be positive")
     if len(args.wiki_modes) != len(set(args.wiki_modes)):
         parser.error("--wiki-modes cannot contain duplicate modes")
+    if args.llm_context_tokens <= JSON_CONTEXT_RESERVE:
+        parser.error("--llm-context-tokens must exceed the JSON retry reserve")
     model = args.model
     run_label = f"docs_{args.top_docs}_questions_{args.max_questions}"
     run_id = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S_%fZ")
@@ -1230,7 +1303,18 @@ def main(argv: list[str] | None = None) -> int:
         "rag_top_k": 3, "rag_chunk_words": 200,
         "wiki_search": "compiled-page and raw-source paragraphs; BM25 or RRF(k=60)",
         "wiki_query_preparation": "LLM page selection and term expansion for all three structured-wiki strategies",
-        "llm_settings": {"temperature": 0, "sdk_transport_retries": 0, "json_validation_attempts": 2,
+        "llm_settings": {"temperature": 0, "sdk_transport_retries": 0,
+                         "json_validation_attempts": JSON_INVALID_ATTEMPTS,
+                         "json_max_generation_attempts": JSON_MAX_REQUESTS,
+                         "json_retry_token_multiplier": JSON_TOKEN_MULTIPLIER,
+                         "json_retry_context_reserve": JSON_CONTEXT_RESERVE,
+                         "served_context_tokens": args.llm_context_tokens,
+                         "json_retry_instruction": JSON_RETRY_INSTRUCTION,
+                         "extract_recovery": "facts/nodes/relations from full original source after exhausted truncation",
+                         "json_output_budgets": {
+                             stage: {"initial": initial, "ceiling": initial * JSON_TOKEN_MULTIPLIER}
+                             for stage, initial in (("ingest_extract", 4096), ("ingest_reconcile", 1024),
+                                                    ("query_route", 512), ("query_search_terms", 384))},
                          "extract_max_tokens": 4096, "reconcile_max_tokens": 1024,
                          "route_max_tokens": 512, "search_terms_max_tokens": 384, "answer_max_tokens": 96},
         "writeback_enabled": False, "replicates": 1, "randomized_order": False,
@@ -1248,7 +1332,7 @@ def main(argv: list[str] | None = None) -> int:
         "latency_scope": "Retrieval plus generation, excluding per-query result export. Library timing includes HTTP trace capture.",
         "relevant_environment": redact_secrets({key: value for key, value in os.environ.items()
                                   if key.startswith(("OKF_", "VLLM_", "BENCHMARK_"))
-                                  or key in {"LLM_MODEL", "LLM_BASE_URL"}})}
+                                  or key in {"LLM_MODEL", "LLM_BASE_URL", "LLM_MAX_MODEL_LEN"}})}
     write_json(run_dir / "benchmark_manifest.json", manifest)
     write_json(run_dir / "runtime_environment.json", runtime_snapshot())
     prompt_manifest = save_prompt_snapshot(
@@ -1281,7 +1365,8 @@ def main(argv: list[str] | None = None) -> int:
     wikis: dict[str, dict[str, Any]] = {}
     save_run(run_dir, model, structured, wikis, manifest, status)
     llm = VLLM(model, os.environ["LLM_BASE_URL"], os.getenv("VLLM_API_KEY", "EMPTY"),
-               float(os.getenv("VLLM_TIMEOUT_SECONDS", "1200")), run_dir / "structured_wiki" / "model_calls.jsonl")
+               float(os.getenv("VLLM_TIMEOUT_SECONDS", "1200")), run_dir / "structured_wiki" / "model_calls.jsonl",
+               context_tokens=args.llm_context_tokens)
     try:
         structured = run_structured_wiki(llm, docs, questions, run_dir, progress=progress)
     except Exception as exc:

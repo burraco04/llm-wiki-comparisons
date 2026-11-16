@@ -17,7 +17,7 @@ APPLICATION_FILES = (
 )
 REBUILD_MESSAGE = (
     "Rebuild the benchmark image from this checkout (docker build -t "
-    "llm-wiki-benchmark:structured-wiki-v3 .), then set VLLM_IMAGE to its tag."
+    "llm-wiki-benchmark:structured-wiki-v4 .), then set VLLM_IMAGE to its tag."
 )
 
 # This runs even in an old image: it imports only the Python standard library,

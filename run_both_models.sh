@@ -5,7 +5,7 @@ set -euo pipefail
 cd "$(dirname "${BASH_SOURCE[0]}")"
 mkdir -p logs
 
-VLLM_IMAGE="${VLLM_IMAGE:-llm-wiki-benchmark:structured-wiki-v3}"
+VLLM_IMAGE="${VLLM_IMAGE:-llm-wiki-benchmark:structured-wiki-v4}"
 # Fail before reserving GPUs if the image still contains an older benchmark.
 # Jobs inherit the checked immutable ID and verify it again on their node.
 VLLM_IMAGE="$(python3 ./verify_benchmark_image.py "$VLLM_IMAGE")"

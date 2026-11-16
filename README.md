@@ -1,8 +1,8 @@
 # LLM Wiki comparison benchmark
 
-Direct calls disable implicit OpenAI SDK transport retries so each request attempt is visible. JSON validation still allows two attempts; failed requests remain in the traces and evaluation records.
+Direct calls disable implicit OpenAI SDK transport retries so each request attempt is visible. Ordinary invalid JSON allows two validation failures. Truncated JSON can use up to three generation attempts with increasing output budgets. Every request and recovery remains in the traces.
 
-## Protocol: structured_wiki_v3
+## Protocol: structured_wiki_v4
 
 Each model/subset run evaluates six configurations on the same documents and questions:
 
@@ -24,6 +24,40 @@ policy. Neither wiki ingests generated answers during evaluation.
 Classic and CROW build fresh bundles with the same source order, writer, prompt
 overrides and installed library. The default classifier is `LiquidAI/d1-3B`.
 The library is third-party work; its internal algorithms are not modified.
+Its version is pinned to 0.8.0, matching the recorded v3 experiment.
+
+## Recovery from truncated structured extraction
+
+The v3 large Qwen2.5 run stopped on document 5 after two incomplete JSON
+responses, both ending at 4,096 completion tokens. The traces also contain
+whitespace padding and repeated relations, not a context-length or memory error.
+
+Version v4 keeps the original extraction prompt, schema, source documents and
+initial budgets. Only invalid responses trigger recovery:
+
+- An invalid reply ending with `finish_reason=length` increases the output budget,
+  normally 4,096 → 8,192 → 16,384 tokens for extraction. Retry growth is bounded
+  by measured prompt usage and the served context limit, with 128 tokens reserved.
+- Repair instructions request compact JSON without whitespace padding or repeated
+  items. Non-truncated validation failures retain their output budget.
+- If whole-document extraction still fails after truncation, three smaller JSON
+  outputs request facts, nodes, then relations. Each reads the full original
+  document; relations receive the actual extracted node IDs. Partial responses
+  are discarded, never repaired into invented knowledge or source-only pages.
+- Each call allows at most three generation attempts, or two ordinary validation
+  failures. Failed schema-support negotiation can add a separately traced request.
+  If the sectional recovery also fails, construction still fails explicitly.
+
+The manifest records the policy, repair instruction and served context limit.
+Requests record actual caps, validation outcomes and retry reasons. Ingestion
+records distinguish `single` from `sectioned_after_truncation`. All recovery work
+is included in construction time, calls and token usage. Historical v3 outputs
+remain unchanged; new outputs go under `results/structured_wiki_v4`.
+
+The served limit defaults to the container's `LLM_MAX_MODEL_LEN`. Use
+`--llm-context-tokens` only to match the actual inference service configuration.
+Changing recovery can change the generated wiki; use the same v4 image for all
+conditions of a new comparative matrix and do not silently pool v3 and v4.
 
 ## Build and submit
 
@@ -32,11 +66,11 @@ metadata collector and prompts. Use the same rebuilt image for all four runs;
 keep the source checkout unchanged while runs are queued or executing.
 
 ~~~bash
-docker build -t llm-wiki-benchmark:structured-wiki-v3 .
-VLLM_IMAGE=llm-wiki-benchmark:structured-wiki-v3 bash run_both_models.sh
+docker build -t llm-wiki-benchmark:structured-wiki-v4 .
+VLLM_IMAGE=llm-wiki-benchmark:structured-wiki-v4 bash run_both_models.sh
 ~~~
 
-All launchers default to `llm-wiki-benchmark:structured-wiki-v3`.
+All launchers default to `llm-wiki-benchmark:structured-wiki-v4`.
 Before submitting, `run_both_models.sh` checks the actual image files against
 the local benchmark, adapters, service script, metadata collector, Markdown
 prompts and requirements. This check uses a temporary container without GPUs
@@ -48,7 +82,7 @@ cannot silently switch an already submitted job to a different image.
 To check an existing image separately, without submitting a job:
 
 ~~~bash
-python3 verify_benchmark_image.py llm-wiki-benchmark:structured-wiki-v3
+python3 verify_benchmark_image.py llm-wiki-benchmark:structured-wiki-v4
 ~~~
 
 The launcher submits four Slurm jobs: Qwen2.5-3B-Instruct and Qwen3.5-4B, each
@@ -59,7 +93,7 @@ Classic and CROW run sequentially within that allocation.
 For a small validation run:
 
 ~~~bash
-VLLM_IMAGE=llm-wiki-benchmark:structured-wiki-v3 PORT=8000 \
+VLLM_IMAGE=llm-wiki-benchmark:structured-wiki-v4 PORT=8000 \
   sbatch --export=ALL run_with_vllm.sh Qwen/Qwen2.5-3B-Instruct -- \
   python benchmark_llm_wiki.py --top-docs 3 --max-questions 25 \
   --wiki-modes classic crow
@@ -74,9 +108,22 @@ Both note-wiki constructions add work. Set the allocation time without editing
 the launcher when needed:
 
 ~~~bash
-RUN_TIME_LIMIT=12:00:00 VLLM_IMAGE=llm-wiki-benchmark:structured-wiki-v3 \
+RUN_TIME_LIMIT=12:00:00 VLLM_IMAGE=llm-wiki-benchmark:structured-wiki-v4 \
   bash run_both_models.sh
 ~~~
+
+To rerun only the previously incomplete condition, on its original dataset revision:
+
+~~~bash
+VLLM_IMAGE=llm-wiki-benchmark:structured-wiki-v4 PORT=8002 \
+  sbatch --export=ALL -w faretra run_with_vllm.sh Qwen/Qwen2.5-3B-Instruct -- \
+  python benchmark_llm_wiki.py --top-docs 8 --max-questions 150 \
+  --wiki-modes classic crow --dataset-revision 71ac0d0bd1f951d2d6b70311f7d2ae404e1ffa82
+~~~
+
+Rebuild the image first. This runs all six configurations in the requested
+condition and keeps the historical run intact. A complete new matrix uses
+`bash run_both_models.sh` instead.
 
 The launchers capture actual image identity, service commands, hardware
 inventory and package provenance when available. These are startup records,
@@ -134,7 +181,7 @@ python3 -m unittest -v test_startup_scripts test_verify_benchmark_image test_gpu
 Every run has a separate versioned, timestamped directory:
 
 ~~~text
-results/structured_wiki_v3/<model>/docs_<N>_questions_<M>/<UTC-run-id>/
+results/structured_wiki_v4/<model>/docs_<N>_questions_<M>/<UTC-run-id>/
   benchmark_manifest.json
   runtime_environment.json
   run_status.json

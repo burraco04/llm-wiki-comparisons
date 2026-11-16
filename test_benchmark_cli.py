@@ -116,6 +116,18 @@ class CLITests(unittest.TestCase):
         self.assertFalse(self.read(run, "run_status.json")["all_systems_complete"])
         self.assertFalse(self.read(run, "paired_comparison.json")["paired_comparison_complete"])
 
+    def test_recovery_policy_and_context_limit_are_saved(self):
+        result, run = self.run_cli("--llm-context-tokens", "16384")
+        self.assertEqual(result, 0)
+        manifest = self.read(run, "benchmark_manifest.json")
+        self.assertEqual(manifest["benchmark_version"], "structured_wiki_v4")
+        settings = manifest["llm_settings"]
+        self.assertEqual(settings["served_context_tokens"], 16384)
+        self.assertEqual(settings["json_max_generation_attempts"], 3)
+        self.assertEqual(settings["json_output_budgets"]["ingest_extract"],
+                         {"initial": 4096, "ceiling": 16384})
+        self.assertIn("full original source", settings["extract_recovery"])
+
     def test_single_mode_is_explicit_diagnostic_not_a_complete_pair(self):
         result, run = self.run_cli("--wiki-modes", "crow")
         self.assertEqual(result, 0)
