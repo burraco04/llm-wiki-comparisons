@@ -28,9 +28,6 @@ query() {
   fi
 }
 
-query -L
-query --query-gpu=index,uuid,name,memory.free,memory.total --format=csv
-
 GPU_LIST="${CUDA_VISIBLE_DEVICES:-${SLURM_JOB_GPUS:-}}"
 if [[ -z "$GPU_LIST" ]]; then
   printf 'ERROR: no allocated GPUs in CUDA_VISIBLE_DEVICES or SLURM_JOB_GPUS\n' >&2
@@ -46,6 +43,6 @@ for gpu in "${allocated[@]}"; do
     continue
   fi
   printf 'Checking allocated GPU %s\n' "$gpu"
-  query -i "$gpu" --query-gpu=uuid,memory.free,memory.total --format=csv
+  query -i "$gpu" --query-gpu=index,uuid,pci.bus_id,memory.free,memory.total --format=csv
 done
 exit "$status"

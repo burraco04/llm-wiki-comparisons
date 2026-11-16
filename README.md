@@ -131,6 +131,43 @@ not peak-memory or energy measurements.
 
 ## Troubleshooting an immediate exit
 
+### Numeric GPU access works, but UUID lookup fails
+
+Logs `exp-16605618` through `exp-16605621` stopped before Docker/model startup:
+Slurm allocated GPUs `2,3`, index-to-UUID discovery succeeded, but the subsequent
+`nvidia-smi -i GPU-190ed... --query-gpu=memory.free` failed with exit 255.
+On the same host, querying index 2 returned the expected UUID, PCI `81:00.0` and
+free memory, whereas querying that UUID reported an error for PCI `01:00.0`.
+This establishes a UUID lookup/access problem; it does not establish that
+the allocated GPU is physically defective or that CUDA works.
+
+`start_vllm.sh` now retains numeric selectors when the normalized
+`CUDA_VISIBLE_DEVICES` and `SLURM_JOB_GPUS` assignments agree. It checks each
+allocated index's UUID and memory, passes exactly those indices to Docker, and
+retains both UUIDs in logs/host allocation metadata. It refuses empty, duplicate
+or conflicting assignments and never selects a different GPU as a workaround.
+Numeric memory failures remain fatal. The UUID-only allocation path is retained.
+
+This correction affects host scripts, so the existing verified v4 image can be
+used without rebuilding it. Copy the updated host scripts to the server first.
+Before queuing the full matrix, one scheduled startup-only check can verify
+both real inference services and then print CLI help without running experiments:
+
+~~~bash
+VLLM_IMAGE=llm-wiki-benchmark:structured-wiki-v4 PORT=8000 \
+  sbatch --export=ALL -w faretra run_with_vllm.sh Qwen/Qwen2.5-3B-Instruct -- \
+  python benchmark_llm_wiki.py --help
+~~~
+
+After this reaches `ready` and `done`, submit `bash run_both_models.sh` normally.
+If Docker or CUDA still reports an error, inspect that new service log: the
+successful index query alone cannot establish CUDA health. Driver/device repair
+must be coordinated with the server administrator, without resetting GPUs used
+by other allocations. `gpu_diagnostic.sh` now queries only its allocated devices
+and includes PCI identifiers; unrelated GPUs no longer determine its result.
+
+### An older image rejects benchmark arguments
+
 The November 11 logs (`exp-16419749` through `exp-16419752` and
 `exp-16420762` through `exp-16420765`) show both model services becoming ready,
 followed by `unrecognized arguments: --wiki-modes classic crow`. The image

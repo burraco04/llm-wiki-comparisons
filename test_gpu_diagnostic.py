@@ -51,6 +51,8 @@ printf 'fixture GPU query succeeded\\n'
         )
 
     def allocated_queries(self) -> list[str]:
+        if not self.trace.exists():
+            return []
         return [line for line in self.trace.read_text(encoding="utf-8").splitlines() if line.startswith("-i ")]
 
     def test_uses_bash_and_checks_only_allocated_gpu_indices(self) -> None:
@@ -59,9 +61,10 @@ printf 'fixture GPU query succeeded\\n'
         result = self.run_diagnostic(CUDA_VISIBLE_DEVICES="0,2", SLURM_JOB_GPUS="1,3")
         self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
         self.assertEqual(self.allocated_queries(), [
-            "-i 0 --query-gpu=uuid,memory.free,memory.total --format=csv",
-            "-i 2 --query-gpu=uuid,memory.free,memory.total --format=csv",
+            "-i 0 --query-gpu=index,uuid,pci.bus_id,memory.free,memory.total --format=csv",
+            "-i 2 --query-gpu=index,uuid,pci.bus_id,memory.free,memory.total --format=csv",
         ])
+        self.assertEqual(len(self.trace.read_text(encoding="utf-8").splitlines()), 2)
 
     def test_slurm_fallback_accepts_gpu_uuids(self) -> None:
         result = self.run_diagnostic(SLURM_JOB_GPUS="GPU-first,GPU-second")
@@ -81,6 +84,7 @@ printf 'fixture GPU query succeeded\\n'
         self.assertNotEqual(result.returncode, 0, result.stdout + result.stderr)
         self.assertIn("no allocated GPUs", result.stderr)
         self.assertEqual(self.allocated_queries(), [])
+        self.assertFalse(self.trace.exists())
 
 
 if __name__ == "__main__":

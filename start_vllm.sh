@@ -23,9 +23,9 @@
 #  Stop:   docker rm -f vllm-8000
 #  Logs:   docker logs -f vllm-8000
 #
-#  GPU: uses the first two entries in $CUDA_VISIBLE_DEVICES (set by Slurm),
-#  else $SLURM_JOB_GPUS, else fails.  The LLM uses container GPU 0 and the
-#  classifier container GPU 1.
+#  GPU: requires exactly two allocated devices. Matching numeric CUDA/Slurm
+#  assignments retain those indices for queries and Docker; UUID identities
+#  are still checked and logged. The services use container GPUs 0 and 1.
 #  The API is only reachable from this machine (127.0.0.1); use an SSH tunnel from outside.
 # ═══════════════════════════════════════════════════════
 set -Eeuo pipefail
@@ -92,9 +92,18 @@ query_gpu() {
   fi
 }
 
-# ── which GPUs (Docker ignores Slurm, so pin both explicitly by UUID) ──
+# Docker must receive exactly the allocated devices. Keep selector and identity
+# separate: on this host UUID-based NVML lookups can fail even when the SAME
+# device is readable when addressed by its allocated numeric index.
 STARTUP_STAGE=gpu_discovery
+VISIBLE_GPU_LIST="${CUDA_VISIBLE_DEVICES:-}"
+VISIBLE_GPU_LIST="${VISIBLE_GPU_LIST//[[:space:]]/}"
+if [[ ${CUDA_VISIBLE_DEVICES+x} && -z "$VISIBLE_GPU_LIST" ]]; then
+  echo "ERROR: CUDA_VISIBLE_DEVICES is explicitly empty; no GPU access is permitted"
+  exit 1
+fi
 GPU_LIST="${CUDA_VISIBLE_DEVICES:-${SLURM_JOB_GPUS:-}}"
+GPU_LIST="${GPU_LIST//[[:space:]]/}"
 printf '>>> GPU discovery: CUDA_VISIBLE_DEVICES=%s SLURM_JOB_GPUS=%s\n' "${CUDA_VISIBLE_DEVICES:-unset}" "${SLURM_JOB_GPUS:-unset}"
 if [[ -z "$GPU_LIST" ]]; then
   echo "ERROR: Slurm did not expose two GPUs through CUDA_VISIBLE_DEVICES or SLURM_JOB_GPUS"
@@ -105,19 +114,55 @@ if [[ -z "${GPU0:-}" || -z "${GPU1:-}" || -n "${extra:-}" ]]; then
   echo "ERROR: expected exactly two allocated GPUs, got '$GPU_LIST'"
   exit 1
 fi
+if [[ "$GPU0" == "$GPU1" ]]; then
+  echo "ERROR: expected two distinct allocated GPUs"
+  exit 1
+fi
+GPU_QUERY0="$GPU0"
+GPU_QUERY1="$GPU1"
+USE_NUMERIC_ALLOCATION=0
+JOB_GPU_LIST="${SLURM_JOB_GPUS:-}"
+JOB_GPU_LIST="${JOB_GPU_LIST//[[:space:]]/}"
+if [[ "$GPU0" =~ ^[0-9]+$ && "$GPU1" =~ ^[0-9]+$ && -n "$JOB_GPU_LIST" ]]; then
+  if [[ "$GPU_LIST" != "$JOB_GPU_LIST" ]]; then
+    echo "ERROR: numeric CUDA and Slurm GPU assignments differ; cannot infer host device mapping"
+    exit 1
+  fi
+  USE_NUMERIC_ALLOCATION=1
+fi
 for var in GPU0 GPU1; do
   gpu="${!var}"
   gpu="${gpu//[[:space:]]/}"
   if [[ "$gpu" != GPU-* ]]; then
     gpu=$(query_gpu "$gpu" uuid)
   fi
+  if [[ ! "$gpu" =~ ^GPU-[[:xdigit:]]{8}-[[:xdigit:]]{4}-[[:xdigit:]]{4}-[[:xdigit:]]{4}-[[:xdigit:]]{12}$ ]]; then
+    echo "ERROR: allocated GPU has an invalid UUID"
+    exit 1
+  fi
   printf -v "$var" '%s' "$gpu"
 done
+if [[ "$GPU0" == "$GPU1" ]]; then
+  echo "ERROR: allocated GPU selectors resolve to the same UUID"
+  exit 1
+fi
+if (( USE_NUMERIC_ALLOCATION )); then
+  GPU_SELECTOR0="$GPU_QUERY0"
+  GPU_SELECTOR1="$GPU_QUERY1"
+  printf '>>> verified numeric GPU selectors=%s,%s UUIDs=%s,%s\n' "$GPU_SELECTOR0" "$GPU_SELECTOR1" "$GPU0" "$GPU1"
+else
+  # UUID-only allocations retain explicit UUID selection. Never scan or choose
+  # a different GPU to work around a failed query.
+  GPU_QUERY0="$GPU0"
+  GPU_QUERY1="$GPU1"
+  GPU_SELECTOR0="$GPU0"
+  GPU_SELECTOR1="$GPU1"
+fi
 STARTUP_STAGE=gpu_memory_query
-FREE0=$(query_gpu "$GPU0" memory.free)
-TOTAL0=$(query_gpu "$GPU0" memory.total)
-FREE1=$(query_gpu "$GPU1" memory.free)
-TOTAL1=$(query_gpu "$GPU1" memory.total)
+FREE0=$(query_gpu "$GPU_QUERY0" memory.free)
+TOTAL0=$(query_gpu "$GPU_QUERY0" memory.total)
+FREE1=$(query_gpu "$GPU_QUERY1" memory.free)
+TOTAL1=$(query_gpu "$GPU_QUERY1" memory.total)
 echo ">>> LLM GPU $GPU0: ${FREE0}/${TOTAL0} MiB free, classifier GPU $GPU1: ${FREE1}/${TOTAL1} MiB free"
 echo ">>> requesting LLM=${MEM} and classifier=${CLASSIFIER_MEM} of total"
 
@@ -148,7 +193,7 @@ docker rm -f "$NAME" >/dev/null 2>&1 || true
 STARTUP_STAGE=container_start
 echo ">>> starting container $NAME from image $VLLM_IMAGE"
 docker run -d --name "$NAME" \
-  --gpus "\"device=${GPU0},${GPU1}\"" \
+  --gpus "\"device=${GPU_SELECTOR0},${GPU_SELECTOR1}\"" \
   --ipc=host \
   -v "$HF_CACHE":/root/.cache/huggingface \
   -v "$RESULTS_DIR":/workdir/results \
