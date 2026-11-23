@@ -183,7 +183,7 @@ CONFIG_ENV=()
 while IFS='=' read -r name _; do
   if [[ "$name" =~ ^[A-Za-z_][A-Za-z0-9_]*$ ]]; then
     case "$name" in
-      OKF_*|VLLM_API_KEY|VLLM_TIMEOUT_SECONDS)
+      OKF_*|VLLM_API_KEY|VLLM_TIMEOUT_SECONDS|HF_HUB_OFFLINE)
         CONFIG_ENV+=(--env "$name") ;;
     esac
   fi

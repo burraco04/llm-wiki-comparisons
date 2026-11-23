@@ -120,7 +120,7 @@ done
 set -eu
 printf 'sbatch\n' >> "$MOCK_DOCKER_LOG"
 [[ "$VLLM_IMAGE" == sha256:offline-fixture ]]
-printf 'MOCK job submitted\n'
+printf 'MOCK job submitted %s\n' "$*"
 """,
 }
 
@@ -341,6 +341,29 @@ class StartupScriptsTest(unittest.TestCase):
         result = self.run_bash("bash run_both_models.sh")
         self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
         self.assertEqual(self.docker_operations(), ["image_preflight"] + ["sbatch"] * 4)
+
+    def test_archived_matrix_uses_saved_subsets_in_all_four_jobs(self) -> None:
+        launch = "bash run_both_models.sh"
+        result = self.run_bash(launch, REPLAY_ARCHIVE="1")
+        self.assertNotEqual(result.returncode, 0)
+        self.assertNotIn("sbatch", self.docker_operations())
+        subsets = (
+            "docs_3_questions_25/20261116T110157_135698Z",
+            "docs_8_questions_150/20261116T113159_994748Z",
+        )
+        for subset in subsets:
+            run = self.work / "results/structured_wiki_v4/Qwen_Qwen2.5-3B-Instruct" / subset
+            (run / "dataset").mkdir(parents=True)
+            for name in ("benchmark_manifest.json", "dataset/documents.jsonl", "dataset/questions.jsonl"):
+                (run / name).touch()
+        result = self.run_bash(launch, REPLAY_ARCHIVE="1", RUN_NODE="")
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+        jobs = [line for line in result.stdout.splitlines() if "MOCK job submitted" in line]
+        self.assertEqual(len(jobs), 4)
+        for job, subset in zip(jobs, (subsets[0], subsets[0], subsets[1], subsets[1])):
+            self.assertIn("--dataset-dir /workdir/results/structured_wiki_v4/Qwen_Qwen2.5-3B-Instruct/"
+                          + subset + "/dataset", job)
+            self.assertNotIn(" -w ", job)
 
     def test_benchmark_failure_keeps_exit_code_and_cleans_up_services(self) -> None:
         result = self.run_launcher(MOCK_BENCHMARK_EXIT="23")

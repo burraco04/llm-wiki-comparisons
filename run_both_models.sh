@@ -11,19 +11,40 @@ VLLM_IMAGE="${VLLM_IMAGE:-llm-wiki-benchmark:structured-wiki-v4}"
 VLLM_IMAGE="$(python3 ./verify_benchmark_image.py "$VLLM_IMAGE")"
 export VLLM_IMAGE
 RUN_TIME_LIMIT="${RUN_TIME_LIMIT:-08:00:00}"
+RUN_NODE="${RUN_NODE-faretra}"
+node_args=()
+if [[ -n "$RUN_NODE" ]]; then
+  node_args=(-w "$RUN_NODE")
+fi
 
-# Different ports also make all jobs safe if Slurm schedules them on the same
-# host with different GPUs. The first pair is the 3-document/25-question run;
-# the second pair is the 8-document/150-question run.
-PORT=8000 sbatch --export=ALL --time="$RUN_TIME_LIMIT" -w faretra \
-  run_with_vllm.sh Qwen/Qwen2.5-3B-Instruct -- \
-  python benchmark_llm_wiki.py --wiki-modes classic crow
-PORT=8004 sbatch --export=ALL --time="$RUN_TIME_LIMIT" -w faretra \
-  run_with_vllm.sh Qwen/Qwen3.5-4B -- \
-  python benchmark_llm_wiki.py --wiki-modes classic crow
-PORT=8002 sbatch --export=ALL --time="$RUN_TIME_LIMIT" -w faretra \
-  run_with_vllm.sh Qwen/Qwen2.5-3B-Instruct -- \
-  python benchmark_llm_wiki.py --top-docs 8 --max-questions 150 --wiki-modes classic crow
-PORT=8003 sbatch --export=ALL --time="$RUN_TIME_LIMIT" -w faretra \
-  run_with_vllm.sh Qwen/Qwen3.5-4B -- \
-  python benchmark_llm_wiki.py --top-docs 8 --max-questions 150 --wiki-modes classic crow
+# Both models used byte-identical inputs at each scale. Reuse the saved Qwen2.5
+# subsets for both rather than picking whichever timestamp happens to be latest.
+small_data="structured_wiki_v4/Qwen_Qwen2.5-3B-Instruct/docs_3_questions_25/20261116T110157_135698Z/dataset"
+large_data="structured_wiki_v4/Qwen_Qwen2.5-3B-Instruct/docs_8_questions_150/20261116T113159_994748Z/dataset"
+if [[ "${REPLAY_ARCHIVE:-0}" == 1 ]]; then
+  for subset in "$small_data" "$large_data"; do
+    host_path="${RESULTS_DIR:-$PWD/results}/$subset"
+    for file in documents.jsonl questions.jsonl ../benchmark_manifest.json; do
+      if [[ ! -r "$host_path/$file" ]]; then
+        echo "Missing archived input $host_path/$file. Extract the archive in the checkout first." >&2
+        exit 1
+      fi
+    done
+  done
+fi
+
+# Distinct host ports allow the jobs to share a host on different GPUs.
+submit() {
+  local port="$1" model="$2" docs="$3" questions="$4" subset="$5"
+  local dataset_args=()
+  if [[ "${REPLAY_ARCHIVE:-0}" == 1 ]]; then
+    dataset_args=(--dataset-dir "/workdir/results/$subset")
+  fi
+  PORT="$port" sbatch --export=ALL --time="$RUN_TIME_LIMIT" "${node_args[@]}" \
+    run_with_vllm.sh "$model" -- python benchmark_llm_wiki.py \
+    --top-docs "$docs" --max-questions "$questions" --wiki-modes classic crow "${dataset_args[@]}"
+}
+submit 8000 Qwen/Qwen2.5-3B-Instruct 3 25 "$small_data"
+submit 8004 Qwen/Qwen3.5-4B          3 25 "$small_data"
+submit 8002 Qwen/Qwen2.5-3B-Instruct 8 150 "$large_data"
+submit 8003 Qwen/Qwen3.5-4B          8 150 "$large_data"

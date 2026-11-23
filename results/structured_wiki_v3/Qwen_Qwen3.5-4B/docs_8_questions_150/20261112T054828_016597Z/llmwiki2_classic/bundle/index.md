@@ -1,7 +1,0 @@
----
-okf_version: "0.2"
----
-
-# Subdirectories
-
-* [tech-news](tech-news/index.md) - Updates on technology industry events, company launches, and market developments.

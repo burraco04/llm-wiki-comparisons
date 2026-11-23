@@ -100,6 +100,28 @@ class CLITests(unittest.TestCase):
                      "dataset/documents.jsonl", "prompts/direct_prompts.json"):
             self.assertTrue((run / name).is_file(), name)
 
+    def test_archived_subset_replays_without_calling_the_hub(self):
+        archived = self.directory / "original-run"
+        metadata = {"name": "test input", "split": "train"}
+        bench.save_dataset(archived, DOCS, QUESTIONS, metadata)
+        bench.write_json(archived / "benchmark_manifest.json", {
+            "top_docs": 1, "max_questions": 2, "dataset": metadata,
+            **bench.input_fingerprints(DOCS, QUESTIONS),
+        })
+        data = archived / "dataset"
+        result, run = self.run_cli("--dataset-dir", str(data), "--top-docs", "1", "--max-questions", "2")
+        bench.make_dataset.assert_not_called()
+        self.assertEqual(result, 0)
+        manifest = self.read(run, "benchmark_manifest.json")
+        self.assertEqual(manifest["dataset"]["replayed_from"]["run_id"], archived.name)
+        for name in ("documents.jsonl", "questions.jsonl"):
+            self.assertEqual((run / "dataset" / name).read_bytes(), (data / name).read_bytes())
+        with self.assertRaisesRegex(ValueError, "Archived subset requires"):
+            bench.read_archived_dataset(data, 1, 1)
+        bench.save_dataset(archived, DOCS, [{**QUESTIONS[0], "question": "Changed question"}], metadata)
+        with self.assertRaisesRegex(ValueError, "questions_sha256"):
+            bench.read_archived_dataset(data, 1, 2)
+
     def test_one_mode_failure_keeps_other_results_and_null_missing_accuracy(self):
         def fail_classic(*args, mode, **kwargs):
             if mode == "classic":

@@ -39,6 +39,7 @@ from benchmark_artifacts import (
 ROOT = Path(__file__).resolve().parent
 OUT = ROOT / "results"
 EMBEDDING_MODEL = "sentence-transformers/all-MiniLM-L6-v2"
+DATASET_REVISION = "71ac0d0bd1f951d2d6b70311f7d2ae404e1ffa82"
 BENCHMARK_VERSION = "structured_wiki_v4"
 CONTEXT_BUDGET = 12000
 JSON_MAX_REQUESTS = 3
@@ -130,7 +131,7 @@ def make_dataset(top_docs: int, max_questions: int, *, revision: str | None = No
         for name, data in (("MultiHopRAG", queries), ("corpus", corpus)):
             info = data.info
             checksums = getattr(info, "download_checksums", None) or {}
-            resolved = sorted(set(re.findall(r"/resolve/([0-9a-f]{40})/", "\n".join(checksums))))
+            resolved = sorted(set(re.findall(r"(?:/resolve/|@)([0-9a-f]{40})/", "\n".join(checksums))))
             configs[name] = {"rows": len(data), "fingerprint": getattr(data, "_fingerprint", None),
                              "builder_version": str(getattr(info, "version", "")),
                              "resolved_repository_revisions": resolved,
@@ -144,6 +145,38 @@ def make_dataset(top_docs: int, max_questions: int, *, revision: str | None = No
                          "eligible_questions_before_cap": len(questions),
                          "selection": "non-null queries; documents by evidence frequency; dataset question order; no shuffle"})
     return docs, questions[:max_questions]
+
+
+def input_fingerprints(docs, questions) -> dict[str, Any]:
+    return {
+        "documents": [doc["title"] for doc in docs],
+        "document_order": [doc["id"] for doc in docs],
+        "document_sha256": {doc["id"]: hashlib.sha256(doc["text"].encode("utf-8")).hexdigest() for doc in docs},
+        "questions_sha256": hashlib.sha256(json.dumps(questions, sort_keys=True, ensure_ascii=False).encode()).hexdigest(),
+    }
+
+
+def read_archived_dataset(directory: Path, top_docs: int, max_questions: int):
+    """Load the original ordered subset and verify it against its adjacent run manifest."""
+    manifest_bytes = (directory.parent / "benchmark_manifest.json").read_bytes()
+    manifest = json.loads(manifest_bytes)
+    if (top_docs, max_questions) != (manifest["top_docs"], manifest["max_questions"]):
+        raise ValueError(f"Archived subset requires --top-docs {manifest['top_docs']} "
+                         f"--max-questions {manifest['max_questions']}")
+
+    def read_records(name: str) -> list[dict[str, Any]]:
+        with (directory / name).open(encoding="utf-8") as stream:
+            return [json.loads(line) for line in stream]
+
+    docs = read_records("documents.jsonl")
+    questions = read_records("questions.jsonl")
+    for key, actual in input_fingerprints(docs, questions).items():
+        if actual != manifest[key]:
+            raise ValueError(f"Archived dataset differs from benchmark_manifest.json ({key})")
+    metadata = {**manifest["dataset"], "replayed_from": {
+        "run_id": directory.parent.name, "manifest_sha256": hashlib.sha256(manifest_bytes).hexdigest(),
+    }}
+    return docs, questions, metadata
 
 
 class JSONGenerationError(ValueError):
@@ -1261,8 +1294,11 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--prompt-dir", type=Path, default=Path(os.getenv("OKF_PROMPTS_DIR", ROOT / "prompts_benchmark")))
     parser.add_argument("--wiki-modes", nargs="+", choices=WIKI_MODES, default=list(WIKI_MODES),
                         help="Independent note-wiki modes, in execution order (default: classic crow).")
-    parser.add_argument("--dataset-revision", default=None,
-                        help="Optional Hugging Face revision; actual dataset fingerprints/checksums are always saved.")
+    dataset_source = parser.add_mutually_exclusive_group()
+    dataset_source.add_argument("--dataset-revision", default=DATASET_REVISION,
+                                help="Hugging Face dataset revision (default: the final experiment commit).")
+    dataset_source.add_argument("--dataset-dir", type=Path,
+                                help="Read the exact subset from a restored run's dataset/ directory.")
     parser.add_argument("--llm-context-tokens", type=int, default=os.getenv("LLM_MAX_MODEL_LEN", "32768"),
                         help="Served context limit used to bound JSON retries (defaults to LLM_MAX_MODEL_LEN).")
     args = parser.parse_args(argv)
@@ -1343,16 +1379,16 @@ def main(argv: list[str] | None = None) -> int:
     manifest["prompt_snapshot"] = prompt_manifest
     dataset_metadata: dict[str, Any] = {}
     try:
-        docs, questions = make_dataset(args.top_docs, args.max_questions, revision=args.dataset_revision,
-                                       metadata=dataset_metadata)
+        if args.dataset_dir is None:
+            docs, questions = make_dataset(args.top_docs, args.max_questions, revision=args.dataset_revision,
+                                           metadata=dataset_metadata)
+        else:
+            docs, questions, dataset_metadata = read_archived_dataset(
+                args.dataset_dir, args.top_docs, args.max_questions)
         if not questions or any(not doc["text"].strip() for doc in docs):
             raise ValueError("Selected data has no questions or contains empty source documents")
-        manifest.update({"actual_questions": len(questions), "documents": [doc["title"] for doc in docs],
-                         "document_order": [doc["id"] for doc in docs],
-                         "document_sha256": {doc["id"]: hashlib.sha256(doc["text"].encode("utf-8")).hexdigest() for doc in docs},
-                         "questions": questions,
-                         "questions_sha256": hashlib.sha256(json.dumps(questions, sort_keys=True, ensure_ascii=False).encode()).hexdigest(),
-                         "dataset": dataset_metadata})
+        manifest.update({"actual_questions": len(questions), **input_fingerprints(docs, questions),
+                         "questions": questions, "dataset": dataset_metadata})
         manifest["dataset_statistics"] = save_dataset(run_dir, docs, questions, dataset_metadata)
         write_json(run_dir / "benchmark_manifest.json", manifest)
         progress({"component": "dataset", "state": "complete", "documents": len(docs), "questions": len(questions)})
