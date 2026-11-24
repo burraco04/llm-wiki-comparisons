@@ -79,6 +79,22 @@ class CheckpointBackupTests(unittest.TestCase):
                 prefix = "checkpoints/huggingface/hub/models--" + model.replace("/", "--")
                 self.assertEqual(REVISION, archive.read(prefix + "/refs/main").decode())
 
+    def test_qwen35_shard_names_survive_backup(self):
+        snapshot = self.snapshots["Qwen/Qwen3.5-4B"]
+        index = snapshot / "model.safetensors.index.json"
+        record = json.loads(index.read_bytes())
+        for key, old in record["weight_map"].copy().items():
+            new = old.replace("model-", "model.safetensors-")
+            (snapshot / old).rename(snapshot / new)
+            record["weight_map"][key] = new
+        index.write_text(json.dumps(record))
+        backup.extend_archive(self.data, self.cache, self.output, {})
+        with zipfile.ZipFile(self.output) as archive:
+            backup.verify_zip(archive, with_models=True)
+            prefix = f"checkpoints/huggingface/hub/models--Qwen--Qwen3.5-4B/snapshots/{REVISION}/"
+            for name in record["weight_map"].values():
+                self.assertEqual(archive.read(prefix + name), (snapshot / name).read_bytes())
+
     def test_invalid_shards_do_not_create_output(self):
         shard = self.snapshots[backup.ENCODER] / "model-00002-of-00002.safetensors"
         original = shard.read_bytes()

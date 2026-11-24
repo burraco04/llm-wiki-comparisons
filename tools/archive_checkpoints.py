@@ -170,7 +170,7 @@ def model_files(snapshot, model):
         name = "chat_templates/" + template.name
         files[name] = cached_file(snapshot, name)
     # Prefer the format loaded by the standard inference clients. Keep only one weight set.
-    for weights, pattern in [("model.safetensors", r"model-(\d+)-of-(\d+)\.safetensors"),
+    for weights, pattern in [("model.safetensors", r"model(?:\.safetensors)?-(\d+)-of-(\d+)\.safetensors"),
                              ("pytorch_model.bin", r"pytorch_model-(\d+)-of-(\d+)\.bin")]:
         index = weights + ".index.json"
         if (snapshot / index).exists():
