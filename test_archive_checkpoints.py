@@ -109,6 +109,31 @@ class CheckpointBackupTests(unittest.TestCase):
             backup.extend_archive(self.data, self.cache, self.output, {})
         self.assertEqual(self.output.read_bytes(), b"existing")
 
+    def test_shared_blob_uses_repository_digest_and_rejects_external_target(self):
+        snapshot = self.snapshots[backup.MODELS[0]]
+        shard = snapshot / "model-00001-of-00002.safetensors"
+        digest = hashlib.sha256(shard.read_bytes()).hexdigest()
+        repo = snapshot.parent.parent
+        blob = repo / "blobs" / digest
+        blob.parent.mkdir()
+        shared = repo.parent / "blobs" / "7f" / ("7f" * 32)
+        shared.parent.mkdir(parents=True)
+        shard.rename(shared)
+        try:
+            shard.symlink_to(Path("..") / ".." / "blobs" / digest)
+            blob.symlink_to(Path("..") / ".." / "blobs" / "7f" / shared.name)
+        except OSError as exc:
+            self.skipTest(f"Symlink creation unavailable: {exc}")
+        backup.extend_archive(self.data, self.cache, self.output, {})
+        with zipfile.ZipFile(self.output) as archive:
+            backup.verify_zip(archive, with_models=True)
+        blob.unlink()
+        external = self.cache / shared.name
+        shared.rename(external)
+        blob.symlink_to(external)
+        with self.assertRaisesRegex(ValueError, "Unexpected shared blob target"):
+            backup.cached_file(snapshot, shard.name)
+
     def test_bad_blob_digest_rejects_complete_but_substituted_shard(self):
         snapshot = self.snapshots[backup.ENCODER]
         shard = snapshot / "model-00002-of-00002.safetensors"

@@ -97,12 +97,26 @@ def cached_file(snapshot, name):
     path = snapshot / name
     resolved = path.resolve(strict=True)
     blob_dir = snapshot.parent.parent / "blobs"
-    if resolved != snapshot.resolve() / name:
-        if resolved.parent != blob_dir or not re.fullmatch(r"[0-9a-f]{40}|[0-9a-f]{64}", resolved.name):
-            raise ValueError(f"Unexpected symlink target for {path}")
     if not resolved.is_file() or not resolved.stat().st_size:
         raise ValueError(f"Missing or empty model file: {path}")
-    return resolved
+    if resolved == snapshot.resolve() / name:
+        return resolved
+    blob_id = r"[0-9a-f]{40}|[0-9a-f]{64}"
+    if resolved.parent == blob_dir and re.fullmatch(blob_id, resolved.name):
+        return resolved
+    if not path.is_symlink():
+        raise ValueError(f"Unexpected redirected directory for {path}")
+    # Preserve the repository blob ID used for the content checksum. The shared
+    # Hub store can give the same file a different storage key.
+    blob = Path(os.path.abspath(path.parent / os.readlink(path)))
+    if not blob.parent.samefile(blob_dir) or not re.fullmatch(blob_id, blob.name):
+        raise ValueError(f"Unexpected symlink target for {path}: {blob}")
+    blob = blob_dir / blob.name
+    if resolved != blob:
+        shared = blob_dir.parent.parent / "blobs"
+        if not re.fullmatch(r"[0-9a-f]{64}", resolved.name) or resolved != shared / resolved.name[:2] / resolved.name:
+            raise ValueError(f"Unexpected shared blob target for {path}: {resolved}")
+    return blob
 
 
 def safe_tensor_keys(path):
